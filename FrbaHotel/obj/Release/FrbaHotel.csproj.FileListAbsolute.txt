@@ -1,7 +1,0 @@
-C:\Users\Administrador\Desktop\git\FrbaHotel\bin\Release\FrbaHotel.exe
-C:\Users\Administrador\Desktop\git\FrbaHotel\bin\Release\FrbaHotel.pdb
-C:\Users\Administrador\Desktop\git\FrbaHotel\obj\Release\ResolveAssemblyReference.cache
-C:\Users\Administrador\Desktop\git\FrbaHotel\obj\Release\FrbaHotel.Properties.Resources.resources
-C:\Users\Administrador\Desktop\git\FrbaHotel\obj\Release\FrbaHotel.csproj.GenerateResource.Cache
-C:\Users\Administrador\Desktop\git\FrbaHotel\obj\Release\FrbaHotel.exe
-C:\Users\Administrador\Desktop\git\FrbaHotel\obj\Release\FrbaHotel.pdb
