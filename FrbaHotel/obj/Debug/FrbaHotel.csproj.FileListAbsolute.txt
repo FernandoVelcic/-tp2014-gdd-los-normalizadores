@@ -1,0 +1,7 @@
+C:\Users\Administrador\Desktop\git\FrbaHotel\bin\Debug\FrbaHotel.exe
+C:\Users\Administrador\Desktop\git\FrbaHotel\bin\Debug\FrbaHotel.pdb
+C:\Users\Administrador\Desktop\git\FrbaHotel\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Administrador\Desktop\git\FrbaHotel\obj\Debug\FrbaHotel.Properties.Resources.resources
+C:\Users\Administrador\Desktop\git\FrbaHotel\obj\Debug\FrbaHotel.csproj.GenerateResource.Cache
+C:\Users\Administrador\Desktop\git\FrbaHotel\obj\Debug\FrbaHotel.exe
+C:\Users\Administrador\Desktop\git\FrbaHotel\obj\Debug\FrbaHotel.pdb
