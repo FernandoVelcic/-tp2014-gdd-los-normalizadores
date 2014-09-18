@@ -263,6 +263,7 @@
             this.Controls.Add(this.groupBox2);
             this.Name = "Form1";
             this.Text = "ABM de Cliente";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

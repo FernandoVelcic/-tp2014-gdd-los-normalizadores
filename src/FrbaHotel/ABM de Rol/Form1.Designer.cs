@@ -106,6 +106,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
             this.Text = "ABM de Rol";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

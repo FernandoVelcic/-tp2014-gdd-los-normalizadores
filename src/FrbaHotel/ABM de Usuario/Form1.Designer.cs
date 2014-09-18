@@ -274,6 +274,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "ABM de Usuario";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

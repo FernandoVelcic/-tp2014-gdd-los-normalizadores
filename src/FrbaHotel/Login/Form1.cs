@@ -27,7 +27,7 @@ namespace FrbaHotel.Login
             label1.Visible = true;
             textBox1.Visible = true;
             label2.Visible = true;
-            textBox2.visible = true;
+            textBox2.Visible = true;
         }
 
         private void radioButton1_CheckedChanged_1(object sender, EventArgs e)

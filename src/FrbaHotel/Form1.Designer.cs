@@ -49,6 +49,7 @@
             this.Controls.Add(this.button2);
             this.Name = "Form1";
             this.Text = "FrbaHotel";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 

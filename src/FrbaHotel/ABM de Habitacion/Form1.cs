@@ -15,5 +15,7 @@ namespace FrbaHotel.ABM_de_Habitacion
         {
             InitializeComponent();
         }
+
+      
     }
 }
