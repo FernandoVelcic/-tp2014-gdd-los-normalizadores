@@ -1,27 +1,17 @@
-USE [GD1C2014]
+USE [GD2C2014]
 GO
 
-DROP DATABASE [LOS_NORMALIZADORES]
+CREATE SCHEMA [LOS_NORMALIZADORES]
 GO
 
-CREATE DATABASE [LOS_NORMALIZADORES];
-GO 
-
-
-USE [LOS_NORMALIZADORES] 
-GO
-
-CREATE SCHEMA [gd_esquema]
-GO
-
-/****** Object:  Table [gd_esquema].[Maestra]    Script Date: 13/09/2014 20:15:46 ******/
+/****** Object:  Table [LOS_NORMALIZADORES].[Maestra]    Script Date: 13/09/2014 20:15:46 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_PADDING ON
 GO
-CREATE TABLE [gd_esquema].[Maestra](
+CREATE TABLE [LOS_NORMALIZADORES].[Maestra](
 	
 	[Hotel_Ciudad] [varchar](255) NULL,
 	[Hotel_Calle] [varchar](255) NULL,
@@ -74,11 +64,11 @@ SET ANSI_PADDING OFF
 GO
 
 
-INSERT INTO [LOS_NORMALIZADORES].[gd_esquema].[Maestra] SELECT TOP 1000 * FROM [GD1C2014].[gd_esquema].[Maestra]
+INSERT INTO [GD2C2014].[LOS_NORMALIZADORES].[Maestra] SELECT TOP 1000 * FROM [GD2C2014].[LOS_NORMALIZADORES].[Maestra]
 GO
   	
 
-CREATE TABLE [gd_esquema].[hoteles](
+CREATE TABLE [LOS_NORMALIZADORES].[hoteles](
 	[id] INTEGER IDENTITY PRIMARY KEY,
 	[ciudad] [varchar](255),
 	[calle] [varchar](255),
@@ -88,7 +78,7 @@ CREATE TABLE [gd_esquema].[hoteles](
 ) ON [PRIMARY]
 
 
-CREATE TABLE [gd_esquema].[habitaciones](
+CREATE TABLE [LOS_NORMALIZADORES].[habitaciones](
 	[id] INTEGER IDENTITY PRIMARY KEY,
 	[hotel_id] INTEGER,						/* A obtener de forma dificil */
 	[numero] [numeric](18, 0),
@@ -100,7 +90,7 @@ CREATE TABLE [gd_esquema].[habitaciones](
 ) ON [PRIMARY]
 
 
-CREATE TABLE [gd_esquema].[regimenes](
+CREATE TABLE [LOS_NORMALIZADORES].[regimenes](
 	[id] INTEGER IDENTITY PRIMARY KEY,
 	[hotel_id] INTEGER,						/* Es a hotel??? Leer la consigna y averiguar */
 	[descripcion] [varchar](255),
@@ -108,7 +98,7 @@ CREATE TABLE [gd_esquema].[regimenes](
 ) ON [PRIMARY]
 
 
-CREATE TABLE [gd_esquema].[reservas](
+CREATE TABLE [LOS_NORMALIZADORES].[reservas](
 	[id] INTEGER IDENTITY PRIMARY KEY,
 	[habitacion_id] INTEGER,				/* Esto sopongo que hay que obtenerlo */
 	[fecha_inicio] [datetime],
@@ -117,7 +107,7 @@ CREATE TABLE [gd_esquema].[reservas](
 ) ON [PRIMARY]
 
 
-CREATE TABLE [gd_esquema].[estadias](
+CREATE TABLE [LOS_NORMALIZADORES].[estadias](
 	[id] INTEGER IDENTITY PRIMARY KEY,
 	[habitacion_id] INTEGER,				/* Me imagino que hay que obtenerlo */
 	[fecha_inicio] [datetime],
@@ -125,7 +115,7 @@ CREATE TABLE [gd_esquema].[estadias](
 ) ON [PRIMARY]
 
 
-CREATE TABLE [gd_esquema].[consumibles](
+CREATE TABLE [LOS_NORMALIZADORES].[consumibles](
 	[id] INTEGER IDENTITY PRIMARY KEY,
 	[habitacion_id] INTEGER,				/* Supongo que es a habitacion, pero confirmar con el enunciado */
 	[codigo] [numeric](18, 0),
@@ -134,7 +124,7 @@ CREATE TABLE [gd_esquema].[consumibles](
 ) ON [PRIMARY]
 
 
-CREATE TABLE [gd_esquema].[items](
+CREATE TABLE [LOS_NORMALIZADORES].[items](
 	[id] INTEGER IDENTITY PRIMARY KEY,
 	[factura_id] INTEGER,					/* Me lo imagino pero no estoy seguro */
 	[factura_cantidad] [numeric](18, 0),
@@ -142,7 +132,7 @@ CREATE TABLE [gd_esquema].[items](
 ) ON [PRIMARY]
 
 
-CREATE TABLE [gd_esquema].[facturas](
+CREATE TABLE [LOS_NORMALIZADORES].[facturas](
 	[id] INTEGER IDENTITY PRIMARY KEY,
 	[cliente_id] INTEGER,					/* Me lo imagino pero no estoy seguro */
 	[hotel_id] INTEGER,						/* Me lo imagino pero no estoy seguro */
@@ -152,7 +142,7 @@ CREATE TABLE [gd_esquema].[facturas](
 ) ON [PRIMARY]
 
 
-CREATE TABLE [gd_esquema].[clientes](
+CREATE TABLE [LOS_NORMALIZADORES].[clientes](
 	[id] INTEGER IDENTITY PRIMARY KEY,
 	[pasaporte_rro] [numeric](18, 0),
 	[apellido] [varchar](255),
@@ -177,37 +167,37 @@ CREATE TABLE [gd_esquema].[clientes](
 
 /* Migracion de hoteles */
 
-INSERT [gd_esquema].[hoteles] (ciudad, calle, nro_calle, cant_estrella, recarga_estrella)
+INSERT [LOS_NORMALIZADORES].[hoteles] (ciudad, calle, nro_calle, cant_estrella, recarga_estrella)
 SELECT DISTINCT Hotel_Ciudad, Hotel_Calle, Hotel_Nro_Calle, Hotel_CantEstrella, Hotel_Recarga_Estrella  
-FROM [gd_esquema].[Maestra] 
+FROM [LOS_NORMALIZADORES].[Maestra] 
 WHERE Hotel_Ciudad IS NOT NULL 
 AND Hotel_Calle IS NOT NULL
 AND Hotel_Nro_Calle IS NOT NULL
 AND Hotel_CantEstrella IS NOT NULL
 AND Hotel_Recarga_Estrella IS NOT NULL
 
-ALTER TABLE [gd_esquema].[Maestra] ADD hotel_id INTEGER
+ALTER TABLE [LOS_NORMALIZADORES].[Maestra] ADD hotel_id INTEGER
 GO
 
-UPDATE [gd_esquema].[Maestra]
+UPDATE [LOS_NORMALIZADORES].[Maestra]
 SET hotel_id = 
-	(SELECT id FROM [gd_esquema].[hoteles] as h
-	WHERE [gd_esquema].[Maestra].Hotel_Ciudad = h.ciudad
-	AND [gd_esquema].[Maestra].Hotel_Calle = h.calle
-	AND [gd_esquema].[Maestra].Hotel_Nro_Calle = h.nro_calle
-	AND [gd_esquema].[Maestra].Hotel_CantEstrella = h.cant_estrella
-	AND [gd_esquema].[Maestra].Hotel_Recarga_Estrella = h.recarga_estrella)
+	(SELECT id FROM [LOS_NORMALIZADORES].[hoteles] as h
+	WHERE [LOS_NORMALIZADORES].[Maestra].Hotel_Ciudad = h.ciudad
+	AND [LOS_NORMALIZADORES].[Maestra].Hotel_Calle = h.calle
+	AND [LOS_NORMALIZADORES].[Maestra].Hotel_Nro_Calle = h.nro_calle
+	AND [LOS_NORMALIZADORES].[Maestra].Hotel_CantEstrella = h.cant_estrella
+	AND [LOS_NORMALIZADORES].[Maestra].Hotel_Recarga_Estrella = h.recarga_estrella)
 GO
 
 
 /* Migracion de habitaciones */
 
-TRUNCATE TABLE [gd_esquema].[habitaciones]
+TRUNCATE TABLE [LOS_NORMALIZADORES].[habitaciones]
 GO
 
-INSERT [gd_esquema].[habitaciones] (hotel_id, numero, piso, frente, tipo_codigo, tipo_descripcion, tipo_porcentual)
+INSERT [LOS_NORMALIZADORES].[habitaciones] (hotel_id, numero, piso, frente, tipo_codigo, tipo_descripcion, tipo_porcentual)
 SELECT DISTINCT hotel_id, Habitacion_Numero, Habitacion_Piso, Habitacion_Frente, Habitacion_Tipo_Codigo, Habitacion_Tipo_Descripcion, Habitacion_Tipo_Porcentual  
-FROM [gd_esquema].[Maestra] 
+FROM [LOS_NORMALIZADORES].[Maestra] 
 WHERE Habitacion_Numero IS NOT NULL 
 AND Habitacion_Piso IS NOT NULL
 AND Habitacion_Frente IS NOT NULL
@@ -216,18 +206,18 @@ AND Habitacion_Tipo_Descripcion IS NOT NULL
 AND Habitacion_Tipo_Porcentual IS NOT NULL
 
 
-ALTER TABLE [gd_esquema].[Maestra] ADD habitacion_id INTEGER
+ALTER TABLE [LOS_NORMALIZADORES].[Maestra] ADD habitacion_id INTEGER
 GO
 
-UPDATE [gd_esquema].[Maestra]
+UPDATE [LOS_NORMALIZADORES].[Maestra]
 SET habitacion_id = 
-	(SELECT id FROM [gd_esquema].[habitaciones] as h
-	WHERE [gd_esquema].[Maestra].Habitacion_Numero = h.numero
-	AND [gd_esquema].[Maestra].Habitacion_Piso = h.piso
-	AND [gd_esquema].[Maestra].Habitacion_Frente = h.frente
-	AND [gd_esquema].[Maestra].Habitacion_Tipo_Codigo = h.tipo_codigo
-	AND [gd_esquema].[Maestra].Habitacion_Tipo_Descripcion = h.tipo_descripcion
-	AND [gd_esquema].[Maestra].Habitacion_Tipo_Porcentual = h.tipo_porcentual)
+	(SELECT id FROM [LOS_NORMALIZADORES].[habitaciones] as h
+	WHERE [LOS_NORMALIZADORES].[Maestra].Habitacion_Numero = h.numero
+	AND [LOS_NORMALIZADORES].[Maestra].Habitacion_Piso = h.piso
+	AND [LOS_NORMALIZADORES].[Maestra].Habitacion_Frente = h.frente
+	AND [LOS_NORMALIZADORES].[Maestra].Habitacion_Tipo_Codigo = h.tipo_codigo
+	AND [LOS_NORMALIZADORES].[Maestra].Habitacion_Tipo_Descripcion = h.tipo_descripcion
+	AND [LOS_NORMALIZADORES].[Maestra].Habitacion_Tipo_Porcentual = h.tipo_porcentual)
 GO
 
 
