@@ -109,7 +109,7 @@
             // dataGridView2
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(3, 30);
+            this.dataGridView2.Location = new System.Drawing.Point(12, 30);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.Size = new System.Drawing.Size(176, 120);
             this.dataGridView2.TabIndex = 4;
@@ -119,7 +119,7 @@
             this.groupBox4.Controls.Add(this.dataGridView3);
             this.groupBox4.Location = new System.Drawing.Point(491, 116);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(195, 170);
+            this.groupBox4.Size = new System.Drawing.Size(206, 170);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Top Cantidad Dias Fuera de servicio";
@@ -218,6 +218,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(981, 463);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox8);

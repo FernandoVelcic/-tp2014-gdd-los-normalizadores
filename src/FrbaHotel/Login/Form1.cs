@@ -40,16 +40,6 @@ namespace FrbaHotel.Login
             this.activar_cuadro_login();
         }
 
-        private void radioButton3_CheckedChanged_1(object sender, EventArgs e)
-        {
-            groupBox2.Visible = false;
-            label1.Visible = false;
-            textBox1.Visible = false;
-            textBox2.Visible = false;
-            label2.Visible = false;
-        }
       
-
-
     }
 }
