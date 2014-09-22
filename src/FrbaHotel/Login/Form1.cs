@@ -47,6 +47,13 @@ namespace FrbaHotel.Login
             inicio.Show();
         }
 
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)textBox2.PasswordChar = '\0';
+            if (!checkBox1.Checked) textBox2.PasswordChar = '*';
+
+        }
+
        
 
        
