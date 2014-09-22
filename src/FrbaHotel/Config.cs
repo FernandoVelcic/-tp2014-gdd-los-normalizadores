@@ -5,16 +5,18 @@ using System.Text;
 
 namespace FrbaHotel
 {
-    public sealed class Config
+    public class Config
     {
-        private static readonly Config instance = new Config();
+        private static Config instance;
 
-        public static Config Instance
+        public static Config getInstance()
         {
-            get
+            if (instance == null)
             {
-                return instance;
+                instance = new Config();
             }
+
+            return instance;
         }
 
         public String server { get; set; }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
+using MyActiveRecord;
+
 namespace FrbaHotel
 {
     static class Program
@@ -13,15 +15,9 @@ namespace FrbaHotel
         [STAThread]
         static void Main()
         {
-            /*
-                        ConnectionManager.getInstance().connect("Pooling=true;Min Pool Size=5;Max Pool Size=40;Connect Timeout=1;server=NICO-L-WINDOWS\\SQLEXPRESS;database=test_active_record;Integrated Security=false;User Id=nico;Password=nico");
+            //ConnectionManager.getInstance().connect("Pooling=true;Min Pool Size=5;Max Pool Size=40;Connect Timeout=1;server=" + Config.getInstance().server + ";database=" + Config.getInstance().database + ";Integrated Security=false;User Id=" + Config.getInstance().username + ";Password=" + Config.getInstance().password);
+            //ConnectionManager.getInstance().close();
 
-            Person persona = Person.find<Person>(1);
- 
-            ConnectionManager.getInstance().close();
-            Console.ReadLine();
-            //Person persona = Person.find<Person>(7);
-            */
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
