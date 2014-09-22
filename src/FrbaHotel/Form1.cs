@@ -30,9 +30,29 @@ namespace FrbaHotel
 
         private void button1_Click(object sender, EventArgs e)
         {
+             ir_a_login();
+        }
+
+       
+        private void salirToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void administradorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ir_a_login();
+        }
+
+        private void ir_a_login(){
             this.Hide();
             Form login = new FrbaHotel.Login.Form1();
             login.Show();
+        }
+
+        private void recepcionistaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ir_a_login();
         }
     }
 }
