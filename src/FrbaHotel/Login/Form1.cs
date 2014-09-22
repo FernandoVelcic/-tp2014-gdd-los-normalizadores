@@ -18,7 +18,7 @@ namespace FrbaHotel.Login
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            
         }
       
        private void activar_cuadro_login()
@@ -40,6 +40,16 @@ namespace FrbaHotel.Login
             this.activar_cuadro_login();
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            Form inicio = new FrbaHotel.Form1();
+            inicio.Show();
+        }
+
+       
+
+       
       
     }
 }

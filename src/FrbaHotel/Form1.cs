@@ -27,5 +27,12 @@ namespace FrbaHotel
         {
             this.Close();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form login = new FrbaHotel.Login.Form1();
+            login.Show();
+        }
     }
 }

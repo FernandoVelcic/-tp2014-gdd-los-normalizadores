@@ -41,9 +41,10 @@
             // button2
             // 
             this.button2.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button2.Location = new System.Drawing.Point(1260, 12);
+            this.button2.Font = new System.Drawing.Font("Modern No. 20", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Location = new System.Drawing.Point(1243, 12);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(98, 34);
+            this.button2.Size = new System.Drawing.Size(115, 41);
             this.button2.TabIndex = 5;
             this.button2.Text = "Salir";
             this.button2.UseVisualStyleBackColor = false;
@@ -53,11 +54,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label1.Font = new System.Drawing.Font("Modern No. 20", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Modern No. 20", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Blue;
-            this.label1.Location = new System.Drawing.Point(456, 28);
+            this.label1.Location = new System.Drawing.Point(524, 23);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(284, 50);
+            this.label1.Size = new System.Drawing.Size(375, 65);
             this.label1.TabIndex = 6;
             this.label1.Text = "FRBA Hotel";
             // 
@@ -71,6 +72,7 @@
             this.button1.TabIndex = 7;
             this.button1.Text = "Ingresar como Administrador/ Recepcionista";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button3
             // 
@@ -97,9 +99,9 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(246, 129);
+            this.pictureBox1.Location = new System.Drawing.Point(247, 105);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(693, 508);
+            this.pictureBox1.Size = new System.Drawing.Size(545, 546);
             this.pictureBox1.TabIndex = 10;
             this.pictureBox1.TabStop = false;
             // 
