@@ -30,7 +30,9 @@ namespace FrbaHotel
 
         private void button1_Click(object sender, EventArgs e)
         {
-             ir_a_login();
+            Form login = new FrbaHotel.Form2();
+            login.Show(); 
+            //ir_a_login();
         }
 
        
@@ -45,7 +47,7 @@ namespace FrbaHotel
         }
 
         private void ir_a_login(){
-            this.Hide();
+           // this.Hide();
             Form login = new FrbaHotel.Login.Form1();
             login.Show();
         }
@@ -53,6 +55,12 @@ namespace FrbaHotel
         private void recepcionistaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ir_a_login();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form medio = new FrbaHotel.Form2();
+            medio.Show();
         }
     }
 }

@@ -15,5 +15,10 @@ namespace FrbaHotel.Registrar_Estadia
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -57,14 +57,14 @@
             // 
             this.textBox4.Location = new System.Drawing.Point(180, 53);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(89, 20);
+            this.textBox4.Size = new System.Drawing.Size(89, 22);
             this.textBox4.TabIndex = 18;
             // 
             // textBox3
             // 
             this.textBox3.Location = new System.Drawing.Point(180, 21);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(89, 20);
+            this.textBox3.Size = new System.Drawing.Size(89, 22);
             this.textBox3.TabIndex = 17;
             // 
             // label5
@@ -91,28 +91,28 @@
             // 
             this.textBox8.Location = new System.Drawing.Point(227, 288);
             this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(100, 20);
+            this.textBox8.Size = new System.Drawing.Size(100, 22);
             this.textBox8.TabIndex = 27;
             // 
             // textBox7
             // 
             this.textBox7.Location = new System.Drawing.Point(180, 183);
             this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(89, 20);
+            this.textBox7.Size = new System.Drawing.Size(89, 22);
             this.textBox7.TabIndex = 26;
             // 
             // textBox6
             // 
             this.textBox6.Location = new System.Drawing.Point(180, 140);
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(89, 20);
+            this.textBox6.Size = new System.Drawing.Size(89, 22);
             this.textBox6.TabIndex = 25;
             // 
             // textBox5
             // 
             this.textBox5.Location = new System.Drawing.Point(180, 114);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(89, 20);
+            this.textBox5.Size = new System.Drawing.Size(89, 22);
             this.textBox5.TabIndex = 24;
             // 
             // label10
@@ -189,14 +189,14 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(180, 207);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(89, 20);
+            this.textBox1.Size = new System.Drawing.Size(89, 22);
             this.textBox1.TabIndex = 30;
             // 
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(180, 231);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(89, 20);
+            this.textBox2.Size = new System.Drawing.Size(89, 22);
             this.textBox2.TabIndex = 31;
             // 
             // label3
@@ -211,6 +211,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(60, 167);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(255, 92);
@@ -239,6 +240,7 @@
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.groupBox1);
+            this.groupBox2.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(146, 48);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(387, 343);
@@ -258,13 +260,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(773, 475);
+            this.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.ClientSize = new System.Drawing.Size(1012, 721);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.groupBox2);
             this.Name = "Form1";
             this.Text = "ABM de Cliente";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

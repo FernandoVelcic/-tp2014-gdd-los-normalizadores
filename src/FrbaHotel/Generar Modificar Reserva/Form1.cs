@@ -15,5 +15,10 @@ namespace FrbaHotel.Generar_Modificar_Reserva
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
