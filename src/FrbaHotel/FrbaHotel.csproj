@@ -88,9 +88,7 @@
     <Compile Include="Database Helper\ActiveRecord.cs" />
     <Compile Include="Database Helper\ConnectionManager.cs" />
     <Compile Include="Database Helper\DeleteQuery.cs" />
-    <Compile Include="Database Helper\EdadCosificada.cs" />
     <Compile Include="Database Helper\InsertQuery.cs" />
-    <Compile Include="Database Helper\Person.cs" />
     <Compile Include="Database Helper\Query.cs" />
     <Compile Include="Database Helper\SelectQuery.cs" />
     <Compile Include="Database Helper\UpdateQuery.cs" />
