@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{BAFE3016-AC06-4C43-ABEF-87F21AB5699B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -88,6 +88,7 @@
     <Compile Include="Database Helper\ActiveRecord.cs" />
     <Compile Include="Database Helper\ConnectionManager.cs" />
     <Compile Include="Database Helper\DeleteQuery.cs" />
+    <Compile Include="Database Helper\Hoteles.cs" />
     <Compile Include="Database Helper\InsertQuery.cs" />
     <Compile Include="Database Helper\Query.cs" />
     <Compile Include="Database Helper\SelectQuery.cs" />

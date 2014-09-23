@@ -25,7 +25,8 @@ namespace MyActiveRecord
 
         public String parseName(String className)
         {
-            return string.Concat(className.Select((x, i) => i > 0 && char.IsUpper(x) ? "_" + x.ToString() : x.ToString())).ToLower(); 
+            //TODO agregar soporte para schemas
+            return "[LOS_NORMALIZADORES].[" + className.ToLower() + "]";
         }
 
 
