@@ -49,6 +49,9 @@ namespace FrbaHotel.Login
 
             switch (intentos_fallidos)
             {
+                case -3: //Usuario inhabilitado (estado = 0)
+                    MessageBox.Show("Usuario inhabilitado");
+                    break;
                 case -2: //Usuario bloqueado (supero los intentos fallidos)
                     MessageBox.Show("Usuario bloqueado (Supero los tres intentos fallidos)");
                     break;

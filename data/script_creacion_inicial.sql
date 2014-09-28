@@ -248,8 +248,9 @@ CREATE TABLE [LOS_NORMALIZADORES].[usuarios](
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[username] [varchar](30) NOT NULL,
 	[password] [varchar](30) NOT NULL,
-	[rol] [varchar](50) NULL,
+	[rol_nombre] [varchar](50) NULL,
 	[intentos_fallidos] [tinyint] NOT NULL,
+	[estado] [bit] NOT NULL,
  CONSTRAINT [PK_usuarios] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
@@ -265,22 +266,19 @@ BEGIN
 	SET NOCOUNT ON;
 	
 	DECLARE @password_ret varchar(30)
+	DECLARE @estado bit
 	
-	SELECT @intentos_fallidos = intentos_fallidos, @password_ret = password FROM usuarios WHERE username = @username
+	SELECT @intentos_fallidos = intentos_fallidos, @password_ret = password, @estado = estado FROM usuarios WHERE username = @username
 	
 	IF (@intentos_fallidos IS NOT NULL) AND @password = @password_ret
 	BEGIN
 		IF @intentos_fallidos < 3
-		BEGIN
-			SET @intentos_fallidos = 0
-			UPDATE usuarios SET intentos_fallidos = 0 WHERE username = @username
-			RETURN
-		END
+			UPDATE usuarios SET intentos_fallidos = 0 WHERE username = @username AND estado = 1
 		ELSE
-		BEGIN
 			SET @intentos_fallidos = -2
-			RETURN
-		END
+		IF @estado = 0
+			SET @intentos_fallidos = -3
+		RETURN
 	END
 	
 
