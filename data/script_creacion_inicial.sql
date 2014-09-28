@@ -246,11 +246,15 @@ GO
 /* LOGIN y ROLES */
 CREATE TABLE [LOS_NORMALIZADORES].[usuarios](
 	[id] [int] IDENTITY(1,1) NOT NULL,
-	[username] [varchar](30) NOT NULL,
-	[password] [varchar](30) NOT NULL,
-	[rol_nombre] [varchar](50) NULL,
+	[username] [nvarchar](30) NOT NULL,
+	[password] [nvarchar](30) NOT NULL,
+	[rol] [tinyint] NOT NULL,
 	[intentos_fallidos] [tinyint] NOT NULL,
 	[estado] [bit] NOT NULL,
+	[nombre] [nvarchar](255) NOT NULL,
+	[apellido] [nvarchar](255) NOT NULL,
+	[mail] [nvarchar](255) NOT NULL,
+	[fecha_nac] [datetime] NOT NULL
  CONSTRAINT [PK_usuarios] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC

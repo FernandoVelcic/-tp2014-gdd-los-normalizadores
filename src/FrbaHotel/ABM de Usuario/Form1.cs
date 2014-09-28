@@ -20,5 +20,26 @@ namespace FrbaHotel.ABM_de_Usuario
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Usuarios user = new Usuarios();
+            user.username = textBox1.Text;
+            user.password = textBox2.Text;
+            user.rol = 0;
+            user.nombre = textBox3.Text;
+            user.apellido = textBox4.Text;
+            user.mail = textBox5.Text;
+
+            user.fecha_nac = /*DateTime.Parse(*/textBox8.Text/*)*/;
+
+            user.intentos_fallidos = 0;
+            user.estado = 1;
+
+            user.insert();
+
+            MessageBox.Show("Usuario creado correctamente!");
+            this.Close();
+        }
     }
 }
