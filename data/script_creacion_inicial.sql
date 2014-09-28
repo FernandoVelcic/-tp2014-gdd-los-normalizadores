@@ -241,3 +241,54 @@ GO
 /* TODO:
 	- Normalizar calles, descripciones, ubicaciones y todo lo repetido
  */
+
+
+/* LOGIN y ROLES */
+CREATE TABLE [LOS_NORMALIZADORES].[usuarios](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[username] [varchar](30) NOT NULL,
+	[password] [varchar](30) NOT NULL,
+	[rol] [varchar](50) NULL,
+	[intentos_fallidos] [tinyint] NOT NULL,
+ CONSTRAINT [PK_usuarios] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+CREATE PROCEDURE [LOS_NORMALIZADORES].[uspLogin]
+	@username varchar(30),
+	@password varchar(30),
+	@intentos_fallidos int OUTPUT
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	DECLARE @password_ret varchar(30)
+	
+	SELECT @intentos_fallidos = intentos_fallidos, @password_ret = password FROM usuarios WHERE username = @username
+	
+	IF (@intentos_fallidos IS NOT NULL) AND @password = @password_ret
+	BEGIN
+		IF @intentos_fallidos < 3
+		BEGIN
+			UPDATE usuarios SET intentos_fallidos = 0 WHERE username = @username
+			RETURN
+		END
+		ELSE
+		BEGIN
+			SET @intentos_fallidos = -2
+			RETURN
+		END
+	END
+	
+
+	IF (@intentos_fallidos IS NOT NULL)
+	BEGIN
+		SET @intentos_fallidos = @intentos_fallidos+1
+		UPDATE usuarios SET intentos_fallidos = intentos_fallidos+1 WHERE username = @username
+		RETURN
+	END
+	SET @intentos_fallidos = -1
+	RETURN
+END

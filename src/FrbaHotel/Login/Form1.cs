@@ -20,25 +20,6 @@ namespace FrbaHotel.Login
         {
             
         }
-      
-       private void activar_cuadro_login()
-        {
-            groupBox2.Visible = true; 
-            label1.Visible = true;
-            textBox1.Visible = true;
-            label2.Visible = true;
-            textBox2.Visible = true;
-        }
-
-        private void radioButton1_CheckedChanged_1(object sender, EventArgs e)
-        {
-            this.activar_cuadro_login();
-        }
-
-        private void radioButton2_CheckedChanged_1(object sender, EventArgs e)
-        {
-            this.activar_cuadro_login();
-        }
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -53,10 +34,5 @@ namespace FrbaHotel.Login
             if (!checkBox1.Checked) textBox2.PasswordChar = '*';
 
         }
-
-       
-
-       
-      
     }
 }

@@ -30,9 +30,7 @@ namespace FrbaHotel
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form login = new FrbaHotel.Form2();
-            login.Show(); 
-            //ir_a_login();
+            ir_a_login();
         }
 
        
@@ -46,8 +44,9 @@ namespace FrbaHotel
             ir_a_login();
         }
 
-        private void ir_a_login(){
-           // this.Hide();
+        private void ir_a_login()
+        {
+            //this.Hide();
             Form login = new FrbaHotel.Login.Form1();
             login.Show();
         }
