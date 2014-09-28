@@ -272,6 +272,7 @@ BEGIN
 	BEGIN
 		IF @intentos_fallidos < 3
 		BEGIN
+			SET @intentos_fallidos = 0
 			UPDATE usuarios SET intentos_fallidos = 0 WHERE username = @username
 			RETURN
 		END

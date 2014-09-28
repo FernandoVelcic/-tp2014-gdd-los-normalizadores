@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using MyActiveRecord;
+using System.Data.SqlClient;
+
 namespace FrbaHotel.Login
 {
     public partial class Form1 : Form
@@ -33,6 +36,32 @@ namespace FrbaHotel.Login
             if (checkBox1.Checked)textBox2.PasswordChar = '\0';
             if (!checkBox1.Checked) textBox2.PasswordChar = '*';
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            String query;
+            query = "DECLARE @Retintentos_fallidos int;";
+            query += "EXECUTE [GD2C2014].[LOS_NORMALIZADORES].[uspLogin] @username = '" + textBox1.Text + "', @password = '" + textBox2.Text + "', @intentos_fallidos = @Retintentos_fallidos OUTPUT;";
+            query += "SELECT @Retintentos_fallidos;";
+            SqlCommand command = new SqlCommand(query, ConnectionManager.getInstance().getConnection());
+            int intentos_fallidos = System.Convert.ToInt32(command.ExecuteScalar());
+
+            switch (intentos_fallidos)
+            {
+                case -2: //Usuario bloqueado (supero los intentos fallidos)
+                    MessageBox.Show("Usuario bloqueado (Supero los tres intentos fallidos)");
+                    break;
+                case -1: //Usuario y contraseña invalida
+                    MessageBox.Show("Usuario y contraseña invalida");
+                    break;
+                case 0: //Login correcto
+                    MessageBox.Show("Usuario y contraseña valido");
+                    break;
+                default: //Contraseña incorrecta (sumando intentos fallidos)
+                    MessageBox.Show("Contraseña incorrecta. Intentos fallidos: " + intentos_fallidos);
+                    break;
+            }
         }
     }
 }
