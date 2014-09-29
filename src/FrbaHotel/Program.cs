@@ -15,7 +15,16 @@ namespace FrbaHotel
         [STAThread]
         static void Main()
         {
-            //ConnectionManager.getInstance().connect("Pooling=true;Min Pool Size=5;Max Pool Size=40;Connect Timeout=1;server=" + Config.getInstance().server + ";database=" + Config.getInstance().database + ";Integrated Security=false;User Id=" + Config.getInstance().username + ";Password=" + Config.getInstance().password);
+            try
+            {
+                ConnectionManager.getInstance().connect("Pooling=true;Min Pool Size=5;Max Pool Size=40;Connect Timeout=1;server=" + Config.getInstance().server + ";database=" + Config.getInstance().database + ";Integrated Security=false;User Id=" + Config.getInstance().username + ";Password=" + Config.getInstance().password);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se puede conectar al servidor\r\n" + ex.Message);
+                //return;
+            }
+            
             /*Hoteles hoteles = new Hoteles();
             hoteles.calle = "asdasd";
             hoteles.cant_estrella = 5;

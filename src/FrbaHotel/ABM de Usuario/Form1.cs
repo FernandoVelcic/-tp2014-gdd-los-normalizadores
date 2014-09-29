@@ -36,7 +36,15 @@ namespace FrbaHotel.ABM_de_Usuario
             user.intentos_fallidos = 0;
             user.estado = 1;
 
-            user.insert();
+            try
+            {
+                user.insert();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Faltan llenar campos!\r\n" + ex.Message);
+                return;
+            }
 
             MessageBox.Show("Usuario creado correctamente!");
             this.Close();

@@ -29,7 +29,11 @@ namespace MyActiveRecord
                 if (value.Key != "id")
                 {
                     keys.Add(value.Key);
-                    values.Add("'" + value.Value + "'");
+                    //CHECK NULL
+                    if (value.Value != "")
+                        values.Add("'" + value.Value + "'");
+                    else
+                        values.Add("NULL");
                 }
             }
             return "INSERT INTO " + parseName(clazz.Name) + " (" + string.Join(", ", keys.ToArray()) + ") VALUES  (" + string.Join(", ", values.ToArray()) + ") ;";
