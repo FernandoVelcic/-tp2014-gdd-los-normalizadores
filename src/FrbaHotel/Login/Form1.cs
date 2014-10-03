@@ -42,7 +42,7 @@ namespace FrbaHotel.Login
         {
             String query;
             query = "DECLARE @Retintentos_fallidos int;";
-            query += "EXECUTE [GD2C2014].[LOS_NORMALIZADORES].[uspLogin] @username = '" + textBox1.Text + "', @password = '" + textBox2.Text + "', @intentos_fallidos = @Retintentos_fallidos OUTPUT;";
+            query += "EXECUTE " + Config.getInstance().database + " .[uspLogin] @username = '" + textBox1.Text + "', @password = '" + textBox2.Text + "', @intentos_fallidos = @Retintentos_fallidos OUTPUT;";
             query += "SELECT @Retintentos_fallidos;";
             SqlCommand command = new SqlCommand(query, ConnectionManager.getInstance().getConnection());
             int intentos_fallidos = System.Convert.ToInt32(command.ExecuteScalar());

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FrbaHotel;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -30,6 +31,11 @@ namespace MyActiveRecord
         {
             coneccion = new SqlConnection(conectionString);
             coneccion.Open();
+            String query;
+            query = "USE [" + Config.getInstance().database + "] ";
+            SqlCommand command = new SqlCommand(query, coneccion);
+            command.ExecuteNonQuery();
+
         }
 
         public SqlConnection getConnection()

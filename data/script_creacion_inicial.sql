@@ -1,8 +1,18 @@
 USE [GD2C2014]
 GO
 
+DROP DATABASE [LOS_NORMALIZADORES]
+GO
+
+CREATE DATABASE [LOS_NORMALIZADORES]
+GO
+
+USE [LOS_NORMALIZADORES]
+GO
+
 CREATE SCHEMA [LOS_NORMALIZADORES]
 GO
+
 
 /****** Object:  Table [LOS_NORMALIZADORES].[Maestra]    Script Date: 13/09/2014 20:15:46 ******/
 SET ANSI_NULLS ON
@@ -256,10 +266,15 @@ CREATE TABLE [LOS_NORMALIZADORES].[usuarios](
 	[mail] [nvarchar](255) NOT NULL,
 	[fecha_nac] [datetime] NOT NULL
  CONSTRAINT [PK_usuarios] PRIMARY KEY CLUSTERED 
-(
-	[id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
+
+([id] ASC)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]) ON [PRIMARY]
+
+INSERT INTO [LOS_NORMALIZADORES].[usuarios] (username, password, nombre, fecha_nac, rol, intentos_fallidos, estado, apellido, mail) VALUES ('admin', 'admin', 'admin','', '',0, 1, 'admin', 'admin@admin.com.ar')
+GO
+
+
+
+/* Procedimientos */
 
 CREATE PROCEDURE [LOS_NORMALIZADORES].[uspLogin]
 	@username varchar(30),
@@ -295,3 +310,7 @@ BEGIN
 	SET @intentos_fallidos = -1
 	RETURN
 END
+
+
+
+
