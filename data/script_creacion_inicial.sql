@@ -254,11 +254,33 @@ GO
 
 
 /* LOGIN y ROLES */
+CREATE TABLE [LOS_NORMALIZADORES].[roles](
+	[id] INTEGER IDENTITY PRIMARY KEY,
+	[descripcion] [nvarchar](30) NOT NULL,
+	[rol_permisos_id] INTEGER NOT NULL,
+	[habilitado] [bit] NOT NULL,
+) ON [PRIMARY]
+
+
+CREATE TABLE [LOS_NORMALIZADORES].[rol_permisos](
+	[id] INTEGER IDENTITY PRIMARY KEY,
+	[generar_reservas] [bit] NOT NULL,
+	[ver_habitaciones] [bit] NOT NULL
+	/* Etc agregar el resto */
+) ON [PRIMARY]
+
+
+CREATE TABLE [LOS_NORMALIZADORES].[rol_usuario](
+	[id] INTEGER IDENTITY PRIMARY KEY,
+	[usuario_id] INTEGER NOT NULL,
+	[rol_id] INTEGER NOT NULL
+) ON [PRIMARY]
+
+
 CREATE TABLE [LOS_NORMALIZADORES].[usuarios](
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[username] [nvarchar](30) NOT NULL,
 	[password] [nvarchar](30) NOT NULL,
-	[rol] [tinyint] NOT NULL,
 	[intentos_fallidos] [tinyint] NOT NULL,
 	[estado] [bit] NOT NULL,
 	[nombre] [nvarchar](255) NOT NULL,

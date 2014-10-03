@@ -32,7 +32,7 @@ namespace FrbaHotel.Database_Helper
         }
 
 
-        public void setiLike(string key, string value)
+        public void setLike(string key, string value)
         {
             this.key = key;
             this.value = "%" + value + "%";

@@ -15,7 +15,6 @@ namespace FrbaHotel
         //public int id { get; set; } //INTEGER IDENTITY PRIMARY KEY
         public String username { get; set; } //[nvarchar](30)
         public String password { get; set; } //[nvarchar](30)
-        public int rol { get; set; } //[tinyint]
         public String nombre { get; set; } //[nvarchar](255)
         public String apellido { get; set; } //[nvarchar](255)
         //tipo y numero de documento
