@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 
 using MyActiveRecord;
+using FrbaHotel.Database_Helper;
 
 namespace FrbaHotel
 {
@@ -35,6 +36,8 @@ namespace FrbaHotel
             //Hoteles hotel = Hoteles.find<Hoteles>(2);
             //MessageBox.Show("asdad" + hotel.calle);
             //ConnectionManager.getInstance().close();
+            //List<Usuarios> usuarios = EntityManager.findAll<Usuarios>();
+           // MessageBox.Show("Muestro al usuario: " + usuarios[0].nombre);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

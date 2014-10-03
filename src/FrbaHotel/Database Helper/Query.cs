@@ -23,7 +23,7 @@ namespace MyActiveRecord
 
 
 
-        public String parseName(String className)
+        public String getTableName(String className)
         {
             //TODO agregar soporte para schemas
             return "[LOS_NORMALIZADORES].[" + className.ToLower() + "]";

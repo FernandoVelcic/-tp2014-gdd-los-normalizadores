@@ -51,7 +51,7 @@ namespace MyActiveRecord
 
         private string buildFrom()
         {
-            return "FROM " + this.parseName(clazz.Name);
+            return "FROM " + this.getTableName(clazz.Name);
         }
 
 

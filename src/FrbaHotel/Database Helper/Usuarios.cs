@@ -9,6 +9,9 @@ namespace FrbaHotel
 {
     class Usuarios : ActiveRecord
     {
+
+        public override String table { get { return "usuarios"; } }
+
         //public int id { get; set; } //INTEGER IDENTITY PRIMARY KEY
         public String username { get; set; } //[nvarchar](30)
         public String password { get; set; } //[nvarchar](30)

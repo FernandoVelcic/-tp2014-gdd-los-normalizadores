@@ -9,6 +9,9 @@ namespace FrbaHotel
 {
     class Hoteles : ActiveRecord
     {
+
+        public override String table { get { return "hoteles"; } }
+
         //public int id { get; set; } //INTEGER IDENTITY PRIMARY KEY
         public String ciudad { get; set; } //[varchar](255)
         public String calle { get; set; } //[varchar](255)

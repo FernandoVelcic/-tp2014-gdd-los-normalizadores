@@ -36,7 +36,7 @@ namespace MyActiveRecord
                         values.Add("NULL");
                 }
             }
-            return "INSERT INTO " + parseName(clazz.Name) + " (" + string.Join(", ", keys.ToArray()) + ") VALUES  (" + string.Join(", ", values.ToArray()) + ") ;";
+            return "INSERT INTO " + getTableName(clazz.Name) + " (" + string.Join(", ", keys.ToArray()) + ") VALUES  (" + string.Join(", ", values.ToArray()) + ") ;";
         }
 
         public int exec()
