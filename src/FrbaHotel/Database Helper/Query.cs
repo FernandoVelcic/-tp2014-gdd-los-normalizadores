@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FrbaHotel.Database_Helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -50,6 +51,16 @@ namespace MyActiveRecord
             this.whereConditions.Add(condition);
         }
 
+        
+        public void addWhere(List<FetchCondition> conditions)
+        {
+            foreach (FetchCondition condition in conditions)
+            {
+                this.addWhere(condition.build());
+            }
+        }
+
+
         protected string buildWhere()
         {
             if (whereConditions.Count == 0)
@@ -59,10 +70,6 @@ namespace MyActiveRecord
             return " WHERE " + string.Join(" AND ", whereConditions.ToArray());
         }
 
-
-        
-
-        public String table;
 
         public abstract String build();
 

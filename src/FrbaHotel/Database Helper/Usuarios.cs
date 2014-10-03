@@ -26,6 +26,9 @@ namespace FrbaHotel
         //hotel donde se desempeña
 
         public int intentos_fallidos { get; set; } //[tinyint]
-        public int estado { get; set; } //[bit]
+        public Boolean estado { get; set; } //[bit]
+
+        public List<Hoteles> gerente { get; set; } //[bit]
+
     }
 }

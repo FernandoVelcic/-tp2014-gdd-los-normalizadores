@@ -16,10 +16,14 @@ namespace MyActiveRecord
             values = new Dictionary<string, string>();
         }
 
-
         public void addKeyValue(String key, String value)
         {
-            if (key != "id")
+            this.addKeyValue(key, value, false);
+        }
+
+        public void addKeyValue(String key, String value, Boolean ignoreSpaces)
+        {
+            if (key != "id" && ((value != "" || value.Length > 0) || !ignoreSpaces))
             {
                 this.values.Add(key, value);
             }

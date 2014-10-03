@@ -45,6 +45,9 @@ namespace MyActiveRecord
             EntityManager.getInstance().insert(this);
         }
 
+
+
+
         public void fill(Object values)
         {
 

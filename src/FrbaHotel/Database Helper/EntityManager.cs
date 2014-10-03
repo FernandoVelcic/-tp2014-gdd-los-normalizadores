@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Windows.Forms;
 
 namespace FrbaHotel.Database_Helper
 {
@@ -106,15 +107,13 @@ namespace FrbaHotel.Database_Helper
 
 
 
-
-
-        public static List<T> findList<T>(List<T> conditions)
+        public static List<T> findList<T>(List<FetchCondition> conditions)
         {
-
             SelectQuery<T> query = new SelectQuery<T>(typeof(T));
 
-            //query.addWhere("id", value);
+            query.addWhere(conditions);
 
+            
             Console.WriteLine(query.build());
             Console.Read();
 
@@ -126,30 +125,7 @@ namespace FrbaHotel.Database_Helper
             {
                 while (result.Read())
                 {
-                    T item = (T) Activator.CreateInstance(typeof(T));
-
-                    PropertyInfo[] propertyInfos = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                    
-                    foreach (PropertyInfo property in propertyInfos)
-                    {
-
-                        if (property.PropertyType == typeof(List<>))
-                        {
-                            //Aca hay un join, cague
-
-                        }
-                        else if (property.Name == "table")
-                        {
-                            //la ignoro
-                        }
-                        else if (property.PropertyType == typeof(String))
-                        {
-                            property.SetValue(item, result[property.Name].ToString(), null);
-                        }
-
-                    }
-
-                    lista.Add(item);
+                    lista.Add(FillerHelper.buildObject<T>(result));
                 }
             }
 
@@ -158,15 +134,18 @@ namespace FrbaHotel.Database_Helper
 
         public static List<T> findAll<T>()
         {
-            return EntityManager.findList<T>(new List<T>());
+            return EntityManager.findList<T>(new List<FetchCondition>());
         }
 
         public static T findBy<T>(String key, String value)
         {
-            return EntityManager.findList<T>(new List<T>())[0];
+            FetchCondition condition = new FetchCondition();
+            condition.setEquals(key, value);
+            List<FetchCondition> condiciones = new List<FetchCondition>();
+            return EntityManager.findList<T>(condiciones)[0];
         }
 
-        public static T findById<T>(long id, Boolean join)
+        public static T findById<T>(long id)
         {
             return EntityManager.findBy<T>("id", id.ToString());
         }

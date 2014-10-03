@@ -34,7 +34,7 @@ namespace FrbaHotel.ABM_de_Usuario
             user.fecha_nac = /*DateTime.Parse(*/textBox8.Text/*)*/;
 
             user.intentos_fallidos = 0;
-            user.estado = 1;
+            user.estado = true;
 
             try
             {
