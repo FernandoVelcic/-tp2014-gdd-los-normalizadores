@@ -22,7 +22,6 @@ namespace FrbaHotel.ABM_de_Usuario
             Usuarios user = new Usuarios();
             user.username = textBox1.Text;
             user.password = textBox2.Text;
-            user.rol = 0;
             user.nombre = textBox3.Text;
             user.apellido = textBox4.Text;
             user.mail = textBox5.Text;

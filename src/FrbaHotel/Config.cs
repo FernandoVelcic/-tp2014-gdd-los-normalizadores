@@ -23,6 +23,7 @@ namespace FrbaHotel
         public String username { get; set; }
         public String password { get; set; }
         public String database { get; set; }
+        public String schema { get; set; }
 
         private Config()
         {
@@ -30,6 +31,7 @@ namespace FrbaHotel
             username = "gd";
             password = "gd2014";
             database = "GD2C2014";
+            schema = "LOS_NORMALIZADORES";
         }
 
         //[DllImport("kernel32")]

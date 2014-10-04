@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
+using FrbaHotel;
+
 namespace MyActiveRecord
 {
     abstract class Query
@@ -27,7 +29,7 @@ namespace MyActiveRecord
         public String getTableName(String className)
         {
             //TODO agregar soporte para schemas
-            return "[LOS_NORMALIZADORES].[" + className.ToLower() + "]";
+            return "[" + Config.getInstance().schema + "].[" + className.ToLower() + "]";
         }
 
 

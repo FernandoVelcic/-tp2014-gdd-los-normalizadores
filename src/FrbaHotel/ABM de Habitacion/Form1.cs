@@ -23,7 +23,7 @@ namespace FrbaHotel.ABM_de_Habitacion
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Habitacion habitacionNew = new Habitacion();
+            Habitaciones habitacionNew = new Habitaciones();
             habitacionNew.numero = Convert.ToInt32(textBox1.Text);
             habitacionNew.hotel= comboBox1.Text;
             habitacionNew.pisoHotel = comboBox2.Text ;

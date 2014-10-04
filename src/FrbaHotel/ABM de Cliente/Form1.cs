@@ -23,7 +23,7 @@ namespace FrbaHotel.ABM_de_Cliente
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Cliente cliente= New Cliente();
+            /*Cliente cliente= new Cliente();
             cliente.nombre=textBox3.Text;
             cliente.apellido=textBox4.Text;
             //tipo y nro doc
@@ -33,7 +33,7 @@ namespace FrbaHotel.ABM_de_Cliente
             cliente.localidad=textBox1.Text;
             cliente.pais=textBox2.Text;
             //nacionalidad se autocompleta? hace falta ponerlo?
-            cliente.fechaNacimiento=textBox8.Text;
+            cliente.fechaNacimiento=textBox8.Text;*/
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)

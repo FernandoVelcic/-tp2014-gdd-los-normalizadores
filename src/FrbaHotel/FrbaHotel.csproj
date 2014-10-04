@@ -86,14 +86,19 @@
     </Compile>
     <Compile Include="Config.cs" />
     <Compile Include="Database Helper\ActiveRecord.cs" />
+    <Compile Include="Database Helper\ConnectionBuilder.cs" />
     <Compile Include="Database Helper\ConnectionManager.cs" />
     <Compile Include="Database Helper\DeleteQuery.cs" />
-    <Compile Include="Database Helper\Hoteles.cs" />
+    <Compile Include="Database Helper\EntityManager.cs" />
+    <Compile Include="Database Helper\FetchCondition.cs" />
+    <Compile Include="Database Helper\FetchConfig.cs" />
+    <Compile Include="Database Helper\FillerHelper.cs" />
+    <Compile Include="Database Helper\Modelos\Hoteles.cs" />
     <Compile Include="Database Helper\InsertQuery.cs" />
     <Compile Include="Database Helper\Query.cs" />
     <Compile Include="Database Helper\SelectQuery.cs" />
     <Compile Include="Database Helper\UpdateQuery.cs" />
-    <Compile Include="Database Helper\Usuarios.cs" />
+    <Compile Include="Database Helper\Modelos\Usuarios.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,7 +117,7 @@
     <Compile Include="Generar Modificar Reserva\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Habitacion.cs" />
+    <Compile Include="Database Helper\Modelos\Habitaciones.cs" />
     <Compile Include="Listado Estadistico\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
