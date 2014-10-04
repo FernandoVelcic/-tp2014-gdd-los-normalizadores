@@ -26,7 +26,7 @@ namespace FrbaHotel.ABM_de_Usuario
             user.apellido = textBox4.Text;
             user.mail = textBox5.Text;
 
-            user.fecha_nac = textBox8.Text;
+            user.fecha_nac = dateTimePicker1.Text;
 
             user.intentos_fallidos = 0;
             user.estado = true;
@@ -44,13 +44,6 @@ namespace FrbaHotel.ABM_de_Usuario
             MessageBox.Show("Usuario creado correctamente!");
             this.Close();
         }
-
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
-            textBox8.Text = dateTimePicker1.Value.ToString("MM/dd/yyyy");
-        }
-
-   
        
     }
 }

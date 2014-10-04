@@ -27,13 +27,13 @@ namespace FrbaHotel.Database_Helper
                 {
                     //Si hay un 1 a muchos no deberia guardarlo
                 }
-                if (property.Name == "table")
+                else if (property.Name == "table")
                 {
                     //Ignorar
                 }
                 else if (property.PropertyType.IsPrimitive || property.PropertyType == typeof(Decimal) || property.PropertyType == typeof(String))
                 {
-                    properties.Add(property.Name, property.GetGetMethod().Invoke(this, null).ToString());
+                    properties.Add(property.Name, property.GetGetMethod().Invoke(item, null).ToString());
                 }
                 else
                 {

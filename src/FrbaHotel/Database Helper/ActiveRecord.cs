@@ -12,7 +12,7 @@ namespace MyActiveRecord
 
         public long id { get; set; }
 
-        public abstract String table{get;}
+        public abstract String table { get; }
 
 
         public Boolean validates()
