@@ -23,20 +23,20 @@ SET ANSI_PADDING ON
 GO
 CREATE TABLE [LOS_NORMALIZADORES].[Maestra](
 	
-	[Hotel_Ciudad] [varchar](255) NULL,
-	[Hotel_Calle] [varchar](255) NULL,
+	[Hotel_Ciudad] [nvarchar](255) NULL,
+	[Hotel_Calle] [nvarchar](255) NULL,
 	[Hotel_Nro_Calle] [numeric](18, 0) NULL,
 	[Hotel_CantEstrella] [numeric](18, 0) NULL,
 	[Hotel_Recarga_Estrella] [numeric](18, 0) NULL,
 	
 	[Habitacion_Numero] [numeric](18, 0) NULL,
 	[Habitacion_Piso] [numeric](18, 0) NULL,
-	[Habitacion_Frente] [varchar](50) NULL,
+	[Habitacion_Frente] [nvarchar](50) NULL,
 	[Habitacion_Tipo_Codigo] [numeric](18, 0) NULL,
-	[Habitacion_Tipo_Descripcion] [varchar](255) NULL,
+	[Habitacion_Tipo_Descripcion] [nvarchar](255) NULL,
 	[Habitacion_Tipo_Porcentual] [numeric](18, 2) NULL,
 	
-	[Regimen_Descripcion] [varchar](255) NULL,
+	[Regimen_Descripcion] [nvarchar](255) NULL,
 	[Regimen_Precio] [numeric](18, 2) NULL,
 	
 	[Reserva_Fecha_Inicio] [datetime] NULL,
@@ -47,7 +47,7 @@ CREATE TABLE [LOS_NORMALIZADORES].[Maestra](
 	[Estadia_Cant_Noches] [numeric](18, 0) NULL,
 	
 	[Consumible_Codigo] [numeric](18, 0) NULL,
-	[Consumible_Descripcion] [varchar](255) NULL,
+	[Consumible_Descripcion] [nvarchar](255) NULL,
 	[Consumible_Precio] [numeric](18, 2) NULL,
 	
 	[Item_Factura_Cantidad] [numeric](18, 0) NULL,
@@ -58,15 +58,15 @@ CREATE TABLE [LOS_NORMALIZADORES].[Maestra](
 	[Factura_Total] [numeric](18, 2) NULL,
 	
 	[Cliente_Pasaporte_Nro] [numeric](18, 0) NULL,
-	[Cliente_Apellido] [varchar](255) NULL,
-	[Cliente_Nombre] [varchar](255) NULL,
+	[Cliente_Apellido] [nvarchar](255) NULL,
+	[Cliente_Nombre] [nvarchar](255) NULL,
 	[Cliente_Fecha_Nac] [datetime] NULL,
-	[Cliente_Mail] [varchar](255) NULL,
-	[Cliente_Dom_Calle] [varchar](255) NULL,
+	[Cliente_Mail] [nvarchar](255) NULL,
+	[Cliente_Dom_Calle] [nvarchar](255) NULL,
 	[Cliente_Nro_Calle] [numeric](18, 0) NULL,
 	[Cliente_Piso] [numeric](18, 0) NULL,
-	[Cliente_Depto] [varchar](50) NULL,
-	[Cliente_Nacionalidad] [varchar](255) NULL
+	[Cliente_Depto] [nvarchar](50) NULL,
+	[Cliente_Nacionalidad] [nvarchar](255) NULL
 ) ON [PRIMARY]
 
 GO
@@ -80,8 +80,8 @@ GO
 
 CREATE TABLE [LOS_NORMALIZADORES].[hoteles](
 	[id] INTEGER IDENTITY PRIMARY KEY,
-	[ciudad] [varchar](255),
-	[calle] [varchar](255),
+	[ciudad] [nvarchar](255),
+	[calle] [nvarchar](255),
 	[nro_Calle] [numeric](18, 0),
 	[cant_estrella] [numeric](18, 0),
 	[recarga_estrella] [numeric](18, 0)
@@ -93,9 +93,9 @@ CREATE TABLE [LOS_NORMALIZADORES].[habitaciones](
 	[hotel_id] INTEGER,						/* A obtener de forma dificil */
 	[numero] [numeric](18, 0),
 	[piso] [numeric](18, 0),
-	[frente] [varchar](50),
+	[frente] [nvarchar](50),
 	[tipo_codigo] [numeric](18, 0),
-	[tipo_descripcion] [varchar](255),
+	[tipo_descripcion] [nvarchar](255),
 	[tipo_porcentual] [numeric](18, 2)
 ) ON [PRIMARY]
 
@@ -103,7 +103,7 @@ CREATE TABLE [LOS_NORMALIZADORES].[habitaciones](
 CREATE TABLE [LOS_NORMALIZADORES].[regimenes](
 	[id] INTEGER IDENTITY PRIMARY KEY,
 	[hotel_id] INTEGER,						/* Es a hotel??? Leer la consigna y averiguar */
-	[descripcion] [varchar](255),
+	[descripcion] [nvarchar](255),
 	[precio] [numeric](18, 2),
 ) ON [PRIMARY]
 
@@ -129,7 +129,7 @@ CREATE TABLE [LOS_NORMALIZADORES].[consumibles](
 	[id] INTEGER IDENTITY PRIMARY KEY,
 	[habitacion_id] INTEGER,				/* Supongo que es a habitacion, pero confirmar con el enunciado */
 	[codigo] [numeric](18, 0),
-	[descripcion] [varchar](255),
+	[descripcion] [nvarchar](255),
 	[precio] [numeric](18, 2),
 ) ON [PRIMARY]
 
@@ -155,15 +155,15 @@ CREATE TABLE [LOS_NORMALIZADORES].[facturas](
 CREATE TABLE [LOS_NORMALIZADORES].[clientes](
 	[id] INTEGER IDENTITY PRIMARY KEY,
 	[pasaporte_rro] [numeric](18, 0),
-	[apellido] [varchar](255),
-	[nombre] [varchar](255),
+	[apellido] [nvarchar](255),
+	[nombre] [nvarchar](255),
 	[fecha_nac] [datetime],
-	[mail] [varchar](255),
-	[dom_calle] [varchar](255),
+	[mail] [nvarchar](255),
+	[dom_calle] [nvarchar](255),
 	[nro_calle] [numeric](18, 0),
 	[piso] [numeric](18, 0),
-	[depto] [varchar](50),
-	[nacionalidad] [varchar](255)
+	[depto] [nvarchar](50),
+	[nacionalidad] [nvarchar](255)
 ) ON [PRIMARY]
 
 
