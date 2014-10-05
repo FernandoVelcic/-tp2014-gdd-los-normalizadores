@@ -12,12 +12,15 @@ using FrbaHotel.Database_Helper;
 
 namespace FrbaHotel.ABM_de_Usuario
 {
-    public partial class Form1 : Form
+    public partial class AltaUsuario : Form
     {
-        public Form1()
+        public AltaUsuario()
         {
             InitializeComponent();
+        }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
             BindingSource roles_binding = new BindingSource();
             roles_binding.DataSource = EntityManager.findAll<Roles>();
             comboBox2.DataSource = roles_binding;
@@ -64,6 +67,8 @@ namespace FrbaHotel.ABM_de_Usuario
         {
             this.Close();
         }
+
+
        
     }
 }

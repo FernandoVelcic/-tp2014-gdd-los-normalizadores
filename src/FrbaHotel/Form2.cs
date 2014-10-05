@@ -78,8 +78,7 @@ namespace FrbaHotel
 
         private void button11_Click(object sender, EventArgs e)
         {
-            Form user = new FrbaHotel.ABM_de_Usuario.Form1();
-            user.Show();
+            new FrbaHotel.ABM_de_Usuario.ABMUsuario().Show();
         }
 
       
