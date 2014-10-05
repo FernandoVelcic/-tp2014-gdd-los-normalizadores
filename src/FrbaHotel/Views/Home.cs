@@ -44,7 +44,7 @@ namespace FrbaHotel
         private void ir_a_login()
         {
             //this.Hide();
-            Form login = new FrbaHotel.Login.Form1();
+            Form login = new FrbaHotel.Login.Login();
             login.Show();
         }
 

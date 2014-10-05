@@ -60,7 +60,7 @@ namespace FrbaHotel
 
         private void button8_Click(object sender, EventArgs e)
         {
-            Form login = new FrbaHotel.Login.Form1();
+            Form login = new FrbaHotel.Login.Login();
             login.Show();
         }
 

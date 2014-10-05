@@ -48,46 +48,46 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ABM de Cliente\Form1.cs">
+    <Compile Include="Views\ABM de Cliente\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ABM de Cliente\Form1.Designer.cs">
+    <Compile Include="Views\ABM de Cliente\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="ABM de Habitacion\Form1.cs">
+    <Compile Include="Views\ABM de Habitacion\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ABM de Habitacion\Form1.Designer.cs">
+    <Compile Include="Views\ABM de Habitacion\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="ABM de Regimen\Form1.cs">
+    <Compile Include="Views\ABM de Regimen\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ABM de Regimen\Form1.Designer.cs">
+    <Compile Include="Views\ABM de Regimen\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="ABM de Rol\Form1.cs">
+    <Compile Include="Views\ABM de Rol\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ABM de Rol\Form1.Designer.cs">
+    <Compile Include="Views\ABM de Rol\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="ABM de Usuario\ABMUsuario.cs">
+    <Compile Include="Views\ABM de Usuario\ABMUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ABM de Usuario\ABMUsuario.Designer.cs">
+    <Compile Include="Views\ABM de Usuario\ABMUsuario.Designer.cs">
       <DependentUpon>ABMUsuario.cs</DependentUpon>
     </Compile>
-    <Compile Include="ABM de Usuario\AltaUsuario.cs">
+    <Compile Include="Views\ABM de Usuario\AltaUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ABM de Usuario\AltaUsuario.Designer.cs">
+    <Compile Include="Views\ABM de Usuario\AltaUsuario.Designer.cs">
       <DependentUpon>AltaUsuario.cs</DependentUpon>
     </Compile>
-    <Compile Include="Cancelar Reserva\Form1.cs">
+    <Compile Include="Views\Cancelar Reserva\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Cancelar Reserva\Form1.Designer.cs">
+    <Compile Include="Views\Cancelar Reserva\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Config.cs" />
@@ -99,93 +99,92 @@
     <Compile Include="Database Helper\FetchCondition.cs" />
     <Compile Include="Database Helper\FetchConfig.cs" />
     <Compile Include="Database Helper\FillerHelper.cs" />
-    <Compile Include="Database Helper\Modelos\Hoteles.cs" />
+    <Compile Include="Models\Hoteles.cs" />
     <Compile Include="Database Helper\InsertQuery.cs" />
-    <Compile Include="Database Helper\Modelos\Regimenes.cs" />
-    <Compile Include="Database Helper\Modelos\Reservas.cs" />
-    <Compile Include="Database Helper\Modelos\Roles.cs" />
+    <Compile Include="Models\Regimenes.cs" />
+    <Compile Include="Models\Reservas.cs" />
+    <Compile Include="Models\Roles.cs" />
     <Compile Include="Database Helper\Query.cs" />
     <Compile Include="Database Helper\SelectQuery.cs" />
     <Compile Include="Database Helper\UpdateQuery.cs" />
-    <Compile Include="Database Helper\Modelos\Usuarios.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Models\Usuarios.cs" />
+    <Compile Include="Views\Home.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
+    <Compile Include="Views\Home.Designer.cs">
+      <DependentUpon>Home.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Operaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Operaciones.Designer.cs">
+      <DependentUpon>Operaciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Generar Modificar Reserva\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Generar Modificar Reserva\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form2.cs">
+    <Compile Include="Models\Habitaciones.cs" />
+    <Compile Include="Views\Listado Estadistico\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form2.Designer.cs">
-      <DependentUpon>Form2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Generar Modificar Reserva\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Generar Modificar Reserva\Form1.Designer.cs">
+    <Compile Include="Views\Listado Estadistico\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Database Helper\Modelos\Habitaciones.cs" />
-    <Compile Include="Listado Estadistico\Form1.cs">
+    <Compile Include="Views\Login\Login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Listado Estadistico\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Login\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Login\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Views\Login\Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ABM de Cliente\Form1.resx">
+    <EmbeddedResource Include="Views\ABM de Cliente\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="ABM de Habitacion\Form1.resx">
+    <EmbeddedResource Include="Views\ABM de Habitacion\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="ABM de Regimen\Form1.resx">
+    <EmbeddedResource Include="Views\ABM de Regimen\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="ABM de Rol\Form1.resx">
+    <EmbeddedResource Include="Views\ABM de Rol\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="ABM de Usuario\ABMUsuario.resx">
+    <EmbeddedResource Include="Views\ABM de Usuario\ABMUsuario.resx">
       <DependentUpon>ABMUsuario.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ABM de Usuario\AltaUsuario.resx">
+    <EmbeddedResource Include="Views\ABM de Usuario\AltaUsuario.resx">
       <DependentUpon>AltaUsuario.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Cancelar Reserva\Form1.resx">
+    <EmbeddedResource Include="Views\Cancelar Reserva\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
+    <EmbeddedResource Include="Views\Home.resx">
+      <DependentUpon>Home.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Operaciones.resx">
+      <DependentUpon>Operaciones.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Generar Modificar Reserva\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form2.resx">
-      <DependentUpon>Form2.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Generar Modificar Reserva\Form1.resx">
+    <EmbeddedResource Include="Views\Listado Estadistico\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Listado Estadistico\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Login\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Views\Login\Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -193,11 +192,11 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Registrar Consumible\Form1.resx">
+    <EmbeddedResource Include="Views\Registrar Consumible\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Registrar Estadia\Form1.resx">
+    <EmbeddedResource Include="Views\Registrar Estadia\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -214,16 +213,16 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Registrar Consumible\Form1.cs">
+    <Compile Include="Views\Registrar Consumible\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Registrar Consumible\Form1.Designer.cs">
+    <Compile Include="Views\Registrar Consumible\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Registrar Estadia\Form1.cs">
+    <Compile Include="Views\Registrar Estadia\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Registrar Estadia\Form1.Designer.cs">
+    <Compile Include="Views\Registrar Estadia\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Tools\SHA256.cs" />
