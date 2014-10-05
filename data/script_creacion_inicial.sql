@@ -235,7 +235,8 @@ GO
 /* Migracion de regimenes */
 INSERT INTO [LOS_NORMALIZADORES].[regimenes]
            ([descripcion], [precio], [estado])
-     SELECT DISTINCT [Regimen_Descripcion], [Regimen_Precio], 1 FROM [GD2C2014].[gd_esquema].[Maestra]
+	SELECT DISTINCT [Regimen_Descripcion], [Regimen_Precio], 1 FROM [GD2C2014].[gd_esquema].[Maestra]
+	WHERE [Regimen_Descripcion] IS NOT NULL AND [Regimen_Precio] IS NOT NULL
 
 /* Migracion de reservas */ 
 
