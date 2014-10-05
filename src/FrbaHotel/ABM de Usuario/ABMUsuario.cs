@@ -20,7 +20,8 @@ namespace FrbaHotel.ABM_de_Usuario
 
         private void ABMUsuario_Load(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = EntityManager.findAll<Usuarios>();
+            var usuariosBinding = new BindingList<Usuarios>(EntityManager.findAll<Usuarios>());
+            dataGridView1.DataSource = new BindingSource(usuariosBinding, null);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -30,10 +31,12 @@ namespace FrbaHotel.ABM_de_Usuario
 
         private void button2_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow item in this.dataGridView1.SelectedRows)
+            foreach (DataGridViewRow row in this.dataGridView1.SelectedRows)
             {
-                dataGridView1.Rows.RemoveAt(item.Index);
-                //dataGridView1.Rows[item.Index];
+                Usuarios user = row.DataBoundItem as Usuarios;
+                user.delete();
+                dataGridView1.Rows.RemoveAt(row.Index);
+                
             }
         }
     }

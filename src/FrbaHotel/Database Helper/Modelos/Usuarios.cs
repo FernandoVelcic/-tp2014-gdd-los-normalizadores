@@ -9,12 +9,12 @@ namespace FrbaHotel
 {
     class Usuarios : ActiveRecord
     {
-
+        [System.ComponentModel.Browsable(false)] 
         public override String table { get { return "usuarios"; } }
 
         //public int id { get; set; } //INTEGER IDENTITY PRIMARY KEY
         public String username { get; set; } //[nvarchar](30)
-        [System.ComponentModel.Browsable(false)] //Para no mostrar la contraseña
+        [System.ComponentModel.Browsable(false)]
         public String password { get; set; } //[char](256)
         public String nombre { get; set; } //[nvarchar](255)
         public String apellido { get; set; } //[nvarchar](255)
