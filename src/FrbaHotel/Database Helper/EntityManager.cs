@@ -95,7 +95,7 @@ namespace FrbaHotel.Database_Helper
         public void delete(ActiveRecord item)
         {
             DeleteQuery query = new DeleteQuery(item.GetType());
-            query.addWhere("id", item.ToString());
+            query.addWhere("id", item.id.ToString());
             Console.WriteLine(query.build());
             query.exec();
         }

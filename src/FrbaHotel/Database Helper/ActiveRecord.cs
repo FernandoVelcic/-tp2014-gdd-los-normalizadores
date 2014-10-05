@@ -45,7 +45,10 @@ namespace MyActiveRecord
             EntityManager.getInstance().insert(this);
         }
 
-
+        public void delete()
+        {
+            EntityManager.getInstance().delete(this);
+        }
 
 
         public void fill(Object values)
