@@ -102,9 +102,9 @@ CREATE TABLE [LOS_NORMALIZADORES].[habitaciones](
 
 CREATE TABLE [LOS_NORMALIZADORES].[regimenes](
 	[id] INTEGER IDENTITY PRIMARY KEY,
-	[hotel_id] INTEGER,						/* Es a hotel??? Leer la consigna y averiguar */
 	[descripcion] [nvarchar](255),
 	[precio] [numeric](18, 2),
+	[estado] [bit]
 ) ON [PRIMARY]
 
 
@@ -233,6 +233,9 @@ GO
 
 
 /* Migracion de regimenes */
+INSERT INTO [LOS_NORMALIZADORES].[regimenes]
+           ([descripcion], [precio], [estado])
+     SELECT DISTINCT [Regimen_Descripcion], [Regimen_Precio], 1 FROM [GD2C2014].[gd_esquema].[Maestra]
 
 /* Migracion de reservas */ 
 
