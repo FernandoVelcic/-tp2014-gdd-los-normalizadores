@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using MyActiveRecord;
 using System.Data.SqlClient;
+using FrbaHotel.Tools;
 
 namespace FrbaHotel.Login
 {
@@ -42,7 +43,7 @@ namespace FrbaHotel.Login
         {
             String query;
             query = "DECLARE @Retintentos_fallidos int;";
-            query += "EXECUTE " + Config.getInstance().schema + " .[uspLogin] @username = '" + textBox1.Text + "', @password = '" + textBox2.Text + "', @intentos_fallidos = @Retintentos_fallidos OUTPUT;";
+            query += "EXECUTE " + Config.getInstance().schema + " .[uspLogin] @username = '" + textBox1.Text + "', @password = '" + new SHA256(textBox2.Text).ToString() + "', @intentos_fallidos = @Retintentos_fallidos OUTPUT;";
             query += "SELECT @Retintentos_fallidos;";
             SqlCommand command = new SqlCommand(query, ConnectionManager.getInstance().getConnection());
             int intentos_fallidos = System.Convert.ToInt32(command.ExecuteScalar());

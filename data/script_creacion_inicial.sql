@@ -280,7 +280,7 @@ CREATE TABLE [LOS_NORMALIZADORES].[rol_usuario](
 CREATE TABLE [LOS_NORMALIZADORES].[usuarios](
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[username] [nvarchar](30) NOT NULL,
-	[password] [nvarchar](30) NOT NULL,
+	[password] [char](256) NOT NULL,
 	[intentos_fallidos] [tinyint] NOT NULL,
 	[estado] [bit] NOT NULL,
 	[nombre] [nvarchar](255) NOT NULL,

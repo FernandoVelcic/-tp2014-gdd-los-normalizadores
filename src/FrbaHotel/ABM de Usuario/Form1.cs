@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using FrbaHotel.Tools;
+
 namespace FrbaHotel.ABM_de_Usuario
 {
     public partial class Form1 : Form
@@ -21,7 +23,7 @@ namespace FrbaHotel.ABM_de_Usuario
         {
             Usuarios user = new Usuarios();
             user.username = textBox1.Text;
-            user.password = textBox2.Text;
+            user.password = new SHA256(textBox2.Text).ToString();
             user.nombre = textBox3.Text;
             user.apellido = textBox4.Text;
             user.mail = textBox5.Text;
