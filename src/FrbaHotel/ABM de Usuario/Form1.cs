@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using FrbaHotel.Tools;
+using FrbaHotel.Database_Helper;
 
 namespace FrbaHotel.ABM_de_Usuario
 {
@@ -16,6 +17,18 @@ namespace FrbaHotel.ABM_de_Usuario
         public Form1()
         {
             InitializeComponent();
+
+            BindingSource roles_binding = new BindingSource();
+            roles_binding.DataSource = EntityManager.findAll<Roles>();
+            comboBox2.DataSource = roles_binding;
+            comboBox2.DisplayMember = "Descripcion";
+            comboBox2.ValueMember = "id";
+
+            BindingSource hoteles_binding = new BindingSource();
+            hoteles_binding.DataSource = EntityManager.findAll<Hoteles>();
+            comboBox1.DataSource = hoteles_binding;
+            comboBox1.DisplayMember = "id"; //TODO mostrar un nombre de hotel mas lindo
+            comboBox1.ValueMember = "id";
         }
 
       
@@ -44,6 +57,11 @@ namespace FrbaHotel.ABM_de_Usuario
             }
 
             MessageBox.Show("Usuario creado correctamente!");
+            this.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
             this.Close();
         }
        

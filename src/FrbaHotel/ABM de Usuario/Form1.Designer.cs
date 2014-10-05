@@ -97,7 +97,7 @@
             this.comboBox1.Location = new System.Drawing.Point(197, 228);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 24);
-            this.comboBox1.TabIndex = 19;
+            this.comboBox1.TabIndex = 22;
             // 
             // textBox4
             // 
@@ -220,21 +220,21 @@
             this.comboBox2.Location = new System.Drawing.Point(103, 77);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(121, 21);
-            this.comboBox2.TabIndex = 27;
+            this.comboBox2.TabIndex = 6;
             // 
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(103, 46);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(89, 20);
-            this.textBox2.TabIndex = 26;
+            this.textBox2.TabIndex = 5;
             // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(103, 20);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(89, 20);
-            this.textBox1.TabIndex = 25;
+            this.textBox1.TabIndex = 4;
             // 
             // label3
             // 
@@ -277,7 +277,7 @@
             this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(504, 111);
-            this.groupBox2.TabIndex = 29;
+            this.groupBox2.TabIndex = 27;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Datos del usuario";
             // 
@@ -287,7 +287,7 @@
             this.button1.Location = new System.Drawing.Point(394, 405);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(122, 39);
-            this.button1.TabIndex = 30;
+            this.button1.TabIndex = 23;
             this.button1.Text = "Guardar";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -301,6 +301,7 @@
             this.button2.TabIndex = 31;
             this.button2.Text = "Volver";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // Form1
             // 

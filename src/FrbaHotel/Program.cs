@@ -38,6 +38,7 @@ namespace FrbaHotel
             //ConnectionManager.getInstance().close();
             //List<Usuarios> usuarios = EntityManager.findAll<Usuarios>();
             //MessageBox.Show("Muestro al usuario: " + usuarios[0].id);
+            
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

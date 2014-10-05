@@ -95,6 +95,7 @@
     <Compile Include="Database Helper\FillerHelper.cs" />
     <Compile Include="Database Helper\Modelos\Hoteles.cs" />
     <Compile Include="Database Helper\InsertQuery.cs" />
+    <Compile Include="Database Helper\Modelos\Roles.cs" />
     <Compile Include="Database Helper\Query.cs" />
     <Compile Include="Database Helper\SelectQuery.cs" />
     <Compile Include="Database Helper\UpdateQuery.cs" />
