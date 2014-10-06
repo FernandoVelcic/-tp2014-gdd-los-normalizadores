@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FrbaHotel.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FrbaHotel.ABM_de_Cliente
+namespace FrbaHotel.Views.ABM_de_Cliente
 {
     public partial class Form1 : Form
     {
@@ -23,22 +24,47 @@ namespace FrbaHotel.ABM_de_Cliente
 
         private void button1_Click(object sender, EventArgs e)
         {
-            /*Cliente cliente= new Cliente();
-            cliente.nombre=textBox3.Text;
-            cliente.apellido=textBox4.Text;
+            Cliente cliente= new Cliente();
+            cliente.nombre=txt_Nombre.Text;
+            cliente.apellido=txt_Apellido.Text;
             //tipo y nro doc
-            cliente.mail=textBox5.Text;
-            cliente.telefono=textBox6.Text;
-            cliente.direccion=textBox7.Text;
-            cliente.localidad=textBox1.Text;
-            cliente.pais=textBox2.Text;
+            
+            cliente.mail = txt_Mail.Text;
+            //cliente.t = txt_Telefono.Text;
+            cliente.dom_calle = txt_Calle.Text;
+            //cliente. = txt_Localidad.Text;
+            cliente.nacionalidad = txt_Pais.Text;
             //nacionalidad se autocompleta? hace falta ponerlo?
-            cliente.fechaNacimiento=textBox8.Text;*/
+            cliente.fecha_nac = dateTimePicker1.Value;
+
+            try
+            {
+                cliente.save();
+                MessageBox.Show("El cliente se guardo correctamente");
+                this.Close();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+            
+
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-            textBox8.Text = dateTimePicker1.Value.ToString("MM/dd/yyyy");
+            txt_FechaNac.Text = dateTimePicker1.Value.ToString("MM/dd/yyyy");
         }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

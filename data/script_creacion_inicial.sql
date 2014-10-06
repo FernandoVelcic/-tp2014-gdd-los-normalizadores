@@ -296,7 +296,7 @@ CREATE TABLE [LOS_NORMALIZADORES].[usuarios](
 
 ([id] ASC)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]) ON [PRIMARY]
 
-INSERT INTO [LOS_NORMALIZADORES].[usuarios] (username, password, nombre, fecha_nac, rol, intentos_fallidos, estado, apellido, mail) VALUES ('admin', 'admin', 'admin','', '',0, 1, 'admin', 'admin@admin.com.ar')
+INSERT INTO [LOS_NORMALIZADORES].[usuarios] (username, password, nombre, fecha_nac,  intentos_fallidos, estado, apellido, mail) VALUES ('admin', 'admin', 'admin','', '',0, 'admin', 'admin@admin.com.ar')
 GO
 
 

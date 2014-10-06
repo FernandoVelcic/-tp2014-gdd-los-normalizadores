@@ -39,9 +39,9 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.dataGridView1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 135);
+            this.groupBox1.Location = new System.Drawing.Point(12, 47);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(550, 227);
+            this.groupBox1.Size = new System.Drawing.Size(550, 315);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Listado de Usuarios";
@@ -55,12 +55,12 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(538, 202);
+            this.dataGridView1.Size = new System.Drawing.Size(538, 290);
             this.dataGridView1.TabIndex = 0;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(438, 100);
+            this.button1.Location = new System.Drawing.Point(438, 12);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(124, 29);
             this.button1.TabIndex = 1;
@@ -70,7 +70,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(304, 100);
+            this.button2.Location = new System.Drawing.Point(304, 12);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(128, 29);
             this.button2.TabIndex = 2;

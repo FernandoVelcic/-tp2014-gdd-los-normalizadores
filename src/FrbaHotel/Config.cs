@@ -27,10 +27,10 @@ namespace FrbaHotel
 
         private Config()
         {
-            server = "WIN-J1WNSO7Z940\\SQLSERVER2008";
+            server = "NICO-L-WINDOWS\\SQLEXPRESS";
             username = "gd";
             password = "gd2014";
-            database = "GD2C2014";
+            database = "LOS_NORMALIZADORES";
             schema = "LOS_NORMALIZADORES";
         }
 
