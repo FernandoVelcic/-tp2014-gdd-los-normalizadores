@@ -31,13 +31,19 @@ namespace FrbaHotel.ABM_de_Usuario
 
         private void button2_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in this.dataGridView1.SelectedRows)
+            DialogResult dr = MessageBox.Show("¿Esta seguro que desea borrar este registro?", "Borrar registro", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+
+            if (dr == DialogResult.Yes)
             {
-                Usuarios user = row.DataBoundItem as Usuarios;
-                user.delete();
-                dataGridView1.Rows.RemoveAt(row.Index);
-                
+                foreach (DataGridViewRow row in this.dataGridView1.SelectedRows)
+                {
+                    Usuarios user = row.DataBoundItem as Usuarios;
+                    user.logicalDelete();
+                    //dataGridView1.Rows.RemoveAt(row.Index);
+                    MessageBox.Show("Registro borrado correctamente");
+                }
             }
+
         }
     }
 }

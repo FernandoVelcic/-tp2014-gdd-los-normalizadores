@@ -262,7 +262,7 @@ CREATE TABLE [LOS_NORMALIZADORES].[roles](
 	[id] INTEGER IDENTITY PRIMARY KEY,
 	[descripcion] [nvarchar](30) NOT NULL,
 	[rol_permisos_id] INTEGER NOT NULL,
-	[habilitado] [bit] NOT NULL,
+	[estado] [bit] NOT NULL,
 ) ON [PRIMARY]
 
 
@@ -291,6 +291,7 @@ CREATE TABLE [LOS_NORMALIZADORES].[usuarios](
 	[apellido] [nvarchar](255) NOT NULL,
 	[mail] [nvarchar](255) NOT NULL,
 	[fecha_nac] [datetime] NOT NULL
+	/* Etc agregar el resto */
  CONSTRAINT [PK_usuarios] PRIMARY KEY CLUSTERED 
 
 ([id] ASC)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]) ON [PRIMARY]

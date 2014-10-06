@@ -14,6 +14,6 @@ namespace FrbaHotel
         //public int id { get; set; } //INTEGER IDENTITY PRIMARY KEY
         public String descripcion { get; set; } //[nvarchar](30)
         public int rol_permisos_id { get; set; } //INTEGER
-        public Boolean habilitado { get; set; } //[bit]
+        public Boolean estado { get; set; } //[bit]
     }
 }

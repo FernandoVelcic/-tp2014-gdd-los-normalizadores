@@ -100,7 +100,15 @@ namespace FrbaHotel.Database_Helper
             query.exec();
         }
 
+        public void logicalDelete(ActiveRecord item)
+        {
+            UpdateQuery query = new UpdateQuery(item.GetType());
+            query.addKeyValue("estado", "0");
 
+            query.addWhere("id", item.id.ToString());
+            Console.WriteLine(query.build());
+            query.exec();
+        }
 
 
 

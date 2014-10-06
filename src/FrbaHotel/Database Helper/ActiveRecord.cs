@@ -50,6 +50,10 @@ namespace MyActiveRecord
             EntityManager.getInstance().delete(this);
         }
 
+        public void logicalDelete()
+        {
+            EntityManager.getInstance().logicalDelete(this);
+        }
 
         public void fill(Object values)
         {
