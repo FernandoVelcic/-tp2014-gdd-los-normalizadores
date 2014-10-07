@@ -8,24 +8,21 @@ namespace FrbaHotel.Models
 {
     class Cliente : ActiveRecord
     {
-
         public override String table { get { return "clientes"; } }
 
-        public int pasaporte_nro { get; set; } 
-        public String apellido { get; set; }
-        public String nombre { get; set; } 
-        public DateTime fecha_nac { get; set; } 
-        public String mail { get; set; } 
+        //public int id { get; set; } //INTEGER IDENTITY PRIMARY KEY
+        public int pasaporte_nro { get; set; }  //[numeric](18, 0)
+        public String apellido { get; set; } //[nvarchar](255)
+        public String nombre { get; set; }  //[nvarchar](255)
+        public String fecha_nac { get; set; } //[datetime]
+        public String mail { get; set; } //[nvarchar](255)
 
         /* ¿Normalizar? */
-        public String dom_calle { get; set; } 
-        public String nro_calle { get; set; } 
-        public String piso { get; set; }
-        public String depto { get; set; }
+        public String dom_calle { get; set; } //[nvarchar](255)
+        public String nro_calle { get; set; } //[numeric](18, 0)
+        public String piso { get; set; } //[numeric](18, 0)
+        public String depto { get; set; } //[nvarchar](50)
 
-        public String nacionalidad { get; set; } 
-
-
-
+        public String nacionalidad { get; set; } //[nvarchar](255)
     }
 }
