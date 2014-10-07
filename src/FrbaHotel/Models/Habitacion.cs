@@ -5,9 +5,9 @@ using System.Text;
 
 using MyActiveRecord;
 
-namespace FrbaHotel
+namespace FrbaHotel.Models
 {
-    class Habitaciones : ActiveRecord
+    class Habitacion : ActiveRecord
     {
         public override String table { get { return "habitaciones"; } }
 

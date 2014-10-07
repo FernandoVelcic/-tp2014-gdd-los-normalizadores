@@ -5,9 +5,9 @@ using System.Text;
 
 using MyActiveRecord;
 
-namespace FrbaHotel
+namespace FrbaHotel.Models
 {
-    class Roles : ActiveRecord
+    class Rol : ActiveRecord
     {
         public override String table { get { return "roles"; } }
 

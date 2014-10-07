@@ -48,7 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Clientes.cs" />
+    <Compile Include="Models\Cliente.cs" />
     <Compile Include="Views\ABM de Cliente\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,15 +106,15 @@
     <Compile Include="Database Helper\FetchCondition.cs" />
     <Compile Include="Database Helper\FetchConfig.cs" />
     <Compile Include="Database Helper\FillerHelper.cs" />
-    <Compile Include="Models\Hoteles.cs" />
+    <Compile Include="Models\Hotel.cs" />
     <Compile Include="Database Helper\InsertQuery.cs" />
-    <Compile Include="Models\Regimenes.cs" />
-    <Compile Include="Models\Reservas.cs" />
-    <Compile Include="Models\Roles.cs" />
+    <Compile Include="Models\Regimen.cs" />
+    <Compile Include="Models\Reserva.cs" />
+    <Compile Include="Models\Rol.cs" />
     <Compile Include="Database Helper\Query.cs" />
     <Compile Include="Database Helper\SelectQuery.cs" />
     <Compile Include="Database Helper\UpdateQuery.cs" />
-    <Compile Include="Models\Usuarios.cs" />
+    <Compile Include="Models\Usuario.cs" />
     <Compile Include="Views\Home.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,7 +133,7 @@
     <Compile Include="Views\Generar Modificar Reserva\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\Habitaciones.cs" />
+    <Compile Include="Models\Habitacion.cs" />
     <Compile Include="Views\Listado Estadistico\Form1.cs">
       <SubType>Form</SubType>
     </Compile>

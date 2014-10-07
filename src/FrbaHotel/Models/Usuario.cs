@@ -5,9 +5,9 @@ using System.Text;
 
 using MyActiveRecord;
 
-namespace FrbaHotel
+namespace FrbaHotel.Models
 {
-    class Usuarios : ActiveRecord
+    class Usuario : ActiveRecord
     {
         [System.ComponentModel.Browsable(false)] 
         public override String table { get { return "usuarios"; } }

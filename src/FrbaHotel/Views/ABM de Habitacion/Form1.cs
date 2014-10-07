@@ -7,6 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using MyActiveRecord;
+using FrbaHotel.Models;
+
+
 namespace FrbaHotel.ABM_de_Habitacion
 {
     public partial class Form1 : Form
@@ -24,7 +28,7 @@ namespace FrbaHotel.ABM_de_Habitacion
         private void button1_Click(object sender, EventArgs e)
         {
             //TODO matchear bien esto
-            Habitaciones habitacionNew = new Habitaciones();
+            Habitacion habitacionNew = new Habitacion();
             habitacionNew.numero = Convert.ToInt32(textBox1.Text);
             /*habitacionNew.hotel= comboBox1.Text;
             habitacionNew.pisoHotel = comboBox2.Text ;

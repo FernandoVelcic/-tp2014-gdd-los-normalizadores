@@ -35,7 +35,7 @@ namespace FrbaHotel.Views.ABM_de_Cliente
             //cliente. = txt_Localidad.Text;
             cliente.nacionalidad = txt_Pais.Text;
             //nacionalidad se autocompleta? hace falta ponerlo?
-            cliente.fecha_nac = dateTimePicker1.Value;
+            cliente.fecha_nac = dateTimePicker1.Value.ToString();
 
             try
             {

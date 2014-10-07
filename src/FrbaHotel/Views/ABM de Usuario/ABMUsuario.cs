@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using FrbaHotel.Models;
 using FrbaHotel.Database_Helper;
 
 namespace FrbaHotel.ABM_de_Usuario
@@ -20,7 +21,7 @@ namespace FrbaHotel.ABM_de_Usuario
 
         private void ABMUsuario_Load(object sender, EventArgs e)
         {
-            var usuariosBinding = new BindingList<Usuarios>(EntityManager.findAll<Usuarios>());
+            var usuariosBinding = new BindingList<Usuario>(EntityManager.findAll<Usuario>());
             dataGridView1.DataSource = new BindingSource(usuariosBinding, null);
         }
 
@@ -37,7 +38,7 @@ namespace FrbaHotel.ABM_de_Usuario
             {
                 foreach (DataGridViewRow row in this.dataGridView1.SelectedRows)
                 {
-                    Usuarios user = row.DataBoundItem as Usuarios;
+                    Usuario user = row.DataBoundItem as Usuario;
                     user.logicalDelete();
                     //dataGridView1.Rows.RemoveAt(row.Index);
                     MessageBox.Show("Registro borrado correctamente");
