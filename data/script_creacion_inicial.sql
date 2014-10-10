@@ -74,7 +74,7 @@ SET ANSI_PADDING OFF
 GO
 
 
-INSERT INTO [GD2C2014].[LOS_NORMALIZADORES].[Maestra] SELECT TOP 1000 * FROM [GD2C2014].[LOS_NORMALIZADORES].[Maestra]
+INSERT INTO [LOS_NORMALIZADORES].[Maestra] SELECT TOP 1000 * FROM [GD2C2014].[gd_esquema].[Maestra]
 GO
   	
 
@@ -100,6 +100,12 @@ CREATE TABLE [LOS_NORMALIZADORES].[habitaciones](
 ) ON [PRIMARY]
 
 
+CREATE TABLE [LOS_NORMALIZADORES].[hoteles_regimenes](
+	[id] INTEGER IDENTITY PRIMARY KEY,
+	[hotel_id] INTEGER,
+	[regimen_id] INTEGER
+) ON [PRIMARY]
+
 CREATE TABLE [LOS_NORMALIZADORES].[regimenes](
 	[id] INTEGER IDENTITY PRIMARY KEY,
 	[descripcion] [nvarchar](255),
@@ -110,51 +116,19 @@ CREATE TABLE [LOS_NORMALIZADORES].[regimenes](
 
 CREATE TABLE [LOS_NORMALIZADORES].[reservas](
 	[id] INTEGER IDENTITY PRIMARY KEY,
-	[habitacion_id] INTEGER,				/* Esto sopongo que hay que obtenerlo */
-	[fecha_inicio] [datetime],
+	[fecha] [datetime],						/* Fecha en que se realizo la reserva */
+	[fecha_inicio] [datetime],				/* Fecha en del primer dia que se va a alojar el huesped */
 	[codigo] [numeric](18, 0),
-	[cant_noches] [numeric](18, 0)
-) ON [PRIMARY]
-
-
-CREATE TABLE [LOS_NORMALIZADORES].[estadias](
-	[id] INTEGER IDENTITY PRIMARY KEY,
-	[habitacion_id] INTEGER,				/* Me imagino que hay que obtenerlo */
-	[fecha_inicio] [datetime],
 	[cant_noches] [numeric](18, 0),
-) ON [PRIMARY]
-
-
-CREATE TABLE [LOS_NORMALIZADORES].[consumibles](
-	[id] INTEGER IDENTITY PRIMARY KEY,
-	[habitacion_id] INTEGER,				/* Supongo que es a habitacion, pero confirmar con el enunciado */
-	[codigo] [numeric](18, 0),
-	[descripcion] [nvarchar](255),
-	[precio] [numeric](18, 2),
-) ON [PRIMARY]
-
-
-CREATE TABLE [LOS_NORMALIZADORES].[items](
-	[id] INTEGER IDENTITY PRIMARY KEY,
-	[factura_id] INTEGER,					/* Me lo imagino pero no estoy seguro */
-	[factura_cantidad] [numeric](18, 0),
-	[monto] [numeric](18, 2),
-) ON [PRIMARY]
-
-
-CREATE TABLE [LOS_NORMALIZADORES].[facturas](
-	[id] INTEGER IDENTITY PRIMARY KEY,
-	[cliente_id] INTEGER,					/* Me lo imagino pero no estoy seguro */
-	[hotel_id] INTEGER,						/* Me lo imagino pero no estoy seguro */
-	[nro] [numeric](18, 0),
-	[fecha] [datetime],
-	[total] [numeric](18, 2),
+	[regimen_id] INTEGER,
+	[cantidad_personas]	INTEGER				/* Deberia ir ??? */
+											/* Como calculo el precio?? */
 ) ON [PRIMARY]
 
 
 CREATE TABLE [LOS_NORMALIZADORES].[clientes](
 	[id] INTEGER IDENTITY PRIMARY KEY,
-	[pasaporte_rro] [numeric](18, 0),
+	[pasaporte_nro] [numeric](18, 0),
 	[apellido] [nvarchar](255),
 	[nombre] [nvarchar](255),
 	[fecha_nac] [datetime],
@@ -168,9 +142,73 @@ CREATE TABLE [LOS_NORMALIZADORES].[clientes](
 
 
 
+CREATE TABLE [LOS_NORMALIZADORES].[estadias](
+	[id] INTEGER IDENTITY PRIMARY KEY,
+	[habitacion_id] INTEGER,				
+	[cliente_id] INTEGER,
+	[fecha_inicio] [datetime],
+	[cant_noches] [numeric](18, 0),
+) ON [PRIMARY]
+
+
+CREATE TABLE [LOS_NORMALIZADORES].[consumibles](
+	[id] INTEGER IDENTITY PRIMARY KEY,
+	[codigo] [numeric](18, 0),
+	[descripcion] [nvarchar](255),
+	[precio] [numeric](18, 2),
+) ON [PRIMARY]
+
+CREATE TABLE [LOS_NORMALIZADORES].[consumibles_estadias](
+	[id] INTEGER IDENTITY PRIMARY KEY,
+	[consumible_id] INTEGER,
+	[estadia_id] INTEGER,
+) ON [PRIMARY]
+
+
+
+CREATE TABLE [LOS_NORMALIZADORES].[facturas](
+	[id] INTEGER IDENTITY PRIMARY KEY,
+	[estadia_id] INTEGER,					
+	[nro] [numeric](18, 0),
+	[fecha] [datetime],
+	[cant_dias_reales] INTEGER,					/* Este dato no esta en la Maestra */
+	[forma_pago] [nvarchar](255)				/* Este dato no esta en la Maestra */
+) ON [PRIMARY]
+
+
+/* Deberian salir estos datos de items ?? */
+CREATE TABLE [LOS_NORMALIZADORES].[items](
+	[id] INTEGER IDENTITY PRIMARY KEY,
+	[factura_id] INTEGER,					
+	[factura_cantidad] [numeric](18, 0),
+	[monto] [numeric](18, 2),
+) ON [PRIMARY]
+
+
+
+
+
 /* Aca agregan las FKs */
 
+ALTER TABLE [LOS_NORMALIZADORES].[habitaciones] ADD CONSTRAINT habitaciones_hotel_id FOREIGN KEY (hotel_id) REFERENCES [LOS_NORMALIZADORES].[hoteles](id)
 
+ALTER TABLE [LOS_NORMALIZADORES].[hoteles_regimenes] ADD CONSTRAINT regimenes_hotel_hotel_id FOREIGN KEY (hotel_id) REFERENCES [LOS_NORMALIZADORES].[hoteles](id)
+
+ALTER TABLE [LOS_NORMALIZADORES].[hoteles_regimenes] ADD CONSTRAINT regimenes_hotel_regimen_id FOREIGN KEY (regimen_id) REFERENCES [LOS_NORMALIZADORES].[regimenes](id)
+
+ALTER TABLE [LOS_NORMALIZADORES].[reservas] ADD CONSTRAINT reservas_regimen_id FOREIGN KEY (regimen_id) REFERENCES [LOS_NORMALIZADORES].[regimenes](id)
+
+ALTER TABLE [LOS_NORMALIZADORES].[estadias] ADD CONSTRAINT estadias_habitacion_id FOREIGN KEY (habitacion_id) REFERENCES [LOS_NORMALIZADORES].[habitaciones](id)
+
+ALTER TABLE [LOS_NORMALIZADORES].[estadias] ADD CONSTRAINT estadias_regimen_id FOREIGN KEY (cliente_id) REFERENCES [LOS_NORMALIZADORES].[clientes](id)
+
+ALTER TABLE [LOS_NORMALIZADORES].[consumibles_estadias] ADD CONSTRAINT consumibles_estadia_id FOREIGN KEY (estadia_id) REFERENCES [LOS_NORMALIZADORES].[estadias](id)
+
+ALTER TABLE [LOS_NORMALIZADORES].[consumibles_estadias] ADD CONSTRAINT consumibles_consumible_id FOREIGN KEY (consumible_id) REFERENCES [LOS_NORMALIZADORES].[consumibles](id)
+
+ALTER TABLE [LOS_NORMALIZADORES].[facturas] ADD CONSTRAINT facturas_estadia_id FOREIGN KEY (estadia_id) REFERENCES [LOS_NORMALIZADORES].[estadias](id)
+
+ALTER TABLE [LOS_NORMALIZADORES].[items] ADD CONSTRAINT items_factura_id FOREIGN KEY (factura_id) REFERENCES [LOS_NORMALIZADORES].[facturas](id)
 
 
 
@@ -191,20 +229,18 @@ GO
 
 UPDATE [LOS_NORMALIZADORES].[Maestra]
 SET hotel_id = 
-	(SELECT id FROM [LOS_NORMALIZADORES].[hoteles] as h
-	WHERE [LOS_NORMALIZADORES].[Maestra].Hotel_Ciudad = h.ciudad
-	AND [LOS_NORMALIZADORES].[Maestra].Hotel_Calle = h.calle
-	AND [LOS_NORMALIZADORES].[Maestra].Hotel_Nro_Calle = h.nro_calle
-	AND [LOS_NORMALIZADORES].[Maestra].Hotel_CantEstrella = h.cant_estrella
-	AND [LOS_NORMALIZADORES].[Maestra].Hotel_Recarga_Estrella = h.recarga_estrella)
+	(
+		SELECT id FROM [LOS_NORMALIZADORES].[hoteles] as h
+		WHERE [LOS_NORMALIZADORES].[Maestra].Hotel_Ciudad = h.ciudad
+		AND [LOS_NORMALIZADORES].[Maestra].Hotel_Calle = h.calle
+		AND [LOS_NORMALIZADORES].[Maestra].Hotel_Nro_Calle = h.nro_calle
+		AND [LOS_NORMALIZADORES].[Maestra].Hotel_CantEstrella = h.cant_estrella
+		AND [LOS_NORMALIZADORES].[Maestra].Hotel_Recarga_Estrella = h.recarga_estrella
+	)
 GO
 
 
 /* Migracion de habitaciones */
-
-TRUNCATE TABLE [LOS_NORMALIZADORES].[habitaciones]
-GO
-
 INSERT [LOS_NORMALIZADORES].[habitaciones] (hotel_id, numero, piso, frente, tipo_codigo, tipo_descripcion, tipo_porcentual)
 SELECT DISTINCT hotel_id, Habitacion_Numero, Habitacion_Piso, Habitacion_Frente, Habitacion_Tipo_Codigo, Habitacion_Tipo_Descripcion, Habitacion_Tipo_Porcentual  
 FROM [LOS_NORMALIZADORES].[Maestra] 
@@ -221,34 +257,202 @@ GO
 
 UPDATE [LOS_NORMALIZADORES].[Maestra]
 SET habitacion_id = 
-	(SELECT id FROM [LOS_NORMALIZADORES].[habitaciones] as h
-	WHERE [LOS_NORMALIZADORES].[Maestra].Habitacion_Numero = h.numero
-	AND [LOS_NORMALIZADORES].[Maestra].Habitacion_Piso = h.piso
-	AND [LOS_NORMALIZADORES].[Maestra].Habitacion_Frente = h.frente
-	AND [LOS_NORMALIZADORES].[Maestra].Habitacion_Tipo_Codigo = h.tipo_codigo
-	AND [LOS_NORMALIZADORES].[Maestra].Habitacion_Tipo_Descripcion = h.tipo_descripcion
-	AND [LOS_NORMALIZADORES].[Maestra].Habitacion_Tipo_Porcentual = h.tipo_porcentual)
+	(
+		SELECT id FROM [LOS_NORMALIZADORES].[habitaciones] as h
+		WHERE [LOS_NORMALIZADORES].[Maestra].Habitacion_Numero = h.numero
+		AND [LOS_NORMALIZADORES].[Maestra].hotel_id = h.id
+		AND [LOS_NORMALIZADORES].[Maestra].Habitacion_Piso = h.piso
+		AND [LOS_NORMALIZADORES].[Maestra].Habitacion_Frente = h.frente
+		AND [LOS_NORMALIZADORES].[Maestra].Habitacion_Tipo_Codigo = h.tipo_codigo
+		AND [LOS_NORMALIZADORES].[Maestra].Habitacion_Tipo_Descripcion = h.tipo_descripcion
+		AND [LOS_NORMALIZADORES].[Maestra].Habitacion_Tipo_Porcentual = h.tipo_porcentual
+	)
 GO
 
 
 
+
 /* Migracion de regimenes */
-INSERT INTO [LOS_NORMALIZADORES].[regimenes]
-           ([descripcion], [precio], [estado])
-	SELECT DISTINCT [Regimen_Descripcion], [Regimen_Precio], 1 FROM [GD2C2014].[gd_esquema].[Maestra]
-	WHERE [Regimen_Descripcion] IS NOT NULL AND [Regimen_Precio] IS NOT NULL
+
+INSERT INTO [LOS_NORMALIZADORES].[regimenes] ([descripcion], [precio], [estado])	
+	SELECT DISTINCT [Regimen_Descripcion], [Regimen_Precio], 1 FROM [LOS_NORMALIZADORES].[Maestra]
+	WHERE [Regimen_Descripcion] IS NOT NULL 
+	AND   [Regimen_Precio] IS NOT NULL
+GO
+
+ALTER TABLE [LOS_NORMALIZADORES].[Maestra] ADD regimen_id INTEGER
+GO
+
+
+UPDATE [LOS_NORMALIZADORES].[Maestra]
+SET regimen_id = 
+	(
+		SELECT id FROM [LOS_NORMALIZADORES].[regimenes] as r
+		WHERE [LOS_NORMALIZADORES].[Maestra].Regimen_Descripcion = r.descripcion
+		AND   [LOS_NORMALIZADORES].[Maestra].Regimen_Precio = r.precio
+	)
+GO
+
+
+/* Relacion entre regimenes y hoteles */
+INSERT INTO [LOS_NORMALIZADORES].[hoteles_regimenes] (hotel_id, regimen_id)
+
+	SELECT hotel_id, regimen_id FROM  [LOS_NORMALIZADORES].[Maestra]
+	WHERE hotel_id is NOT NULL
+		AND regimen_id IS NOT NULL
+
+GO
+
+
 
 /* Migracion de reservas */ 
+INSERT INTO [LOS_NORMALIZADORES].[reservas] ([fecha_inicio], [codigo], [cant_noches], [regimen_id])	
+	SELECT DISTINCT [Reserva_Fecha_Inicio], [Reserva_Codigo], [Reserva_Cant_Noches], [regimen_id] FROM [LOS_NORMALIZADORES].[Maestra]
+	WHERE [Reserva_Fecha_Inicio] IS NOT NULL 
+	AND   [Reserva_Codigo] IS NOT NULL
+	AND   [Reserva_Cant_Noches] IS NOT NULL
+	AND   [regimen_id] IS NOT NULL
+GO
+
+ALTER TABLE [LOS_NORMALIZADORES].[Maestra] ADD reserva_id INTEGER
+GO
+
+UPDATE [LOS_NORMALIZADORES].[Maestra]
+SET reserva_id = 
+	(
+		SELECT id FROM [LOS_NORMALIZADORES].[reservas] as r
+		WHERE [LOS_NORMALIZADORES].[Maestra].Reserva_Fecha_Inicio = r.fecha_inicio
+		AND   [LOS_NORMALIZADORES].[Maestra].Reserva_Codigo = r.codigo
+		AND   [LOS_NORMALIZADORES].[Maestra].Reserva_Cant_Noches = r.cant_noches
+		AND   [LOS_NORMALIZADORES].[Maestra].regimen_id = r.regimen_id
+	)
+GO
+
+
+
+
+/* Clientes */
+INSERT INTO [LOS_NORMALIZADORES].[clientes] ([pasaporte_nro], [apellido], [nombre], [fecha_nac], [mail], [dom_calle], [nro_calle], [piso], [depto], [nacionalidad])	
+	SELECT DISTINCT [Cliente_Pasaporte_Nro], [Cliente_Apellido], [Cliente_Nombre], [Cliente_Fecha_Nac], [Cliente_Mail], [Cliente_Dom_Calle], [Cliente_Nro_Calle], [Cliente_Piso], [Cliente_Depto], [Cliente_Nacionalidad]  FROM [LOS_NORMALIZADORES].[Maestra]
+	WHERE [Cliente_Pasaporte_Nro] IS NOT NULL 
+	AND   [Cliente_Apellido] IS NOT NULL
+	AND   [Cliente_Nombre] IS NOT NULL
+	AND   [Cliente_Fecha_Nac] IS NOT NULL
+	AND   [Cliente_Mail] IS NOT NULL
+	AND   [Cliente_Dom_Calle] IS NOT NULL
+	AND   [Cliente_Nro_Calle] IS NOT NULL
+	AND   [Cliente_Piso] IS NOT NULL
+	AND   [Cliente_Depto] IS NOT NULL
+	AND   [Cliente_Nacionalidad] IS NOT NULL
+GO
+
+ALTER TABLE [LOS_NORMALIZADORES].[Maestra] ADD cliente_id INTEGER
+GO
+
+UPDATE [LOS_NORMALIZADORES].[Maestra]
+SET cliente_id = 
+	(
+		SELECT id FROM [LOS_NORMALIZADORES].[clientes] as c
+		WHERE [LOS_NORMALIZADORES].[Maestra].Cliente_Pasaporte_Nro = c.pasaporte_nro
+		AND   [LOS_NORMALIZADORES].[Maestra].Cliente_Apellido = c.apellido
+		AND   [LOS_NORMALIZADORES].[Maestra].Cliente_Nombre = c.nombre
+		AND   [LOS_NORMALIZADORES].[Maestra].Cliente_Fecha_Nac = c.fecha_nac
+		AND   [LOS_NORMALIZADORES].[Maestra].Cliente_Mail = c.mail
+		AND   [LOS_NORMALIZADORES].[Maestra].Cliente_Dom_Calle = c.dom_calle
+		AND   [LOS_NORMALIZADORES].[Maestra].Cliente_Nro_Calle = c.nro_calle
+		AND   [LOS_NORMALIZADORES].[Maestra].Cliente_Piso = c.piso
+		AND   [LOS_NORMALIZADORES].[Maestra].Cliente_Depto = c.depto
+		AND   [LOS_NORMALIZADORES].[Maestra].Cliente_Nacionalidad = c.nacionalidad
+	)
+GO
+
+
 
 /* Estadias */
+INSERT INTO [LOS_NORMALIZADORES].[estadias] ([fecha_inicio], [cant_noches], [habitacion_id], [cliente_id])	
+	SELECT DISTINCT [Estadia_Fecha_Inicio], [Estadia_Cant_Noches], [habitacion_id], [cliente_id] FROM [LOS_NORMALIZADORES].[Maestra]
+	WHERE [Estadia_Fecha_Inicio] IS NOT NULL 
+	AND   [Estadia_Cant_Noches] IS NOT NULL
+	AND   [habitacion_id] IS NOT NULL
+	AND   [cliente_id] IS NOT NULL
+GO
+
+ALTER TABLE [LOS_NORMALIZADORES].[Maestra] ADD estadia_id INTEGER
+GO
+
+UPDATE [LOS_NORMALIZADORES].[Maestra]
+SET reserva_id = 
+	(
+		SELECT id FROM [LOS_NORMALIZADORES].[estadias] as e
+		WHERE [LOS_NORMALIZADORES].[Maestra].Estadia_Fecha_Inicio = e.fecha_inicio
+		AND   [LOS_NORMALIZADORES].[Maestra].Estadia_Cant_Noches = e.cant_noches
+		AND   [LOS_NORMALIZADORES].[Maestra].habitacion_id = e.habitacion_id
+		AND   [LOS_NORMALIZADORES].[Maestra].cliente_id = e.cliente_id
+	)
+GO
+
+
 
 /* Consumibles */ 
+INSERT INTO [LOS_NORMALIZADORES].[consumibles] ([codigo], [descripcion], [precio])	
+	SELECT DISTINCT [Consumible_Codigo], [Consumible_Descripcion], [Consumible_Precio] FROM [LOS_NORMALIZADORES].[Maestra]
+	WHERE [Consumible_Codigo] IS NOT NULL 
+	AND   [Consumible_Descripcion] IS NOT NULL
+	AND   [Consumible_Precio] IS NOT NULL
+GO
+
+ALTER TABLE [LOS_NORMALIZADORES].[Maestra] ADD consumible_id INTEGER
+GO
+
+UPDATE [LOS_NORMALIZADORES].[Maestra]
+SET consumible_id = 
+	(
+		SELECT id FROM [LOS_NORMALIZADORES].[consumibles] as c
+		WHERE [LOS_NORMALIZADORES].[Maestra].Consumible_Codigo = c.codigo
+		AND   [LOS_NORMALIZADORES].[Maestra].Consumible_Descripcion = c.descripcion
+		AND   [LOS_NORMALIZADORES].[Maestra].Consumible_Precio = c.precio
+	)
+GO
+
+/* Relacion entre consumibles y estadia */
+
+INSERT INTO [LOS_NORMALIZADORES].[consumibles_estadias] (consumible_id, estadia_id)
+	SELECT consumible_id, estadia_id FROM  [LOS_NORMALIZADORES].[Maestra]
+	WHERE consumible_id is NOT NULL
+	AND   estadia_id IS NOT NULL
+GO
+
+
+
+/* Facturas */
+INSERT INTO [LOS_NORMALIZADORES].[facturas] ([nro], [estadia_id], [fecha])	
+	SELECT DISTINCT [Factura_Nro], [estadia_id], [Factura_Fecha] FROM [LOS_NORMALIZADORES].[Maestra]
+	WHERE [Factura_Nro] IS NOT NULL 
+	AND   [estadia_id] IS NOT NULL
+	AND   [Factura_Fecha] IS NOT NULL
+GO
+
+ALTER TABLE [LOS_NORMALIZADORES].[Maestra] ADD factura_id INTEGER
+GO
+
+UPDATE [LOS_NORMALIZADORES].[Maestra]
+SET factura_id = 
+	(
+		SELECT id FROM [LOS_NORMALIZADORES].[facturas] as f
+		WHERE [LOS_NORMALIZADORES].[Maestra].Factura_Nro = f.nro
+		AND   [LOS_NORMALIZADORES].[Maestra].estadia_id = f.estadia_id
+		AND   [LOS_NORMALIZADORES].[Maestra].Factura_Fecha = f.fecha
+	)
+GO
+
 
 /* Items */
 
-/* Facturas */
 
-/* Clientes */
+
+
+
+/* Aca hay un tema bastante raro... */
 
 
 
@@ -295,6 +499,12 @@ CREATE TABLE [LOS_NORMALIZADORES].[usuarios](
  CONSTRAINT [PK_usuarios] PRIMARY KEY CLUSTERED 
 
 ([id] ASC)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]) ON [PRIMARY]
+
+
+
+
+
+
 
 INSERT INTO [LOS_NORMALIZADORES].[usuarios] (username, password, nombre, fecha_nac,  intentos_fallidos, estado, apellido, mail) VALUES ('admin', 'admin', 'admin','', '',0, 'admin', 'admin@admin.com.ar')
 GO
