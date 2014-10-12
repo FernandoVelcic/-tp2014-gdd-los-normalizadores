@@ -61,17 +61,35 @@
     <Compile Include="Views\ABM de Cliente\Listado.Designer.cs">
       <DependentUpon>Listado.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\ABM de Habitacion\ABMHabitacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ABM de Habitacion\ABMHabitacion.Designer.cs">
+      <DependentUpon>ABMHabitacion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\ABM de Habitacion\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\ABM de Habitacion\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\ABM de Regimen\ABMRegimen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ABM de Regimen\ABMRegimen.Designer.cs">
+      <DependentUpon>ABMRegimen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\ABM de Regimen\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\ABM de Regimen\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ABM de Rol\ABMRol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ABM de Rol\ABMRol.Designer.cs">
+      <DependentUpon>ABMRol.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\ABM de Rol\Form1.cs">
       <SubType>Form</SubType>
@@ -155,13 +173,22 @@
     <EmbeddedResource Include="Views\ABM de Cliente\Listado.resx">
       <DependentUpon>Listado.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\ABM de Habitacion\ABMHabitacion.resx">
+      <DependentUpon>ABMHabitacion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\ABM de Habitacion\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\ABM de Regimen\ABMRegimen.resx">
+      <DependentUpon>ABMRegimen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\ABM de Regimen\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ABM de Rol\ABMRol.resx">
+      <DependentUpon>ABMRol.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ABM de Rol\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

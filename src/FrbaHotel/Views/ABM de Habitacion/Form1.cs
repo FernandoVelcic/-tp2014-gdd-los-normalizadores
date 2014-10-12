@@ -30,11 +30,29 @@ namespace FrbaHotel.ABM_de_Habitacion
             //TODO matchear bien esto
             Habitacion habitacionNew = new Habitacion();
             habitacionNew.numero = Convert.ToInt32(textBox1.Text);
-            /*habitacionNew.hotel= comboBox1.Text;
-            habitacionNew.pisoHotel = comboBox2.Text ;
+            habitacionNew.piso = Convert.ToInt32(comboBox2.Text);
+            habitacionNew.hotel_id = Convert.ToInt32(comboBox1.Text);
+            /*
             habitacionNew.ubicacionEnElHotel = textBox2.Text;
             habitacionNew.tipoDeHabitacion = comboBox3.Text;*/
             habitacionNew.descripcion = textBox3.Text;
+            try
+            {
+                habitacionNew.insert();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Faltan llenar campos!\r\n" + ex.Message);
+                return;
+            }
+
+            MessageBox.Show("Habitacion creada correctamente!");
+            this.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
       

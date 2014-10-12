@@ -6,6 +6,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using FrbaHotel.Models;
+using FrbaHotel.Database_Helper;
+
+
 
 namespace FrbaHotel.ABM_de_Rol
 {
@@ -16,10 +20,33 @@ namespace FrbaHotel.ABM_de_Rol
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
+            Rol rol = new Rol();
+            
+           // rol.descripcion=;
+           // rol.estado=;
 
+            try
+            {
+                rol.insert();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Faltan llenar campos!\r\n" + ex.Message);
+                return;
+            }
+
+            MessageBox.Show("Rol creado correctamente!");
+            this.Close();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        
 
        
     }
