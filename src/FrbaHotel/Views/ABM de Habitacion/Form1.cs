@@ -35,7 +35,7 @@ namespace FrbaHotel.ABM_de_Habitacion
             /*
             habitacionNew.ubicacionEnElHotel = textBox2.Text;
             habitacionNew.tipoDeHabitacion = comboBox3.Text;*/
-            habitacionNew.descripcion = textBox3.Text;
+            //habitacionNew.descripcion = textBox3.Text;
             try
             {
                 habitacionNew.insert();
@@ -53,6 +53,11 @@ namespace FrbaHotel.ABM_de_Habitacion
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
       

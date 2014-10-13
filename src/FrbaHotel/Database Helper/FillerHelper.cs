@@ -35,6 +35,10 @@ namespace FrbaHotel.Database_Helper
                 {
                     property.SetValue(item, Int32.Parse(result[property.Name].ToString()), null);
                 }
+                else if (property.PropertyType == typeof(float))
+                {
+                    property.SetValue(item, Single.Parse(result[property.Name].ToString()), null);
+                }
                 else if (property.PropertyType == typeof(long))
                 {
                     property.SetValue(item, Convert.ToInt64(result[property.Name].ToString()), null);

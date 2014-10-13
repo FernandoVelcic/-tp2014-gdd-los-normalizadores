@@ -33,17 +33,17 @@
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(673, 277);
+            this.button3.Location = new System.Drawing.Point(606, 115);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(124, 75);
+            this.button3.Size = new System.Drawing.Size(124, 44);
             this.button3.TabIndex = 14;
             this.button3.Text = "Baja rol";
             this.button3.UseVisualStyleBackColor = true;
@@ -51,9 +51,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(673, 183);
+            this.button2.Location = new System.Drawing.Point(606, 67);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(124, 75);
+            this.button2.Size = new System.Drawing.Size(124, 42);
             this.button2.TabIndex = 13;
             this.button2.Text = "Modificar rol";
             this.button2.UseVisualStyleBackColor = true;
@@ -61,9 +61,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(673, 85);
+            this.button1.Location = new System.Drawing.Point(606, 19);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(124, 75);
+            this.button1.Size = new System.Drawing.Size(124, 42);
             this.button1.TabIndex = 12;
             this.button1.Text = "Alta rol";
             this.button1.UseVisualStyleBackColor = true;
@@ -72,21 +72,28 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(62, 158);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 165);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(587, 293);
+            this.dataGridView1.Size = new System.Drawing.Size(718, 293);
             this.dataGridView1.TabIndex = 11;
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(62, 14);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(588, 118);
+            this.groupBox1.Size = new System.Drawing.Size(588, 147);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Opciones de filtrado";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(116, 29);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 2;
             // 
             // label1
             // 
@@ -98,18 +105,11 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Nombre";
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(116, 29);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 2;
-            // 
             // ABMRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(859, 440);
+            this.ClientSize = new System.Drawing.Size(742, 473);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);

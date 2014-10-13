@@ -77,7 +77,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(142, 83);
             this.button4.TabIndex = 3;
-            this.button4.Text = "abm de rol";
+            this.button4.Text = "ABM de rol";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -147,7 +147,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(142, 83);
             this.button11.TabIndex = 10;
-            this.button11.Text = "Abm de usuario";
+            this.button11.Text = "ABM de usuario";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 

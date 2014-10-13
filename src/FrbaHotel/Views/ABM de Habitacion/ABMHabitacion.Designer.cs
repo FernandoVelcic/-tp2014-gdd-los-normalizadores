@@ -33,25 +33,25 @@
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(693, 279);
+            this.button3.Location = new System.Drawing.Point(606, 124);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(124, 75);
+            this.button3.Size = new System.Drawing.Size(124, 59);
             this.button3.TabIndex = 9;
             this.button3.Text = "Baja habitación";
             this.button3.UseVisualStyleBackColor = true;
@@ -59,9 +59,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(693, 185);
+            this.button2.Location = new System.Drawing.Point(606, 67);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(124, 75);
+            this.button2.Size = new System.Drawing.Size(124, 51);
             this.button2.TabIndex = 8;
             this.button2.Text = "Modificar habitación";
             this.button2.UseVisualStyleBackColor = true;
@@ -69,9 +69,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(693, 87);
+            this.button1.Location = new System.Drawing.Point(606, 12);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(124, 75);
+            this.button1.Size = new System.Drawing.Size(124, 49);
             this.button1.TabIndex = 7;
             this.button1.Text = "Alta habitación";
             this.button1.UseVisualStyleBackColor = true;
@@ -80,9 +80,9 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(82, 160);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 189);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(587, 293);
+            this.dataGridView1.Size = new System.Drawing.Size(718, 386);
             this.dataGridView1.TabIndex = 6;
             // 
             // groupBox1
@@ -97,12 +97,45 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(82, 16);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(588, 118);
+            this.groupBox1.Size = new System.Drawing.Size(588, 171);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Opciones de filtrado";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(420, 25);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(121, 20);
+            this.textBox2.TabIndex = 18;
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(420, 55);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(121, 21);
+            this.comboBox3.TabIndex = 17;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(290, 55);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(98, 13);
+            this.label5.TabIndex = 16;
+            this.label5.Text = "Tipo de habitacion:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(290, 25);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(110, 13);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "Ubicacion en el hotel:";
             // 
             // comboBox2
             // 
@@ -154,44 +187,11 @@
             this.label1.TabIndex = 9;
             this.label1.Text = "Numero Habitación:";
             // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(420, 25);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(121, 20);
-            this.textBox2.TabIndex = 18;
-            // 
-            // comboBox3
-            // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(420, 55);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(121, 21);
-            this.comboBox3.TabIndex = 17;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(290, 55);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(98, 13);
-            this.label5.TabIndex = 16;
-            this.label5.Text = "Tipo de habitacion:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(290, 25);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(110, 13);
-            this.label4.TabIndex = 15;
-            this.label4.Text = "Ubicacion en el hotel:";
-            // 
             // ABMHabitacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(898, 448);
+            this.ClientSize = new System.Drawing.Size(742, 587);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);

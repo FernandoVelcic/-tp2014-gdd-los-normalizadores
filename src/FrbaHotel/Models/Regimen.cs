@@ -13,7 +13,7 @@ namespace FrbaHotel.Models
 
         //public int id { get; set; } //INTEGER IDENTITY PRIMARY KEY
         public String descripcion { get; set; } //[nvarchar](255)
-        public int precio { get; set; } //[numeric](18, 2)
+        public float precio { get; set; } //[numeric](18, 2)
         public Boolean estado { get; set; } //[bit]
     }
 }

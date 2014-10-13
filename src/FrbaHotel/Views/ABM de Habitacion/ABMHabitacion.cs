@@ -16,8 +16,15 @@ namespace FrbaHotel.Views.ABM_de_Habitacion
         public ABMHabitacion()
         {
             InitializeComponent();
+            setUpList();
         }
-        
+
+        private void setUpList()
+        {
+            var habitacionesBinding = new BindingList<Habitacion>(EntityManager.findAll<Habitacion>());
+            dataGridView1.DataSource = new BindingSource(habitacionesBinding, null);
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
             DialogResult dr = MessageBox.Show("¿Esta seguro que desea modificar este registro?", "Modificar registro", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);

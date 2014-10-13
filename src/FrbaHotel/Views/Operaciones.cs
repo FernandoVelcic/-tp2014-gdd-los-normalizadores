@@ -24,19 +24,19 @@ namespace FrbaHotel
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Form habit = new FrbaHotel.ABM_de_Habitacion.Form1();
+            Form habit = new FrbaHotel.Views.ABM_de_Habitacion.ABMHabitacion();
             habit.Show();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Form regimen = new FrbaHotel.ABM_de_Regimen.Form1();
+            Form regimen = new FrbaHotel.Views.ABM_de_Regimen.ABMRegimen();
             regimen.Show();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Form rol = new FrbaHotel.ABM_de_Rol.Form1();
+            Form rol = new FrbaHotel.Views.ABM_de_Rol.ABMRol();
             rol.Show();
         }
 

@@ -18,7 +18,7 @@ namespace FrbaHotel.Models
         public String frente { get; set; } //[nvarchar](50)
         public int tipo_codigo { get; set; } //[numeric](18, 0)
         public String tipo_descripcion { get; set; } //[nvarchar](255)
-        public String descripcion { get; set; } //[nvarchar](255)
-        public int tipo_porcentual { get; set; } //[numeric](18, 2)
+        //public String descripcion { get; set; } //[nvarchar](255)
+        public float tipo_porcentual { get; set; } //[numeric](18, 2)
     }
 }

@@ -40,7 +40,7 @@
             // 
             this.btn_EliminarCliente.Location = new System.Drawing.Point(399, 12);
             this.btn_EliminarCliente.Name = "btn_EliminarCliente";
-            this.btn_EliminarCliente.Size = new System.Drawing.Size(128, 29);
+            this.btn_EliminarCliente.Size = new System.Drawing.Size(128, 48);
             this.btn_EliminarCliente.TabIndex = 4;
             this.btn_EliminarCliente.Text = "Eliminar cliente";
             this.btn_EliminarCliente.UseVisualStyleBackColor = true;
@@ -50,7 +50,7 @@
             // 
             this.btn_AltaCliente.Location = new System.Drawing.Point(533, 12);
             this.btn_AltaCliente.Name = "btn_AltaCliente";
-            this.btn_AltaCliente.Size = new System.Drawing.Size(124, 29);
+            this.btn_AltaCliente.Size = new System.Drawing.Size(124, 48);
             this.btn_AltaCliente.TabIndex = 3;
             this.btn_AltaCliente.Text = "Alta de cliente";
             this.btn_AltaCliente.UseVisualStyleBackColor = true;

@@ -60,7 +60,7 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(53, 32);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(429, 234);
             this.groupBox1.TabIndex = 0;
@@ -69,10 +69,11 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(141, 191);
+            this.textBox3.Location = new System.Drawing.Point(166, 190);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(241, 20);
+            this.textBox3.Size = new System.Drawing.Size(253, 20);
             this.textBox3.TabIndex = 11;
+            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // textBox2
             // 
@@ -168,7 +169,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(306, 335);
+            this.button1.Location = new System.Drawing.Point(287, 252);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(144, 45);
             this.button1.TabIndex = 1;
@@ -178,7 +179,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(78, 335);
+            this.button2.Location = new System.Drawing.Point(23, 252);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(156, 44);
             this.button2.TabIndex = 2;
@@ -191,7 +192,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ClientSize = new System.Drawing.Size(1012, 721);
+            this.ClientSize = new System.Drawing.Size(455, 319);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);
