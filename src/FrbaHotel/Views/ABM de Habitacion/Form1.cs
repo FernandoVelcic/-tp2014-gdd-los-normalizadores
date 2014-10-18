@@ -9,51 +9,110 @@ using System.Windows.Forms;
 
 using MyActiveRecord;
 using FrbaHotel.Models;
+using FrbaHotel.Database_Helper;
+using FrbaHotel.Models.Exceptions;
 
 
 namespace FrbaHotel.ABM_de_Habitacion
 {
     public partial class Form1 : Form
     {
+
+        private List<Hotel> hoteles;
+        private List<TipoHabitacion> tipoHabitaciones;
+
         public Form1()
         {
             InitializeComponent();
+            cmb_Frente.Items.Add("Si");
+            cmb_Frente.Items.Add("No");
         }
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
-        }
+            hoteles = EntityManager.findAll<Hotel>();
+            foreach (Hotel hotel in hoteles)
+            {
+                cmb_Hotel.Items.Add(hotel.calle);
+            }
 
-        private void button1_Click(object sender, EventArgs e)
+            tipoHabitaciones = EntityManager.findAll<TipoHabitacion>();
+            foreach (TipoHabitacion tipo in tipoHabitaciones)
+            {
+                cmb_TipoHabitacion.Items.Add(tipo.descripcion);
+            }
+
+        }
+        
+
+        private void onGuardar(object sender, EventArgs e)
         {
-            //TODO matchear bien esto
-            Habitacion habitacionNew = new Habitacion();
-            habitacionNew.numero = Convert.ToInt32(textBox1.Text);
-            habitacionNew.piso = Convert.ToInt32(comboBox2.Text);
-            habitacionNew.hotel_id = Convert.ToInt32(comboBox1.Text);
-            /*
-            habitacionNew.ubicacionEnElHotel = textBox2.Text;
-            habitacionNew.tipoDeHabitacion = comboBox3.Text;*/
-            //habitacionNew.descripcion = textBox3.Text;
+
             try
             {
-                habitacionNew.insert();
+                Habitacion habitacion = bindFromForm(new Habitacion());
+                habitacion.insert();
+            }
+            catch (ValidationException ex)
+            {
+                MessageBox.Show("Faltan llenar campos!\r\n" + ex.Message);
+                return;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Faltan llenar campos!\r\n" + ex.Message);
+                MessageBox.Show(ex.Message + "\r\n"  + Query.log.Last());
                 return;
             }
 
             MessageBox.Show("Habitacion creada correctamente!");
             this.Close();
+
         }
 
-        private void button2_Click(object sender, EventArgs e)
+
+        private Habitacion bindFromForm(Habitacion habitacion)
+        {
+
+            //TODO matchear bien esto
+            habitacion.numero = Convert.ToInt32(txt_NroHabitacion.Text);
+            habitacion.piso = Convert.ToInt32(txt_Piso.Text);
+
+            foreach (Hotel hotel in hoteles)
+            {
+                if (cmb_Hotel.Text == hotel.calle)
+                {
+                    habitacion.hotel = hotel;
+                }
+            }
+
+            foreach (TipoHabitacion tipo in tipoHabitaciones)
+            {
+                if (cmb_TipoHabitacion.Text == tipo.descripcion)
+                {
+                    habitacion.tipo = tipo;
+                }
+            }
+
+
+            if (habitacion.tipo == null)
+            {
+                throw new ValidationException("Complete el campo tipo");
+            }
+
+            habitacion.frente = cmb_Frente.Text == "Si" ? "S" : "N";
+
+            return habitacion;
+        }
+
+
+
+        private void onVolver(object sender, EventArgs e)
         {
             this.Close();
         }
+
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {

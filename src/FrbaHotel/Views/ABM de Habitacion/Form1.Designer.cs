@@ -29,32 +29,28 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.cmb_Frente = new System.Windows.Forms.ComboBox();
+            this.txt_Piso = new System.Windows.Forms.TextBox();
+            this.cmb_TipoHabitacion = new System.Windows.Forms.ComboBox();
+            this.cmb_Hotel = new System.Windows.Forms.ComboBox();
+            this.txt_NroHabitacion = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btn_Confirmar = new System.Windows.Forms.Button();
+            this.btn_Volver = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.textBox3);
-            this.groupBox1.Controls.Add(this.textBox2);
-            this.groupBox1.Controls.Add(this.comboBox3);
-            this.groupBox1.Controls.Add(this.comboBox2);
-            this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.cmb_Frente);
+            this.groupBox1.Controls.Add(this.txt_Piso);
+            this.groupBox1.Controls.Add(this.cmb_TipoHabitacion);
+            this.groupBox1.Controls.Add(this.cmb_Hotel);
+            this.groupBox1.Controls.Add(this.txt_NroHabitacion);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
@@ -67,60 +63,43 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos de la habitación";
             // 
-            // textBox3
+            // cmb_Frente
             // 
-            this.textBox3.Location = new System.Drawing.Point(166, 190);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(253, 20);
-            this.textBox3.TabIndex = 11;
-            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
+            this.cmb_Frente.FormattingEnabled = true;
+            this.cmb_Frente.Location = new System.Drawing.Point(166, 124);
+            this.cmb_Frente.Name = "cmb_Frente";
+            this.cmb_Frente.Size = new System.Drawing.Size(121, 21);
+            this.cmb_Frente.TabIndex = 13;
             // 
-            // textBox2
+            // txt_Piso
             // 
-            this.textBox2.Location = new System.Drawing.Point(166, 126);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(121, 20);
-            this.textBox2.TabIndex = 10;
+            this.txt_Piso.Location = new System.Drawing.Point(166, 98);
+            this.txt_Piso.Name = "txt_Piso";
+            this.txt_Piso.Size = new System.Drawing.Size(121, 20);
+            this.txt_Piso.TabIndex = 12;
             // 
-            // comboBox3
+            // cmb_TipoHabitacion
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(166, 156);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(121, 21);
-            this.comboBox3.TabIndex = 9;
+            this.cmb_TipoHabitacion.FormattingEnabled = true;
+            this.cmb_TipoHabitacion.Location = new System.Drawing.Point(166, 156);
+            this.cmb_TipoHabitacion.Name = "cmb_TipoHabitacion";
+            this.cmb_TipoHabitacion.Size = new System.Drawing.Size(121, 21);
+            this.cmb_TipoHabitacion.TabIndex = 9;
             // 
-            // comboBox2
+            // cmb_Hotel
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(166, 89);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
-            this.comboBox2.TabIndex = 8;
+            this.cmb_Hotel.FormattingEnabled = true;
+            this.cmb_Hotel.Location = new System.Drawing.Point(166, 66);
+            this.cmb_Hotel.Name = "cmb_Hotel";
+            this.cmb_Hotel.Size = new System.Drawing.Size(121, 21);
+            this.cmb_Hotel.TabIndex = 7;
             // 
-            // comboBox1
+            // txt_NroHabitacion
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(166, 63);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 7;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(166, 40);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(121, 20);
-            this.textBox1.TabIndex = 6;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(39, 190);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(66, 13);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "Descripcion:";
+            this.txt_NroHabitacion.Location = new System.Drawing.Point(166, 40);
+            this.txt_NroHabitacion.Name = "txt_NroHabitacion";
+            this.txt_NroHabitacion.Size = new System.Drawing.Size(121, 20);
+            this.txt_NroHabitacion.TabIndex = 6;
             // 
             // label5
             // 
@@ -136,9 +115,9 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(36, 126);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(110, 13);
+            this.label4.Size = new System.Drawing.Size(43, 13);
             this.label4.TabIndex = 3;
-            this.label4.Text = "Ubicacion en el hotel:";
+            this.label4.Text = "Frente: ";
             // 
             // label3
             // 
@@ -154,9 +133,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(36, 98);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(75, 13);
+            this.label2.Size = new System.Drawing.Size(30, 13);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Piso del Hotel:";
+            this.label2.Text = "Piso:";
             // 
             // label1
             // 
@@ -167,25 +146,25 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Numero Habitación:";
             // 
-            // button1
+            // btn_Confirmar
             // 
-            this.button1.Location = new System.Drawing.Point(287, 252);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(144, 45);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Confirmar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btn_Confirmar.Location = new System.Drawing.Point(287, 252);
+            this.btn_Confirmar.Name = "btn_Confirmar";
+            this.btn_Confirmar.Size = new System.Drawing.Size(144, 45);
+            this.btn_Confirmar.TabIndex = 1;
+            this.btn_Confirmar.Text = "Confirmar";
+            this.btn_Confirmar.UseVisualStyleBackColor = true;
+            this.btn_Confirmar.Click += new System.EventHandler(this.onGuardar);
             // 
-            // button2
+            // btn_Volver
             // 
-            this.button2.Location = new System.Drawing.Point(23, 252);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(156, 44);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Volver";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btn_Volver.Location = new System.Drawing.Point(23, 252);
+            this.btn_Volver.Name = "btn_Volver";
+            this.btn_Volver.Size = new System.Drawing.Size(156, 44);
+            this.btn_Volver.TabIndex = 2;
+            this.btn_Volver.Text = "Volver";
+            this.btn_Volver.UseVisualStyleBackColor = true;
+            this.btn_Volver.Click += new System.EventHandler(this.onVolver);
             // 
             // Form1
             // 
@@ -193,8 +172,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(455, 319);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btn_Volver);
+            this.Controls.Add(this.btn_Confirmar);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
             this.Text = "ABM de Habitacion";
@@ -213,14 +192,12 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ComboBox cmb_TipoHabitacion;
+        private System.Windows.Forms.ComboBox cmb_Hotel;
+        private System.Windows.Forms.TextBox txt_NroHabitacion;
+        private System.Windows.Forms.Button btn_Confirmar;
+        private System.Windows.Forms.Button btn_Volver;
+        private System.Windows.Forms.ComboBox cmb_Frente;
+        private System.Windows.Forms.TextBox txt_Piso;
     }
 }
