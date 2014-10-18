@@ -44,7 +44,9 @@ namespace MyActiveRecord
                         values.Add("NULL");
                 }
             }
-            return "INSERT INTO " + getTableName(clazz.Name) + " (" + string.Join(", ", keys.ToArray()) + ") VALUES  (" + string.Join(", ", values.ToArray()) + ") ;";
+            String query = "INSERT INTO " + getTableName(clazz.Name) + " (" + string.Join(", ", keys.ToArray()) + ") VALUES  (" + string.Join(", ", values.ToArray()) + ") ;";
+            Query.addLog(query);
+            return query;
         }
 
         public int exec()

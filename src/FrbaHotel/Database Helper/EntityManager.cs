@@ -16,7 +16,7 @@ namespace FrbaHotel.Database_Helper
 
         private EntityManager() { }
 
-        private Dictionary<String, String> getProperties(Object item)
+        private Dictionary<String, String> getProperties(ActiveRecord item)
         {
             PropertyInfo[] propertyInfos = item.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
             Dictionary<String, String> properties = new Dictionary<string, string>();
@@ -37,9 +37,12 @@ namespace FrbaHotel.Database_Helper
                 }
                 else
                 {
-                    //Aca obtengo el id del objeto anidado
-                    Object objetoAnidado = property.GetGetMethod().Invoke(this, null);
-                    properties.Add(property.Name, objetoAnidado.GetType().GetProperty("id").GetGetMethod().Invoke(objetoAnidado, null).ToString());
+                    //Aca obtengo el id del objeto relacionado
+                    MethodInfo getPropAnidada =  property.GetGetMethod();                               // Obtengo el getter de la propiedad
+                    Object objetoAnidado = getPropAnidada.Invoke(item, null);                           // Obtengo el valor (el otro objeto)
+                    Type claseAnidada = objetoAnidado.GetType();                                        // Consigo la clase del objeto
+                    MethodInfo getIdAnidado = claseAnidada.GetProperty("id").GetGetMethod();            // Consigo el getter del id del objeto
+                    properties.Add(property.Name + "_id", getIdAnidado.Invoke(objetoAnidado, null).ToString()); //Consigo el id y lo guardo en el diccionario
                 }
 
             }

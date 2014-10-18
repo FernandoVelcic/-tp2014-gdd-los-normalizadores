@@ -57,7 +57,9 @@ namespace MyActiveRecord
 
         public override string build()
         {
-            return this.buildSelect() + this.buildFrom() + this.buildWhere();
+            String query = this.buildSelect() + this.buildFrom() + this.buildWhere();
+            Query.addLog(query);
+            return query;
         }
 
         private T createObjectFromReader(SqlDataReader reader)

@@ -12,6 +12,18 @@ namespace MyActiveRecord
     abstract class Query
     {
 
+        public static List<String> log;
+
+        public static void addLog(String query)
+        {
+            if (Query.log == null)
+            {
+                log = new List<String>();
+            }
+
+            log.Add(query);
+        }
+
         //TODO cosificar para poder agregar condicions con OR
         public List<String> whereConditions;
 

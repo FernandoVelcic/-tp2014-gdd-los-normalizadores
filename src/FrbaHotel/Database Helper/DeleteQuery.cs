@@ -13,7 +13,9 @@ namespace MyActiveRecord
 
         public override string build()
         {
-            return "DELETE FROM " + getTableName(clazz.Name) + this.buildWhere();
+            String query = "DELETE FROM " + getTableName(clazz.Name) + this.buildWhere();
+            Query.addLog(query);
+            return query;
         }
 
         public int exec()

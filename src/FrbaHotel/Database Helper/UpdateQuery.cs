@@ -32,7 +32,9 @@ namespace MyActiveRecord
 
         public override string build()
         {
-            return "UPDATE " + getTableName(clazz.Name) + " SET " + string.Join(", ", values.Select(x => x.Key + " = " + "'" + x.Value + "'").ToArray()) + " " + this.buildWhere() + ";";
+            String query = "UPDATE " + getTableName(clazz.Name) + " SET " + string.Join(", ", values.Select(x => x.Key + " = " + "'" + x.Value + "'").ToArray()) + " " + this.buildWhere() + ";";
+            Query.addLog(query);
+            return query;
         }
 
         public int exec()
