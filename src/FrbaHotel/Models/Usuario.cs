@@ -20,8 +20,8 @@ namespace FrbaHotel.Models
         public String apellido { get; set; } //[nvarchar](255)
         //tipo y numero de documento
         public String mail { get; set; } //[nvarchar](255)
-        //telefono
-        //direccion
+        public String telefono { get; set; } //[nvarchar](255)
+        public String direccion { get; set; } //[nvarchar](255)
         public String fecha_nac { get; set; } //datetime
         //hotel donde se desempeña
 

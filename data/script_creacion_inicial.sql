@@ -539,7 +539,9 @@ CREATE TABLE [LOS_NORMALIZADORES].[usuarios](
 	[nombre] [nvarchar](255) NOT NULL,
 	[apellido] [nvarchar](255) NOT NULL,
 	[mail] [nvarchar](255) NOT NULL,
-	[fecha_nac] [datetime] NOT NULL
+	[fecha_nac] [datetime] NOT NULL,
+	[direccion] [nvarchar](255) NULL,
+	[telefono] [nvarchar](255) NULL
 	/* Etc agregar el resto */
  CONSTRAINT [PK_usuarios] PRIMARY KEY CLUSTERED 
 
@@ -550,11 +552,31 @@ CREATE TABLE [LOS_NORMALIZADORES].[usuarios](
 
 
 
-
-INSERT INTO [LOS_NORMALIZADORES].[usuarios] (username, password, nombre, fecha_nac,  intentos_fallidos, estado, apellido, mail) VALUES ('admin', 'admin', 'admin','', '',0, 'admin', 'admin@admin.com.ar')
+/* Agregando usuario (admin;w23e) */
+INSERT INTO [LOS_NORMALIZADORES].[usuarios] (username, password, nombre, fecha_nac,  intentos_fallidos, estado, apellido, mail, telefono, direccion) VALUES ('admin', 'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7', 'admin','', '', 1, 'admin', 'admin@admin.com.ar', '1112312311', 'Corrientes 3200')
 GO
 
-
+/* Agregando roles */
+INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[roles]
+           ([descripcion]
+           ,[rol_permisos_id]
+           ,[estado])
+     VALUES
+           ('Administrador', 0,1)
+INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[roles]
+           ([descripcion]
+           ,[rol_permisos_id]
+           ,[estado])
+     VALUES
+           ('Recepcionista', 0,1)
+/*
+INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[roles]
+           ([descripcion]
+           ,[rol_permisos_id]
+           ,[estado])
+     VALUES
+           ('Guest', 0,1)
+*/
 
 /* Procedimientos */
 
