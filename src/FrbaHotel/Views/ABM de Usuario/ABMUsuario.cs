@@ -21,7 +21,7 @@ namespace FrbaHotel.ABM_de_Usuario
 
         private void ABMUsuario_Load(object sender, EventArgs e)
         {
-            var usuariosBinding = new BindingList<Usuario>(EntityManager.findAll<Usuario>());
+            var usuariosBinding = new BindingList<Usuario>(EntityManager.getEntityManager().findAll<Usuario>());
             dataGridView1.DataSource = new BindingSource(usuariosBinding, null);
         }
 

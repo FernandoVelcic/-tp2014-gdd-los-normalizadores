@@ -39,12 +39,18 @@ namespace MyActiveRecord
                     keys.Add(value.Key);
                     //CHECK NULL
                     if (value.Value != "")
+                    {
+                        //TODO check number or date
                         values.Add("'" + value.Value + "'");
+                    }
                     else
+                    {
                         values.Add("NULL");
+                    }
+                        
                 }
             }
-            String query = "INSERT INTO " + getTableName(clazz.Name) + " (" + string.Join(", ", keys.ToArray()) + ") VALUES  (" + string.Join(", ", values.ToArray()) + ") ;";
+            String query = "INSERT INTO " + getTableName() + " (" + string.Join(", ", keys.ToArray()) + ") VALUES  (" + string.Join(", ", values.ToArray()) + ") ;";
             Query.addLog(query);
             return query;
         }

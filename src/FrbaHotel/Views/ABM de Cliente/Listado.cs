@@ -22,7 +22,7 @@ namespace FrbaHotel.Views.ABM_de_Cliente
 
         public void setUpList()
         {
-            var clientesBinding = new BindingList<Cliente>(EntityManager.findAll<Cliente>());
+            var clientesBinding = new BindingList<Cliente>(EntityManager.getEntityManager().findAll<Cliente>());
             dataGridView2.DataSource = new BindingSource(clientesBinding, null);
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FrbaHotel;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -17,20 +18,44 @@ namespace MyActiveRecord
             return this;
         }
 
-        public SelectQuery<T> addLeftJoin()
+
+        public List<String> joins = new List<string>();
+        public SelectQuery<T> addLeftJoin(String tableName, String condition)
         {
+            return addJoin("LEFT", tableName, condition);
+        }
+
+        public SelectQuery<T> addInnerJoin(String tableName, String condition)
+        {
+            return addJoin("INNER", tableName, condition);
+        }
+
+        private SelectQuery<T> addJoin(String type, String tableName, String condition)
+        {
+            joins.Add(" " + type + " JOIN ["+ Config.getInstance().schema +"].[" + tableName + "] ON " + condition);
             return this;
         }
+
 
         public SelectQuery<T> addGroupBy()
         {
             return this;
         }
 
-        public SelectQuery<T> addSelect()
+
+        private List<String> selects = new List<String>();
+        public SelectQuery<T> addSelect(String col)
         {
+            this.selects.Add(col);
             return this;
         }
+
+        public SelectQuery<T> addSelect(String col, String alias)
+        {
+            return addSelect(col + " as " + alias);
+        }
+
+
 
         public SelectQuery<T> addCount()
         {
@@ -43,21 +68,29 @@ namespace MyActiveRecord
         }
 
 
+        private String buildJoin()
+        {
+            return string.Join(" ", joins) + " ";
+        }
 
         private string buildSelect()
         {
-            return "SELECT * ";
+            if (selects.Count() == 0)
+            {
+                return "SELECT * ";
+            }
+            return "SELECT " + string.Join(", ", selects) + " ";
         }
 
         private string buildFrom()
         {
-            return "FROM " + this.getTableName(clazz.Name);
+            return "FROM " + this.getTableName();
         }
 
 
         public override string build()
         {
-            String query = this.buildSelect() + this.buildFrom() + this.buildWhere();
+            String query = buildSelect() + buildFrom() + buildJoin() + buildWhere();
             Query.addLog(query);
             return query;
         }

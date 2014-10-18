@@ -11,6 +11,7 @@ using MyActiveRecord;
 using FrbaHotel.Models;
 using FrbaHotel.Database_Helper;
 using FrbaHotel.Models.Exceptions;
+using System.Data.SqlClient;
 
 
 namespace FrbaHotel.ABM_de_Habitacion
@@ -31,14 +32,13 @@ namespace FrbaHotel.ABM_de_Habitacion
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
-            hoteles = EntityManager.findAll<Hotel>();
+            hoteles = EntityManager.getEntityManager().findAll<Hotel>();
             foreach (Hotel hotel in hoteles)
             {
                 cmb_Hotel.Items.Add(hotel.calle);
             }
 
-            tipoHabitaciones = EntityManager.findAll<TipoHabitacion>();
+            tipoHabitaciones = EntityManager.getEntityManager().findAll<TipoHabitacion>();
             foreach (TipoHabitacion tipo in tipoHabitaciones)
             {
                 cmb_TipoHabitacion.Items.Add(tipo.descripcion);
@@ -60,7 +60,7 @@ namespace FrbaHotel.ABM_de_Habitacion
                 MessageBox.Show("Faltan llenar campos!\r\n" + ex.Message);
                 return;
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 MessageBox.Show(ex.Message + "\r\n"  + Query.log.Last());
                 return;

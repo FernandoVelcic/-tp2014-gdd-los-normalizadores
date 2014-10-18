@@ -21,7 +21,7 @@ namespace FrbaHotel.Views.ABM_de_Habitacion
 
         private void setUpList()
         {
-            var habitacionesBinding = new BindingList<Habitacion>(EntityManager.findAll<Habitacion>());
+            var habitacionesBinding = new BindingList<Habitacion>(EntityManager.getEntityManager().findAll<Habitacion>());
             dataGridView1.DataSource = new BindingSource(habitacionesBinding, null);
         }
 

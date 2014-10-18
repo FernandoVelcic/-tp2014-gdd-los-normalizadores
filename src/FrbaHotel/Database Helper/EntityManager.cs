@@ -14,13 +14,45 @@ namespace FrbaHotel.Database_Helper
 
         private static EntityManager Instance;
 
-        private EntityManager() { }
+        private EntityManager(){ }
+
+        public static EntityManager getEntityManager()
+        {
+            if (EntityManager.Instance == null)
+            {
+                EntityManager.Instance = new EntityManager();
+            }
+            return Instance;
+        }
+
+
+
+
+        public PropertyInfo[] getProperties(Type clazz)
+        {
+            return clazz.GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(prop => {
+                //Esto evita que se devuelva como propiedad las que sean listas y la propiedad del nombre de la tabla
+                return prop.PropertyType != typeof(List<>) && prop.Name != "table" ;
+            }).ToArray();
+        }
+
+        public String getTableName(Type clazz)
+        {
+            Object instancia = Activator.CreateInstance(clazz);
+            return clazz.GetProperty("table").GetGetMethod().Invoke(instancia, null).ToString();
+        }
+
+        public String tableWithSchemaName(Type clazz)
+        {
+            return "";
+        }
+
 
         private Dictionary<String, String> getProperties(ActiveRecord item)
         {
-            PropertyInfo[] propertyInfos = item.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
             Dictionary<String, String> properties = new Dictionary<string, string>();
-            foreach (PropertyInfo property in propertyInfos)
+           
+            foreach (PropertyInfo property in getProperties(item.GetType()))
             {
 
                 if (property.PropertyType == typeof(List<>))
@@ -49,15 +81,6 @@ namespace FrbaHotel.Database_Helper
             return properties;
         }
 
-
-        public static EntityManager getInstance()
-        {
-            if (EntityManager.Instance == null)
-            {
-                EntityManager.Instance = new EntityManager();
-            }
-            return EntityManager.Instance;
-        }
 
 
         public void save(ActiveRecord item)
@@ -118,19 +141,57 @@ namespace FrbaHotel.Database_Helper
 
 
 
-        public static List<T> findList<T>(List<FetchCondition> conditions)
+        
+
+        private SelectQuery<T> buildQuery<T>(List<FetchCondition> conditions)
         {
+
             SelectQuery<T> query = new SelectQuery<T>(typeof(T));
 
             query.addWhere(conditions);
 
-            
-            Console.WriteLine(query.build());
-            Console.Read();
+            String tableName = getTableName(typeof(T));
+
+            foreach (PropertyInfo property in getProperties(typeof(T)))
+            {
+                if (property.PropertyType.IsPrimitive || property.PropertyType == typeof(Decimal) || property.PropertyType == typeof(String))
+                {
+                    query.addSelect(tableName + "." + property.Name, tableName + "_" + property.Name);
+                } 
+                else if(property.PropertyType.IsSubclassOf(typeof(ActiveRecord)))
+                {
+
+                    /* Este es el caso donde hace el join a la propiedad */
+                    String subTableName = getTableName(property.PropertyType);
+                    foreach (PropertyInfo subProperty in getProperties(property.PropertyType))
+                    {
+                        /* Agrega los selects */
+                        if (subProperty.PropertyType.IsPrimitive || subProperty.PropertyType == typeof(Decimal) || subProperty.PropertyType == typeof(String))
+                        {
+                            query.addSelect(subTableName + "." + subProperty.Name, subTableName + "_" + subProperty.Name);
+                        } 
+                    }
+
+                    /* Agrega el join */
+                    query.addLeftJoin(subTableName, tableName + "." + property.Name + "_id" + " = " + subTableName + ".id");
+                }
+            }
+
+            return query;
+
+        }
+
+
+        public List<T> findList<T>(List<FetchCondition> conditions)
+        {
+
+            SelectQuery<T> query = EntityManager.getEntityManager().buildQuery<T>(conditions);
 
             SqlCommand cmd = new SqlCommand(query.build(), ConnectionManager.getInstance().getConnection());
 
             List<T> lista = new List<T>();
+
+            MessageBox.Show(query.build());
 
             using (SqlDataReader result = cmd.ExecuteReader())
             {
@@ -143,22 +204,22 @@ namespace FrbaHotel.Database_Helper
             return lista;
         }
 
-        public static List<T> findAll<T>()
+        public List<T> findAll<T>()
         {
-            return EntityManager.findList<T>(new List<FetchCondition>());
+            return findList<T>(new List<FetchCondition>());
         }
 
-        public static T findBy<T>(String key, String value)
+        public T findBy<T>(String key, String value)
         {
             FetchCondition condition = new FetchCondition();
             condition.setEquals(key, value);
             List<FetchCondition> condiciones = new List<FetchCondition>();
-            return EntityManager.findList<T>(condiciones)[0];
+            return findList<T>(condiciones)[0];
         }
 
-        public static T findById<T>(long id)
+        public T findById<T>(long id)
         {
-            return EntityManager.findBy<T>("id", id.ToString());
+            return findBy<T>(getTableName(typeof(T)) + ".id", id.ToString());
         }
 
 

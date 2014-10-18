@@ -21,7 +21,7 @@ namespace FrbaHotel.Views.ABM_de_Rol
 
         private void setUpList()
         {
-            var rolesBinding = new BindingList<Rol>(EntityManager.findAll<Rol>());
+            var rolesBinding = new BindingList<Rol>(EntityManager.getEntityManager().findAll<Rol>());
             dataGridView1.DataSource = new BindingSource(rolesBinding, null);
         }
 

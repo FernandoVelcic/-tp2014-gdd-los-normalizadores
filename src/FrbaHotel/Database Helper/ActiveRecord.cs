@@ -37,22 +37,22 @@ namespace MyActiveRecord
 
         public void save()
         {
-            EntityManager.getInstance().save(this);
+            EntityManager.getEntityManager().save(this);
         }
 
         public void insert()
         {
-            EntityManager.getInstance().insert(this);
+            EntityManager.getEntityManager().insert(this);
         }
 
         public void delete()
         {
-            EntityManager.getInstance().delete(this);
+            EntityManager.getEntityManager().delete(this);
         }
 
         public void logicalDelete()
         {
-            EntityManager.getInstance().logicalDelete(this);
+            EntityManager.getEntityManager().logicalDelete(this);
         }
 
         public void fill(Object values)

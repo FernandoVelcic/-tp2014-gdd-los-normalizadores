@@ -38,11 +38,9 @@ namespace MyActiveRecord
 
 
 
-        public String getTableName(String className)
+        public String getTableName()
         {
-            //TODO agregar soporte para schemas
-            Object instancia = Activator.CreateInstance(clazz);
-            return "[" + Config.getInstance().schema + "].[" + instancia.GetType().GetProperty("table").GetGetMethod().Invoke(instancia, null) +"]";
+            return "[" + Config.getInstance().schema + "].[" + EntityManager.getEntityManager().getTableName(clazz) +"]";
         }
 
 

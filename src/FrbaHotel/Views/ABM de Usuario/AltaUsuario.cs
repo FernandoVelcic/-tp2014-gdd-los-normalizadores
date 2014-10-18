@@ -23,13 +23,13 @@ namespace FrbaHotel.ABM_de_Usuario
         private void Form1_Load(object sender, EventArgs e)
         {
             BindingSource roles_binding = new BindingSource();
-            roles_binding.DataSource = EntityManager.findAll<Rol>();
+            roles_binding.DataSource = EntityManager.getEntityManager().findAll<Rol>();
             comboBox2.DataSource = roles_binding;
             comboBox2.DisplayMember = "Descripcion";
             comboBox2.ValueMember = "id";
 
             BindingSource hoteles_binding = new BindingSource();
-            hoteles_binding.DataSource = EntityManager.findAll<Hotel>();
+            hoteles_binding.DataSource = EntityManager.getEntityManager().findAll<Hotel>();
             comboBox1.DataSource = hoteles_binding;
             comboBox1.DisplayMember = "id"; //TODO mostrar un nombre de hotel mas lindo
             comboBox1.ValueMember = "id";
