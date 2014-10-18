@@ -70,7 +70,7 @@ namespace MyActiveRecord
 
         private String buildJoin()
         {
-            return string.Join(" ", joins) + " ";
+            return string.Join(" ", joins.ToArray()) + " ";
         }
 
         private string buildSelect()
@@ -79,7 +79,7 @@ namespace MyActiveRecord
             {
                 return "SELECT * ";
             }
-            return "SELECT " + string.Join(", ", selects) + " ";
+            return "SELECT " + string.Join(", ", selects.ToArray()) + " ";
         }
 
         private string buildFrom()
