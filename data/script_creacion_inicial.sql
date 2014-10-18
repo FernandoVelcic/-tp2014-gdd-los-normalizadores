@@ -74,7 +74,7 @@ SET ANSI_PADDING OFF
 GO
 
 
-INSERT INTO [LOS_NORMALIZADORES].[Maestra] SELECT TOP 10000 * FROM [GD2C2014].[gd_esquema].[Maestra]
+INSERT INTO [LOS_NORMALIZADORES].[Maestra] SELECT TOP 1000 * FROM [GD2C2014].[gd_esquema].[Maestra]
 GO
   	
 
@@ -94,9 +94,15 @@ CREATE TABLE [LOS_NORMALIZADORES].[habitaciones](
 	[numero] [numeric](18, 0),
 	[piso] [numeric](18, 0),
 	[frente] [nvarchar](50),
-	[tipo_codigo] [numeric](18, 0),
-	[tipo_descripcion] [nvarchar](255),
-	[tipo_porcentual] [numeric](18, 2)
+	[tipo_id] INTEGER,
+) ON [PRIMARY]
+
+
+CREATE TABLE [LOS_NORMALIZADORES].[habitaciones_tipos](
+	[id] INTEGER IDENTITY PRIMARY KEY,
+	[codigo] [numeric](18, 0),
+	[descripcion] [nvarchar](255),
+	[porcentual] [numeric](18, 2)
 ) ON [PRIMARY]
 
 
@@ -105,6 +111,7 @@ CREATE TABLE [LOS_NORMALIZADORES].[hoteles_regimenes](
 	[hotel_id] INTEGER,
 	[regimen_id] INTEGER
 ) ON [PRIMARY]
+
 
 CREATE TABLE [LOS_NORMALIZADORES].[regimenes](
 	[id] INTEGER IDENTITY PRIMARY KEY,
@@ -141,7 +148,6 @@ CREATE TABLE [LOS_NORMALIZADORES].[clientes](
 ) ON [PRIMARY]
 
 
-
 CREATE TABLE [LOS_NORMALIZADORES].[estadias](
 	[id] INTEGER IDENTITY PRIMARY KEY,
 	[habitacion_id] INTEGER,				
@@ -158,12 +164,12 @@ CREATE TABLE [LOS_NORMALIZADORES].[consumibles](
 	[precio] [numeric](18, 2),
 ) ON [PRIMARY]
 
+
 CREATE TABLE [LOS_NORMALIZADORES].[consumibles_estadias](
 	[id] INTEGER IDENTITY PRIMARY KEY,
 	[consumible_id] INTEGER,
 	[estadia_id] INTEGER,
 ) ON [PRIMARY]
-
 
 
 CREATE TABLE [LOS_NORMALIZADORES].[facturas](
@@ -191,6 +197,8 @@ CREATE TABLE [LOS_NORMALIZADORES].[items](
 /* Aca agregan las FKs */
 
 ALTER TABLE [LOS_NORMALIZADORES].[habitaciones] ADD CONSTRAINT habitaciones_hotel_id FOREIGN KEY (hotel_id) REFERENCES [LOS_NORMALIZADORES].[hoteles](id)
+
+ALTER TABLE [LOS_NORMALIZADORES].[habitaciones] ADD CONSTRAINT habitaciones_tipo_id FOREIGN KEY (tipo_id) REFERENCES [LOS_NORMALIZADORES].[habitaciones_tipos](id)
 
 ALTER TABLE [LOS_NORMALIZADORES].[hoteles_regimenes] ADD CONSTRAINT regimenes_hotel_hotel_id FOREIGN KEY (hotel_id) REFERENCES [LOS_NORMALIZADORES].[hoteles](id)
 
@@ -252,17 +260,40 @@ SET hotel_id =
 GO
 
 
+
+
 /* Migracion de habitaciones */
-INSERT [LOS_NORMALIZADORES].[habitaciones] (hotel_id, numero, piso, frente, tipo_codigo, tipo_descripcion, tipo_porcentual)
-SELECT DISTINCT hotel_id, Habitacion_Numero, Habitacion_Piso, Habitacion_Frente, Habitacion_Tipo_Codigo, Habitacion_Tipo_Descripcion, Habitacion_Tipo_Porcentual  
+
+
+INSERT [LOS_NORMALIZADORES].[habitaciones_tipos] (codigo, descripcion, porcentual)
+SELECT DISTINCT Habitacion_Tipo_Codigo, Habitacion_Tipo_Descripcion, Habitacion_Tipo_Porcentual  
+FROM [LOS_NORMALIZADORES].[Maestra] 
+WHERE Habitacion_Tipo_Codigo IS NOT NULL
+AND Habitacion_Tipo_Descripcion IS NOT NULL
+AND Habitacion_Tipo_Porcentual IS NOT NULL
+
+ALTER TABLE [LOS_NORMALIZADORES].[Maestra] ADD habitacion_tipo_id INTEGER
+GO
+
+UPDATE [LOS_NORMALIZADORES].[Maestra]
+SET habitacion_tipo_id = 
+	(
+		SELECT id FROM [LOS_NORMALIZADORES].[habitaciones_tipos] as h
+		WHERE [LOS_NORMALIZADORES].[Maestra].Habitacion_Tipo_Codigo = h.codigo
+		AND [LOS_NORMALIZADORES].[Maestra].Habitacion_Tipo_Descripcion = h.descripcion
+		AND [LOS_NORMALIZADORES].[Maestra].Habitacion_Tipo_Porcentual = h.porcentual
+	)
+GO
+
+
+
+INSERT [LOS_NORMALIZADORES].[habitaciones] (hotel_id, numero, piso, frente, tipo_id)
+SELECT DISTINCT hotel_id, Habitacion_Numero, Habitacion_Piso, Habitacion_Frente, habitacion_tipo_id 
 FROM [LOS_NORMALIZADORES].[Maestra] 
 WHERE Habitacion_Numero IS NOT NULL 
 AND Habitacion_Piso IS NOT NULL
 AND Habitacion_Frente IS NOT NULL
-AND Habitacion_Tipo_Codigo IS NOT NULL
-AND Habitacion_Tipo_Descripcion IS NOT NULL
-AND Habitacion_Tipo_Porcentual IS NOT NULL
-
+AND habitacion_tipo_id IS NOT NULL
 
 ALTER TABLE [LOS_NORMALIZADORES].[Maestra] ADD habitacion_id INTEGER
 GO
@@ -275,9 +306,7 @@ SET habitacion_id =
 		AND [LOS_NORMALIZADORES].[Maestra].hotel_id = h.id
 		AND [LOS_NORMALIZADORES].[Maestra].Habitacion_Piso = h.piso
 		AND [LOS_NORMALIZADORES].[Maestra].Habitacion_Frente = h.frente
-		AND [LOS_NORMALIZADORES].[Maestra].Habitacion_Tipo_Codigo = h.tipo_codigo
-		AND [LOS_NORMALIZADORES].[Maestra].Habitacion_Tipo_Descripcion = h.tipo_descripcion
-		AND [LOS_NORMALIZADORES].[Maestra].Habitacion_Tipo_Porcentual = h.tipo_porcentual
+		AND [LOS_NORMALIZADORES].[Maestra].habitacion_tipo_id = h.tipo_id
 	)
 GO
 
@@ -344,6 +373,7 @@ GO
 
 
 /* Clientes */
+
 INSERT INTO [LOS_NORMALIZADORES].[clientes] ([pasaporte_nro], [apellido], [nombre], [fecha_nac], [mail], [dom_calle], [nro_calle], [piso], [depto], [nacionalidad])	
 	SELECT DISTINCT [Cliente_Pasaporte_Nro], [Cliente_Apellido], [Cliente_Nombre], [Cliente_Fecha_Nac], [Cliente_Mail], [Cliente_Dom_Calle], [Cliente_Nro_Calle], [Cliente_Piso], [Cliente_Depto], [Cliente_Nacionalidad]  FROM [LOS_NORMALIZADORES].[Maestra]
 	WHERE [Cliente_Pasaporte_Nro] IS NOT NULL 
@@ -381,6 +411,9 @@ GO
 
 
 /* Estadias */
+
+//TODO agregar cantidad de personas en base al tipo de habitacion
+
 INSERT INTO [LOS_NORMALIZADORES].[estadias] ([fecha_inicio], [cant_noches], [habitacion_id], [cliente_id])	
 	SELECT DISTINCT [Estadia_Fecha_Inicio], [Estadia_Cant_Noches], [habitacion_id], [cliente_id] FROM [LOS_NORMALIZADORES].[Maestra]
 	WHERE [Estadia_Fecha_Inicio] IS NOT NULL 
