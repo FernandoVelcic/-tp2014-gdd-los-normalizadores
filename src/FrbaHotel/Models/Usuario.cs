@@ -23,7 +23,8 @@ namespace FrbaHotel.Models
         public String telefono { get; set; } //[nvarchar](255)
         public String direccion { get; set; } //[nvarchar](255)
         public String fecha_nac { get; set; } //datetime
-        //hotel donde se desempeña
+
+        //public Hotel hotel { get; set; } //hotel_id
 
         public int intentos_fallidos { get; set; } //[tinyint]
         public Boolean estado { get; set; } //[bit]

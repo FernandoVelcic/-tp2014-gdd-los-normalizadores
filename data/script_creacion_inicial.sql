@@ -540,8 +540,9 @@ CREATE TABLE [LOS_NORMALIZADORES].[usuarios](
 	[apellido] [nvarchar](255) NOT NULL,
 	[mail] [nvarchar](255) NOT NULL,
 	[fecha_nac] [datetime] NOT NULL,
-	[direccion] [nvarchar](255) NULL,
-	[telefono] [nvarchar](255) NULL
+	[direccion] [nvarchar](255) NOT NULL,
+	[telefono] [nvarchar](255) NOT NULL,
+	[hotel_id] INTEGER
 	/* Etc agregar el resto */
  CONSTRAINT [PK_usuarios] PRIMARY KEY CLUSTERED 
 

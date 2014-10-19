@@ -46,6 +46,8 @@ namespace FrbaHotel.ABM_de_Usuario
             user.mail = textBox5.Text;
             user.telefono = textBox6.Text;
             user.direccion = textBox7.Text;
+           
+            //user.hotel = (Hotel)comboBox1.SelectedValue;
 
             user.fecha_nac = dateTimePicker1.Text;
 
