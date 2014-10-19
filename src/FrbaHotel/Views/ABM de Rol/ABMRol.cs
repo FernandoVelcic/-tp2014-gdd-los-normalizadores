@@ -16,10 +16,9 @@ namespace FrbaHotel.Views.ABM_de_Rol
         public ABMRol()
         {
             InitializeComponent();
-            setUpList();
         }
 
-        private void setUpList()
+        private void ABMRol_Load(object sender, EventArgs e)
         {
             var rolesBinding = new BindingList<Rol>(EntityManager.getEntityManager().findAll<Rol>());
             dataGridView1.DataSource = new BindingSource(rolesBinding, null);

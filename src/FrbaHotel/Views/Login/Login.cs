@@ -10,6 +10,9 @@ using System.Windows.Forms;
 using MyActiveRecord;
 using System.Data.SqlClient;
 using FrbaHotel.Tools;
+using FrbaHotel.Models;
+using FrbaHotel.Database_Helper;
+using FrbaHotel.Views.Login;
 
 namespace FrbaHotel.Login
 {
@@ -61,6 +64,8 @@ namespace FrbaHotel.Login
                     break;
                 case 0: //Login correcto
                     MessageBox.Show("Usuario y contraseña valido");
+                    Usuario user = EntityManager.getEntityManager().findBy<Usuario>("username", textBox1.Text);
+                    //new SeleccionRoles(user).Show();
                     break;
                 default: //Contraseña incorrecta (sumando intentos fallidos)
                     MessageBox.Show("Contraseña incorrecta. Intentos fallidos: " + intentos_fallidos);

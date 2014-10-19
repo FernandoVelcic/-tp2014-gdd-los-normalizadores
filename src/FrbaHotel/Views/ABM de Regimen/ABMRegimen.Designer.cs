@@ -172,6 +172,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Name = "ABMRegimen";
             this.Text = "ABMRegimen";
+            this.Load += new System.EventHandler(this.ABMRegimen_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);

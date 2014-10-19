@@ -17,15 +17,13 @@ namespace FrbaHotel.Views.ABM_de_Regimen
         public ABMRegimen()
         {
             InitializeComponent();
-            setUpList();
         }
 
-
-        private void setUpList()
+        private void ABMRegimen_Load(object sender, EventArgs e)
         {
             var regimennesBinding = new BindingList<Regimen>(EntityManager.getEntityManager().findAll<Regimen>());
             dataGridView1.DataSource = new BindingSource(regimennesBinding, null);
-        }      
+        } 
  
 
        private void button2_Click(object sender, EventArgs e)
@@ -64,8 +62,6 @@ namespace FrbaHotel.Views.ABM_de_Regimen
       {
           new FrbaHotel.ABM_de_Regimen.Form1().Show();
       }
-         
-  
 
     }
 }

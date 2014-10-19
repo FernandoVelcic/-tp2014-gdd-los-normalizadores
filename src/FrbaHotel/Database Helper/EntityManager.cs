@@ -209,6 +209,14 @@ namespace FrbaHotel.Database_Helper
             return findList<T>(new List<FetchCondition>());
         }
 
+        public List<T> findAllBy<T>(String key, String value)
+        {
+            FetchCondition condition = new FetchCondition();
+            condition.setEquals(key, value);
+            List<FetchCondition> condiciones = new List<FetchCondition>();
+            return findList<T>(condiciones);
+        }
+
         public T findBy<T>(String key, String value)
         {
             FetchCondition condition = new FetchCondition();
