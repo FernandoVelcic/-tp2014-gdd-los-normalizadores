@@ -219,10 +219,7 @@ namespace FrbaHotel.Database_Helper
 
         public T findBy<T>(String key, String value)
         {
-            FetchCondition condition = new FetchCondition();
-            condition.setEquals(key, value);
-            List<FetchCondition> condiciones = new List<FetchCondition>();
-            return findList<T>(condiciones)[0];
+            return findAllBy<T>(key, value)[0];
         }
 
         public T findById<T>(long id)
