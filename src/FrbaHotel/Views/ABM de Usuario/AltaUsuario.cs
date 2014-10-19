@@ -24,20 +24,28 @@ namespace FrbaHotel.ABM_de_Usuario
         {
             BindingSource roles_binding = new BindingSource();
             roles_binding.DataSource = EntityManager.getEntityManager().findAll<Rol>();
-            comboBox2.DataSource = roles_binding;
-            comboBox2.DisplayMember = "Descripcion";
-            comboBox2.ValueMember = "id";
+            checkedListBox1.DataSource = roles_binding;
+            checkedListBox1.DisplayMember = "descripcion";
 
             BindingSource hoteles_binding = new BindingSource();
             hoteles_binding.DataSource = EntityManager.getEntityManager().findAll<Hotel>();
             comboBox1.DataSource = hoteles_binding;
             comboBox1.DisplayMember = "id"; //TODO mostrar un nombre de hotel mas lindo
-            comboBox1.ValueMember = "id";
+
+            BindingSource documentos_binding = new BindingSource();
+            documentos_binding.DataSource = EntityManager.getEntityManager().findAll<TipoDocumento>();
+            comboBox3.DataSource = documentos_binding;
+            comboBox3.DisplayMember = "descripcion";
         }
 
       
         private void button1_Click(object sender, EventArgs e)
         {
+            if (checkedListBox1.CheckedItems.Count == 0)
+            {
+                MessageBox.Show("Debe seleccionar al menos un rol");
+                return;
+            }
             Usuario user = new Usuario();
             user.username = textBox1.Text;
             user.password = new SHA256(textBox2.Text).ToString();
@@ -46,8 +54,11 @@ namespace FrbaHotel.ABM_de_Usuario
             user.mail = textBox5.Text;
             user.telefono = textBox6.Text;
             user.direccion = textBox7.Text;
-           
-            //user.hotel = (Hotel)comboBox1.SelectedValue;
+
+            user.hotel = comboBox1.SelectedValue as Hotel;
+
+            user.documento_tipo = comboBox3.SelectedValue as TipoDocumento;
+            user.documento_nro = long.Parse(textBox8.Text);
 
             user.fecha_nac = dateTimePicker1.Text;
 
@@ -57,6 +68,14 @@ namespace FrbaHotel.ABM_de_Usuario
             try
             {
                 user.insert();
+                
+                foreach(Rol rol in checkedListBox1.CheckedItems)
+                {
+                    RolUsuario rolUsuario = new RolUsuario();
+                    rolUsuario.rol = rol;
+                    rolUsuario.usuario = user;
+                    rolUsuario.insert();
+                }
             }
             catch (Exception ex)
             {

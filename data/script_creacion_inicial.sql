@@ -412,7 +412,7 @@ GO
 
 /* Estadias */
 
-//TODO agregar cantidad de personas en base al tipo de habitacion
+/*TODO agregar cantidad de personas en base al tipo de habitacion*/
 
 INSERT INTO [LOS_NORMALIZADORES].[estadias] ([fecha_inicio], [cant_noches], [habitacion_id], [cliente_id])	
 	SELECT DISTINCT [Estadia_Fecha_Inicio], [Estadia_Cant_Noches], [habitacion_id], [cliente_id] FROM [LOS_NORMALIZADORES].[Maestra]
@@ -542,20 +542,29 @@ CREATE TABLE [LOS_NORMALIZADORES].[usuarios](
 	[fecha_nac] [datetime] NOT NULL,
 	[direccion] [nvarchar](255) NOT NULL,
 	[telefono] [nvarchar](255) NOT NULL,
-	[hotel_id] INTEGER
-	/* Etc agregar el resto */
+	[hotel_id] INTEGER,
+	[documento_tipo_id] INTEGER NOT NULL,
+	[documento_nro] [bigint] NOT NULL
  CONSTRAINT [PK_usuarios] PRIMARY KEY CLUSTERED 
 
 ([id] ASC)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]) ON [PRIMARY]
 
-
-
-
-
-
 /* Agregando usuario (admin;w23e) */
-INSERT INTO [LOS_NORMALIZADORES].[usuarios] (username, password, nombre, fecha_nac,  intentos_fallidos, estado, apellido, mail, telefono, direccion) VALUES ('admin', 'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7', 'admin','', '', 1, 'admin', 'admin@admin.com.ar', '1112312311', 'Corrientes 3200')
-GO
+INSERT INTO [LOS_NORMALIZADORES].[usuarios] (username, password, nombre, fecha_nac,  intentos_fallidos, estado, apellido, mail, telefono, direccion, documento_tipo_id, documento_nro, hotel_id) VALUES ('admin', 'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7', 'admin','', '', 1, 'admin', 'admin@admin.com.ar', '1112312311', 'Corrientes 3200', '1', '37000000', 1)
+
+
+/* tipo de documento */
+CREATE TABLE [LOS_NORMALIZADORES].[documento_tipos](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[descripcion] [nvarchar](255) NOT NULL
+ CONSTRAINT [PK_DOCUMENTO_TIPOS] PRIMARY KEY CLUSTERED 
+
+([id] ASC)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]) ON [PRIMARY]
+
+/* agregando tipos de documentos */
+INSERT INTO [LOS_NORMALIZADORES].[documento_tipos] (descripcion) VALUES ('DNI - Documento Nacional de Identidad')
+INSERT INTO [LOS_NORMALIZADORES].[documento_tipos] (descripcion) VALUES ('LC - Libreta Civica')
+INSERT INTO [LOS_NORMALIZADORES].[documento_tipos] (descripcion) VALUES ('LE - Libreta de Enrolamiento')
 
 /* Agregando roles */
 INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[roles]
@@ -578,7 +587,7 @@ INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[roles]
      VALUES
            ('Guest', 0,1)
 */
-
+GO
 /* Procedimientos */
 
 CREATE PROCEDURE [LOS_NORMALIZADORES].[uspLogin]

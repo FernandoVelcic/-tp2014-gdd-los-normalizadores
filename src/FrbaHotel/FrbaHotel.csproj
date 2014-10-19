@@ -49,6 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Cliente.cs" />
+    <Compile Include="Models\RolUsuario.cs" />
+    <Compile Include="Models\TipoDocumento.cs" />
     <Compile Include="Models\Exceptions\ValidationException.cs" />
     <Compile Include="Models\TipoHabitacion.cs" />
     <Compile Include="Views\ABM de Cliente\Form1.cs">
