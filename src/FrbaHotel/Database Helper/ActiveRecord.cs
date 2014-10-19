@@ -9,9 +9,9 @@ namespace MyActiveRecord
 {
     abstract class ActiveRecord
     {
-
+        [System.ComponentModel.Browsable(false)] 
         public long id { get; set; }
-
+        [System.ComponentModel.Browsable(false)] 
         public abstract String table { get; }
 
 

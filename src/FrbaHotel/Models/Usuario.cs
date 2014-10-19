@@ -9,7 +9,6 @@ namespace FrbaHotel.Models
 {
     class Usuario : ActiveRecord
     {
-        [System.ComponentModel.Browsable(false)] 
         public override String table { get { return "usuarios"; } }
 
         //public int id { get; set; } //INTEGER IDENTITY PRIMARY KEY
