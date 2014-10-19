@@ -42,7 +42,7 @@ namespace MyActiveRecord
 
         public void insert()
         {
-            EntityManager.getEntityManager().insert(this);
+            id = EntityManager.getEntityManager().insert(this);
         }
 
         public void delete()
