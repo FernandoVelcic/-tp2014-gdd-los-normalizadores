@@ -576,23 +576,56 @@ INSERT INTO [LOS_NORMALIZADORES].[documento_tipos] (descripcion) VALUES ('LE - L
 /* Agregando roles */
 INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[roles]
            ([descripcion]
-           ,[rol_permisos_id]
-           ,[estado])
+           ,[estado]
+           ,[ABM_Rol]
+           ,[ABM_Habitación]
+           ,[ABM_Cliente]
+           ,[ABM_Usuario]
+		   ,[ABM_Regimen]
+		   ,[ABM_Hotel]
+		   ,[Generar_Reserva]
+		   ,[Cancelar_Reserva]
+		   ,[Registrar_Consumible]
+	   	   ,[Registrar_Estadía]
+		   ,[Facturar_Estadía]
+		   ,[Listado_Estadístico])
      VALUES
-           ('Administrador', 0,1)
+           ('Administrador',1,1,1,1,1,1,1,1,1,1,1,1,1)
 INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[roles]
            ([descripcion]
-           ,[rol_permisos_id]
-           ,[estado])
+           ,[estado]
+           ,[ABM_Rol]
+           ,[ABM_Habitación]
+           ,[ABM_Cliente]
+           ,[ABM_Usuario]
+		   ,[ABM_Regimen]
+		   ,[ABM_Hotel]
+		   ,[Generar_Reserva]
+		   ,[Cancelar_Reserva]
+		   ,[Registrar_Consumible]
+	   	   ,[Registrar_Estadía]
+		   ,[Facturar_Estadía]
+		   ,[Listado_Estadístico])
      VALUES
-           ('Recepcionista', 0,1)
+           ('Recepcionista',1,1,1,1,1,1,1,1,1,1,1,1,1)
 /*
 INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[roles]
            ([descripcion]
-           ,[rol_permisos_id]
-           ,[estado])
+           ,[estado]
+           ,[ABM_Rol]
+           ,[ABM_Habitación]
+           ,[ABM_Cliente]
+           ,[ABM_Usuario]
+		   ,[ABM_Regimen]
+		   ,[ABM_Hotel]
+		   ,[Generar_Reserva]
+		   ,[Cancelar_Reserva]
+		   ,[Registrar_Consumible]
+	   	   ,[Registrar_Estadía]
+		   ,[Facturar_Estadía]
+		   ,[Listado_Estadístico])
      VALUES
-           ('Guest', 0,1)
+           ('Guest',1,1,1,1,1,1,1,1,1,1,1,1,1)
 */
 GO
 /* Procedimientos */
