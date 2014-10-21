@@ -40,15 +40,19 @@ namespace FrbaHotel.Views.ABM_de_Cliente
             txt_Nombre.DataBindings.Add("Text", cliente, "nombre");
             txt_Apellido.DataBindings.Add("Text", cliente, "apellido");
             txt_Mail.DataBindings.Add("Text", cliente, "mail");
-            txt_Calle.DataBindings.Add("Text", cliente, "dom_calle");
             dateTimePicker1.DataBindings.Add("Text", cliente, "fecha_nac", true);
+
+            txt_Calle.DataBindings.Add("Text", cliente, "dom_calle");
+            textBox1.DataBindings.Add("Text", cliente, "nro_calle");
+            textBox2.DataBindings.Add("Text", cliente, "piso");
+            textBox3.DataBindings.Add("Text", cliente, "depto");
+
+            txt_Pais.DataBindings.Add("Text", cliente, "nacionalidad");
 
             //tipo y nro doc
 
             //cliente.t = txt_Telefono.Text;
             //cliente. = txt_Localidad.Text;
-            cliente.nacionalidad = txt_Pais.Text;
-            //nacionalidad se autocompleta? hace falta ponerlo?
         }
 
         private void button1_Click(object sender, EventArgs e)

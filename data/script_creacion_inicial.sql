@@ -148,7 +148,9 @@ CREATE TABLE [LOS_NORMALIZADORES].[clientes](
 	[nro_calle] [numeric](18, 0),
 	[piso] [numeric](18, 0),
 	[depto] [nvarchar](50),
-	[nacionalidad] [nvarchar](255)
+	[nacionalidad] [nvarchar](255),
+	[documento_tipo_id] INTEGER NULL,
+	[documento_nro] [bigint] NULL
 ) ON [PRIMARY]
 
 

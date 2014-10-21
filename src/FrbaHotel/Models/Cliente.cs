@@ -24,5 +24,8 @@ namespace FrbaHotel.Models
         public String depto { get; set; } //[nvarchar](50)
 
         public String nacionalidad { get; set; } //[nvarchar](255)
+
+        //public TipoDocumento documento_tipo { get; set; }
+        //public long documento_nro { get; set; } //[bigint]
     }
 }
