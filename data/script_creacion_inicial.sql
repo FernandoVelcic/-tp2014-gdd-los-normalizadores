@@ -514,16 +514,19 @@ GO
 CREATE TABLE [LOS_NORMALIZADORES].[roles](
 	[id] INTEGER IDENTITY PRIMARY KEY,
 	[descripcion] [nvarchar](30) NOT NULL,
-	[rol_permisos_id] INTEGER NOT NULL,
 	[estado] [bit] NOT NULL,
-) ON [PRIMARY]
-
-
-CREATE TABLE [LOS_NORMALIZADORES].[rol_permisos](
-	[id] INTEGER IDENTITY PRIMARY KEY,
-	[generar_reservas] [bit] NOT NULL,
-	[ver_habitaciones] [bit] NOT NULL
-	/* Etc agregar el resto */
+	[ABM_Rol][bit] NOT NULL,
+	[ABM_Habitación][bit] NOT NULL,
+	[ABM_Cliente][bit] NOT NULL,
+	[ABM_Usuario][bit] NOT NULL,
+	[ABM_Regimen][bit] NOT NULL,
+	[ABM_Hotel][bit] NOT NULL,
+	[Generar_Reserva][bit] NOT NULL,
+	[Cancelar_Reserva][bit] NOT NULL,
+	[Registrar_Consumible][bit] NOT NULL,
+	[Registrar_Estadía][bit] NOT NULL,
+	[Facturar_Estadía][bit] NOT NULL,
+	[Listado_Estadístico][bit] NOT NULL,
 ) ON [PRIMARY]
 
 

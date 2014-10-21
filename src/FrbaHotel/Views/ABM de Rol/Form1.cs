@@ -24,9 +24,11 @@ namespace FrbaHotel.ABM_de_Rol
         {
             Rol rol = new Rol();
             
-           // rol.descripcion=;
-           // rol.estado=;
-
+            rol.descripcion=textBox1.Text;
+            if (radioButton1.Checked) rol.estado = true;
+            if (radioButton2.Checked) rol.estado = false;
+            //Falta saber como quieren que se guarde el listado de cada rol
+            CheckedListBox.CheckedItemCollection listaSeleccionados = checkedListBox1.CheckedItems;
             try
             {
                 rol.insert();
@@ -46,7 +48,12 @@ namespace FrbaHotel.ABM_de_Rol
             this.Close();
         }
 
-        
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+             
 
        
     }

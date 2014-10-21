@@ -13,7 +13,19 @@ namespace FrbaHotel.Models
 
         //public int id { get; set; } //INTEGER IDENTITY PRIMARY KEY
         public String descripcion { get; set; } //[nvarchar](30)
-        public int rol_permisos_id { get; set; } //INTEGER
         public Boolean estado { get; set; } //[bit]
+        public Boolean ABM_Rol { get; set; } //[bit]
+        public Boolean ABM_Habitación { get; set; } //[bit]
+        public Boolean ABM_Cliente { get; set; } //[bit]
+        public Boolean ABM_Usuario { get; set; } //[bit]
+        public Boolean ABM_Regimen { get; set; } //[bit]
+        public Boolean ABM_Hotel { get; set; } //[bit]
+        public Boolean Generar_Reserva { get; set; } //[bit]
+        public Boolean Cancelar_Reserva { get; set; } //[bit]
+        public Boolean Registrar_Consumible { get; set; } //[bit]
+        public Boolean Registrar_Estadía { get; set; } //[bit]
+        public Boolean Facturar_Estadía { get; set; } //[bit]
+        public Boolean Listado_Estadístico { get; set; } //[bit]
+        
     }
 }
