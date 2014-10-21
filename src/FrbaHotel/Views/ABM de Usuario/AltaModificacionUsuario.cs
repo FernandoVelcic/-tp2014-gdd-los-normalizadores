@@ -13,11 +13,28 @@ using FrbaHotel.Database_Helper;
 
 namespace FrbaHotel.ABM_de_Usuario
 {
-    public partial class AltaUsuario : Form
+    public partial class AltaModificaiconUsuario : Form
     {
-        public AltaUsuario()
+        private Usuario usuario;
+
+        public AltaModificaiconUsuario()
         {
             InitializeComponent();
+        }
+
+        public AltaModificaiconUsuario(Usuario usuario)
+        {
+            InitializeComponent();
+            this.usuario = usuario;
+
+            textBox1.Text = usuario.username;
+            /* TODO: hay que usar binding
+            user.password = new SHA256(textBox2.Text).ToString();
+            user.nombre = textBox3.Text;
+            user.apellido = textBox4.Text;
+            user.mail = textBox5.Text;
+            user.telefono = textBox6.Text;
+            user.direccion = textBox7.Text;*/
         }
 
         private void Form1_Load(object sender, EventArgs e)

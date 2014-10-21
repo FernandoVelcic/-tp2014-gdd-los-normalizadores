@@ -1,6 +1,6 @@
 ﻿namespace FrbaHotel.ABM_de_Usuario
 {
-    partial class AltaUsuario
+    partial class AltaModificaiconUsuario
     {
         /// <summary>
         /// Required designer variable.

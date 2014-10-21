@@ -27,7 +27,7 @@ namespace FrbaHotel.ABM_de_Usuario
 
         private void button1_Click(object sender, EventArgs e)
         {
-            new FrbaHotel.ABM_de_Usuario.AltaUsuario().Show();
+            new FrbaHotel.ABM_de_Usuario.AltaModificaiconUsuario().Show();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -45,6 +45,15 @@ namespace FrbaHotel.ABM_de_Usuario
                 }
             }
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in this.dataGridView1.SelectedRows)
+            {
+                Usuario user = row.DataBoundItem as Usuario;
+                new AltaModificaiconUsuario(user).Show();
+            }
         }
     }
 }

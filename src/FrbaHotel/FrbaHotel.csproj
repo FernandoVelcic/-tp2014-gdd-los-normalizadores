@@ -108,11 +108,11 @@
     <Compile Include="Views\ABM de Usuario\ABMUsuario.Designer.cs">
       <DependentUpon>ABMUsuario.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\ABM de Usuario\AltaUsuario.cs">
+    <Compile Include="Views\ABM de Usuario\AltaModificacionUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\ABM de Usuario\AltaUsuario.Designer.cs">
-      <DependentUpon>AltaUsuario.cs</DependentUpon>
+    <Compile Include="Views\ABM de Usuario\AltaModificacionUsuario.Designer.cs">
+      <DependentUpon>AltaModificacionUsuario.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Cancelar Reserva\Form1.cs">
       <SubType>Form</SubType>
@@ -207,8 +207,8 @@
     <EmbeddedResource Include="Views\ABM de Usuario\ABMUsuario.resx">
       <DependentUpon>ABMUsuario.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ABM de Usuario\AltaUsuario.resx">
-      <DependentUpon>AltaUsuario.cs</DependentUpon>
+    <EmbeddedResource Include="Views\ABM de Usuario\AltaModificacionUsuario.resx">
+      <DependentUpon>AltaModificacionUsuario.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Cancelar Reserva\Form1.resx">
