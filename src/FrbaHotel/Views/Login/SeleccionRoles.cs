@@ -15,21 +15,50 @@ namespace FrbaHotel.Views.Login
 {
     public partial class SeleccionRoles : Form
     {
-        //private Usuario user { get; set; }
+        private Usuario user;
 
-        public SeleccionRoles()
+        public SeleccionRoles(Usuario user)
         {
+            this.user = user;
             InitializeComponent();
         }
 
         private void SeleccionRoles_Load(object sender, EventArgs e)
         {
-            /*List<RolUsuario> roles = EntityManager.getEntityManager().findAllBy<RolUsuario>("user_id", user.id.ToString());
+            List<RolUsuario> roles = EntityManager.getEntityManager().findAllBy<RolUsuario>("user_id", user.id.ToString());
+
+            if (roles.Count == 0)
+            {
+                MessageBox.Show("Este usuario no posee roles", "Salir", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                //TODO: Ir a home y cerrar
+                return;
+            }
+            
             if (roles.Count == 1)
             {
                 this.Hide();
-                new FrbaHotel.Form2().Show();
-            }*/
+                new FrbaHotel.Operaciones().Show();
+            }
+
+            BindingSource roles_binding = new BindingSource();
+            roles_binding.DataSource = EntityManager.getEntityManager().findAll<RolUsuario>();
+            comboBox1.DataSource = roles_binding;
+            //comboBox1.DisplayMember = "descripcion";
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            new Home().Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedIndex == -1)
+            {
+                MessageBox.Show("Debe seleccionar un rol para poder ingresar.");
+                return;
+            }
+            new Operaciones().Show();
         }
     }
 }

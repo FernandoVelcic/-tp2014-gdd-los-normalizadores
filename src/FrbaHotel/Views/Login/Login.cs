@@ -31,7 +31,7 @@ namespace FrbaHotel.Login
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close();
-            Form inicio = new FrbaHotel.Form1();
+            Form inicio = new FrbaHotel.Home();
             inicio.Show();
         }
 
@@ -65,7 +65,7 @@ namespace FrbaHotel.Login
                 case 0: //Login correcto
                     MessageBox.Show("Usuario y contraseña valido");
                     Usuario user = EntityManager.getEntityManager().findBy<Usuario>("username", textBox1.Text);
-                    //new SeleccionRoles(user).Show();
+                    new SeleccionRoles(user).Show();
                     break;
                 default: //Contraseña incorrecta (sumando intentos fallidos)
                     MessageBox.Show("Contraseña incorrecta. Intentos fallidos: " + intentos_fallidos);

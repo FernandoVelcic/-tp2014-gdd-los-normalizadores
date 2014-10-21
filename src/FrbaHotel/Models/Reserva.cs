@@ -7,7 +7,7 @@ using MyActiveRecord;
 
 namespace FrbaHotel.Models
 {
-    class Reserva : ActiveRecord
+    public class Reserva : ActiveRecord
     {
         public override String table { get { return "reservas"; } }
 

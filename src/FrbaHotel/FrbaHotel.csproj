@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Cliente.cs" />
+    <Compile Include="Models\Consumible.cs" />
     <Compile Include="Models\RolUsuario.cs" />
     <Compile Include="Models\TipoDocumento.cs" />
     <Compile Include="Models\Exceptions\ValidationException.cs" />

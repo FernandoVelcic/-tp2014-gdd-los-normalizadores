@@ -7,7 +7,7 @@ using MyActiveRecord;
 
 namespace FrbaHotel.Models
 {
-    class RolUsuario : ActiveRecord
+    public class RolUsuario : ActiveRecord
     {
         public override String table { get { return "rol_usuario"; } }
 

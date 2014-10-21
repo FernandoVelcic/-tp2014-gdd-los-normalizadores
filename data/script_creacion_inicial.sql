@@ -553,9 +553,9 @@ CREATE TABLE [LOS_NORMALIZADORES].[usuarios](
 
 ([id] ASC)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]) ON [PRIMARY]
 
-/* Agregando usuario (admin;w23e) */
+/* Agregando usuario (admin;w23e) como Administrador */
 INSERT INTO [LOS_NORMALIZADORES].[usuarios] (username, password, nombre, fecha_nac,  intentos_fallidos, estado, apellido, mail, telefono, direccion, documento_tipo_id, documento_nro, hotel_id) VALUES ('admin', 'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7', 'admin','', '', 1, 'admin', 'admin@admin.com.ar', '1112312311', 'Corrientes 3200', '1', '37000000', 1)
-
+INSERT INTO [LOS_NORMALIZADORES].[rol_usuario] (usuario_id, rol_id) VALUES (1,1)
 
 /* tipo de documento */
 CREATE TABLE [LOS_NORMALIZADORES].[documento_tipos](

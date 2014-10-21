@@ -6,7 +6,7 @@ using System.Text;
 
 namespace FrbaHotel.Models
 {
-    class Consumible : ActiveRecord 
+    public class Consumible : ActiveRecord 
     {
 
         public override String table { get { return "consumibles"; } }

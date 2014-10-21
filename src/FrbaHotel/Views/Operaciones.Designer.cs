@@ -1,6 +1,6 @@
 ﻿namespace FrbaHotel
 {
-    partial class Form2
+    partial class Operaciones
     {
         /// <summary>
         /// Required designer variable.

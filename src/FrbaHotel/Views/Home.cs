@@ -9,13 +9,11 @@ using System.Windows.Forms;
 
 namespace FrbaHotel
 {
-    public partial class Form1 : Form
+    public partial class Home : Form
     {
-        public Form1()
+        public Home()
         {
             InitializeComponent();
-           
-
         }
 
       
@@ -55,7 +53,7 @@ namespace FrbaHotel
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Form medio = new FrbaHotel.Form2();
+            Form medio = new FrbaHotel.Operaciones();
             medio.Show();
         }
     }
