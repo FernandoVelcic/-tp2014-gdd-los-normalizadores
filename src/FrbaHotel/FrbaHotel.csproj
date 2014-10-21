@@ -55,17 +55,17 @@
     <Compile Include="Models\TipoDocumento.cs" />
     <Compile Include="Models\Exceptions\ValidationException.cs" />
     <Compile Include="Models\TipoHabitacion.cs" />
-    <Compile Include="Views\ABM de Cliente\Form1.cs">
+    <Compile Include="Views\ABM de Cliente\AltaModificacionCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\ABM de Cliente\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Views\ABM de Cliente\AltaModificacionCliente.Designer.cs">
+      <DependentUpon>AltaModificacionCliente.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\ABM de Cliente\Listado.cs">
+    <Compile Include="Views\ABM de Cliente\ABMCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\ABM de Cliente\Listado.Designer.cs">
-      <DependentUpon>Listado.cs</DependentUpon>
+    <Compile Include="Views\ABM de Cliente\ABMCliente.Designer.cs">
+      <DependentUpon>ABMCliente.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\ABM de Habitacion\ABMHabitacion.cs">
       <SubType>Form</SubType>
@@ -178,12 +178,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Views\ABM de Cliente\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Views\ABM de Cliente\AltaModificacionCliente.resx">
+      <DependentUpon>AltaModificacionCliente.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ABM de Cliente\Listado.resx">
-      <DependentUpon>Listado.cs</DependentUpon>
+    <EmbeddedResource Include="Views\ABM de Cliente\ABMCliente.resx">
+      <DependentUpon>ABMCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ABM de Habitacion\ABMHabitacion.resx">
       <DependentUpon>ABMHabitacion.cs</DependentUpon>

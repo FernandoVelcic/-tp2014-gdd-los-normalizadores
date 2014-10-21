@@ -18,7 +18,7 @@ namespace FrbaHotel
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.nextForm(new FrbaHotel.Views.ABM_de_Cliente.Listado());
+            this.nextForm(new FrbaHotel.Views.ABM_de_Cliente.ABMCliente());
         }
 
         private void button2_Click(object sender, EventArgs e)

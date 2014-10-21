@@ -1,6 +1,6 @@
 ﻿namespace FrbaHotel.Views.ABM_de_Cliente
 {
-    partial class Listado
+    partial class ABMCliente
     {
         /// <summary>
         /// Required designer variable.
@@ -78,7 +78,7 @@
             this.dataGridView2.Size = new System.Drawing.Size(624, 522);
             this.dataGridView2.TabIndex = 0;
             // 
-            // Listado
+            // ABMCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -86,8 +86,9 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btn_EliminarCliente);
             this.Controls.Add(this.btn_AltaCliente);
-            this.Name = "Listado";
+            this.Name = "ABMCliente";
             this.Text = "Listado";
+            this.Load += new System.EventHandler(this.ABMCliente_Load);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
