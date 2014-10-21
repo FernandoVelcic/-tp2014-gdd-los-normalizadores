@@ -514,13 +514,7 @@ GO
 CREATE TABLE [LOS_NORMALIZADORES].[roles](
 	[id] INTEGER IDENTITY PRIMARY KEY,
 	[descripcion] [nvarchar](30) NOT NULL,
-	[rol_permisos_id] INTEGER NOT NULL,
 	[estado] [bit] NOT NULL,
-) ON [PRIMARY]
-
-
-CREATE TABLE [LOS_NORMALIZADORES].[rol_permisos](
-	[id] INTEGER IDENTITY PRIMARY KEY,
 	[ABM_Rol][bit] NOT NULL,
 	[ABM_Habitación][bit] NOT NULL,
 	[ABM_Cliente][bit] NOT NULL,
@@ -533,7 +527,6 @@ CREATE TABLE [LOS_NORMALIZADORES].[rol_permisos](
 	[Registrar_Estadía][bit] NOT NULL,
 	[Facturar_Estadía][bit] NOT NULL,
 	[Listado_Estadístico][bit] NOT NULL,
-	/* Etc agregar el resto */
 ) ON [PRIMARY]
 
 

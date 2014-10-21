@@ -60,5 +60,15 @@ namespace FrbaHotel.Views.ABM_de_Rol
                 }
             }
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = "";
+            checkBox1.Checked = false;
+            checkBox2.Checked = false;
+            var rolesBinding = new BindingList<Rol>(EntityManager.getEntityManager().findAll<Rol>());
+            dataGridView1.DataSource = new BindingSource(rolesBinding, null);
+        }
+               
     }
 }
