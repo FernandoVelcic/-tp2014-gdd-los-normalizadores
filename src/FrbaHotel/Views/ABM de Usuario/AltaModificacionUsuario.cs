@@ -17,24 +17,17 @@ namespace FrbaHotel.ABM_de_Usuario
     {
         private Usuario usuario;
 
-        public AltaModificaiconUsuario()
+        public AltaModificaiconUsuario() : this(new Usuario())
         {
-            InitializeComponent();
+            usuario.intentos_fallidos = 0;
+            usuario.estado = true;
+            usuario.fecha_nac = DateTime.Today.ToString();
         }
 
         public AltaModificaiconUsuario(Usuario usuario)
         {
             InitializeComponent();
             this.usuario = usuario;
-
-            textBox1.Text = usuario.username;
-            /* TODO: hay que usar binding
-            user.password = new SHA256(textBox2.Text).ToString();
-            user.nombre = textBox3.Text;
-            user.apellido = textBox4.Text;
-            user.mail = textBox5.Text;
-            user.telefono = textBox6.Text;
-            user.direccion = textBox7.Text;*/
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -53,6 +46,15 @@ namespace FrbaHotel.ABM_de_Usuario
             documentos_binding.DataSource = EntityManager.getEntityManager().findAll<TipoDocumento>();
             comboBox3.DataSource = documentos_binding;
             comboBox3.DisplayMember = "descripcion";
+
+            textBox1.DataBindings.Add("Text", usuario, "username");
+            textBox3.DataBindings.Add("Text", usuario, "nombre");
+            textBox8.DataBindings.Add("Text", usuario, "documento_nro");
+            textBox4.DataBindings.Add("Text", usuario, "apellido");
+            textBox5.DataBindings.Add("Text", usuario, "mail");
+            textBox6.DataBindings.Add("Text", usuario, "telefono");
+            textBox7.DataBindings.Add("Text", usuario, "direccion");
+            dateTimePicker1.DataBindings.Add("Text", usuario, "fecha_nac", true);
         }
 
       
@@ -63,34 +65,21 @@ namespace FrbaHotel.ABM_de_Usuario
                 MessageBox.Show("Debe seleccionar al menos un rol");
                 return;
             }
-            Usuario user = new Usuario();
-            user.username = textBox1.Text;
-            user.password = new SHA256(textBox2.Text).ToString();
-            user.nombre = textBox3.Text;
-            user.apellido = textBox4.Text;
-            user.mail = textBox5.Text;
-            user.telefono = textBox6.Text;
-            user.direccion = textBox7.Text;
-
-            user.hotel = comboBox1.SelectedValue as Hotel;
-
-            user.documento_tipo = comboBox3.SelectedValue as TipoDocumento;
-            user.documento_nro = long.Parse(textBox8.Text);
-
-            user.fecha_nac = dateTimePicker1.Text;
-
-            user.intentos_fallidos = 0;
-            user.estado = true;
+            
+            //Bindings especiales
+            usuario.password = new SHA256(textBox2.Text).ToString();
+            usuario.hotel = comboBox1.SelectedValue as Hotel;
+            usuario.documento_tipo = comboBox3.SelectedValue as TipoDocumento;
 
             try
             {
-                user.insert();
+                usuario.save();
                 
                 foreach(Rol rol in checkedListBox1.CheckedItems)
                 {
                     RolUsuario rolUsuario = new RolUsuario();
                     rolUsuario.rol = rol;
-                    rolUsuario.usuario = user;
+                    rolUsuario.usuario = usuario;
                     rolUsuario.insert();
                 }
             }
