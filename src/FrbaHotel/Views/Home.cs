@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using FrbaHotel;
 
 namespace FrbaHotel
 {
@@ -16,8 +17,6 @@ namespace FrbaHotel
             InitializeComponent();
         }
 
-      
-
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -25,36 +24,12 @@ namespace FrbaHotel
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ir_a_login();
-        }
-
-       
-        private void salirToolStripMenuItem_Click_1(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void administradorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ir_a_login();
-        }
-
-        private void ir_a_login()
-        {
-            //this.Hide();
-            Form login = new FrbaHotel.Login.Login();
-            login.Show();
-        }
-
-        private void recepcionistaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ir_a_login();
+            this.nextForm(new FrbaHotel.Login.Login());
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Form medio = new FrbaHotel.Operaciones();
-            medio.Show();
+            this.nextForm(new FrbaHotel.Operaciones());
         }
     }
 }

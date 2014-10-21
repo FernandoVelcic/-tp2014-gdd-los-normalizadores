@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Tools\Navigator.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Consumible.cs" />
     <Compile Include="Models\RolUsuario.cs" />
