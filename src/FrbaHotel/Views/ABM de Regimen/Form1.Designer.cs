@@ -30,16 +30,16 @@
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.radio_Inactivo = new System.Windows.Forms.RadioButton();
+            this.radio_Activo = new System.Windows.Forms.RadioButton();
+            this.txt_PrecioBase = new System.Windows.Forms.TextBox();
+            this.txt_Descripcion = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.bnt_Confirmar = new System.Windows.Forms.Button();
+            this.btn_Volver = new System.Windows.Forms.Button();
+            this.txt_Codigo = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -47,9 +47,9 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.groupBox2);
-            this.groupBox1.Controls.Add(this.textBox3);
-            this.groupBox1.Controls.Add(this.textBox2);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.txt_PrecioBase);
+            this.groupBox1.Controls.Add(this.txt_Descripcion);
+            this.groupBox1.Controls.Add(this.txt_Codigo);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
@@ -62,8 +62,8 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.radioButton2);
-            this.groupBox2.Controls.Add(this.radioButton1);
+            this.groupBox2.Controls.Add(this.radio_Inactivo);
+            this.groupBox2.Controls.Add(this.radio_Activo);
             this.groupBox2.Location = new System.Drawing.Point(84, 188);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(323, 66);
@@ -71,48 +71,41 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Estado:";
             // 
-            // radioButton2
+            // radio_Inactivo
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(191, 33);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(72, 17);
-            this.radioButton2.TabIndex = 8;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "No Activo";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.radio_Inactivo.AutoSize = true;
+            this.radio_Inactivo.Location = new System.Drawing.Point(191, 33);
+            this.radio_Inactivo.Name = "radio_Inactivo";
+            this.radio_Inactivo.Size = new System.Drawing.Size(72, 17);
+            this.radio_Inactivo.TabIndex = 8;
+            this.radio_Inactivo.TabStop = true;
+            this.radio_Inactivo.Text = "No Activo";
+            this.radio_Inactivo.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // radio_Activo
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(66, 33);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(55, 17);
-            this.radioButton1.TabIndex = 7;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Activo";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radio_Activo.AutoSize = true;
+            this.radio_Activo.Location = new System.Drawing.Point(66, 33);
+            this.radio_Activo.Name = "radio_Activo";
+            this.radio_Activo.Size = new System.Drawing.Size(55, 17);
+            this.radio_Activo.TabIndex = 7;
+            this.radio_Activo.TabStop = true;
+            this.radio_Activo.Text = "Activo";
+            this.radio_Activo.UseVisualStyleBackColor = true;
             // 
-            // textBox3
+            // txt_PrecioBase
             // 
-            this.textBox3.Location = new System.Drawing.Point(226, 145);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 6;
+            this.txt_PrecioBase.Location = new System.Drawing.Point(226, 144);
+            this.txt_PrecioBase.Name = "txt_PrecioBase";
+            this.txt_PrecioBase.Size = new System.Drawing.Size(100, 20);
+            this.txt_PrecioBase.TabIndex = 6;
             // 
-            // textBox2
+            // txt_Descripcion
             // 
-            this.textBox2.Location = new System.Drawing.Point(226, 90);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 5;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(226, 43);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 4;
+            this.txt_Descripcion.Location = new System.Drawing.Point(226, 90);
+            this.txt_Descripcion.Name = "txt_Descripcion";
+            this.txt_Descripcion.Size = new System.Drawing.Size(100, 20);
+            this.txt_Descripcion.TabIndex = 5;
             // 
             // label3
             // 
@@ -132,6 +125,33 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Descripción:";
             // 
+            // bnt_Confirmar
+            // 
+            this.bnt_Confirmar.Location = new System.Drawing.Point(271, 339);
+            this.bnt_Confirmar.Name = "bnt_Confirmar";
+            this.bnt_Confirmar.Size = new System.Drawing.Size(165, 48);
+            this.bnt_Confirmar.TabIndex = 1;
+            this.bnt_Confirmar.Text = "Confirmar";
+            this.bnt_Confirmar.UseVisualStyleBackColor = true;
+            this.bnt_Confirmar.Click += new System.EventHandler(this.bnt_Confirmar_Click);
+            // 
+            // btn_Volver
+            // 
+            this.btn_Volver.Location = new System.Drawing.Point(12, 339);
+            this.btn_Volver.Name = "btn_Volver";
+            this.btn_Volver.Size = new System.Drawing.Size(165, 48);
+            this.btn_Volver.TabIndex = 2;
+            this.btn_Volver.Text = "Volver";
+            this.btn_Volver.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_Volver.UseVisualStyleBackColor = true;
+            // 
+            // txt_Codigo
+            // 
+            this.txt_Codigo.Location = new System.Drawing.Point(226, 43);
+            this.txt_Codigo.Name = "txt_Codigo";
+            this.txt_Codigo.Size = new System.Drawing.Size(100, 20);
+            this.txt_Codigo.TabIndex = 4;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -141,33 +161,14 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Codigo:";
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(271, 339);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(165, 48);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Confirmar";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(12, 339);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(165, 48);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Volver";
-            this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button2.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(454, 404);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btn_Volver);
+            this.Controls.Add(this.bnt_Confirmar);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
             this.Text = "ABM de Regimen";
@@ -185,14 +186,14 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.RadioButton radio_Inactivo;
+        private System.Windows.Forms.RadioButton radio_Activo;
+        private System.Windows.Forms.TextBox txt_PrecioBase;
+        private System.Windows.Forms.TextBox txt_Descripcion;
+        private System.Windows.Forms.Button bnt_Confirmar;
+        private System.Windows.Forms.Button btn_Volver;
+        private System.Windows.Forms.TextBox txt_Codigo;
+        private System.Windows.Forms.Label label1;
     }
 }

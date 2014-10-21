@@ -91,7 +91,7 @@
             // txt_FechaNac
             // 
             this.txt_FechaNac.Enabled = false;
-            this.txt_FechaNac.Location = new System.Drawing.Point(215, 289);
+            this.txt_FechaNac.Location = new System.Drawing.Point(182, 294);
             this.txt_FechaNac.Name = "txt_FechaNac";
             this.txt_FechaNac.Size = new System.Drawing.Size(100, 22);
             this.txt_FechaNac.TabIndex = 27;
@@ -121,7 +121,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(94, 292);
+            this.label10.Location = new System.Drawing.Point(61, 297);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(115, 16);
             this.label10.TabIndex = 23;
@@ -206,7 +206,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(94, 268);
+            this.label3.Location = new System.Drawing.Point(61, 273);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(75, 16);
             this.label3.TabIndex = 32;
@@ -254,7 +254,7 @@
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(331, 290);
+            this.dateTimePicker1.Location = new System.Drawing.Point(298, 295);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 22);
             this.dateTimePicker1.TabIndex = 34;

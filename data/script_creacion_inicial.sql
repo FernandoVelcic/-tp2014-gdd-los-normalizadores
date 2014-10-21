@@ -117,6 +117,7 @@ CREATE TABLE [LOS_NORMALIZADORES].[hoteles_regimenes](
 
 CREATE TABLE [LOS_NORMALIZADORES].[regimenes](
 	[id] INTEGER IDENTITY PRIMARY KEY,
+	[codigo] [nvarchar](255),
 	[descripcion] [nvarchar](255),
 	[precio] [numeric](18, 2),
 	[estado] [bit]

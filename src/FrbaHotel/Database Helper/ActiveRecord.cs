@@ -7,7 +7,7 @@ using FrbaHotel.Database_Helper;  // reflection namespace
 
 namespace MyActiveRecord
 {
-    abstract class ActiveRecord
+    public abstract class ActiveRecord
     {
         [System.ComponentModel.Browsable(false)] 
         public long id { get; set; }

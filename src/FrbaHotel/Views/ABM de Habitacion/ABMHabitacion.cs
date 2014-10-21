@@ -42,7 +42,7 @@ namespace FrbaHotel.Views.ABM_de_Habitacion
 
         private void button1_Click(object sender, EventArgs e)
         {
-            new FrbaHotel.ABM_de_Habitacion.Form1().Show();
+            new FrbaHotel.ABM_de_Habitacion.Form1(new Habitacion()).Show();
         }
 
         private void button3_Click(object sender, EventArgs e)

@@ -60,7 +60,7 @@ namespace FrbaHotel.Views.ABM_de_Regimen
 
       private void button1_Click(object sender, EventArgs e)
       {
-          new FrbaHotel.ABM_de_Regimen.Form1().Show();
+          new FrbaHotel.ABM_de_Regimen.Form1(new Regimen()).Show();
       }
 
     }

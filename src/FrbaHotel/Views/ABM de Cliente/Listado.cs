@@ -33,7 +33,7 @@ namespace FrbaHotel.Views.ABM_de_Cliente
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form cliente = new FrbaHotel.Views.ABM_de_Cliente.Form1();
+            Form cliente = new FrbaHotel.Views.ABM_de_Cliente.Form1(new Cliente());
             cliente.Show();
         }
 

@@ -21,12 +21,14 @@ namespace FrbaHotel.ABM_de_Habitacion
 
         private List<Hotel> hoteles;
         private List<TipoHabitacion> tipoHabitaciones;
+        private Habitacion habitacion;
 
-        public Form1()
+        public Form1(Habitacion habitacion)
         {
             InitializeComponent();
             cmb_Frente.Items.Add("Si");
             cmb_Frente.Items.Add("No");
+            this.habitacion = habitacion;
         }
 
 
@@ -52,7 +54,7 @@ namespace FrbaHotel.ABM_de_Habitacion
 
             try
             {
-                Habitacion habitacion = bindFromForm(new Habitacion());
+                bindFromForm();
                 habitacion.insert();
             }
             catch (ValidationException ex)
@@ -72,7 +74,7 @@ namespace FrbaHotel.ABM_de_Habitacion
         }
 
 
-        private Habitacion bindFromForm(Habitacion habitacion)
+        private void bindFromForm()
         {
 
             //TODO matchear bien esto
@@ -103,7 +105,6 @@ namespace FrbaHotel.ABM_de_Habitacion
 
             habitacion.frente = cmb_Frente.Text == "Si" ? "S" : "N";
 
-            return habitacion;
         }
 
 

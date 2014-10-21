@@ -1,8 +1,10 @@
 ﻿using FrbaHotel.Models;
+using FrbaHotel.Models.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,10 +14,15 @@ namespace FrbaHotel.Views.ABM_de_Cliente
 {
     public partial class Form1 : Form
     {
-        public Form1()
+
+        Cliente cliente;
+
+        public Form1(Cliente cliente)
         {
             InitializeComponent();
+            this.cliente = cliente;
         }
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -24,11 +31,33 @@ namespace FrbaHotel.Views.ABM_de_Cliente
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Cliente cliente= new Cliente();
-            cliente.nombre=txt_Nombre.Text;
-            cliente.apellido=txt_Apellido.Text;
-            //tipo y nro doc
+
+            try
+            {
+                bindFromForm();
+                cliente.save();
+                MessageBox.Show("El cliente se guardo correctamente");
+                this.Close();
+            }
+            catch (ValidationException exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+            catch (SqlException exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
             
+
+        }
+
+        private void bindFromForm()
+        {
+
+            cliente.nombre = txt_Nombre.Text;
+            cliente.apellido = txt_Apellido.Text;
+            //tipo y nro doc
+
             cliente.mail = txt_Mail.Text;
             //cliente.t = txt_Telefono.Text;
             cliente.dom_calle = txt_Calle.Text;
@@ -37,19 +66,8 @@ namespace FrbaHotel.Views.ABM_de_Cliente
             //nacionalidad se autocompleta? hace falta ponerlo?
             cliente.fecha_nac = dateTimePicker1.Value.ToString();
 
-            try
-            {
-                cliente.save();
-                MessageBox.Show("El cliente se guardo correctamente");
-                this.Close();
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show(exception.Message);
-            }
-            
-
         }
+
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {

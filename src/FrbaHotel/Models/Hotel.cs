@@ -7,7 +7,7 @@ using MyActiveRecord;
 
 namespace FrbaHotel.Models
 {
-    class Hotel : ActiveRecord
+    public class Hotel : ActiveRecord
     {
         public override String table { get { return "hoteles"; } }
 
@@ -17,5 +17,12 @@ namespace FrbaHotel.Models
         public int nro_Calle { get; set; } //[numeric](18, 0)
 	    public int cant_estrella { get; set; } //[numeric](18, 0)
 	    public int recarga_estrella { get; set; } //[numeric](18, 0)
+
+        public override string ToString()
+        {
+            return calle;
+        }
+
+
     }
 }

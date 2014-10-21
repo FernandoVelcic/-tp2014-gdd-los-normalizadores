@@ -7,7 +7,7 @@ using MyActiveRecord;
 
 namespace FrbaHotel.Models
 {
-    class Habitacion : ActiveRecord
+    public class Habitacion : ActiveRecord
     {
         public override String table { get { return "habitaciones"; } }
 
@@ -18,6 +18,12 @@ namespace FrbaHotel.Models
         public int piso { get; set; } //[numeric](18, 0)
         public String frente { get; set; } //[nvarchar](50)
         public TipoHabitacion tipo { get; set; }
+
+        public override string ToString()
+        {
+            return hotel.ToString() + " - " + numero.ToString() ;
+        }
+
 
     }
 }
