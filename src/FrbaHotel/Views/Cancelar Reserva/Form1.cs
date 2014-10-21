@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FrbaHotel.Database_Helper;
+using FrbaHotel.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,5 +22,22 @@ namespace FrbaHotel.Cancelar_Reserva
         {
 
         }
+
+        private void btn_Cancelar_Click(object sender, EventArgs e)
+        {
+            
+            Reserva reserva = EntityManager.getEntityManager().findBy<Reserva>("codigo", txt_NroReserva.Text);
+            if (reserva == null)
+            {
+                MessageBox.Show("La reserva no existe");
+                return;
+            }
+
+
+        }
+
+
+
+
     }
 }

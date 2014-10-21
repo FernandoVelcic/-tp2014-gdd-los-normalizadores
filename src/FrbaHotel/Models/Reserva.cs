@@ -16,5 +16,6 @@ namespace FrbaHotel.Models
         public int fecha_inicio { get; set; } //[datetime]
         public int codigo { get; set; } //[numeric](18, 0)
         public int cant_noches { get; set; } //[numeric](18, 0)
+
     }
 }

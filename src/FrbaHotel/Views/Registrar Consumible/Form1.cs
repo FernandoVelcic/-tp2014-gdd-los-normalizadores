@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FrbaHotel.Database_Helper;
+using FrbaHotel.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,7 +20,21 @@ namespace FrbaHotel.Registrar_Consumible
 
         private void Form1_Load(object sender, EventArgs e)
         {
+           var consumiblesBinding = new BindingList<Consumible>(EntityManager.getEntityManager().findAll<Consumible>());
+            dataGridView1.DataSource = new BindingSource(consumiblesBinding, null);
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
 
         }
+
+        private void btn_Volver_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+
+
     }
 }

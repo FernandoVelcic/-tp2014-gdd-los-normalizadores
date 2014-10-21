@@ -132,6 +132,7 @@ CREATE TABLE [LOS_NORMALIZADORES].[reservas](
 	[cant_noches] [numeric](18, 0),
 	[regimen_id] INTEGER,
 	[cantidad_personas]	INTEGER				/* Deberia ir ??? */
+											/* Falta calcular en base a la habitacion y la cantidad de gente que entre */
 											/* Como calculo el precio?? */
 ) ON [PRIMARY]
 

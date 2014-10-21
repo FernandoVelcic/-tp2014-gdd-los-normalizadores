@@ -29,63 +29,64 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txt_Usuario = new System.Windows.Forms.TextBox();
+            this.txt_FechaCancelacion = new System.Windows.Forms.TextBox();
+            this.txt_Motivo = new System.Windows.Forms.TextBox();
+            this.txt_NroReserva = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btn_Cancelar = new System.Windows.Forms.Button();
+            this.btn_Vovler = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.textBox4);
-            this.groupBox1.Controls.Add(this.textBox3);
-            this.groupBox1.Controls.Add(this.textBox2);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.txt_Usuario);
+            this.groupBox1.Controls.Add(this.txt_FechaCancelacion);
+            this.groupBox1.Controls.Add(this.txt_Motivo);
+            this.groupBox1.Controls.Add(this.txt_NroReserva);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(39, 45);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(478, 232);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Por favor, complete los siguientes campos:";
             // 
-            // textBox4
+            // txt_Usuario
             // 
-            this.textBox4.Location = new System.Drawing.Point(265, 133);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 22);
-            this.textBox4.TabIndex = 7;
+            this.txt_Usuario.Location = new System.Drawing.Point(265, 133);
+            this.txt_Usuario.Name = "txt_Usuario";
+            this.txt_Usuario.Size = new System.Drawing.Size(100, 22);
+            this.txt_Usuario.TabIndex = 7;
             // 
-            // textBox3
+            // txt_FechaCancelacion
             // 
-            this.textBox3.Location = new System.Drawing.Point(265, 107);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 22);
-            this.textBox3.TabIndex = 6;
+            this.txt_FechaCancelacion.Location = new System.Drawing.Point(265, 107);
+            this.txt_FechaCancelacion.Name = "txt_FechaCancelacion";
+            this.txt_FechaCancelacion.Size = new System.Drawing.Size(100, 22);
+            this.txt_FechaCancelacion.TabIndex = 6;
             // 
-            // textBox2
+            // txt_Motivo
             // 
-            this.textBox2.Location = new System.Drawing.Point(265, 83);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 22);
-            this.textBox2.TabIndex = 5;
+            this.txt_Motivo.Location = new System.Drawing.Point(265, 83);
+            this.txt_Motivo.Name = "txt_Motivo";
+            this.txt_Motivo.Size = new System.Drawing.Size(100, 22);
+            this.txt_Motivo.TabIndex = 5;
             // 
-            // textBox1
+            // txt_NroReserva
             // 
-            this.textBox1.Location = new System.Drawing.Point(265, 60);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 22);
-            this.textBox1.TabIndex = 4;
+            this.txt_NroReserva.Location = new System.Drawing.Point(265, 60);
+            this.txt_NroReserva.Name = "txt_NroReserva";
+            this.txt_NroReserva.Size = new System.Drawing.Size(100, 22);
+            this.txt_NroReserva.TabIndex = 4;
             // 
             // label4
             // 
@@ -127,23 +128,35 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Numero de reserva:";
             // 
-            // button1
+            // btn_Cancelar
             // 
-            this.button1.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(571, 72);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(115, 47);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Cancelar Reserva";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btn_Cancelar.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Cancelar.Location = new System.Drawing.Point(375, 250);
+            this.btn_Cancelar.Name = "btn_Cancelar";
+            this.btn_Cancelar.Size = new System.Drawing.Size(115, 47);
+            this.btn_Cancelar.TabIndex = 1;
+            this.btn_Cancelar.Text = "Cancelar Reserva";
+            this.btn_Cancelar.UseVisualStyleBackColor = true;
+            this.btn_Cancelar.Click += new System.EventHandler(this.btn_Cancelar_Click);
+            // 
+            // btn_Vovler
+            // 
+            this.btn_Vovler.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Vovler.Location = new System.Drawing.Point(12, 250);
+            this.btn_Vovler.Name = "btn_Vovler";
+            this.btn_Vovler.Size = new System.Drawing.Size(115, 47);
+            this.btn_Vovler.TabIndex = 2;
+            this.btn_Vovler.Text = "Volver";
+            this.btn_Vovler.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ClientSize = new System.Drawing.Size(1012, 721);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(497, 306);
+            this.Controls.Add(this.btn_Vovler);
+            this.Controls.Add(this.btn_Cancelar);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
             this.Text = "Cancelar Reserva";
@@ -157,14 +170,15 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txt_NroReserva;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox txt_Usuario;
+        private System.Windows.Forms.TextBox txt_FechaCancelacion;
+        private System.Windows.Forms.TextBox txt_Motivo;
+        private System.Windows.Forms.Button btn_Cancelar;
+        private System.Windows.Forms.Button btn_Vovler;
     }
 }
