@@ -12,21 +12,21 @@ namespace FrbaHotel.Database_Helper
 
         public void setEquals(string key, string value)
         {
-            this.key = "'" + key + "'";
+            this.key = key;
             this.value = "'" + value + "'";
             this.comparator = "=";
         }
 
         public void setEquals(string key, int value)
         {
-            this.key = "'" + key + "'";
+            this.key = key;
             this.value = value.ToString();
             this.comparator = "=";
         }
 
         public void setEqualsWithFunction(string key, string value)
         {
-            this.key = "'" + key + "'";
+            this.key = key;
             this.value = value;
             this.comparator = "=";
         }

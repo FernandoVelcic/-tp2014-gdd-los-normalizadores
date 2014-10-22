@@ -191,7 +191,7 @@ namespace FrbaHotel.Database_Helper
 
             List<T> lista = new List<T>();
 
-            //MessageBox.Show(query.build());
+            MessageBox.Show(query.build());
 
             using (SqlDataReader result = cmd.ExecuteReader())
             {
@@ -214,6 +214,7 @@ namespace FrbaHotel.Database_Helper
             FetchCondition condition = new FetchCondition();
             condition.setEquals(key, value);
             List<FetchCondition> condiciones = new List<FetchCondition>();
+            condiciones.Add(condition);
             return findList<T>(condiciones);
         }
 
