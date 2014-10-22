@@ -20,17 +20,22 @@ namespace MyActiveRecord
             return false;
         }
 
-        public void preSave()
+        public virtual void preSave()
         {
 
         }
 
-        public void afterSave()
+        public virtual void afterSave()
         {
 
         }
 
-        public void afterLoad()
+        public virtual void afterLoad()
+        {
+
+        }
+
+        public virtual void preInsert()
         {
 
         }

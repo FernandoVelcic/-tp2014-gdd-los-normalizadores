@@ -1,4 +1,5 @@
-﻿using FrbaHotel.Models;
+﻿using FrbaHotel.Database_Helper;
+using FrbaHotel.Models;
 using FrbaHotel.Models.Exceptions;
 using System;
 using System.Collections.Generic;
@@ -15,15 +16,36 @@ namespace FrbaHotel.Generar_Modificar_Reserva
     public partial class Form1 : Form
     {
 
+        Reserva reserva;
 
-        public Form1()
+        public Form1(Reserva reserva)
         {
             InitializeComponent();
+            this.reserva = reserva;
+            
+
+        }
+
+        private void setUpComboBoxes()
+        {
+            BindingSource tipo_habitacion_binding = new BindingSource();
+            tipo_habitacion_binding.DataSource = EntityManager.getEntityManager().findAll<TipoHabitacion>();
+            cmb_TipoHabitacion.DataSource = tipo_habitacion_binding;
+            cmb_TipoHabitacion.DisplayMember = "descripcion";
+
+            BindingSource regimen_binding = new BindingSource();
+            regimen_binding.DataSource = EntityManager.getEntityManager().findAll<Regimen>();
+            cmb_Regimen.DataSource = regimen_binding;
+            cmb_Regimen.DisplayMember = "descripcion";
+
+            txt_Cant_Noches.DataBindings.Add("Text", this.reserva, "cant_noches");
+            txt_Desde.DataBindings.Add("Text", this.reserva, "fecha_inicio");
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            setUpComboBoxes();
         }
 
         private void btn_Volver_Click(object sender, EventArgs e)
@@ -34,14 +56,15 @@ namespace FrbaHotel.Generar_Modificar_Reserva
 
         private Reserva bindFromForm()
         {
-            Reserva  reserva = new Reserva();
+            reserva.regimen = (Regimen) cmb_Regimen.SelectedItem;
+            reserva.tipo_habitacion = (TipoHabitacion)cmb_TipoHabitacion.SelectedItem;
             return reserva;
         }
 
         private void btn_Generar_Click(object sender, EventArgs e)
         {
 
-            Reserva reserva = bindFromForm();
+            reserva = bindFromForm();
             try
             {
                 reserva.save();
@@ -54,7 +77,7 @@ namespace FrbaHotel.Generar_Modificar_Reserva
             }
             catch (SqlException exception)
             {
-                MessageBox.Show(exception.Message);
+                MessageBox.Show(exception.StackTrace);
             }
 
         }

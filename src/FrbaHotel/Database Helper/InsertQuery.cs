@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace MyActiveRecord
 {
@@ -58,9 +59,8 @@ namespace MyActiveRecord
         public int exec()
         {
             SqlCommand command = new SqlCommand(build() + "; SELECT @@identity", ConnectionManager.getInstance().getConnection());
-            Console.WriteLine(build());
+            //MessageBox.Show(build());
             int newId = System.Convert.ToInt32(command.ExecuteScalar());
-            Console.WriteLine("Inserto el ID: " + newId);
             return newId;
         }
 

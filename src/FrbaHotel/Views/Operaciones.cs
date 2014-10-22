@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FrbaHotel.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -43,7 +44,7 @@ namespace FrbaHotel
 
         private void button6_Click(object sender, EventArgs e)
         {
-            this.nextForm(new FrbaHotel.Generar_Modificar_Reserva.Form1());
+            this.nextForm(new FrbaHotel.Generar_Modificar_Reserva.Form1(new Reserva()));
         }
 
         private void button7_Click(object sender, EventArgs e)

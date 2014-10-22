@@ -67,14 +67,26 @@ namespace FrbaHotel.Database_Helper
                 {
                     properties.Add(property.Name, property.GetGetMethod().Invoke(item, null).ToString());
                 }
+                else if (property.PropertyType == typeof(DateTime))
+                {
+                    //TODO
+                    DateTime fecha = (DateTime) property.GetGetMethod().Invoke(item, null);
+                    properties.Add(property.Name, fecha.ToShortDateString());
+                }
                 else
                 {
                     //Aca obtengo el id del objeto relacionado
                     MethodInfo getPropAnidada =  property.GetGetMethod();                               // Obtengo el getter de la propiedad
                     Object objetoAnidado = getPropAnidada.Invoke(item, null);                           // Obtengo el valor (el otro objeto)
-                    Type claseAnidada = objetoAnidado.GetType();                                        // Consigo la clase del objeto
-                    MethodInfo getIdAnidado = claseAnidada.GetProperty("id").GetGetMethod();            // Consigo el getter del id del objeto
-                    properties.Add(property.Name + "_id", getIdAnidado.Invoke(objetoAnidado, null).ToString()); //Consigo el id y lo guardo en el diccionario
+
+                    //Capaz el objeto anidado no esta seado y es null, probablemente haya un problema con las FK
+                    if (objetoAnidado != null)
+                    {
+                        Type claseAnidada = objetoAnidado.GetType();                                        // Consigo la clase del objeto
+                        MethodInfo getIdAnidado = claseAnidada.GetProperty("id").GetGetMethod();            // Consigo el getter del id del objeto
+                        properties.Add(property.Name + "_id", getIdAnidado.Invoke(objetoAnidado, null).ToString()); //Consigo el id y lo guardo en el diccionario
+                    }
+                    
                 }
 
             }
@@ -97,6 +109,7 @@ namespace FrbaHotel.Database_Helper
 
         public int insert(ActiveRecord item)
         {
+            item.preInsert();
             InsertQuery query = new InsertQuery(item.GetType());
             foreach (KeyValuePair<string, string> properties in getProperties(item))
             {

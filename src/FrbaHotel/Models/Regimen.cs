@@ -17,5 +17,11 @@ namespace FrbaHotel.Models
         public float precio { get; set; } //[numeric](18, 2)
         public Boolean estado { get; set; } //[bit]
 
+        public override string ToString()
+        {
+            return descripcion;
+        }
+
+
     }
 }

@@ -126,11 +126,12 @@ CREATE TABLE [LOS_NORMALIZADORES].[regimenes](
 
 CREATE TABLE [LOS_NORMALIZADORES].[reservas](
 	[id] INTEGER IDENTITY PRIMARY KEY,
-	[fecha] [datetime],						/* Fecha en que se realizo la reserva */
+	[fecha_carga] [datetime],				/* Fecha en que se realizo la reserva, debe ser por archivo de configuración */
 	[fecha_inicio] [datetime],				/* Fecha en del primer dia que se va a alojar el huesped */
 	[codigo] [numeric](18, 0),
 	[cant_noches] [numeric](18, 0),
 	[regimen_id] INTEGER,
+	[tipo_habitacion_id] INTEGER,
 	[cantidad_personas]	INTEGER				/* Deberia ir ??? */
 											/* Falta calcular en base a la habitacion y la cantidad de gente que entre */
 											/* Como calculo el precio?? */
@@ -216,6 +217,8 @@ ALTER TABLE [LOS_NORMALIZADORES].[hoteles_regimenes] ADD CONSTRAINT regimenes_ho
 ALTER TABLE [LOS_NORMALIZADORES].[hoteles_regimenes] ADD CONSTRAINT regimenes_unique UNIQUE(hotel_id, regimen_id);
 
 ALTER TABLE [LOS_NORMALIZADORES].[reservas] ADD CONSTRAINT reservas_regimen_id FOREIGN KEY (regimen_id) REFERENCES [LOS_NORMALIZADORES].[regimenes](id)
+
+ALTER TABLE [LOS_NORMALIZADORES].[reservas] ADD CONSTRAINT reservas_tipo_habitacion_id FOREIGN KEY (tipo_habitacion_id) REFERENCES [LOS_NORMALIZADORES].[habitaciones_tipos](id)
 
 ALTER TABLE [LOS_NORMALIZADORES].[estadias] ADD CONSTRAINT estadias_habitacion_id FOREIGN KEY (habitacion_id) REFERENCES [LOS_NORMALIZADORES].[habitaciones](id)
 

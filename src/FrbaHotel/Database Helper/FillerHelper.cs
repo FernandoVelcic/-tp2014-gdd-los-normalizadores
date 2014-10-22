@@ -48,6 +48,10 @@ namespace FrbaHotel.Database_Helper
                 else if (property.PropertyType == typeof(String))
                 {
                     property.SetValue(item, result[tableName + "_" + property.Name].ToString(), null);
+                }
+                else if (property.PropertyType == typeof(DateTime))
+                {
+                    property.SetValue(item, DateTime.Parse(result[tableName + "_" + property.Name].ToString()), null);
                 } 
                 else if (property.PropertyType.IsSubclassOf(typeof(ActiveRecord)))
                 {
@@ -76,7 +80,7 @@ namespace FrbaHotel.Database_Helper
                             }
                             catch (FormatException e)
                             {
-
+                                MessageBox.Show(e.Message);
                             }                  
                         }
                         else if (subProperty.PropertyType == typeof(long))
@@ -88,7 +92,7 @@ namespace FrbaHotel.Database_Helper
                             }
                             catch (FormatException e)
                             {
-
+                                MessageBox.Show(e.Message);
                             }
                         }
                         else if (subProperty.PropertyType == typeof(Boolean))
@@ -98,6 +102,10 @@ namespace FrbaHotel.Database_Helper
                         else if (subProperty.PropertyType == typeof(String))
                         {
                             subProperty.SetValue(instancia, result[subTableName + "_" + subProperty.Name].ToString(), null);
+                        }
+                        else if (subProperty.PropertyType == typeof(DateTime))
+                        {
+                            subProperty.SetValue(instancia, DateTime.Parse(result[subTableName + "_" + subProperty.Name].ToString()), null);
                         } 
 
                     }
