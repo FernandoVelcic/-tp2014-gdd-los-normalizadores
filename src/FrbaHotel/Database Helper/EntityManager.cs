@@ -191,7 +191,8 @@ namespace FrbaHotel.Database_Helper
 
             List<T> lista = new List<T>();
 
-            MessageBox.Show(query.build());
+            //DEBUG
+            //MessageBox.Show(query.build());
 
             using (SqlDataReader result = cmd.ExecuteReader())
             {
