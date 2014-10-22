@@ -152,7 +152,8 @@ CREATE TABLE [LOS_NORMALIZADORES].[clientes](
 	[nacionalidad] [nvarchar](255),
 	[documento_tipo_id] INTEGER NULL,
 	[documento_nro] [bigint] NULL,
-	[telefono] [nvarchar](255) NULL
+	[telefono] [nvarchar](255) NULL,
+	[estado] [bit] default 1
 ) ON [PRIMARY]
 
 

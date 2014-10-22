@@ -59,6 +59,11 @@ namespace FrbaHotel.Views.ABM_de_Cliente
             }
         }
 
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
 
 
     }
