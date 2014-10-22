@@ -34,17 +34,17 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.btn_Filtrar = new System.Windows.Forms.Button();
+            this.txt_Filter_Documento = new System.Windows.Forms.TextBox();
+            this.txt_Filter_Apellido = new System.Windows.Forms.TextBox();
+            this.txt_Filter_Mail = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txt_Filtro_Nombre = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -90,7 +90,7 @@
             this.button2.TabIndex = 5;
             this.button2.Text = "Eliminar cliente";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            this.button2.Click += new System.EventHandler(this.onBtnEliminar);
             // 
             // button1
             // 
@@ -100,18 +100,18 @@
             this.button1.TabIndex = 4;
             this.button1.Text = "Alta de clientes";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.button1.Click += new System.EventHandler(this.onBtnAlta);
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button4);
-            this.groupBox2.Controls.Add(this.textBox4);
-            this.groupBox2.Controls.Add(this.textBox3);
-            this.groupBox2.Controls.Add(this.textBox2);
+            this.groupBox2.Controls.Add(this.btn_Filtrar);
+            this.groupBox2.Controls.Add(this.txt_Filter_Documento);
+            this.groupBox2.Controls.Add(this.txt_Filter_Apellido);
+            this.groupBox2.Controls.Add(this.txt_Filter_Mail);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.comboBox2);
-            this.groupBox2.Controls.Add(this.textBox1);
+            this.groupBox2.Controls.Add(this.txt_Filtro_Nombre);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.label1);
@@ -122,26 +122,39 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Opciones de filtrado";
             // 
-            // textBox4
+            // btn_Filtrar
             // 
-            this.textBox4.Location = new System.Drawing.Point(368, 48);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(121, 20);
-            this.textBox4.TabIndex = 20;
+            this.btn_Filtrar.AccessibleDescription = "";
+            this.btn_Filtrar.AccessibleName = "";
+            this.btn_Filtrar.Location = new System.Drawing.Point(368, 73);
+            this.btn_Filtrar.Name = "btn_Filtrar";
+            this.btn_Filtrar.Size = new System.Drawing.Size(145, 23);
+            this.btn_Filtrar.TabIndex = 21;
+            this.btn_Filtrar.Tag = "0";
+            this.btn_Filtrar.Text = "Filtrar";
+            this.btn_Filtrar.UseVisualStyleBackColor = true;
+            this.btn_Filtrar.Click += new System.EventHandler(this.onBtnFiltrar);
             // 
-            // textBox3
+            // txt_Filter_Documento
             // 
-            this.textBox3.Location = new System.Drawing.Point(110, 44);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(121, 20);
-            this.textBox3.TabIndex = 19;
+            this.txt_Filter_Documento.Location = new System.Drawing.Point(368, 48);
+            this.txt_Filter_Documento.Name = "txt_Filter_Documento";
+            this.txt_Filter_Documento.Size = new System.Drawing.Size(145, 20);
+            this.txt_Filter_Documento.TabIndex = 20;
             // 
-            // textBox2
+            // txt_Filter_Apellido
             // 
-            this.textBox2.Location = new System.Drawing.Point(110, 67);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(121, 20);
-            this.textBox2.TabIndex = 18;
+            this.txt_Filter_Apellido.Location = new System.Drawing.Point(110, 44);
+            this.txt_Filter_Apellido.Name = "txt_Filter_Apellido";
+            this.txt_Filter_Apellido.Size = new System.Drawing.Size(121, 20);
+            this.txt_Filter_Apellido.TabIndex = 19;
+            // 
+            // txt_Filter_Mail
+            // 
+            this.txt_Filter_Mail.Location = new System.Drawing.Point(110, 67);
+            this.txt_Filter_Mail.Name = "txt_Filter_Mail";
+            this.txt_Filter_Mail.Size = new System.Drawing.Size(121, 20);
+            this.txt_Filter_Mail.TabIndex = 18;
             // 
             // label5
             // 
@@ -169,12 +182,12 @@
             this.comboBox2.Size = new System.Drawing.Size(145, 21);
             this.comboBox2.TabIndex = 14;
             // 
-            // textBox1
+            // txt_Filtro_Nombre
             // 
-            this.textBox1.Location = new System.Drawing.Point(110, 22);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(121, 20);
-            this.textBox1.TabIndex = 12;
+            this.txt_Filtro_Nombre.Location = new System.Drawing.Point(110, 22);
+            this.txt_Filtro_Nombre.Name = "txt_Filtro_Nombre";
+            this.txt_Filtro_Nombre.Size = new System.Drawing.Size(121, 20);
+            this.txt_Filtro_Nombre.TabIndex = 12;
             // 
             // label3
             // 
@@ -202,19 +215,6 @@
             this.label1.Size = new System.Drawing.Size(47, 13);
             this.label1.TabIndex = 9;
             this.label1.Text = "Nombre:";
-            // 
-            // button4
-            // 
-            this.button4.AccessibleDescription = "";
-            this.button4.AccessibleName = "";
-            this.button4.Location = new System.Drawing.Point(368, 70);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(121, 23);
-            this.button4.TabIndex = 21;
-            this.button4.Tag = "0";
-            this.button4.Text = "Filtrar";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // ABMCliente
             // 
@@ -245,16 +245,16 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txt_Filter_Mail;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txt_Filtro_Nombre;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.TextBox txt_Filter_Documento;
+        private System.Windows.Forms.TextBox txt_Filter_Apellido;
+        private System.Windows.Forms.Button btn_Filtrar;
     }
 }

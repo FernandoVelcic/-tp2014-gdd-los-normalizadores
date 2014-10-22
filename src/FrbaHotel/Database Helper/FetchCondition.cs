@@ -35,7 +35,7 @@ namespace FrbaHotel.Database_Helper
         public void setLike(string key, string value)
         {
             this.key = key;
-            this.value = "%" + value + "%";
+            this.value = "'%" + value + "%'";
             this.comparator = "LIKE";
         }
 

@@ -1,9 +1,11 @@
 ﻿using FrbaHotel.Database_Helper;
 using FrbaHotel.Models;
+using MyActiveRecord;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -24,15 +26,29 @@ namespace FrbaHotel.Views.ABM_de_Cliente
             documentos_binding.DataSource = EntityManager.getEntityManager().findAll<TipoDocumento>();
             comboBox2.DataSource = documentos_binding;
             comboBox2.DisplayMember = "descripcion";
+            Listar(new List<FetchCondition>());
 
-            var clientesBinding = new BindingList<Cliente>(EntityManager.getEntityManager().findAll<Cliente>());
-            dataGridView2.DataSource = new BindingSource(clientesBinding, null);
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void Listar(List<FetchCondition> conditions)
+        {
+            try
+            {
+                var clientesBinding = new BindingList<Cliente>(EntityManager.getEntityManager().findList<Cliente>(conditions));
+                dataGridView2.DataSource = new BindingSource(clientesBinding, null);
+            }
+            catch (SqlException e)
+            {
+                MessageBox.Show("Error en la query: " + Query.log.Last());
+            }
+            
+        }
+
+        private void onBtnAlta(object sender, EventArgs e)
         {
             new FrbaHotel.Views.ABM_de_Cliente.AltaModificacionCliente().Show();
         }
+
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -43,7 +59,8 @@ namespace FrbaHotel.Views.ABM_de_Cliente
             }
         }
 
-        private void button2_Click_1(object sender, EventArgs e)
+
+        private void onBtnEliminar(object sender, EventArgs e)
         {
             DialogResult dr = MessageBox.Show("¿Esta seguro que desea borrar este registro?", "Borrar registro", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
 
@@ -59,8 +76,28 @@ namespace FrbaHotel.Views.ABM_de_Cliente
             }
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void onBtnFiltrar(object sender, EventArgs e)
         {
+
+            List<FetchCondition> condiciones = new List<FetchCondition>();
+
+            FetchCondition condicionNombre = new FetchCondition();
+            condicionNombre.setLike("clientes.nombre", txt_Filtro_Nombre.Text);
+            condiciones.Add(condicionNombre);
+
+            FetchCondition condicionApellido = new FetchCondition();
+            condicionApellido.setLike("clientes.apellido", txt_Filter_Apellido.Text);
+            condiciones.Add(condicionApellido);
+
+            FetchCondition condicionMail = new FetchCondition();
+            condicionMail.setLike("clientes.mail", txt_Filter_Mail.Text);
+            condiciones.Add(condicionMail);
+
+            FetchCondition condicionIdentificacion = new FetchCondition();
+            condicionIdentificacion.setLike("clientes.documento_nro", txt_Filter_Documento.Text);
+            condiciones.Add(condicionIdentificacion);
+
+            Listar(condiciones);
 
         }
 
