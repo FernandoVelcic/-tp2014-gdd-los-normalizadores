@@ -33,13 +33,13 @@
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -80,8 +80,10 @@
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(12, 165);
+            this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(718, 293);
             this.dataGridView1.TabIndex = 11;
             // 
@@ -100,6 +102,45 @@
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Opciones de filtrado";
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(428, 67);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(113, 30);
+            this.button5.TabIndex = 7;
+            this.button5.Text = "Limpiar";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(428, 22);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(114, 32);
+            this.button4.TabIndex = 6;
+            this.button4.Text = "Filtrar";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(190, 67);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(72, 17);
+            this.checkBox2.TabIndex = 5;
+            this.checkBox2.Text = "No activo";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(104, 67);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(56, 17);
+            this.checkBox1.TabIndex = 4;
+            this.checkBox1.Text = "Activo";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
@@ -127,45 +168,6 @@
             this.label1.Size = new System.Drawing.Size(49, 16);
             this.label1.TabIndex = 1;
             this.label1.Text = "Nombre";
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(104, 67);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(56, 17);
-            this.checkBox1.TabIndex = 4;
-            this.checkBox1.Text = "Activo";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(190, 67);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(72, 17);
-            this.checkBox2.TabIndex = 5;
-            this.checkBox2.Text = "No activo";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(428, 22);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(114, 32);
-            this.button4.TabIndex = 6;
-            this.button4.Text = "Filtrar";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(428, 67);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(113, 30);
-            this.button5.TabIndex = 7;
-            this.button5.Text = "Limpiar";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // ABMRol
             // 
