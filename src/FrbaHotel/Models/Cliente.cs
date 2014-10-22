@@ -16,6 +16,7 @@ namespace FrbaHotel.Models
         public String nombre { get; set; }  //[nvarchar](255)
         public String fecha_nac { get; set; } //[datetime]
         public String mail { get; set; } //[nvarchar](255)
+        public String telefono { get; set; } //[nvarchar](255)
 
         /* ¿Normalizar? */
         public String dom_calle { get; set; } //[nvarchar](255)
@@ -23,6 +24,7 @@ namespace FrbaHotel.Models
         public String piso { get; set; } //[numeric](18, 0)
         public String depto { get; set; } //[nvarchar](50)
 
+        public String localidad { get; set; } //[nvarchar](255)
         public String nacionalidad { get; set; } //[nvarchar](255)
 
         //public TipoDocumento documento_tipo { get; set; }

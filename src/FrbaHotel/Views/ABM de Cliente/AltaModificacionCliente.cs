@@ -41,22 +41,29 @@ namespace FrbaHotel.Views.ABM_de_Cliente
             txt_Apellido.DataBindings.Add("Text", cliente, "apellido");
             txt_Mail.DataBindings.Add("Text", cliente, "mail");
             dateTimePicker1.DataBindings.Add("Text", cliente, "fecha_nac", true);
+            txt_Telefono.DataBindings.Add("Text", cliente, "telefono");
 
             txt_Calle.DataBindings.Add("Text", cliente, "dom_calle");
             textBox1.DataBindings.Add("Text", cliente, "nro_calle");
             textBox2.DataBindings.Add("Text", cliente, "piso");
             textBox3.DataBindings.Add("Text", cliente, "depto");
 
+            txt_Localidad.DataBindings.Add("Text", cliente, "localidad");
             txt_Pais.DataBindings.Add("Text", cliente, "nacionalidad");
 
-            //tipo y nro doc
-
-            //cliente.t = txt_Telefono.Text;
-            //cliente. = txt_Localidad.Text;
+            //textBox8.DataBindings.Add("Text", cliente, "documento_nro");
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //cliente.documento_tipo = comboBox3.SelectedValue as TipoDocumento;
+
+            List<Cliente> clientes = EntityManager.getEntityManager().findAllBy<Cliente>("mail", cliente.mail);
+            if (clientes.Count != 0)
+            {
+                MessageBox.Show("Email duplicado");
+                return;
+            }
 
             try
             {

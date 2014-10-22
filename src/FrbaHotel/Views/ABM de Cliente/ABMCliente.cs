@@ -20,11 +20,30 @@ namespace FrbaHotel.Views.ABM_de_Cliente
 
         private void ABMCliente_Load(object sender, EventArgs e)
         {
+            BindingSource documentos_binding = new BindingSource();
+            documentos_binding.DataSource = EntityManager.getEntityManager().findAll<TipoDocumento>();
+            comboBox2.DataSource = documentos_binding;
+            comboBox2.DisplayMember = "descripcion";
+
             var clientesBinding = new BindingList<Cliente>(EntityManager.getEntityManager().findAll<Cliente>());
             dataGridView2.DataSource = new BindingSource(clientesBinding, null);
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            new FrbaHotel.Views.ABM_de_Cliente.AltaModificacionCliente().Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in this.dataGridView2.SelectedRows)
+            {
+                Cliente cliente = row.DataBoundItem as Cliente;
+                new FrbaHotel.Views.ABM_de_Cliente.AltaModificacionCliente(cliente).Show();
+            }
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
         {
             DialogResult dr = MessageBox.Show("¿Esta seguro que desea borrar este registro?", "Borrar registro", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
 
@@ -38,11 +57,6 @@ namespace FrbaHotel.Views.ABM_de_Cliente
                     MessageBox.Show("Registro borrado correctamente");
                 }
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            new FrbaHotel.Views.ABM_de_Cliente.AltaModificacionCliente().Show();
         }
 
 
