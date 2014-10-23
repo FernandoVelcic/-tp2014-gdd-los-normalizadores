@@ -29,24 +29,6 @@ namespace FrbaHotel.Views.Login
             BindingSource roles_binding = new BindingSource();
             roles_binding.DataSource = EntityManager.getEntityManager().findAll<RolUsuario>();
             comboBox1.DataSource = roles_binding;
-            comboBox1.ValueMember = "";
-            comboBox1.DisplayMember = "rol.descripcion";
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            this.nextForm(new Home());
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (comboBox1.SelectedIndex == -1)
-            {
-                MessageBox.Show("Debe seleccionar un rol para poder ingresar.");
-                return;
-            }
-
-            this.nextForm(new Operaciones(comboBox1.SelectedValue as RolUsuario));
         }
 
         private void SeleccionRoles_Shown(object sender, EventArgs e)
@@ -63,6 +45,22 @@ namespace FrbaHotel.Views.Login
             {
                 this.nextForm(new Operaciones(roles[0]));
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.nextForm(new Home());
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedIndex == -1)
+            {
+                MessageBox.Show("Debe seleccionar un rol para poder ingresar.");
+                return;
+            }
+
+            this.nextForm(new Operaciones(comboBox1.SelectedValue as RolUsuario));
         }
     }
 }

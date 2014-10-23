@@ -14,5 +14,10 @@ namespace FrbaHotel.Models
         //public int id { get; set; } //INTEGER IDENTITY PRIMARY KEY
         public Usuario usuario { get; set; }
         public Rol rol { get; set; }
+
+        public override string ToString()
+        {
+            return rol.descripcion;
+        }
     }
 }
