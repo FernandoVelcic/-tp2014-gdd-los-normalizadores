@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using FrbaHotel.Database_Helper;
+using FrbaHotel.Models.Exceptions;
+
 namespace FrbaHotel.Models
 {
     public class Cliente : ActiveRecord
@@ -30,5 +33,14 @@ namespace FrbaHotel.Models
 
         public TipoDocumento documento_tipo { get; set; }
         public long documento_nro { get; set; } //[numeric](18, 0)
+
+        public override void preInsert()
+        {
+            List<Cliente> clientes = EntityManager.getEntityManager().findAllBy<Cliente>("mail", mail);
+            if (clientes.Count != 0)
+            {
+                throw new ValidationException("Email duplicado");
+            }
+        }
     }
 }

@@ -61,16 +61,6 @@ namespace FrbaHotel.Views.ABM_de_Cliente
         {
             cliente.documento_tipo = comboBox3.SelectedValue as TipoDocumento;
 
-            if (esAlta)
-            {
-                List<Cliente> clientes = EntityManager.getEntityManager().findAllBy<Cliente>("mail", cliente.mail);
-                if (clientes.Count != 0)
-                {
-                    MessageBox.Show("Email duplicado");
-                    return;
-                }
-            }
-
             try
             {
                 cliente.save();
