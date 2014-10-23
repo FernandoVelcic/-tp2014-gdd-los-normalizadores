@@ -16,10 +16,12 @@ namespace FrbaHotel.Views.ABM_de_Cliente
 {
     public partial class AltaModificacionCliente : Form
     {
+        private bool esAlta = false;
         private Cliente cliente;
 
         public AltaModificacionCliente() : this(new Cliente())
         {
+            esAlta = true;
             cliente.fecha_nac = DateTime.Today.ToString();
         }
 
@@ -35,6 +37,8 @@ namespace FrbaHotel.Views.ABM_de_Cliente
             BindingSource documentos_binding = new BindingSource();
             documentos_binding.DataSource = EntityManager.getEntityManager().findAll<TipoDocumento>();
             comboBox3.DataSource = documentos_binding;
+            if(!esAlta)
+                comboBox3.Text = cliente.documento_tipo.descripcion;
 
             txt_Nombre.DataBindings.Add("Text", cliente, "nombre");
             txt_Apellido.DataBindings.Add("Text", cliente, "apellido");
@@ -50,7 +54,6 @@ namespace FrbaHotel.Views.ABM_de_Cliente
             txt_Localidad.DataBindings.Add("Text", cliente, "localidad");
             txt_Pais.DataBindings.Add("Text", cliente, "nacionalidad");
 
-            comboBox3.DataBindings.Add("SelectedItem", cliente, "documento_tipo", true);
             textBox8.DataBindings.Add("Text", cliente, "documento_nro");
         }
 
@@ -58,11 +61,14 @@ namespace FrbaHotel.Views.ABM_de_Cliente
         {
             cliente.documento_tipo = comboBox3.SelectedValue as TipoDocumento;
 
-            List<Cliente> clientes = EntityManager.getEntityManager().findAllBy<Cliente>("mail", cliente.mail);
-            if (clientes.Count != 0)
+            if (esAlta)
             {
-                MessageBox.Show("Email duplicado");
-                return;
+                List<Cliente> clientes = EntityManager.getEntityManager().findAllBy<Cliente>("mail", cliente.mail);
+                if (clientes.Count != 0)
+                {
+                    MessageBox.Show("Email duplicado");
+                    return;
+                }
             }
 
             try
