@@ -35,7 +35,6 @@ namespace FrbaHotel.Views.ABM_de_Cliente
             BindingSource documentos_binding = new BindingSource();
             documentos_binding.DataSource = EntityManager.getEntityManager().findAll<TipoDocumento>();
             comboBox3.DataSource = documentos_binding;
-            comboBox3.DisplayMember = "descripcion";
 
             txt_Nombre.DataBindings.Add("Text", cliente, "nombre");
             txt_Apellido.DataBindings.Add("Text", cliente, "apellido");
@@ -51,12 +50,13 @@ namespace FrbaHotel.Views.ABM_de_Cliente
             txt_Localidad.DataBindings.Add("Text", cliente, "localidad");
             txt_Pais.DataBindings.Add("Text", cliente, "nacionalidad");
 
-            //textBox8.DataBindings.Add("Text", cliente, "documento_nro");
+            comboBox3.DataBindings.Add("SelectedItem", cliente, "documento_tipo", true);
+            textBox8.DataBindings.Add("Text", cliente, "documento_nro");
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //cliente.documento_tipo = comboBox3.SelectedValue as TipoDocumento;
+            cliente.documento_tipo = comboBox3.SelectedValue as TipoDocumento;
 
             List<Cliente> clientes = EntityManager.getEntityManager().findAllBy<Cliente>("mail", cliente.mail);
             if (clientes.Count != 0)

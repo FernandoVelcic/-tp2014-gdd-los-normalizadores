@@ -11,7 +11,6 @@ namespace FrbaHotel.Models
         public override String table { get { return "clientes"; } }
 
         //public int id { get; set; } //INTEGER IDENTITY PRIMARY KEY
-        public int pasaporte_nro { get; set; }  //[numeric](18, 0)
         public String apellido { get; set; } //[nvarchar](255)
         public String nombre { get; set; }  //[nvarchar](255)
         public String fecha_nac { get; set; } //[datetime]
@@ -29,7 +28,7 @@ namespace FrbaHotel.Models
 
         public Boolean estado { get; set; } //[bit]
 
-        //public TipoDocumento documento_tipo { get; set; }
-        //public long documento_nro { get; set; } //[bigint]
+        public TipoDocumento documento_tipo { get; set; }
+        public long documento_nro { get; set; } //[numeric](18, 0)
     }
 }

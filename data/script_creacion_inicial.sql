@@ -140,7 +140,6 @@ CREATE TABLE [LOS_NORMALIZADORES].[reservas](
 
 CREATE TABLE [LOS_NORMALIZADORES].[clientes](
 	[id] INTEGER IDENTITY PRIMARY KEY,
-	[pasaporte_nro] [numeric](18, 0),
 	[apellido] [nvarchar](255),
 	[nombre] [nvarchar](255),
 	[fecha_nac] [datetime],
@@ -151,8 +150,8 @@ CREATE TABLE [LOS_NORMALIZADORES].[clientes](
 	[depto] [nvarchar](50),
 	[localidad] [nvarchar](255),
 	[nacionalidad] [nvarchar](255),
-	[documento_tipo_id] INTEGER NULL,
-	[documento_nro] [bigint] NULL,
+	[documento_tipo_id] INTEGER NOT NULL,
+	[documento_nro] [numeric](18, 0) NOT NULL,
 	[telefono] [nvarchar](255) NULL,
 	[estado] [bit] default 1
 ) ON [PRIMARY]
@@ -386,8 +385,8 @@ GO
 
 /* Clientes */
 
-INSERT INTO [LOS_NORMALIZADORES].[clientes] ([pasaporte_nro], [apellido], [nombre], [fecha_nac], [mail], [dom_calle], [nro_calle], [piso], [depto], [nacionalidad])	
-	SELECT DISTINCT [Cliente_Pasaporte_Nro], [Cliente_Apellido], [Cliente_Nombre], [Cliente_Fecha_Nac], [Cliente_Mail], [Cliente_Dom_Calle], [Cliente_Nro_Calle], [Cliente_Piso], [Cliente_Depto], [Cliente_Nacionalidad]  FROM [LOS_NORMALIZADORES].[Maestra]
+INSERT INTO [LOS_NORMALIZADORES].[clientes] ([documento_nro], [apellido], [nombre], [fecha_nac], [mail], [dom_calle], [nro_calle], [piso], [depto], [nacionalidad], [documento_tipo_id])	
+	SELECT DISTINCT [Cliente_Pasaporte_Nro], [Cliente_Apellido], [Cliente_Nombre], [Cliente_Fecha_Nac], [Cliente_Mail], [Cliente_Dom_Calle], [Cliente_Nro_Calle], [Cliente_Piso], [Cliente_Depto], [Cliente_Nacionalidad], 4  FROM [LOS_NORMALIZADORES].[Maestra]
 	WHERE [Cliente_Pasaporte_Nro] IS NOT NULL 
 	AND   [Cliente_Apellido] IS NOT NULL
 	AND   [Cliente_Nombre] IS NOT NULL
@@ -407,7 +406,7 @@ UPDATE [LOS_NORMALIZADORES].[Maestra]
 SET cliente_id = 
 	(
 		SELECT id FROM [LOS_NORMALIZADORES].[clientes] as c
-		WHERE [LOS_NORMALIZADORES].[Maestra].Cliente_Pasaporte_Nro = c.pasaporte_nro
+		WHERE [LOS_NORMALIZADORES].[Maestra].Cliente_Pasaporte_Nro = c.documento_nro
 		AND   [LOS_NORMALIZADORES].[Maestra].Cliente_Apellido = c.apellido
 		AND   [LOS_NORMALIZADORES].[Maestra].Cliente_Nombre = c.nombre
 		AND   [LOS_NORMALIZADORES].[Maestra].Cliente_Fecha_Nac = c.fecha_nac
@@ -559,7 +558,7 @@ CREATE TABLE [LOS_NORMALIZADORES].[usuarios](
 	[telefono] [nvarchar](255) NOT NULL,
 	[hotel_id] INTEGER,
 	[documento_tipo_id] INTEGER NOT NULL,
-	[documento_nro] [bigint] NOT NULL
+	[documento_nro] [numeric](18, 0) NOT NULL
  CONSTRAINT [PK_usuarios] PRIMARY KEY CLUSTERED 
 
 ([id] ASC)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]) ON [PRIMARY]
@@ -580,6 +579,7 @@ CREATE TABLE [LOS_NORMALIZADORES].[documento_tipos](
 INSERT INTO [LOS_NORMALIZADORES].[documento_tipos] (descripcion) VALUES ('DNI - Documento Nacional de Identidad')
 INSERT INTO [LOS_NORMALIZADORES].[documento_tipos] (descripcion) VALUES ('LC - Libreta Civica')
 INSERT INTO [LOS_NORMALIZADORES].[documento_tipos] (descripcion) VALUES ('LE - Libreta de Enrolamiento')
+INSERT INTO [LOS_NORMALIZADORES].[documento_tipos] (descripcion) VALUES ('Pasaporte')
 
 /* Agregando roles */
 INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[roles]

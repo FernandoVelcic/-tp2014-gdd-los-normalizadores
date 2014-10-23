@@ -19,7 +19,7 @@ namespace FrbaHotel.Models
         public String apellido { get; set; } //[nvarchar](255)
 
         public TipoDocumento documento_tipo { get; set; }
-        public long documento_nro { get; set; } //[bigint]
+        public long documento_nro { get; set; } //[numeric](18, 0)
 
         public String mail { get; set; } //[nvarchar](255)
         public String telefono { get; set; } //[nvarchar](255)
