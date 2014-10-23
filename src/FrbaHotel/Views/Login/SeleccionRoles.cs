@@ -16,39 +16,26 @@ namespace FrbaHotel.Views.Login
     public partial class SeleccionRoles : Form
     {
         private Usuario user;
+        private List<RolUsuario> roles;
 
         public SeleccionRoles(Usuario user)
         {
-            this.user = user;
             InitializeComponent();
+            this.user = user;
         }
 
         private void SeleccionRoles_Load(object sender, EventArgs e)
         {
-            List<RolUsuario> roles = EntityManager.getEntityManager().findAllBy<RolUsuario>("user_id", user.id.ToString());
-
-            if (roles.Count == 0)
-            {
-                MessageBox.Show("Este usuario no posee roles", "Salir", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                //TODO: Ir a home y cerrar
-                return;
-            }
-            
-            if (roles.Count == 1)
-            {
-                this.Hide();
-                new FrbaHotel.Operaciones().Show();
-            }
-
             BindingSource roles_binding = new BindingSource();
             roles_binding.DataSource = EntityManager.getEntityManager().findAll<RolUsuario>();
             comboBox1.DataSource = roles_binding;
-            //comboBox1.DisplayMember = "descripcion";
+            comboBox1.ValueMember = "";
+            comboBox1.DisplayMember = "rol.descripcion";
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            new Home().Show();
+            this.nextForm(new Home());
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -58,7 +45,24 @@ namespace FrbaHotel.Views.Login
                 MessageBox.Show("Debe seleccionar un rol para poder ingresar.");
                 return;
             }
-            new Operaciones().Show();
+
+            this.nextForm(new Operaciones(comboBox1.SelectedValue as RolUsuario));
+        }
+
+        private void SeleccionRoles_Shown(object sender, EventArgs e)
+        {
+            roles = EntityManager.getEntityManager().findAllBy<RolUsuario>("usuario_id", user.id.ToString());
+
+            if (roles.Count == 0)
+            {
+                MessageBox.Show("Este usuario no posee roles", "Salir", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                this.nextForm(new Home());
+            }
+
+            if (roles.Count == 1)
+            {
+                this.nextForm(new Operaciones(roles[0]));
+            }
         }
     }
 }

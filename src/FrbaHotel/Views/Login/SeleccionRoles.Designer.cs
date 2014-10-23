@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,31 +51,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Roles";
             // 
-            // label1
+            // button2
             // 
-            this.label1.Location = new System.Drawing.Point(6, 16);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(428, 31);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Su cuenta posee mas de un tipo de rol, por favor seleccione el rol con el que des" +
-                "ea ingresar.";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(181, 68);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 1;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 71);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(169, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Deseo ingresar con el siguiente rol";
+            this.button2.Location = new System.Drawing.Point(9, 108);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(157, 49);
+            this.button2.TabIndex = 4;
+            this.button2.Text = "Volver a la pantalla principal";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
@@ -87,15 +71,31 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
+            // label2
             // 
-            this.button2.Location = new System.Drawing.Point(9, 108);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(157, 49);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Volver a la pantalla principal";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 71);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(169, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Deseo ingresar con el siguiente rol";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(181, 68);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(6, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(428, 31);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Su cuenta posee mas de un tipo de rol, por favor seleccione el rol con el que des" +
+                "ea ingresar.";
             // 
             // SeleccionRoles
             // 
@@ -106,6 +106,7 @@
             this.Name = "SeleccionRoles";
             this.Text = "SeleccionRoles";
             this.Load += new System.EventHandler(this.SeleccionRoles_Load);
+            this.Shown += new System.EventHandler(this.SeleccionRoles_Shown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

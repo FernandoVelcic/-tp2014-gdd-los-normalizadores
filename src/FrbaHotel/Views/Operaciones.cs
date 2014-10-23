@@ -8,10 +8,28 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using FrbaHotel.Database_Helper;
+
 namespace FrbaHotel
 {
     public partial class Operaciones : Form
     {
+        public Operaciones(RolUsuario rolUsuario) : this()
+        {
+            Rol permisos = rolUsuario.rol;
+            button1.Visible = permisos.ABM_Cliente;
+            button2.Visible = permisos.ABM_Habitación;
+            button3.Visible = permisos.ABM_Regimen;
+            button4.Visible = permisos.ABM_Rol;
+            button5.Visible = permisos.Cancelar_Reserva;
+            button6.Visible = permisos.Generar_Reserva;
+            button7.Visible = permisos.Listado_Estadístico;
+            //button8.Visible = permisos.Login;
+            button9.Visible = permisos.Registrar_Consumible;
+            button10.Visible = permisos.Registrar_Estadía;
+            button11.Visible = permisos.ABM_Usuario;
+        }
+
         public Operaciones()
         {
             InitializeComponent();
@@ -44,7 +62,7 @@ namespace FrbaHotel
 
         private void button6_Click(object sender, EventArgs e)
         {
-            this.nextForm(new FrbaHotel.Generar_Modificar_Reserva.Form1(new Reserva()));
+            this.nextForm(new FrbaHotel.Generar_Modificar_Reserva.Form1());
         }
 
         private void button7_Click(object sender, EventArgs e)

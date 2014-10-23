@@ -15,15 +15,18 @@ namespace FrbaHotel.Generar_Modificar_Reserva
 {
     public partial class Form1 : Form
     {
-
         Reserva reserva;
+
+        public Form1() : this(new Reserva())
+        {
+
+        }
+
 
         public Form1(Reserva reserva)
         {
             InitializeComponent();
             this.reserva = reserva;
-            
-
         }
 
         private void setUpComboBoxes()

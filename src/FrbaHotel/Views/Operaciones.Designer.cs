@@ -151,7 +151,7 @@
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
-            // Form2
+            // Operaciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -167,8 +167,8 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Name = "Form2";
-            this.Text = "Form2";
+            this.Name = "Operaciones";
+            this.Text = "Operaciones";
             this.ResumeLayout(false);
 
         }

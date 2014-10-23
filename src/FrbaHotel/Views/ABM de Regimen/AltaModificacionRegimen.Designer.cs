@@ -1,6 +1,6 @@
 ﻿namespace FrbaHotel.ABM_de_Regimen
 {
-    partial class Form1
+    partial class AltaModificacionRegimen
     {
         /// <summary>
         /// Required designer variable.
