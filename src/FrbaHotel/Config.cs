@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
+using System.Xml;
 
 namespace FrbaHotel
 {
@@ -25,16 +27,40 @@ namespace FrbaHotel
         public String database { get; set; }
         public String schema { get; set; }
 
+        private DateTime currentDate;
+
         private Config()
         {
-            server = "WIN-J1WNSO7Z940\\SQLSERVER2008";
-            username = "gd";
-            password = "gd2014";
-            database = "LOS_NORMALIZADORES";
-            schema = "LOS_NORMALIZADORES";
+            parseConfig();
+        }
+
+        private void parseConfig()
+        {
+
+            XmlDocument doc = new XmlDocument(); // Create an XML document object
+            doc.Load("../../../../persistence.xml"); // Load the XML document from the specified file
+
+            XmlNodeList nodes = doc.DocumentElement.GetElementsByTagName("properties");
+
+            foreach (XmlNode node in nodes)
+            {
+                server = node.SelectSingleNode("server").InnerText;
+                username = node.SelectSingleNode("username").InnerText;
+                password = node.SelectSingleNode("password").InnerText;
+                database = node.SelectSingleNode("database").InnerText;
+                schema = node.SelectSingleNode("schema").InnerText;
+            }
+
+            currentDate = DateTime.Parse(doc.DocumentElement.GetElementsByTagName("time")[0].SelectSingleNode("current-time").InnerText);
+
         }
 
         //[DllImport("kernel32")]
         //private static extern int GetPrivateProfileString(string Section, string Key, string Default, StringBuilder RetVal, int Size, string FilePath);
+
+        internal DateTime getCurrentDate()
+        {
+            return currentDate;
+        }
     }
 }

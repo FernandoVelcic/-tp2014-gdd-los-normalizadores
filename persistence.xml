@@ -1,0 +1,16 @@
+<FrbaConfig version="0.1">
+	<persistence-unit>
+		<provider>org.orm.norma</provider>
+		<class>FrbaHotel.Models.*</class>
+		<properties>
+			<server>WIN-J1WNSO7Z940\SQLSERVER2008</server>
+			<username>gd</username>
+			<password>gd2014</password>
+			<database>LOS_NORMALIZADORES</database>
+			<schema>LOS_NORMALIZADORES</schema>
+		</properties>
+	</persistence-unit>
+	<time>
+		<current-time>2014-02-15 15:05:45</current-time>
+	</time>
+</FrbaConfig>
