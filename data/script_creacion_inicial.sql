@@ -75,11 +75,6 @@ GO
 SET ANSI_PADDING OFF
 GO
 
-
-INSERT INTO [LOS_NORMALIZADORES].[Maestra] SELECT TOP 1000 * FROM [GD2C2014].[gd_esquema].[Maestra]
-GO
-  	
-
 CREATE TABLE [LOS_NORMALIZADORES].[hoteles](
 	[id] INTEGER IDENTITY PRIMARY KEY,
 	[ciudad] [nvarchar](255),
@@ -243,6 +238,9 @@ GO
 
 
 
+INSERT INTO [LOS_NORMALIZADORES].[Maestra] SELECT TOP 50000 * FROM [GD2C2014].[gd_esquema].[Maestra]
+GO
+  	
 
 /* Migracion de hoteles */
 
@@ -270,11 +268,10 @@ SET hotel_id =
 	)
 GO
 
-
+CREATE INDEX Maestra_hotel_id ON [LOS_NORMALIZADORES].[Maestra] (hotel_id)
 
 
 /* Migracion de habitaciones */
-
 
 INSERT [LOS_NORMALIZADORES].[habitaciones_tipos] (codigo, descripcion, porcentual)
 SELECT DISTINCT Habitacion_Tipo_Codigo, Habitacion_Tipo_Descripcion, Habitacion_Tipo_Porcentual  
@@ -321,7 +318,7 @@ SET habitacion_id =
 	)
 GO
 
-
+ CREATE INDEX Maestra_habitacion_id ON [LOS_NORMALIZADORES].[Maestra] (habitacion_id)
 
 
 /* Migracion de regimenes */
@@ -336,6 +333,7 @@ ALTER TABLE [LOS_NORMALIZADORES].[Maestra] ADD regimen_id INTEGER
 GO
 
 
+
 UPDATE [LOS_NORMALIZADORES].[Maestra]
 SET regimen_id = 
 	(
@@ -345,11 +343,13 @@ SET regimen_id =
 	)
 GO
 
+CREATE INDEX Maestra_regimen_id ON [LOS_NORMALIZADORES].[Maestra] (regimen_id)
+
 
 /* Relacion entre regimenes y hoteles */
 INSERT INTO [LOS_NORMALIZADORES].[hoteles_regimenes] (hotel_id, regimen_id)
 
-	SELECT hotel_id, regimen_id FROM  [LOS_NORMALIZADORES].[Maestra]
+	SELECT DISTINCT hotel_id, regimen_id FROM  [LOS_NORMALIZADORES].[Maestra]
 	WHERE hotel_id is NOT NULL
 		AND regimen_id IS NOT NULL
 
@@ -402,6 +402,9 @@ GO
 ALTER TABLE [LOS_NORMALIZADORES].[Maestra] ADD cliente_id INTEGER
 GO
 
+CREATE INDEX Clientes_Pasaporte_Nro_id ON [LOS_NORMALIZADORES].[clientes] (documento_nro)
+CREATE INDEX Maestra_Cliente_Pasaporte_Nro_id ON [LOS_NORMALIZADORES].[Maestra] (Cliente_Pasaporte_Nro)
+
 UPDATE [LOS_NORMALIZADORES].[Maestra]
 SET cliente_id = 
 	(
@@ -419,7 +422,8 @@ SET cliente_id =
 	)
 GO
 
-
+DROP INDEX Clientes_Pasaporte_Nro_id ON [LOS_NORMALIZADORES].[clientes]
+CREATE INDEX Maestra_cliente_id ON [LOS_NORMALIZADORES].[Maestra] (cliente_id)
 
 /* Estadias */
 
@@ -460,6 +464,9 @@ GO
 ALTER TABLE [LOS_NORMALIZADORES].[Maestra] ADD consumible_id INTEGER
 GO
 
+CREATE INDEX Consumibles_codigo ON [LOS_NORMALIZADORES].[consumibles] (codigo)
+CREATE INDEX Maestra_Consumiblse_codigo ON [LOS_NORMALIZADORES].[Maestra] (Consumible_Codigo)
+
 UPDATE [LOS_NORMALIZADORES].[Maestra]
 SET consumible_id = 
 	(
@@ -470,10 +477,12 @@ SET consumible_id =
 	)
 GO
 
+DROP INDEX  Consumibles_codigo ON [LOS_NORMALIZADORES].[consumibles]
+
 /* Relacion entre consumibles y estadia */
 
 INSERT INTO [LOS_NORMALIZADORES].[consumibles_estadias] (consumible_id, estadia_id)
-	SELECT consumible_id, estadia_id FROM  [LOS_NORMALIZADORES].[Maestra]
+	SELECT DISTINCT consumible_id, estadia_id FROM  [LOS_NORMALIZADORES].[Maestra]
 	WHERE consumible_id is NOT NULL
 	AND   estadia_id IS NOT NULL
 GO
