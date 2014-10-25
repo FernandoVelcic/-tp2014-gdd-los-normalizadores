@@ -68,10 +68,12 @@ namespace FrbaHotel.Views.ABM_de_Cliente
             catch (ValidationException exception)
             {
                 MessageBox.Show(exception.Message);
+                return;
             }
             catch (SqlException exception)
             {
                 MessageBox.Show(exception.Message);
+                return;
             }
 
             MessageBox.Show("El cliente se guardo correctamente");

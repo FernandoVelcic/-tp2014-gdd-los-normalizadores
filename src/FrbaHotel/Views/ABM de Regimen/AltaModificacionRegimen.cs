@@ -44,10 +44,12 @@ namespace FrbaHotel.ABM_de_Regimen
             catch (ValidationException exception)
             {
                 MessageBox.Show(exception.Message);
+                return;
             }
             catch (SqlException exception)
             {
                 MessageBox.Show(exception.Message);
+                return;
             }
             MessageBox.Show("El regimen se guardo correctamente");
             this.nextForm(new FrbaHotel.Views.ABM_de_Rol.ABMRol());

@@ -89,10 +89,12 @@ namespace FrbaHotel.ABM_de_Usuario
             catch (ValidationException exception)
             {
                 MessageBox.Show(exception.Message);
+                return;
             }
             catch (SqlException exception)
             {
                 MessageBox.Show(exception.Message);
+                return;
             }
 
             MessageBox.Show("Usuario creado correctamente!");

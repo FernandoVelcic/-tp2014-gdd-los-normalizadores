@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 
 using MyActiveRecord;
+using FrbaHotel.Database_Helper;
+using FrbaHotel.Models.Exceptions;
 
 namespace FrbaHotel.Models
 {
@@ -25,6 +27,14 @@ namespace FrbaHotel.Models
             return hotel.ToString() + " - " + numero.ToString() ;
         }
 
+        public override void preInsert()
+        {
+            List<Habitacion> habitaciones = EntityManager.getEntityManager().findAllBy<Habitacion>("numero", numero.ToString());
+            if (habitaciones.Count != 0)
+            {
+                throw new ValidationException("Numero de habitacion duplicado");
+            }
+        }
 
     }
 }

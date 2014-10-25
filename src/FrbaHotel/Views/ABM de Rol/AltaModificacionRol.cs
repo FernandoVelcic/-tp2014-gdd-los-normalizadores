@@ -50,10 +50,12 @@ namespace FrbaHotel.ABM_de_Rol
             catch (ValidationException exception)
             {
                 MessageBox.Show(exception.Message);
+                return;
             }
             catch (SqlException exception)
             {
                 MessageBox.Show(exception.Message);
+                return;
             }
 
             MessageBox.Show("Rol creado correctamente!");
