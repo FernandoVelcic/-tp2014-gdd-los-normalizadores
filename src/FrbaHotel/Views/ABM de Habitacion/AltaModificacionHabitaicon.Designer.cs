@@ -1,6 +1,6 @@
 ﻿namespace FrbaHotel.ABM_de_Habitacion
 {
-    partial class Form1
+    partial class AltaModificacionHabitacion
     {
         /// <summary>
         /// Required designer variable.

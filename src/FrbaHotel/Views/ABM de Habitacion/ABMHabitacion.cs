@@ -49,39 +49,17 @@ namespace FrbaHotel.Views.ABM_de_Habitacion
 
         private void onBtnModificar(object sender, EventArgs e)
         {
-            DialogResult dr = MessageBox.Show("¿Esta seguro que desea modificar este registro?", "Modificar registro", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-
-            if (dr == DialogResult.Yes)
-            {
-                foreach (DataGridViewRow row in this.dataGridView1.SelectedRows)
-                {
-                    Habitacion regimen = row.DataBoundItem as Habitacion;
-                    //modificar
-                    //dataGridView1.Rows.RemoveAt(row.Index);
-                    MessageBox.Show("Registro modificado correctamente");
-                }
-            } 
+            this.editRecord<Habitacion, FrbaHotel.ABM_de_Habitacion.AltaModificacionHabitacion>(dataGridView1);
         }
 
         private void onBtnAlta(object sender, EventArgs e)
         {
-            new FrbaHotel.ABM_de_Habitacion.Form1(new Habitacion()).Show();
+            this.nextForm(new FrbaHotel.ABM_de_Habitacion.AltaModificacionHabitacion());
         }
 
         private void onBtnEliminar(object sender, EventArgs e)
         {
-            DialogResult dr = MessageBox.Show("¿Esta seguro que desea borrar este registro?", "Borrar registro", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-
-            if (dr == DialogResult.Yes)
-            {
-                foreach (DataGridViewRow row in this.dataGridView1.SelectedRows)
-                {
-                    Habitacion habitacion = row.DataBoundItem as Habitacion;
-                    habitacion.logicalDelete();
-                    //dataGridView1.Rows.RemoveAt(row.Index);
-                    MessageBox.Show("Registro borrado correctamente");
-                }
-            }
+            this.deleteRecord(dataGridView1);
         }
 
 

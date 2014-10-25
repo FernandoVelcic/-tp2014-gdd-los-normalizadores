@@ -8,22 +8,32 @@ using System.Text;
 using System.Windows.Forms;
 using FrbaHotel.Models;
 using FrbaHotel.Database_Helper;
-
-
+using FrbaHotel.Views.ABM_de_Rol;
 
 namespace FrbaHotel.ABM_de_Rol
 {
-    public partial class Form1 : Form
+    public partial class AltaModificacionRol : Form
     {
-        public Form1()
+        private Rol rol;
+
+        public AltaModificacionRol() : this(new Rol())
         {
+            
+        }
+
+        public AltaModificacionRol(Rol rol)
+        {
+            this.rol = rol;
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Rol rol = new Rol();
-            
             rol.descripcion=textBox1.Text;
             if (radioButton1.Checked) rol.estado = true;
             if (radioButton2.Checked) rol.estado = false;
@@ -31,7 +41,7 @@ namespace FrbaHotel.ABM_de_Rol
             CheckedListBox.CheckedItemCollection listaSeleccionados = checkedListBox1.CheckedItems;
             try
             {
-                rol.insert();
+                rol.save();
             }
             catch (Exception ex)
             {
@@ -40,21 +50,12 @@ namespace FrbaHotel.ABM_de_Rol
             }
 
             MessageBox.Show("Rol creado correctamente!");
-            this.Close();
+            this.nextForm(new ABMRol());
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.nextForm(new ABMRol());
         }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-             
-
-       
     }
 }

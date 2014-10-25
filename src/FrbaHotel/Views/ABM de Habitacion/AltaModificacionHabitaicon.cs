@@ -16,14 +16,19 @@ using System.Data.SqlClient;
 
 namespace FrbaHotel.ABM_de_Habitacion
 {
-    public partial class Form1 : Form
+    public partial class AltaModificacionHabitacion : Form
     {
 
         private List<Hotel> hoteles;
         private List<TipoHabitacion> tipoHabitaciones;
         private Habitacion habitacion;
 
-        public Form1(Habitacion habitacion)
+        public AltaModificacionHabitacion() : this(new Habitacion())
+        {
+
+        }
+
+        public AltaModificacionHabitacion(Habitacion habitacion)
         {
             InitializeComponent();
             cmb_Frente.Items.Add("Si");
@@ -55,7 +60,7 @@ namespace FrbaHotel.ABM_de_Habitacion
             try
             {
                 bindFromForm();
-                habitacion.insert();
+                habitacion.save();
             }
             catch (ValidationException ex)
             {
@@ -69,8 +74,7 @@ namespace FrbaHotel.ABM_de_Habitacion
             }
 
             MessageBox.Show("Habitacion creada correctamente!");
-            this.Close();
-
+            this.nextForm(new FrbaHotel.Views.ABM_de_Habitacion.ABMHabitacion());
         }
 
 
@@ -111,7 +115,7 @@ namespace FrbaHotel.ABM_de_Habitacion
 
         private void onVolver(object sender, EventArgs e)
         {
-            this.Close();
+            this.nextForm(new FrbaHotel.Views.ABM_de_Habitacion.ABMHabitacion());
         }
 
 

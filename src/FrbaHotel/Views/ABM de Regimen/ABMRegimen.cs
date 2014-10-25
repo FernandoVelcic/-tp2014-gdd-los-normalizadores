@@ -26,32 +26,17 @@ namespace FrbaHotel.Views.ABM_de_Regimen
 
         private void button1_Click(object sender, EventArgs e)
         {
-            new FrbaHotel.ABM_de_Regimen.AltaModificacionRegimen().Show();
+            this.nextForm(new FrbaHotel.ABM_de_Regimen.AltaModificacionRegimen());
         }
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in this.dataGridView1.SelectedRows)
-            {
-                Regimen regimen = row.DataBoundItem as Regimen;
-                new FrbaHotel.ABM_de_Regimen.AltaModificacionRegimen(regimen).Show();
-            }
+            this.editRecord<Regimen, FrbaHotel.ABM_de_Regimen.AltaModificacionRegimen>(dataGridView1);
         }
         
         private void button3_Click_1(object sender, EventArgs e)
         {
-            DialogResult dr = MessageBox.Show("¿Esta seguro que desea borrar este registro?", "Borrar registro", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-            
-            if (dr == DialogResult.Yes)
-            {
-                foreach (DataGridViewRow row in this.dataGridView1.SelectedRows)
-                {
-                    Regimen regimen = row.DataBoundItem as Regimen;
-                    regimen.logicalDelete();
-                    //dataGridView1.Rows.RemoveAt(row.Index);
-                    MessageBox.Show("Registro borrado correctamente");
-                }
-            }
+            this.deleteRecord(dataGridView1);
         }
 
     }

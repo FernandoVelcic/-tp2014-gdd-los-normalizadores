@@ -64,8 +64,6 @@ namespace FrbaHotel.Views.ABM_de_Cliente
             try
             {
                 cliente.save();
-                MessageBox.Show("El cliente se guardo correctamente");
-                this.Close();
             }
             catch (ValidationException exception)
             {
@@ -76,11 +74,13 @@ namespace FrbaHotel.Views.ABM_de_Cliente
                 MessageBox.Show(exception.Message);
             }
 
+            MessageBox.Show("El cliente se guardo correctamente");
+            this.nextForm(new FrbaHotel.Views.ABM_de_Cliente.ABMCliente());
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            this.Close();
+            this.nextForm(new FrbaHotel.Views.ABM_de_Cliente.ABMCliente());
         }
 
     }

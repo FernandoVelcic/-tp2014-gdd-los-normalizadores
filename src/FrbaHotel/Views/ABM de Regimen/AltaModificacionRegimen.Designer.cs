@@ -34,12 +34,12 @@
             this.radio_Activo = new System.Windows.Forms.RadioButton();
             this.txt_PrecioBase = new System.Windows.Forms.TextBox();
             this.txt_Descripcion = new System.Windows.Forms.TextBox();
+            this.txt_Codigo = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.bnt_Confirmar = new System.Windows.Forms.Button();
             this.btn_Volver = new System.Windows.Forms.Button();
-            this.txt_Codigo = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -107,6 +107,13 @@
             this.txt_Descripcion.Size = new System.Drawing.Size(100, 20);
             this.txt_Descripcion.TabIndex = 5;
             // 
+            // txt_Codigo
+            // 
+            this.txt_Codigo.Location = new System.Drawing.Point(226, 43);
+            this.txt_Codigo.Name = "txt_Codigo";
+            this.txt_Codigo.Size = new System.Drawing.Size(100, 20);
+            this.txt_Codigo.TabIndex = 4;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -124,6 +131,15 @@
             this.label2.Size = new System.Drawing.Size(66, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Descripción:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(83, 43);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(43, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Codigo:";
             // 
             // bnt_Confirmar
             // 
@@ -144,24 +160,9 @@
             this.btn_Volver.Text = "Volver";
             this.btn_Volver.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btn_Volver.UseVisualStyleBackColor = true;
+            this.btn_Volver.Click += new System.EventHandler(this.btn_Volver_Click);
             // 
-            // txt_Codigo
-            // 
-            this.txt_Codigo.Location = new System.Drawing.Point(226, 43);
-            this.txt_Codigo.Name = "txt_Codigo";
-            this.txt_Codigo.Size = new System.Drawing.Size(100, 20);
-            this.txt_Codigo.TabIndex = 4;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(83, 43);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Codigo:";
-            // 
-            // Form1
+            // AltaModificacionRegimen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -170,7 +171,7 @@
             this.Controls.Add(this.btn_Volver);
             this.Controls.Add(this.bnt_Confirmar);
             this.Controls.Add(this.groupBox1);
-            this.Name = "Form1";
+            this.Name = "AltaModificacionRegimen";
             this.Text = "ABM de Regimen";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);

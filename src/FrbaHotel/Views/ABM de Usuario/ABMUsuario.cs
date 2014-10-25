@@ -27,33 +27,17 @@ namespace FrbaHotel.ABM_de_Usuario
 
         private void button1_Click(object sender, EventArgs e)
         {
-            new FrbaHotel.ABM_de_Usuario.AltaModificaiconUsuario().Show();
+            this.nextForm(new FrbaHotel.ABM_de_Usuario.AltaModificaiconUsuario());
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            DialogResult dr = MessageBox.Show("¿Esta seguro que desea borrar este registro?", "Borrar registro", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-
-            if (dr == DialogResult.Yes)
-            {
-                foreach (DataGridViewRow row in this.dataGridView1.SelectedRows)
-                {
-                    Usuario user = row.DataBoundItem as Usuario;
-                    user.logicalDelete();
-                    //dataGridView1.Rows.RemoveAt(row.Index);
-                    MessageBox.Show("Registro borrado correctamente");
-                }
-            }
-
+            this.deleteRecord(dataGridView1);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in this.dataGridView1.SelectedRows)
-            {
-                Usuario user = row.DataBoundItem as Usuario;
-                new AltaModificaiconUsuario(user).Show();
-            }
+            this.editRecord<Usuario, FrbaHotel.ABM_de_Usuario.AltaModificaiconUsuario>(dataGridView1);
         }
     }
 }

@@ -46,34 +46,19 @@ namespace FrbaHotel.Views.ABM_de_Cliente
 
         private void onBtnAlta(object sender, EventArgs e)
         {
-            new FrbaHotel.Views.ABM_de_Cliente.AltaModificacionCliente().Show();
+            this.nextForm(new FrbaHotel.Views.ABM_de_Cliente.AltaModificacionCliente());
         }
 
 
         private void button3_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in this.dataGridView2.SelectedRows)
-            {
-                Cliente cliente = row.DataBoundItem as Cliente;
-                new FrbaHotel.Views.ABM_de_Cliente.AltaModificacionCliente(cliente).Show();
-            }
+            this.editRecord<Cliente, AltaModificacionCliente>(dataGridView2);
         }
 
 
         private void onBtnEliminar(object sender, EventArgs e)
         {
-            DialogResult dr = MessageBox.Show("¿Esta seguro que desea borrar este registro?", "Borrar registro", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-
-            if (dr == DialogResult.Yes)
-            {
-                foreach (DataGridViewRow row in this.dataGridView2.SelectedRows)
-                {
-                    Cliente cliente = row.DataBoundItem as Cliente;
-                    cliente.logicalDelete();
-                    //dataGridView1.Rows.RemoveAt(row.Index);
-                    MessageBox.Show("Registro borrado correctamente");
-                }
-            }
+            this.deleteRecord(dataGridView2);
         }
 
         private void onBtnFiltrar(object sender, EventArgs e)

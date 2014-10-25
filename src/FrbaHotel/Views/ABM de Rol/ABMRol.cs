@@ -26,39 +26,17 @@ namespace FrbaHotel.Views.ABM_de_Rol
 
         private void button1_Click(object sender, EventArgs e)
         {
-            new FrbaHotel.ABM_de_Rol.Form1().Show();
+            this.nextForm(new FrbaHotel.ABM_de_Rol.AltaModificacionRol());
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            DialogResult dr = MessageBox.Show("¿Esta seguro que desea modificar este registro?", "Modificar registro", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-
-            if (dr == DialogResult.Yes)
-            {
-                foreach (DataGridViewRow row in this.dataGridView1.SelectedRows)
-                {
-                    Rol rol = row.DataBoundItem as Rol;
-                    //modificar
-                    //dataGridView1.Rows.RemoveAt(row.Index);
-                    MessageBox.Show("Registro modificado correctamente");
-                }
-            } 
+            this.editRecord<Rol, FrbaHotel.ABM_de_Rol.AltaModificacionRol>(dataGridView1);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            DialogResult dr = MessageBox.Show("¿Esta seguro que desea borrar este registro?", "Borrar registro", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-
-            if (dr == DialogResult.Yes)
-            {
-                foreach (DataGridViewRow row in this.dataGridView1.SelectedRows)
-                {
-                    Rol rol = row.DataBoundItem as Rol;
-                    rol.logicalDelete();
-                    //dataGridView1.Rows.RemoveAt(row.Index);
-                    MessageBox.Show("Registro borrado correctamente");
-                }
-            }
+            this.deleteRecord(dataGridView1);
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -68,6 +46,11 @@ namespace FrbaHotel.Views.ABM_de_Rol
             checkBox2.Checked = false;
             var rolesBinding = new BindingList<Rol>(EntityManager.getEntityManager().findAll<Rol>());
             dataGridView1.DataSource = new BindingSource(rolesBinding, null);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
         }
                
     }

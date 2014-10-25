@@ -90,15 +90,12 @@ namespace FrbaHotel.ABM_de_Usuario
             }
 
             MessageBox.Show("Usuario creado correctamente!");
-            this.Close();
+            this.nextForm(new ABMUsuario());
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.nextForm(new ABMUsuario());
         }
-
-
-       
     }
 }

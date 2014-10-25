@@ -16,8 +16,7 @@ namespace FrbaHotel.ABM_de_Regimen
     {
         private Regimen regimen;
 
-        public AltaModificacionRegimen()
-            : this(new Regimen())
+        public AltaModificacionRegimen() : this(new Regimen())
         {
 
         }
@@ -41,8 +40,6 @@ namespace FrbaHotel.ABM_de_Regimen
             try
             {
                 regimen.save();
-                MessageBox.Show("El regimen se guardo correctamente");
-                this.Close();
             }
             catch (ValidationException exception)
             {
@@ -52,6 +49,13 @@ namespace FrbaHotel.ABM_de_Regimen
             {
                 MessageBox.Show(exception.Message);
             }
+            MessageBox.Show("El regimen se guardo correctamente");
+            this.nextForm(new FrbaHotel.Views.ABM_de_Rol.ABMRol());
+        }
+
+        private void btn_Volver_Click(object sender, EventArgs e)
+        {
+            this.nextForm(new FrbaHotel.Views.ABM_de_Rol.ABMRol());
         }
     }
 }
