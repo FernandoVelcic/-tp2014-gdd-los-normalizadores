@@ -7,9 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Data.SqlClient;
+
 using FrbaHotel.Tools;
 using FrbaHotel.Models;
 using FrbaHotel.Database_Helper;
+using FrbaHotel.Models.Exceptions;
 
 namespace FrbaHotel.ABM_de_Usuario
 {
@@ -83,10 +86,13 @@ namespace FrbaHotel.ABM_de_Usuario
                     rolUsuario.insert();
                 }
             }
-            catch (Exception ex)
+            catch (ValidationException exception)
             {
-                MessageBox.Show("Faltan llenar campos!\r\n" + ex.Message);
-                return;
+                MessageBox.Show(exception.Message);
+            }
+            catch (SqlException exception)
+            {
+                MessageBox.Show(exception.Message);
             }
 
             MessageBox.Show("Usuario creado correctamente!");

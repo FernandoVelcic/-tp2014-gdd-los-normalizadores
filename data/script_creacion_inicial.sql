@@ -92,6 +92,7 @@ CREATE TABLE [LOS_NORMALIZADORES].[habitaciones](
 	[piso] [numeric](18, 0),
 	[frente] [nvarchar](50),
 	[tipo_id] INTEGER,
+	[estado] [bit] NOT NULL
 ) ON [PRIMARY]
 
 
@@ -238,7 +239,7 @@ GO
 
 
 
-INSERT INTO [LOS_NORMALIZADORES].[Maestra] SELECT TOP 50000 * FROM [GD2C2014].[gd_esquema].[Maestra]
+INSERT INTO [LOS_NORMALIZADORES].[Maestra] SELECT TOP 1000 * FROM [GD2C2014].[gd_esquema].[Maestra]
 GO
   	
 
@@ -295,8 +296,8 @@ GO
 
 
 
-INSERT [LOS_NORMALIZADORES].[habitaciones] (hotel_id, numero, piso, frente, tipo_id)
-SELECT DISTINCT hotel_id, Habitacion_Numero, Habitacion_Piso, Habitacion_Frente, habitacion_tipo_id 
+INSERT [LOS_NORMALIZADORES].[habitaciones] (hotel_id, numero, piso, frente, tipo_id, estado)
+SELECT DISTINCT hotel_id, Habitacion_Numero, Habitacion_Piso, Habitacion_Frente, habitacion_tipo_id, 1 
 FROM [LOS_NORMALIZADORES].[Maestra] 
 WHERE Habitacion_Numero IS NOT NULL 
 AND Habitacion_Piso IS NOT NULL

@@ -60,9 +60,13 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.radio_Inactivo = new System.Windows.Forms.RadioButton();
+            this.radio_Activo = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // txt_Apellido
@@ -227,6 +231,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.groupBox4);
             this.groupBox2.Controls.Add(this.groupBox3);
             this.groupBox2.Controls.Add(this.dateTimePicker1);
             this.groupBox2.Controls.Add(this.label3);
@@ -244,7 +249,7 @@
             this.groupBox2.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(389, 406);
+            this.groupBox2.Size = new System.Drawing.Size(389, 471);
             this.groupBox2.TabIndex = 34;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Cliente:";
@@ -260,7 +265,7 @@
             // 
             // btn_Confirmar
             // 
-            this.btn_Confirmar.Location = new System.Drawing.Point(281, 424);
+            this.btn_Confirmar.Location = new System.Drawing.Point(282, 489);
             this.btn_Confirmar.Name = "btn_Confirmar";
             this.btn_Confirmar.Size = new System.Drawing.Size(119, 46);
             this.btn_Confirmar.TabIndex = 36;
@@ -270,7 +275,7 @@
             // 
             // btn_Volver
             // 
-            this.btn_Volver.Location = new System.Drawing.Point(12, 424);
+            this.btn_Volver.Location = new System.Drawing.Point(12, 489);
             this.btn_Volver.Name = "btn_Volver";
             this.btn_Volver.Size = new System.Drawing.Size(119, 46);
             this.btn_Volver.TabIndex = 37;
@@ -377,12 +382,45 @@
             this.label14.TabIndex = 39;
             this.label14.Text = "Departamento:";
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.radio_Inactivo);
+            this.groupBox4.Controls.Add(this.radio_Activo);
+            this.groupBox4.Location = new System.Drawing.Point(9, 391);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(323, 66);
+            this.groupBox4.TabIndex = 36;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Estado:";
+            // 
+            // radio_Inactivo
+            // 
+            this.radio_Inactivo.AutoSize = true;
+            this.radio_Inactivo.Location = new System.Drawing.Point(191, 33);
+            this.radio_Inactivo.Name = "radio_Inactivo";
+            this.radio_Inactivo.Size = new System.Drawing.Size(80, 20);
+            this.radio_Inactivo.TabIndex = 8;
+            this.radio_Inactivo.TabStop = true;
+            this.radio_Inactivo.Text = "No Activo";
+            this.radio_Inactivo.UseVisualStyleBackColor = true;
+            // 
+            // radio_Activo
+            // 
+            this.radio_Activo.AutoSize = true;
+            this.radio_Activo.Location = new System.Drawing.Point(66, 33);
+            this.radio_Activo.Name = "radio_Activo";
+            this.radio_Activo.Size = new System.Drawing.Size(61, 20);
+            this.radio_Activo.TabIndex = 7;
+            this.radio_Activo.TabStop = true;
+            this.radio_Activo.Text = "Activo";
+            this.radio_Activo.UseVisualStyleBackColor = true;
+            // 
             // AltaModificacionCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ClientSize = new System.Drawing.Size(414, 482);
+            this.ClientSize = new System.Drawing.Size(414, 547);
             this.Controls.Add(this.btn_Volver);
             this.Controls.Add(this.btn_Confirmar);
             this.Controls.Add(this.groupBox2);
@@ -395,6 +433,8 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -433,5 +473,8 @@
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.RadioButton radio_Inactivo;
+        private System.Windows.Forms.RadioButton radio_Activo;
     }
 }

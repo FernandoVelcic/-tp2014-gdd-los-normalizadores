@@ -18,6 +18,7 @@ namespace FrbaHotel.Models
         public int piso { get; set; } //[numeric](18, 0)
         public String frente { get; set; } //[nvarchar](50)
         public TipoHabitacion tipo { get; set; }
+        public Boolean estado { get; set; } //[bit]
 
         public override string ToString()
         {

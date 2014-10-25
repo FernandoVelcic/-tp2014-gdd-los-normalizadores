@@ -41,11 +41,16 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btn_Confirmar = new System.Windows.Forms.Button();
             this.btn_Volver = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.radio_Inactivo = new System.Windows.Forms.RadioButton();
+            this.radio_Activo = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.cmb_Frente);
             this.groupBox1.Controls.Add(this.txt_Piso);
             this.groupBox1.Controls.Add(this.cmb_TipoHabitacion);
@@ -58,7 +63,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(429, 234);
+            this.groupBox1.Size = new System.Drawing.Size(429, 266);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos de la habitación";
@@ -81,7 +86,7 @@
             // cmb_TipoHabitacion
             // 
             this.cmb_TipoHabitacion.FormattingEnabled = true;
-            this.cmb_TipoHabitacion.Location = new System.Drawing.Point(166, 156);
+            this.cmb_TipoHabitacion.Location = new System.Drawing.Point(166, 153);
             this.cmb_TipoHabitacion.Name = "cmb_TipoHabitacion";
             this.cmb_TipoHabitacion.Size = new System.Drawing.Size(121, 21);
             this.cmb_TipoHabitacion.TabIndex = 9;
@@ -148,7 +153,7 @@
             // 
             // btn_Confirmar
             // 
-            this.btn_Confirmar.Location = new System.Drawing.Point(287, 252);
+            this.btn_Confirmar.Location = new System.Drawing.Point(297, 284);
             this.btn_Confirmar.Name = "btn_Confirmar";
             this.btn_Confirmar.Size = new System.Drawing.Size(144, 45);
             this.btn_Confirmar.TabIndex = 1;
@@ -158,7 +163,7 @@
             // 
             // btn_Volver
             // 
-            this.btn_Volver.Location = new System.Drawing.Point(23, 252);
+            this.btn_Volver.Location = new System.Drawing.Point(12, 285);
             this.btn_Volver.Name = "btn_Volver";
             this.btn_Volver.Size = new System.Drawing.Size(156, 44);
             this.btn_Volver.TabIndex = 2;
@@ -166,20 +171,55 @@
             this.btn_Volver.UseVisualStyleBackColor = true;
             this.btn_Volver.Click += new System.EventHandler(this.onVolver);
             // 
-            // Form1
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.radio_Inactivo);
+            this.groupBox2.Controls.Add(this.radio_Activo);
+            this.groupBox2.Location = new System.Drawing.Point(39, 180);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(323, 66);
+            this.groupBox2.TabIndex = 14;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Estado:";
+            // 
+            // radio_Inactivo
+            // 
+            this.radio_Inactivo.AutoSize = true;
+            this.radio_Inactivo.Location = new System.Drawing.Point(191, 33);
+            this.radio_Inactivo.Name = "radio_Inactivo";
+            this.radio_Inactivo.Size = new System.Drawing.Size(72, 17);
+            this.radio_Inactivo.TabIndex = 8;
+            this.radio_Inactivo.TabStop = true;
+            this.radio_Inactivo.Text = "No Activo";
+            this.radio_Inactivo.UseVisualStyleBackColor = true;
+            // 
+            // radio_Activo
+            // 
+            this.radio_Activo.AutoSize = true;
+            this.radio_Activo.Location = new System.Drawing.Point(66, 33);
+            this.radio_Activo.Name = "radio_Activo";
+            this.radio_Activo.Size = new System.Drawing.Size(55, 17);
+            this.radio_Activo.TabIndex = 7;
+            this.radio_Activo.TabStop = true;
+            this.radio_Activo.Text = "Activo";
+            this.radio_Activo.UseVisualStyleBackColor = true;
+            // 
+            // AltaModificacionHabitacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ClientSize = new System.Drawing.Size(455, 319);
+            this.ClientSize = new System.Drawing.Size(455, 341);
             this.Controls.Add(this.btn_Volver);
             this.Controls.Add(this.btn_Confirmar);
             this.Controls.Add(this.groupBox1);
-            this.Name = "Form1";
+            this.Name = "AltaModificacionHabitacion";
             this.Text = "ABM de Habitacion";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -199,5 +239,8 @@
         private System.Windows.Forms.Button btn_Volver;
         private System.Windows.Forms.ComboBox cmb_Frente;
         private System.Windows.Forms.TextBox txt_Piso;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.RadioButton radio_Inactivo;
+        private System.Windows.Forms.RadioButton radio_Activo;
     }
 }

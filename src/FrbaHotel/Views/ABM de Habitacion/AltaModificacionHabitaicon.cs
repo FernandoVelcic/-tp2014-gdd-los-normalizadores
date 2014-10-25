@@ -62,15 +62,13 @@ namespace FrbaHotel.ABM_de_Habitacion
                 bindFromForm();
                 habitacion.save();
             }
-            catch (ValidationException ex)
+            catch (ValidationException exception)
             {
-                MessageBox.Show("Faltan llenar campos!\r\n" + ex.Message);
-                return;
+                MessageBox.Show(exception.Message);
             }
-            catch (SqlException ex)
+            catch (SqlException exception)
             {
-                MessageBox.Show(ex.Message + "\r\n"  + Query.log.Last());
-                return;
+                MessageBox.Show(exception.Message);
             }
 
             MessageBox.Show("Habitacion creada correctamente!");

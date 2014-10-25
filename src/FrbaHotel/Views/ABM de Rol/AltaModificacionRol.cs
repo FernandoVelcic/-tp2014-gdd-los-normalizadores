@@ -6,9 +6,13 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
+using System.Data.SqlClient;
+
 using FrbaHotel.Models;
 using FrbaHotel.Database_Helper;
 using FrbaHotel.Views.ABM_de_Rol;
+using FrbaHotel.Models.Exceptions;
 
 namespace FrbaHotel.ABM_de_Rol
 {
@@ -43,10 +47,13 @@ namespace FrbaHotel.ABM_de_Rol
             {
                 rol.save();
             }
-            catch (Exception ex)
+            catch (ValidationException exception)
             {
-                MessageBox.Show("Faltan llenar campos!\r\n" + ex.Message);
-                return;
+                MessageBox.Show(exception.Message);
+            }
+            catch (SqlException exception)
+            {
+                MessageBox.Show(exception.Message);
             }
 
             MessageBox.Show("Rol creado correctamente!");
