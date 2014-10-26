@@ -79,6 +79,18 @@
     <Compile Include="Views\ABM de Habitacion\AltaModificacionHabitaicon.Designer.cs">
       <DependentUpon>AltaModificacionHabitaicon.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\ABM de Hotel\ABMHotel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ABM de Hotel\ABMHotel.Designer.cs">
+      <DependentUpon>ABMHotel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ABM de Hotel\AltaHotel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ABM de Hotel\AltaHotel.Designer.cs">
+      <DependentUpon>AltaHotel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\ABM de Regimen\ABMRegimen.cs">
       <SubType>Form</SubType>
     </Compile>

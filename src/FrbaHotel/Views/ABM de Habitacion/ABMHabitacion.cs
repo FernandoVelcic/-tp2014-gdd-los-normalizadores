@@ -86,6 +86,17 @@ namespace FrbaHotel.Views.ABM_de_Habitacion
             Listar(condiciones);
         }
 
+        private void button4_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = "";
+            textBox2.Text = "";
+            comboBox2.SelectedIndex = -1;
+            cmb_Hoteles.SelectedIndex = -1;
+            cmb_TipoHabitacion.SelectedIndex = -1;
+            dataGridView1.Rows.Clear();
+            //Data binding (cargar en el data todos los registros)
+        }
+
 
           
     }

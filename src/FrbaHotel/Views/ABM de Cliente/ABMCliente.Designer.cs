@@ -45,6 +45,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -104,6 +105,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.button4);
             this.groupBox2.Controls.Add(this.btn_Filtrar);
             this.groupBox2.Controls.Add(this.txt_Filter_Documento);
             this.groupBox2.Controls.Add(this.txt_Filter_Apellido);
@@ -126,9 +128,9 @@
             // 
             this.btn_Filtrar.AccessibleDescription = "";
             this.btn_Filtrar.AccessibleName = "";
-            this.btn_Filtrar.Location = new System.Drawing.Point(368, 73);
+            this.btn_Filtrar.Location = new System.Drawing.Point(258, 73);
             this.btn_Filtrar.Name = "btn_Filtrar";
-            this.btn_Filtrar.Size = new System.Drawing.Size(145, 23);
+            this.btn_Filtrar.Size = new System.Drawing.Size(120, 23);
             this.btn_Filtrar.TabIndex = 21;
             this.btn_Filtrar.Tag = "0";
             this.btn_Filtrar.Text = "Filtrar";
@@ -216,6 +218,19 @@
             this.label1.TabIndex = 9;
             this.label1.Text = "Nombre:";
             // 
+            // button4
+            // 
+            this.button4.AccessibleDescription = "";
+            this.button4.AccessibleName = "";
+            this.button4.Location = new System.Drawing.Point(384, 72);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(127, 23);
+            this.button4.TabIndex = 22;
+            this.button4.Tag = "0";
+            this.button4.Text = "Limpiar";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // ABMCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -256,5 +271,6 @@
         private System.Windows.Forms.TextBox txt_Filter_Documento;
         private System.Windows.Forms.TextBox txt_Filter_Apellido;
         private System.Windows.Forms.Button btn_Filtrar;
+        private System.Windows.Forms.Button button4;
     }
 }

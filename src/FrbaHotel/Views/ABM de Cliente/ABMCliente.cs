@@ -92,6 +92,17 @@ namespace FrbaHotel.Views.ABM_de_Cliente
 
         }
 
+        private void button4_Click(object sender, EventArgs e)
+        {
+            txt_Filtro_Nombre.Text = "";
+            txt_Filter_Mail.Text = "";
+            txt_Filter_Documento.Text = "";
+            txt_Filter_Apellido.Text = "";
+            comboBox2.SelectedIndex = -1;
+            dataGridView2.Rows.Clear();
+            //Data binding (cargar en el data todos los registros)
+        }
+
 
 
     }

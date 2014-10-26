@@ -39,5 +39,10 @@ namespace FrbaHotel.ABM_de_Usuario
         {
             this.editRecord<Usuario, FrbaHotel.ABM_de_Usuario.AltaModificaiconUsuario>(dataGridView1);
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //limpieza
+        }
     }
 }

@@ -39,5 +39,15 @@ namespace FrbaHotel.Views.ABM_de_Regimen
             this.deleteRecord(dataGridView1);
         }
 
+        private void button5_Click(object sender, EventArgs e)
+        {
+            textBox1.Text= "";
+            textBox3.Text = "";
+            radioButton1.Checked = false;
+            radioButton2.Checked = false;
+            dataGridView1.Rows.Clear();
+            //Data binding (cargar en el data todos los registros)
+        }
+
     }
 }

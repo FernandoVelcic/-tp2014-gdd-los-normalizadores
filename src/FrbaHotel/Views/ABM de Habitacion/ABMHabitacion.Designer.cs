@@ -44,6 +44,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -91,6 +92,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button4);
             this.groupBox1.Controls.Add(this.btn_Filtrar);
             this.groupBox1.Controls.Add(this.textBox2);
             this.groupBox1.Controls.Add(this.cmb_TipoHabitacion);
@@ -111,7 +113,7 @@
             // 
             // btn_Filtrar
             // 
-            this.btn_Filtrar.Location = new System.Drawing.Point(420, 83);
+            this.btn_Filtrar.Location = new System.Drawing.Point(93, 112);
             this.btn_Filtrar.Name = "btn_Filtrar";
             this.btn_Filtrar.Size = new System.Drawing.Size(121, 27);
             this.btn_Filtrar.TabIndex = 10;
@@ -202,6 +204,16 @@
             this.label1.TabIndex = 9;
             this.label1.Text = "Numero Habitación:";
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(332, 112);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(121, 27);
+            this.button4.TabIndex = 11;
+            this.button4.Text = "Limpiar";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // ABMHabitacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -240,5 +252,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btn_Filtrar;
+        private System.Windows.Forms.Button button4;
     }
 }
