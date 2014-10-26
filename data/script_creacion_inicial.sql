@@ -92,7 +92,8 @@ CREATE TABLE [LOS_NORMALIZADORES].[habitaciones](
 	[piso] [numeric](18, 0),
 	[frente] [nvarchar](50),
 	[tipo_id] INTEGER,
-	[estado] [bit] NOT NULL
+	[estado] [bit] NOT NULL,
+	[descripcion] [nvarchar](255) NOT NULL
 ) ON [PRIMARY]
 
 
@@ -296,8 +297,8 @@ GO
 
 
 
-INSERT [LOS_NORMALIZADORES].[habitaciones] (hotel_id, numero, piso, frente, tipo_id, estado)
-SELECT DISTINCT hotel_id, Habitacion_Numero, Habitacion_Piso, Habitacion_Frente, habitacion_tipo_id, 1 
+INSERT [LOS_NORMALIZADORES].[habitaciones] (hotel_id, numero, piso, frente, tipo_id, estado, descripcion)
+SELECT DISTINCT hotel_id, Habitacion_Numero, Habitacion_Piso, Habitacion_Frente, habitacion_tipo_id, 1, '' 
 FROM [LOS_NORMALIZADORES].[Maestra] 
 WHERE Habitacion_Numero IS NOT NULL 
 AND Habitacion_Piso IS NOT NULL

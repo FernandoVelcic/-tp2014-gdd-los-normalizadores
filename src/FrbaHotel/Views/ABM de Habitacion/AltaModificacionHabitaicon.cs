@@ -18,48 +18,53 @@ namespace FrbaHotel.ABM_de_Habitacion
 {
     public partial class AltaModificacionHabitacion : Form
     {
-
-        private List<Hotel> hoteles;
-        private List<TipoHabitacion> tipoHabitaciones;
+        private bool esAlta = false;
         private Habitacion habitacion;
 
         public AltaModificacionHabitacion() : this(new Habitacion())
         {
-
+            esAlta = true;
+            habitacion.estado = true;
         }
 
         public AltaModificacionHabitacion(Habitacion habitacion)
         {
             InitializeComponent();
-            cmb_Frente.Items.Add("Si");
-            cmb_Frente.Items.Add("No");
             this.habitacion = habitacion;
         }
 
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            hoteles = EntityManager.getEntityManager().findAll<Hotel>();
-            foreach (Hotel hotel in hoteles)
-            {
-                cmb_Hotel.Items.Add(hotel.calle);
-            }
+            BindingSource hoteles_binding = new BindingSource();
+            hoteles_binding.DataSource = EntityManager.getEntityManager().findAll<Hotel>();
+            cmb_Hotel.DataSource = hoteles_binding;
 
-            tipoHabitaciones = EntityManager.getEntityManager().findAll<TipoHabitacion>();
-            foreach (TipoHabitacion tipo in tipoHabitaciones)
-            {
-                cmb_TipoHabitacion.Items.Add(tipo.descripcion);
-            }
+            BindingSource habitacionesTipo_binding = new BindingSource();
+            habitacionesTipo_binding.DataSource = EntityManager.getEntityManager().findAll<TipoHabitacion>();
+            cmb_TipoHabitacion.DataSource = habitacionesTipo_binding;
 
+            txt_NroHabitacion.DataBindings.Add("Text", habitacion, "numero");
+            txt_Piso.DataBindings.Add("Text", habitacion, "piso");
+            cmb_Frente.DataBindings.Add("Text", habitacion, "frente");
+            comboBox1.DataBindings.Add("SelectedIndex", habitacion, "estado");
+            textBox1.DataBindings.Add("Text", habitacion, "descripcion");
+
+            if (!esAlta)
+            {
+                cmb_Hotel.Text = habitacion.hotel.ToString();
+                cmb_TipoHabitacion.Text = habitacion.tipo.ToString();
+            }
         }
         
 
         private void onGuardar(object sender, EventArgs e)
         {
+            habitacion.hotel = cmb_Hotel.SelectedValue as Hotel;
+            habitacion.tipo = cmb_TipoHabitacion.SelectedValue as TipoHabitacion;
 
             try
             {
-                bindFromForm();
                 habitacion.save();
             }
             catch (ValidationException exception)
@@ -73,57 +78,18 @@ namespace FrbaHotel.ABM_de_Habitacion
                 return;
             }
 
-            MessageBox.Show("Habitacion creada correctamente!");
+            if(esAlta)
+                MessageBox.Show("Habitacion creada correctamente!");
+            else
+                MessageBox.Show("Habitacion modificada correctamente!");
+
             this.nextForm(new FrbaHotel.Views.ABM_de_Habitacion.ABMHabitacion());
         }
-
-
-        private void bindFromForm()
-        {
-
-            //TODO matchear bien esto
-            habitacion.numero = Convert.ToInt32(txt_NroHabitacion.Text);
-            habitacion.piso = Convert.ToInt32(txt_Piso.Text);
-
-            foreach (Hotel hotel in hoteles)
-            {
-                if (cmb_Hotel.Text == hotel.calle)
-                {
-                    habitacion.hotel = hotel;
-                }
-            }
-
-            foreach (TipoHabitacion tipo in tipoHabitaciones)
-            {
-                if (cmb_TipoHabitacion.Text == tipo.descripcion)
-                {
-                    habitacion.tipo = tipo;
-                }
-            }
-
-
-            if (habitacion.tipo == null)
-            {
-                throw new ValidationException("Complete el campo tipo");
-            }
-
-            habitacion.frente = cmb_Frente.Text == "Si" ? "S" : "N";
-
-        }
-
-
 
         private void onVolver(object sender, EventArgs e)
         {
             this.nextForm(new FrbaHotel.Views.ABM_de_Habitacion.ABMHabitacion());
         }
-
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
       
     }
 }

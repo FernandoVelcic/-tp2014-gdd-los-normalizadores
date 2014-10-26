@@ -22,8 +22,8 @@ namespace FrbaHotel.Models
 
         /* ¿Normalizar? */
         public String dom_calle { get; set; } //[nvarchar](255)
-        public String nro_calle { get; set; } //[numeric](18, 0)
-        public String piso { get; set; } //[numeric](18, 0)
+        public int nro_calle { get; set; } //[numeric](18, 0)
+        public int piso { get; set; } //[numeric](18, 0)
         public String depto { get; set; } //[nvarchar](50)
 
         public String localidad { get; set; } //[nvarchar](255)

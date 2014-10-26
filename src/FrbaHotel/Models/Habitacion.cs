@@ -21,6 +21,7 @@ namespace FrbaHotel.Models
         public String frente { get; set; } //[nvarchar](50)
         public TipoHabitacion tipo { get; set; }
         public Boolean estado { get; set; } //[bit]
+        public String descripcion { get; set; } //[nvarchar](255)
 
         public override string ToString()
         {
@@ -36,5 +37,12 @@ namespace FrbaHotel.Models
             }
         }
 
+        public override void preSave()
+        {
+            if (descripcion.Length >= 255)
+            {
+                throw new ValidationException("El maximo de caracteres en la descripcion es de 255");
+            }
+        }
     }
 }

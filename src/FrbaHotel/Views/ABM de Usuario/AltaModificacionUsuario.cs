@@ -18,10 +18,12 @@ namespace FrbaHotel.ABM_de_Usuario
 {
     public partial class AltaModificaiconUsuario : Form
     {
+        private bool esAlta = false;
         private Usuario usuario;
 
         public AltaModificaiconUsuario() : this(new Usuario())
         {
+            esAlta = true;
             usuario.intentos_fallidos = 0;
             usuario.estado = true;
             usuario.fecha_nac = DateTime.Today.ToString();
@@ -98,7 +100,11 @@ namespace FrbaHotel.ABM_de_Usuario
                 return;
             }
 
-            MessageBox.Show("Usuario creado correctamente!");
+            if(esAlta)
+                MessageBox.Show("Usuario creado correctamente!");
+            else
+                MessageBox.Show("Usuario modificado correctamente!");
+
             this.nextForm(new ABMUsuario());
         }
 

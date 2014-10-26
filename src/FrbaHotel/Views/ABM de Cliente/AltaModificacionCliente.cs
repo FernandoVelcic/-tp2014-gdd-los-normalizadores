@@ -78,7 +78,11 @@ namespace FrbaHotel.Views.ABM_de_Cliente
                 return;
             }
 
-            MessageBox.Show("El cliente se guardo correctamente");
+            if(esAlta)
+                MessageBox.Show("Cliente creado correctamente!");
+            else
+                MessageBox.Show("Cliente modificado correctamente!");
+
             this.nextForm(new FrbaHotel.Views.ABM_de_Cliente.ABMCliente());
         }
 
