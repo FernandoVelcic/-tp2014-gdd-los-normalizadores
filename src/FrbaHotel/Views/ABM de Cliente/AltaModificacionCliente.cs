@@ -23,6 +23,7 @@ namespace FrbaHotel.Views.ABM_de_Cliente
         {
             esAlta = true;
             cliente.fecha_nac = DateTime.Today.ToString();
+            cliente.estado = true;
         }
 
         public AltaModificacionCliente(Cliente cliente)
@@ -55,6 +56,7 @@ namespace FrbaHotel.Views.ABM_de_Cliente
             txt_Pais.DataBindings.Add("Text", cliente, "nacionalidad");
 
             textBox8.DataBindings.Add("Text", cliente, "documento_nro");
+            comboBox1.DataBindings.Add("SelectedIndex", cliente, "estado");
         }
 
         private void button1_Click(object sender, EventArgs e)

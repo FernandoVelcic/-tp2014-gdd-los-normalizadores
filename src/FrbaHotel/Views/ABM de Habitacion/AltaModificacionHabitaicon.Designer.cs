@@ -41,16 +41,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btn_Confirmar = new System.Windows.Forms.Button();
             this.btn_Volver = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.radio_Inactivo = new System.Windows.Forms.RadioButton();
-            this.radio_Activo = new System.Windows.Forms.RadioButton();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.groupBox2);
+            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.cmb_Frente);
             this.groupBox1.Controls.Add(this.txt_Piso);
             this.groupBox1.Controls.Add(this.cmb_TipoHabitacion);
@@ -63,7 +62,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(429, 266);
+            this.groupBox1.Size = new System.Drawing.Size(320, 217);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos de la habitación";
@@ -153,7 +152,7 @@
             // 
             // btn_Confirmar
             // 
-            this.btn_Confirmar.Location = new System.Drawing.Point(297, 284);
+            this.btn_Confirmar.Location = new System.Drawing.Point(188, 235);
             this.btn_Confirmar.Name = "btn_Confirmar";
             this.btn_Confirmar.Size = new System.Drawing.Size(144, 45);
             this.btn_Confirmar.TabIndex = 1;
@@ -163,7 +162,7 @@
             // 
             // btn_Volver
             // 
-            this.btn_Volver.Location = new System.Drawing.Point(12, 285);
+            this.btn_Volver.Location = new System.Drawing.Point(12, 236);
             this.btn_Volver.Name = "btn_Volver";
             this.btn_Volver.Size = new System.Drawing.Size(156, 44);
             this.btn_Volver.TabIndex = 2;
@@ -171,45 +170,34 @@
             this.btn_Volver.UseVisualStyleBackColor = true;
             this.btn_Volver.Click += new System.EventHandler(this.onVolver);
             // 
-            // groupBox2
+            // comboBox1
             // 
-            this.groupBox2.Controls.Add(this.radio_Inactivo);
-            this.groupBox2.Controls.Add(this.radio_Activo);
-            this.groupBox2.Location = new System.Drawing.Point(39, 180);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(323, 66);
-            this.groupBox2.TabIndex = 14;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Estado:";
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "No activo",
+            "Activo"});
+            this.comboBox1.Location = new System.Drawing.Point(166, 179);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 39;
             // 
-            // radio_Inactivo
+            // label15
             // 
-            this.radio_Inactivo.AutoSize = true;
-            this.radio_Inactivo.Location = new System.Drawing.Point(191, 33);
-            this.radio_Inactivo.Name = "radio_Inactivo";
-            this.radio_Inactivo.Size = new System.Drawing.Size(72, 17);
-            this.radio_Inactivo.TabIndex = 8;
-            this.radio_Inactivo.TabStop = true;
-            this.radio_Inactivo.Text = "No Activo";
-            this.radio_Inactivo.UseVisualStyleBackColor = true;
-            // 
-            // radio_Activo
-            // 
-            this.radio_Activo.AutoSize = true;
-            this.radio_Activo.Location = new System.Drawing.Point(66, 33);
-            this.radio_Activo.Name = "radio_Activo";
-            this.radio_Activo.Size = new System.Drawing.Size(55, 17);
-            this.radio_Activo.TabIndex = 7;
-            this.radio_Activo.TabStop = true;
-            this.radio_Activo.Text = "Activo";
-            this.radio_Activo.UseVisualStyleBackColor = true;
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(36, 181);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(44, 16);
+            this.label15.TabIndex = 38;
+            this.label15.Text = "Estado:";
             // 
             // AltaModificacionHabitacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ClientSize = new System.Drawing.Size(455, 341);
+            this.ClientSize = new System.Drawing.Size(345, 293);
             this.Controls.Add(this.btn_Volver);
             this.Controls.Add(this.btn_Confirmar);
             this.Controls.Add(this.groupBox1);
@@ -218,8 +206,6 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -239,8 +225,7 @@
         private System.Windows.Forms.Button btn_Volver;
         private System.Windows.Forms.ComboBox cmb_Frente;
         private System.Windows.Forms.TextBox txt_Piso;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.RadioButton radio_Inactivo;
-        private System.Windows.Forms.RadioButton radio_Activo;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label15;
     }
 }

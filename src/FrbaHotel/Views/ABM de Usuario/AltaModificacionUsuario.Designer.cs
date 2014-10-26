@@ -57,13 +57,11 @@
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.radio_Inactivo = new System.Windows.Forms.RadioButton();
-            this.radio_Activo = new System.Windows.Forms.RadioButton();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -84,7 +82,7 @@
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(12, 212);
+            this.groupBox1.Location = new System.Drawing.Point(12, 161);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(504, 342);
             this.groupBox1.TabIndex = 28;
@@ -106,6 +104,7 @@
             // 
             // comboBox3
             // 
+            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox3.FormattingEnabled = true;
             this.comboBox3.Location = new System.Drawing.Point(87, 22);
             this.comboBox3.Name = "comboBox3";
@@ -150,6 +149,7 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(197, 302);
             this.comboBox1.Name = "comboBox1";
@@ -307,7 +307,8 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.groupBox4);
+            this.groupBox2.Controls.Add(this.comboBox2);
+            this.groupBox2.Controls.Add(this.label15);
             this.groupBox2.Controls.Add(this.checkedListBox1);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.label2);
@@ -316,7 +317,7 @@
             this.groupBox2.Controls.Add(this.textBox1);
             this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(504, 194);
+            this.groupBox2.Size = new System.Drawing.Size(504, 143);
             this.groupBox2.TabIndex = 27;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Datos del usuario";
@@ -332,7 +333,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(394, 560);
+            this.button1.Location = new System.Drawing.Point(394, 509);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(122, 39);
             this.button1.TabIndex = 23;
@@ -343,7 +344,7 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(12, 560);
+            this.button2.Location = new System.Drawing.Point(12, 509);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(122, 39);
             this.button2.TabIndex = 31;
@@ -351,45 +352,34 @@
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // groupBox4
+            // comboBox2
             // 
-            this.groupBox4.Controls.Add(this.radio_Inactivo);
-            this.groupBox4.Controls.Add(this.radio_Activo);
-            this.groupBox4.Location = new System.Drawing.Point(20, 112);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(323, 66);
-            this.groupBox4.TabIndex = 27;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Estado:";
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "No activo",
+            "Activo"});
+            this.comboBox2.Location = new System.Drawing.Point(103, 112);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(121, 21);
+            this.comboBox2.TabIndex = 39;
             // 
-            // radio_Inactivo
+            // label15
             // 
-            this.radio_Inactivo.AutoSize = true;
-            this.radio_Inactivo.Location = new System.Drawing.Point(191, 33);
-            this.radio_Inactivo.Name = "radio_Inactivo";
-            this.radio_Inactivo.Size = new System.Drawing.Size(72, 17);
-            this.radio_Inactivo.TabIndex = 8;
-            this.radio_Inactivo.TabStop = true;
-            this.radio_Inactivo.Text = "No Activo";
-            this.radio_Inactivo.UseVisualStyleBackColor = true;
-            // 
-            // radio_Activo
-            // 
-            this.radio_Activo.AutoSize = true;
-            this.radio_Activo.Location = new System.Drawing.Point(66, 33);
-            this.radio_Activo.Name = "radio_Activo";
-            this.radio_Activo.Size = new System.Drawing.Size(55, 17);
-            this.radio_Activo.TabIndex = 7;
-            this.radio_Activo.TabStop = true;
-            this.radio_Activo.Text = "Activo";
-            this.radio_Activo.UseVisualStyleBackColor = true;
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(17, 114);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(44, 16);
+            this.label15.TabIndex = 38;
+            this.label15.Text = "Estado:";
             // 
             // AltaModificaiconUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ClientSize = new System.Drawing.Size(528, 611);
+            this.ClientSize = new System.Drawing.Size(528, 557);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox2);
@@ -403,8 +393,6 @@
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -440,8 +428,7 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckedListBox checkedListBox1;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.RadioButton radio_Inactivo;
-        private System.Windows.Forms.RadioButton radio_Activo;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Label label15;
     }
 }

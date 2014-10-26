@@ -25,9 +25,8 @@ namespace FrbaHotel.Views.ABM_de_Cliente
             BindingSource documentos_binding = new BindingSource();
             documentos_binding.DataSource = EntityManager.getEntityManager().findAll<TipoDocumento>();
             comboBox2.DataSource = documentos_binding;
-            comboBox2.DisplayMember = "descripcion";
+            comboBox2.Text = "";
             Listar(new List<FetchCondition>());
-
         }
 
         private void Listar(List<FetchCondition> conditions)
@@ -81,6 +80,13 @@ namespace FrbaHotel.Views.ABM_de_Cliente
             FetchCondition condicionIdentificacion = new FetchCondition();
             condicionIdentificacion.setLike("clientes.documento_nro", txt_Filter_Documento.Text);
             condiciones.Add(condicionIdentificacion);
+
+            if (comboBox2.Text != "")
+            {
+                FetchCondition condicionTipoIdentificacion = new FetchCondition();
+                condicionTipoIdentificacion.setEquals("clientes.documento_tipo_id", (comboBox2.SelectedValue as TipoDocumento).id.ToString());
+                condiciones.Add(condicionTipoIdentificacion);
+            }
 
             Listar(condiciones);
 
