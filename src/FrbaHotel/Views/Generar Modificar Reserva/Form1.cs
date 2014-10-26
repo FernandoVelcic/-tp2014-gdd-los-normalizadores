@@ -29,7 +29,7 @@ namespace FrbaHotel.Generar_Modificar_Reserva
             this.reserva = reserva;
         }
 
-        private void setUpComboBoxes()
+        private void Form1_Load(object sender, EventArgs e)
         {
             BindingSource tipo_habitacion_binding = new BindingSource();
             tipo_habitacion_binding.DataSource = EntityManager.getEntityManager().findAll<TipoHabitacion>();
@@ -43,49 +43,35 @@ namespace FrbaHotel.Generar_Modificar_Reserva
 
             txt_Cant_Noches.DataBindings.Add("Text", this.reserva, "cant_noches");
             txt_Desde.DataBindings.Add("Text", this.reserva, "fecha_inicio");
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            setUpComboBoxes();
-        }
-
-        private void btn_Volver_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-
-        private Reserva bindFromForm()
-        {
-            reserva.regimen = (Regimen) cmb_Regimen.SelectedItem;
-            reserva.tipo_habitacion = (TipoHabitacion)cmb_TipoHabitacion.SelectedItem;
-            return reserva;
         }
 
         private void btn_Generar_Click(object sender, EventArgs e)
         {
+            reserva.regimen = cmb_Regimen.SelectedItem as Regimen;
+            reserva.tipo_habitacion = cmb_TipoHabitacion.SelectedItem as TipoHabitacion;
 
-            reserva = bindFromForm();
             try
             {
                 reserva.save();
-                MessageBox.Show("La reserva se genero corractamente");
-                this.Close();
             }
             catch (ValidationException exception)
             {
                 MessageBox.Show(exception.Message);
+                return;
             }
             catch (SqlException exception)
             {
                 MessageBox.Show(exception.StackTrace);
+                return;
             }
-
+            MessageBox.Show("La reserva se genero corractamente");
+            //TODO: Volver a formulario anterior
         }
 
-
+        private void btn_Volver_Click(object sender, EventArgs e)
+        {
+            //TODO: Volver a formulario anterior
+        }
 
     }
 }
