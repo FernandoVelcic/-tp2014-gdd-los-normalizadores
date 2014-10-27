@@ -41,6 +41,18 @@ namespace FrbaHotel.Views.ABM_de_Cliente
             if(!esAlta)
                 comboBox3.Text = cliente.documento_tipo.descripcion;
 
+            BindingSource nacionalidad_binding = new BindingSource();
+            nacionalidad_binding.DataSource = EntityManager.getEntityManager().findAll<Pais>();
+            comboBox2.DataSource = nacionalidad_binding;
+            comboBox2.DisplayMember = "gentilicio";
+            if (!esAlta)
+                comboBox2.Text = cliente.nacionalidad.gentilicio;
+
+            comboBox4.DataSource = nacionalidad_binding;
+            comboBox4.DisplayMember = "nombre";
+            //if (!esAlta)
+            //    comboBox4.Text = cliente.pais.nombre;
+
             txt_Nombre.DataBindings.Add("Text", cliente, "nombre");
             txt_Apellido.DataBindings.Add("Text", cliente, "apellido");
             txt_Mail.DataBindings.Add("Text", cliente, "mail");
@@ -53,7 +65,6 @@ namespace FrbaHotel.Views.ABM_de_Cliente
             textBox3.DataBindings.Add("Text", cliente, "depto");
 
             txt_Localidad.DataBindings.Add("Text", cliente, "localidad");
-            txt_Pais.DataBindings.Add("Text", cliente, "nacionalidad");
 
             textBox8.DataBindings.Add("Text", cliente, "documento_nro");
             comboBox1.DataBindings.Add("SelectedIndex", cliente, "estado");
@@ -62,6 +73,8 @@ namespace FrbaHotel.Views.ABM_de_Cliente
         private void button1_Click(object sender, EventArgs e)
         {
             cliente.documento_tipo = comboBox3.SelectedValue as TipoDocumento;
+            cliente.nacionalidad = comboBox2.SelectedValue as Pais;
+            //cliente.pais = comboBox4.SelectedValue as Pais;
 
             try
             {

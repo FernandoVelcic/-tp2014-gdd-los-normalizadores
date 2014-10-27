@@ -85,7 +85,7 @@ CREATE TABLE [LOS_NORMALIZADORES].[hoteles](
 	[nombre] [nvarchar](255) NOT NULL,
 	[mail] [nvarchar](255) NOT NULL,
 	[telefono] [nvarchar](255) NOT NULL,
-	[pais] [nvarchar](255) NOT NULL,
+	[pais_id] INTEGER,
 	[fecha_creacion] [datetime],
 	[estado] [bit] NOT NULL
 ) ON [PRIMARY]
@@ -152,7 +152,8 @@ CREATE TABLE [LOS_NORMALIZADORES].[clientes](
 	[piso] [numeric](18, 0),
 	[depto] [nvarchar](50),
 	[localidad] [nvarchar](255),
-	[nacionalidad] [nvarchar](255),
+	[nacionalidad_id] INTEGER NOT NULL,
+	[pais_id] INTEGER,
 	[documento_tipo_id] INTEGER NOT NULL,
 	[documento_nro] [numeric](18, 0) NOT NULL,
 	[telefono] [nvarchar](255) NULL,
@@ -202,7 +203,13 @@ CREATE TABLE [LOS_NORMALIZADORES].[items](
 	[monto] [numeric](18, 2),
 ) ON [PRIMARY]
 
+CREATE TABLE [LOS_NORMALIZADORES].[paises](
+	[id] INTEGER IDENTITY PRIMARY KEY,
+	[nombre] [nvarchar](255) NOT NULL,					
+	[gentilicio] [nvarchar](255) NOT NULL,
+) ON [PRIMARY]
 
+INSERT INTO [LOS_NORMALIZADORES].[paises] (nombre, gentilicio) VALUES ('ARGENTINA', 'ARGENTINO')
 
 
 
@@ -252,8 +259,8 @@ GO
 
 /* Migracion de hoteles */
 
-INSERT [LOS_NORMALIZADORES].[hoteles] (ciudad, calle, nro_calle, cant_estrella, recarga_estrella, nombre, mail, telefono, pais, estado)
-SELECT DISTINCT Hotel_Ciudad, Hotel_Calle, Hotel_Nro_Calle, Hotel_CantEstrella, Hotel_Recarga_Estrella, '', '', '', '', 1
+INSERT [LOS_NORMALIZADORES].[hoteles] (ciudad, calle, nro_calle, cant_estrella, recarga_estrella, nombre, mail, telefono, estado)
+SELECT DISTINCT Hotel_Ciudad, Hotel_Calle, Hotel_Nro_Calle, Hotel_CantEstrella, Hotel_Recarga_Estrella, '', '', '', 1
 FROM [LOS_NORMALIZADORES].[Maestra] 
 WHERE Hotel_Ciudad IS NOT NULL 
 AND Hotel_Calle IS NOT NULL
@@ -393,8 +400,8 @@ GO
 
 /* Clientes */
 
-INSERT INTO [LOS_NORMALIZADORES].[clientes] ([documento_nro], [apellido], [nombre], [fecha_nac], [mail], [dom_calle], [nro_calle], [piso], [depto], [nacionalidad], [documento_tipo_id])	
-	SELECT DISTINCT [Cliente_Pasaporte_Nro], [Cliente_Apellido], [Cliente_Nombre], [Cliente_Fecha_Nac], [Cliente_Mail], [Cliente_Dom_Calle], [Cliente_Nro_Calle], [Cliente_Piso], [Cliente_Depto], [Cliente_Nacionalidad], 4  FROM [LOS_NORMALIZADORES].[Maestra]
+INSERT INTO [LOS_NORMALIZADORES].[clientes] ([documento_nro], [apellido], [nombre], [fecha_nac], [mail], [dom_calle], [nro_calle], [piso], [depto], [nacionalidad_id], [documento_tipo_id])	
+	SELECT DISTINCT [Cliente_Pasaporte_Nro], [Cliente_Apellido], [Cliente_Nombre], [Cliente_Fecha_Nac], [Cliente_Mail], [Cliente_Dom_Calle], [Cliente_Nro_Calle], [Cliente_Piso], [Cliente_Depto], 1, 4  FROM [LOS_NORMALIZADORES].[Maestra]
 	WHERE [Cliente_Pasaporte_Nro] IS NOT NULL 
 	AND   [Cliente_Apellido] IS NOT NULL
 	AND   [Cliente_Nombre] IS NOT NULL
@@ -426,7 +433,6 @@ SET cliente_id =
 		AND   [LOS_NORMALIZADORES].[Maestra].Cliente_Nro_Calle = c.nro_calle
 		AND   [LOS_NORMALIZADORES].[Maestra].Cliente_Piso = c.piso
 		AND   [LOS_NORMALIZADORES].[Maestra].Cliente_Depto = c.depto
-		AND   [LOS_NORMALIZADORES].[Maestra].Cliente_Nacionalidad = c.nacionalidad
 	)
 GO
 

@@ -6,8 +6,13 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
+using System.Data.SqlClient;
+
 using FrbaHotel.Models;
 using FrbaHotel.Database_Helper;
+
+using MyActiveRecord;
 
 namespace FrbaHotel.Views.ABM_de_Rol
 {
@@ -20,8 +25,7 @@ namespace FrbaHotel.Views.ABM_de_Rol
 
         private void ABMRol_Load(object sender, EventArgs e)
         {
-            var rolesBinding = new BindingList<Rol>(EntityManager.getEntityManager().findAll<Rol>());
-            dataGridView1.DataSource = new BindingSource(rolesBinding, null);
+            Listar(new List<FetchCondition>());
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -42,14 +46,31 @@ namespace FrbaHotel.Views.ABM_de_Rol
         private void button5_Click(object sender, EventArgs e)
         {
             textBox1.Text = "";
-            checkBox1.Checked = false;
-            checkBox2.Checked = false;
-            var rolesBinding = new BindingList<Rol>(EntityManager.getEntityManager().findAll<Rol>());
-            dataGridView1.DataSource = new BindingSource(rolesBinding, null);
+            Listar(new List<FetchCondition>());
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            List<FetchCondition> condiciones = new List<FetchCondition>();
+
+            FetchCondition condicionNombre = new FetchCondition();
+            condicionNombre.setLike("roles.descripcion", textBox1.Text);
+            condiciones.Add(condicionNombre);
+
+            Listar(condiciones);
+        }
+
+        private void Listar(List<FetchCondition> conditions)
+        {
+            try
+            {
+                var rolesBinding = new BindingList<Rol>(EntityManager.getEntityManager().findList<Rol>(conditions));
+                dataGridView1.DataSource = new BindingSource(rolesBinding, null);
+            }
+            catch (SqlException e)
+            {
+                MessageBox.Show("Error en la query: " + Query.log.Last());
+            }
 
         }
                

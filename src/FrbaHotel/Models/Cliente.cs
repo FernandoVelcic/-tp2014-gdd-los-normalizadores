@@ -21,14 +21,16 @@ namespace FrbaHotel.Models
         public String mail { get; set; } //[nvarchar](255)
         public String telefono { get; set; } //[nvarchar](255)
 
-        /* ¿Normalizar? */
         public String dom_calle { get; set; } //[nvarchar](255)
         public int nro_calle { get; set; } //[numeric](18, 0)
         public int piso { get; set; } //[numeric](18, 0)
         public String depto { get; set; } //[nvarchar](50)
 
         public String localidad { get; set; } //[nvarchar](255)
-        public String nacionalidad { get; set; } //[nvarchar](255)
+        [System.ComponentModel.Browsable(false)]
+        public Pais nacionalidad { get; set; } //INTEGER
+        //[System.ComponentModel.Browsable(false)]
+        //public Pais pais { get; set; } //INTEGER
 
         public Boolean estado { get; set; } //[bit]
 
