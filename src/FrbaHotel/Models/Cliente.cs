@@ -28,9 +28,9 @@ namespace FrbaHotel.Models
 
         public String localidad { get; set; } //[nvarchar](255)
         [System.ComponentModel.Browsable(false)]
-        public Pais nacionalidad { get; set; } //INTEGER
-        //[System.ComponentModel.Browsable(false)]
-        //public Pais pais { get; set; } //INTEGER
+        public int nacionalidad_id { get; set; }
+        [System.ComponentModel.Browsable(false)]
+        public int pais_id { get; set; }
 
         public Boolean estado { get; set; } //[bit]
 

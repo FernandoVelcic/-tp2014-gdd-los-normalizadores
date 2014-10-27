@@ -32,7 +32,7 @@ namespace MyActiveRecord
 
         private SelectQuery<T> addJoin(String type, String tableName, String condition)
         {
-            joins.Add(" " + type + " JOIN ["+ Config.getInstance().schema +"].[" + tableName + "] ON " + condition);
+            joins.Add(" " + type + " JOIN [" + Config.getInstance().schema + "].[" + tableName + "] AS " + tableName + " ON " + condition);
             return this;
         }
 
