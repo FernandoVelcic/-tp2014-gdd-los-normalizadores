@@ -204,6 +204,12 @@
       <DependentUpon>AltaModificacionHabitaicon.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\ABM de Hotel\ABMHotel.resx">
+      <DependentUpon>ABMHotel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ABM de Hotel\AltaHotel.resx">
+      <DependentUpon>AltaHotel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\ABM de Regimen\ABMRegimen.resx">
       <DependentUpon>ABMRegimen.cs</DependentUpon>
     </EmbeddedResource>

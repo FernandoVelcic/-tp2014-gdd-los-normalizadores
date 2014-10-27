@@ -15,5 +15,16 @@ namespace FrbaHotel.Views.ABM_de_Hotel
         {
             InitializeComponent();
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = "";
+            textBox2.Text = ""; 
+            textBox3.Text = "";
+            textBox4.Text = "";
+            dataGridView1.Rows.Clear();
+        }
+
+       
     }
 }
