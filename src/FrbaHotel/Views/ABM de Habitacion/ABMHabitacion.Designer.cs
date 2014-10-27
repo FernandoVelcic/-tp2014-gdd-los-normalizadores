@@ -33,6 +33,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button4 = new System.Windows.Forms.Button();
             this.btn_Filtrar = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.cmb_TipoHabitacion = new System.Windows.Forms.ComboBox();
@@ -44,7 +45,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -110,6 +110,16 @@
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Opciones de filtrado";
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(332, 112);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(121, 27);
+            this.button4.TabIndex = 11;
+            this.button4.Text = "Limpiar";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // btn_Filtrar
             // 
@@ -204,16 +214,6 @@
             this.label1.TabIndex = 9;
             this.label1.Text = "Numero Habitación:";
             // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(332, 112);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(121, 27);
-            this.button4.TabIndex = 11;
-            this.button4.Text = "Limpiar";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
             // ABMHabitacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -225,7 +225,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.groupBox1);
             this.Name = "ABMHabitacion";
-            this.Text = "ABMHabitacion";
+            this.Text = "ABM de Habitacion";
             this.Load += new System.EventHandler(this.ABMHabitacion_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);

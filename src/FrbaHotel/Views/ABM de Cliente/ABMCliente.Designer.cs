@@ -34,6 +34,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button4 = new System.Windows.Forms.Button();
             this.btn_Filtrar = new System.Windows.Forms.Button();
             this.txt_Filter_Documento = new System.Windows.Forms.TextBox();
             this.txt_Filter_Apellido = new System.Windows.Forms.TextBox();
@@ -45,7 +46,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -123,6 +123,19 @@
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Opciones de filtrado";
+            // 
+            // button4
+            // 
+            this.button4.AccessibleDescription = "";
+            this.button4.AccessibleName = "";
+            this.button4.Location = new System.Drawing.Point(384, 72);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(127, 23);
+            this.button4.TabIndex = 22;
+            this.button4.Tag = "0";
+            this.button4.Text = "Limpiar";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // btn_Filtrar
             // 
@@ -218,19 +231,6 @@
             this.label1.TabIndex = 9;
             this.label1.Text = "Nombre:";
             // 
-            // button4
-            // 
-            this.button4.AccessibleDescription = "";
-            this.button4.AccessibleName = "";
-            this.button4.Location = new System.Drawing.Point(384, 72);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(127, 23);
-            this.button4.TabIndex = 22;
-            this.button4.Tag = "0";
-            this.button4.Text = "Limpiar";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
             // ABMCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -242,7 +242,7 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Name = "ABMCliente";
-            this.Text = "Listado";
+            this.Text = "ABM de Clientes";
             this.Load += new System.EventHandler(this.ABMCliente_Load);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();

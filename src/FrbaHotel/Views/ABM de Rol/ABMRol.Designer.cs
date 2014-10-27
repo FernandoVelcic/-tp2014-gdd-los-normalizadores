@@ -181,7 +181,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.groupBox1);
             this.Name = "ABMRol";
-            this.Text = "ABMRol";
+            this.Text = "ABM de Rol";
             this.Load += new System.EventHandler(this.ABMRol_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);

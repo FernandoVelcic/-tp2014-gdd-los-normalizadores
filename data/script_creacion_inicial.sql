@@ -81,7 +81,13 @@ CREATE TABLE [LOS_NORMALIZADORES].[hoteles](
 	[calle] [nvarchar](255),
 	[nro_Calle] [numeric](18, 0),
 	[cant_estrella] [numeric](18, 0),
-	[recarga_estrella] [numeric](18, 0)
+	[recarga_estrella] [numeric](18, 0),
+	[nombre] [nvarchar](255) NOT NULL,
+	[mail] [nvarchar](255) NOT NULL,
+	[telefono] [nvarchar](255) NOT NULL,
+	[pais] [nvarchar](255) NOT NULL,
+	[fecha_creacion] [datetime],
+	[estado] [bit] NOT NULL
 ) ON [PRIMARY]
 
 
@@ -246,8 +252,8 @@ GO
 
 /* Migracion de hoteles */
 
-INSERT [LOS_NORMALIZADORES].[hoteles] (ciudad, calle, nro_calle, cant_estrella, recarga_estrella)
-SELECT DISTINCT Hotel_Ciudad, Hotel_Calle, Hotel_Nro_Calle, Hotel_CantEstrella, Hotel_Recarga_Estrella  
+INSERT [LOS_NORMALIZADORES].[hoteles] (ciudad, calle, nro_calle, cant_estrella, recarga_estrella, nombre, mail, telefono, pais, estado)
+SELECT DISTINCT Hotel_Ciudad, Hotel_Calle, Hotel_Nro_Calle, Hotel_CantEstrella, Hotel_Recarga_Estrella, '', '', '', '', 1
 FROM [LOS_NORMALIZADORES].[Maestra] 
 WHERE Hotel_Ciudad IS NOT NULL 
 AND Hotel_Calle IS NOT NULL

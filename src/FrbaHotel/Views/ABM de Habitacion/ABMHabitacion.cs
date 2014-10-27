@@ -93,8 +93,7 @@ namespace FrbaHotel.Views.ABM_de_Habitacion
             comboBox2.SelectedIndex = -1;
             cmb_Hoteles.SelectedIndex = -1;
             cmb_TipoHabitacion.SelectedIndex = -1;
-            dataGridView1.Rows.Clear();
-            //Data binding (cargar en el data todos los registros)
+            Listar(new List<FetchCondition>());
         }
 
 

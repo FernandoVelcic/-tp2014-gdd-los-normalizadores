@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
@@ -40,8 +42,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -62,6 +62,25 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Opciones de filtrado";
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(285, 120);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(144, 24);
+            this.button5.TabIndex = 18;
+            this.button5.Text = "Limpiar";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(284, 83);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(144, 24);
+            this.button4.TabIndex = 17;
+            this.button4.Text = "Filtrar";
+            this.button4.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
@@ -169,25 +188,6 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click_1);
             // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(284, 83);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(144, 24);
-            this.button4.TabIndex = 17;
-            this.button4.Text = "Filtrar";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(285, 120);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(144, 24);
-            this.button5.TabIndex = 18;
-            this.button5.Text = "Limpiar";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
             // ABMRegimen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -199,7 +199,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
             this.Name = "ABMRegimen";
-            this.Text = "ABMRegimen";
+            this.Text = "ABM de Regimen";
             this.Load += new System.EventHandler(this.ABMRegimen_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

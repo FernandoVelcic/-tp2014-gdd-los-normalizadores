@@ -61,15 +61,15 @@ namespace FrbaHotel.Views.ABM_de_Hotel
             condiciones.Add(condicionNombre);
 
             FetchCondition condicionCiudad = new FetchCondition();
-            condicionCiudad.setLike("hoteles.ciudad", textBox1.Text);
+            condicionCiudad.setLike("hoteles.ciudad", textBox3.Text);
             condiciones.Add(condicionCiudad);
 
             FetchCondition condicionPais = new FetchCondition();
-            condicionPais.setLike("hoteles.pais", textBox1.Text);
+            condicionPais.setLike("hoteles.pais", textBox4.Text);
             condiciones.Add(condicionPais);
 
             FetchCondition condicionEstrellas = new FetchCondition();
-            condicionEstrellas.setLike("hoteles.cant_estrella", textBox1.Text);
+            condicionEstrellas.setLike("hoteles.cant_estrella", textBox2.Text);
             condiciones.Add(condicionEstrellas);
 
             Listar(condiciones);
