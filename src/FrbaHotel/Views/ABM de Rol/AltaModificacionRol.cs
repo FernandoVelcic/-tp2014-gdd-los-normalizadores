@@ -18,31 +18,32 @@ namespace FrbaHotel.ABM_de_Rol
 {
     public partial class AltaModificacionRol : Form
     {
+        private Boolean esAlta = false;
         private Rol rol;
 
         public AltaModificacionRol() : this(new Rol())
         {
-            
+            esAlta = true;
+            rol.estado = true;
         }
 
         public AltaModificacionRol(Rol rol)
         {
-            this.rol = rol;
             InitializeComponent();
+            this.rol = rol;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            textBox1.DataBindings.Add("Text", rol, "descripcion");
+            comboBox1.DataBindings.Add("SelectedIndex", rol, "estado");
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            rol.descripcion=textBox1.Text;
-            if (radioButton1.Checked) rol.estado = true;
-            if (radioButton2.Checked) rol.estado = false;
             //Falta saber como quieren que se guarde el listado de cada rol
             CheckedListBox.CheckedItemCollection listaSeleccionados = checkedListBox1.CheckedItems;
+            
             try
             {
                 rol.save();
@@ -58,7 +59,10 @@ namespace FrbaHotel.ABM_de_Rol
                 return;
             }
 
-            MessageBox.Show("Rol creado correctamente!");
+            if(esAlta)
+                MessageBox.Show("Rol creado correctamente!");
+            else
+                MessageBox.Show("Rol modificado correctamente!");
             this.nextForm(new ABMRol());
         }
 
