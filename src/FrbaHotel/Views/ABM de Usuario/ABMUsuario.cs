@@ -46,13 +46,15 @@ namespace FrbaHotel.ABM_de_Usuario
             textBox2.Text = "";
             textBox3.Text = "";
             textBox4.Text = "";
-            textBox5.Text = "";
-            textBox6.Text = "";
-            textBox7.Text = "";
             textBox8.Text = "";
             comboBox1.SelectedIndex = -1;
             //listar
             //limpieza
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
         }
 
         

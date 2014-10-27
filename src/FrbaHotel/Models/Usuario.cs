@@ -28,8 +28,6 @@ namespace FrbaHotel.Models
         public String direccion { get; set; } //[nvarchar](255)
         public String fecha_nac { get; set; } //datetime
 
-        public Hotel hotel { get; set; }
-
         public int intentos_fallidos { get; set; } //[tinyint]
         public Boolean estado { get; set; } //[bit]
 

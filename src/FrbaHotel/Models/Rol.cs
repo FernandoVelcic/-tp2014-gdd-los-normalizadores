@@ -26,6 +26,11 @@ namespace FrbaHotel.Models
         public Boolean Registrar_Estadía { get; set; } //[bit]
         public Boolean Facturar_Estadía { get; set; } //[bit]
         public Boolean Listado_Estadístico { get; set; } //[bit]
+
+        public override string ToString()
+        {
+            return descripcion;
+        }
         
     }
 }

@@ -39,14 +39,14 @@ namespace FrbaHotel.ABM_de_Usuario
         {
             BindingSource roles_binding = new BindingSource();
             roles_binding.DataSource = EntityManager.getEntityManager().findAll<Rol>();
-            checkedListBox1.DataSource = roles_binding;
-            checkedListBox1.DisplayMember = "descripcion";
+            this.Rol.DataSource = roles_binding;
+            this.Rol.DisplayMember = "descripcion";
 
             BindingSource hoteles_binding = new BindingSource();
             hoteles_binding.DataSource = EntityManager.getEntityManager().findAll<Hotel>();
-            comboBox1.DataSource = hoteles_binding;
-            comboBox1.DisplayMember = "id"; //TODO mostrar un nombre de hotel mas lindo
-
+            this.Hotel.DataSource = hoteles_binding;
+            this.Hotel.DisplayMember = "calle";
+            
             BindingSource documentos_binding = new BindingSource();
             documentos_binding.DataSource = EntityManager.getEntityManager().findAll<TipoDocumento>();
             comboBox3.DataSource = documentos_binding;
@@ -66,28 +66,27 @@ namespace FrbaHotel.ABM_de_Usuario
       
         private void button1_Click(object sender, EventArgs e)
         {
-            if (checkedListBox1.CheckedItems.Count == 0)
+            if (dataGridView1.Rows.Count == 1)
             {
-                MessageBox.Show("Debe seleccionar al menos un rol");
+                MessageBox.Show("Debe seleccionar al menos un rol para algun hotel");
                 return;
             }
             
             //Bindings especiales
             usuario.password = new SHA256(textBox2.Text).ToString();
-            usuario.hotel = comboBox1.SelectedValue as Hotel;
             usuario.documento_tipo = comboBox3.SelectedValue as TipoDocumento;
 
             try
             {
                 usuario.save();
                 
-                foreach(Rol rol in checkedListBox1.CheckedItems)
+                /*foreach(Rol rol in checkedListBox1.CheckedItems)
                 {
                     RolUsuario rolUsuario = new RolUsuario();
                     rolUsuario.rol = rol;
                     rolUsuario.usuario = usuario;
                     rolUsuario.insert();
-                }
+                }*/
             }
             catch (ValidationException exception)
             {
