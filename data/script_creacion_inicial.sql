@@ -622,7 +622,7 @@ INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[roles]
 		   ,[Facturar_Estadía]
 		   ,[Listado_Estadístico])
      VALUES
-           ('Administrador',1,1,1,1,1,1,1,1,1,1,1,1,1)
+           ('Administrador',1,1,1,0,1,1,1,0,0,0,0,0,1)
 INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[roles]
            ([descripcion]
            ,[estado]
@@ -639,7 +639,7 @@ INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[roles]
 		   ,[Facturar_Estadía]
 		   ,[Listado_Estadístico])
      VALUES
-           ('Recepcionista',1,1,1,1,1,1,1,1,1,1,1,1,1)
+           ('Recepcionista',1,0,0,1,0,0,0,1,1,1,1,1,1)
 /*
 INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[roles]
            ([descripcion]
@@ -657,7 +657,7 @@ INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[roles]
 		   ,[Facturar_Estadía]
 		   ,[Listado_Estadístico])
      VALUES
-           ('Guest',1,1,1,1,1,1,1,1,1,1,1,1,1)
+           ('Guest',1,0,0,0,0,0,0,1,1,0,0,0,1)
 */
 GO
 /* Procedimientos */
