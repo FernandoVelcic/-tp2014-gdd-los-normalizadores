@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 
 using MyActiveRecord;
+using FrbaHotel.Models.Exceptions;
+using FrbaHotel.Tools;
 
 namespace FrbaHotel.Models
 {
@@ -31,5 +33,11 @@ namespace FrbaHotel.Models
         public int intentos_fallidos { get; set; } //[tinyint]
         public Boolean estado { get; set; } //[bit]
 
+
+        public override void preSave()
+        {
+            if (mail.isValidEmail() != true)
+                throw new ValidationException("Formato de email invalido");
+        }
     }
 }

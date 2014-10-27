@@ -6,6 +6,7 @@ using System.Text;
 
 using FrbaHotel.Database_Helper;
 using FrbaHotel.Models.Exceptions;
+using FrbaHotel.Tools;
 
 namespace FrbaHotel.Models
 {
@@ -36,6 +37,9 @@ namespace FrbaHotel.Models
 
         public override void preInsert()
         {
+            if (mail.isValidEmail() != true)
+                throw new ValidationException("Formato de email invalido");
+
             List<Cliente> clientes = EntityManager.getEntityManager().findAllBy<Cliente>("mail", mail);
             if (clientes.Count != 0)
             {

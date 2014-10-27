@@ -28,6 +28,7 @@ namespace FrbaHotel
             button9.Visible = permisos.Registrar_Consumible;
             button10.Visible = permisos.Registrar_Estadía;
             button11.Visible = permisos.ABM_Usuario;
+            button12.Visible = permisos.ABM_Hotel;
         }
 
         public Operaciones()
@@ -88,6 +89,11 @@ namespace FrbaHotel
         private void button11_Click(object sender, EventArgs e)
         {
             this.nextForm(new FrbaHotel.ABM_de_Usuario.ABMUsuario());
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            this.nextForm(new FrbaHotel.Views.ABM_de_Hotel.ABMHotel());
         }
     }
 }

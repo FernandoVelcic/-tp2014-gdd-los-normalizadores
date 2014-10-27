@@ -70,6 +70,7 @@
             // txt_Apellido
             // 
             this.txt_Apellido.Location = new System.Drawing.Point(92, 57);
+            this.txt_Apellido.MaxLength = 255;
             this.txt_Apellido.Name = "txt_Apellido";
             this.txt_Apellido.Size = new System.Drawing.Size(89, 22);
             this.txt_Apellido.TabIndex = 18;
@@ -77,6 +78,7 @@
             // txt_Nombre
             // 
             this.txt_Nombre.Location = new System.Drawing.Point(92, 25);
+            this.txt_Nombre.MaxLength = 255;
             this.txt_Nombre.Name = "txt_Nombre";
             this.txt_Nombre.Size = new System.Drawing.Size(89, 22);
             this.txt_Nombre.TabIndex = 17;
@@ -104,6 +106,7 @@
             // txt_Calle
             // 
             this.txt_Calle.Location = new System.Drawing.Point(92, 253);
+            this.txt_Calle.MaxLength = 255;
             this.txt_Calle.Name = "txt_Calle";
             this.txt_Calle.Size = new System.Drawing.Size(89, 22);
             this.txt_Calle.TabIndex = 26;
@@ -111,6 +114,7 @@
             // txt_Telefono
             // 
             this.txt_Telefono.Location = new System.Drawing.Point(92, 210);
+            this.txt_Telefono.MaxLength = 255;
             this.txt_Telefono.Name = "txt_Telefono";
             this.txt_Telefono.Size = new System.Drawing.Size(89, 22);
             this.txt_Telefono.TabIndex = 25;
@@ -118,6 +122,7 @@
             // txt_Mail
             // 
             this.txt_Mail.Location = new System.Drawing.Point(92, 184);
+            this.txt_Mail.MaxLength = 255;
             this.txt_Mail.Name = "txt_Mail";
             this.txt_Mail.Size = new System.Drawing.Size(89, 22);
             this.txt_Mail.TabIndex = 24;
@@ -236,6 +241,7 @@
             // textBox3
             // 
             this.textBox3.Location = new System.Drawing.Point(260, 46);
+            this.textBox3.MaxLength = 50;
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(89, 22);
             this.textBox3.TabIndex = 41;

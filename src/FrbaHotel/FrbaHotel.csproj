@@ -55,6 +55,7 @@
     <Compile Include="Models\TipoDocumento.cs" />
     <Compile Include="Models\Exceptions\ValidationException.cs" />
     <Compile Include="Models\TipoHabitacion.cs" />
+    <Compile Include="Tools\Validator.cs" />
     <Compile Include="Views\ABM de Cliente\AltaModificacionCliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,11 +86,11 @@
     <Compile Include="Views\ABM de Hotel\ABMHotel.Designer.cs">
       <DependentUpon>ABMHotel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\ABM de Hotel\AltaHotel.cs">
+    <Compile Include="Views\ABM de Hotel\AltaModificacionHotel.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\ABM de Hotel\AltaHotel.Designer.cs">
-      <DependentUpon>AltaHotel.cs</DependentUpon>
+    <Compile Include="Views\ABM de Hotel\AltaModificacionHotel.Designer.cs">
+      <DependentUpon>AltaModificacionHotel.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\ABM de Regimen\ABMRegimen.cs">
       <SubType>Form</SubType>
@@ -207,8 +208,8 @@
     <EmbeddedResource Include="Views\ABM de Hotel\ABMHotel.resx">
       <DependentUpon>ABMHotel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ABM de Hotel\AltaHotel.resx">
-      <DependentUpon>AltaHotel.cs</DependentUpon>
+    <EmbeddedResource Include="Views\ABM de Hotel\AltaModificacionHotel.resx">
+      <DependentUpon>AltaModificacionHotel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ABM de Regimen\ABMRegimen.resx">
       <DependentUpon>ABMRegimen.cs</DependentUpon>
