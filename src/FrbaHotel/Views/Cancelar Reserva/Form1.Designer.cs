@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.txt_Usuario = new System.Windows.Forms.TextBox();
             this.txt_Motivo = new System.Windows.Forms.TextBox();
             this.txt_NroReserva = new System.Windows.Forms.TextBox();
@@ -38,7 +39,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btn_Cancelar = new System.Windows.Forms.Button();
             this.btn_Vovler = new System.Windows.Forms.Button();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,9 +60,17 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Por favor, complete los siguientes campos:";
             // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(265, 122);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 22);
+            this.dateTimePicker1.TabIndex = 8;
+            // 
             // txt_Usuario
             // 
             this.txt_Usuario.Location = new System.Drawing.Point(265, 155);
+            this.txt_Usuario.MaxLength = 30;
             this.txt_Usuario.Name = "txt_Usuario";
             this.txt_Usuario.Size = new System.Drawing.Size(200, 22);
             this.txt_Usuario.TabIndex = 7;
@@ -70,6 +78,7 @@
             // txt_Motivo
             // 
             this.txt_Motivo.Location = new System.Drawing.Point(265, 83);
+            this.txt_Motivo.MaxLength = 255;
             this.txt_Motivo.Name = "txt_Motivo";
             this.txt_Motivo.Size = new System.Drawing.Size(200, 22);
             this.txt_Motivo.TabIndex = 5;
@@ -141,13 +150,6 @@
             this.btn_Vovler.TabIndex = 2;
             this.btn_Vovler.Text = "Volver";
             this.btn_Vovler.UseVisualStyleBackColor = true;
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(265, 122);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 22);
-            this.dateTimePicker1.TabIndex = 8;
             // 
             // Form1
             // 

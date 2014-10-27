@@ -160,6 +160,7 @@
             // txt_Filter_Apellido
             // 
             this.txt_Filter_Apellido.Location = new System.Drawing.Point(110, 44);
+            this.txt_Filter_Apellido.MaxLength = 255;
             this.txt_Filter_Apellido.Name = "txt_Filter_Apellido";
             this.txt_Filter_Apellido.Size = new System.Drawing.Size(121, 20);
             this.txt_Filter_Apellido.TabIndex = 19;
@@ -167,6 +168,7 @@
             // txt_Filter_Mail
             // 
             this.txt_Filter_Mail.Location = new System.Drawing.Point(110, 67);
+            this.txt_Filter_Mail.MaxLength = 255;
             this.txt_Filter_Mail.Name = "txt_Filter_Mail";
             this.txt_Filter_Mail.Size = new System.Drawing.Size(121, 20);
             this.txt_Filter_Mail.TabIndex = 18;
@@ -200,6 +202,7 @@
             // txt_Filtro_Nombre
             // 
             this.txt_Filtro_Nombre.Location = new System.Drawing.Point(110, 22);
+            this.txt_Filtro_Nombre.MaxLength = 255;
             this.txt_Filtro_Nombre.Name = "txt_Filtro_Nombre";
             this.txt_Filtro_Nombre.Size = new System.Drawing.Size(121, 20);
             this.txt_Filtro_Nombre.TabIndex = 12;

@@ -54,11 +54,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.label15 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -159,6 +159,7 @@
             // textBox4
             // 
             this.textBox4.Location = new System.Drawing.Point(111, 63);
+            this.textBox4.MaxLength = 255;
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(89, 22);
             this.textBox4.TabIndex = 14;
@@ -166,6 +167,7 @@
             // textBox7
             // 
             this.textBox7.Location = new System.Drawing.Point(111, 244);
+            this.textBox7.MaxLength = 255;
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(89, 22);
             this.textBox7.TabIndex = 17;
@@ -173,6 +175,7 @@
             // textBox3
             // 
             this.textBox3.Location = new System.Drawing.Point(111, 31);
+            this.textBox3.MaxLength = 255;
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(89, 22);
             this.textBox3.TabIndex = 13;
@@ -180,6 +183,7 @@
             // textBox6
             // 
             this.textBox6.Location = new System.Drawing.Point(111, 217);
+            this.textBox6.MaxLength = 255;
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(89, 22);
             this.textBox6.TabIndex = 16;
@@ -187,6 +191,7 @@
             // textBox5
             // 
             this.textBox5.Location = new System.Drawing.Point(111, 191);
+            this.textBox5.MaxLength = 255;
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(89, 22);
             this.textBox5.TabIndex = 15;
@@ -271,6 +276,7 @@
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(103, 20);
+            this.textBox1.MaxLength = 30;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(89, 20);
             this.textBox1.TabIndex = 4;
@@ -322,6 +328,28 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Datos del usuario";
             // 
+            // comboBox2
+            // 
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "No activo",
+            "Activo"});
+            this.comboBox2.Location = new System.Drawing.Point(103, 112);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(121, 21);
+            this.comboBox2.TabIndex = 39;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(17, 114);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(44, 16);
+            this.label15.TabIndex = 38;
+            this.label15.Text = "Estado:";
+            // 
             // checkedListBox1
             // 
             this.checkedListBox1.FormattingEnabled = true;
@@ -351,28 +379,6 @@
             this.button2.Text = "Volver";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
-            "No activo",
-            "Activo"});
-            this.comboBox2.Location = new System.Drawing.Point(103, 112);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
-            this.comboBox2.TabIndex = 39;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(17, 114);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(44, 16);
-            this.label15.TabIndex = 38;
-            this.label15.Text = "Estado:";
             // 
             // AltaModificaiconUsuario
             // 

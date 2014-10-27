@@ -103,6 +103,7 @@
             // txt_Descripcion
             // 
             this.txt_Descripcion.Location = new System.Drawing.Point(226, 90);
+            this.txt_Descripcion.MaxLength = 255;
             this.txt_Descripcion.Name = "txt_Descripcion";
             this.txt_Descripcion.Size = new System.Drawing.Size(100, 20);
             this.txt_Descripcion.TabIndex = 5;
@@ -110,6 +111,7 @@
             // txt_Codigo
             // 
             this.txt_Codigo.Location = new System.Drawing.Point(226, 43);
+            this.txt_Codigo.MaxLength = 255;
             this.txt_Codigo.Name = "txt_Codigo";
             this.txt_Codigo.Size = new System.Drawing.Size(100, 20);
             this.txt_Codigo.TabIndex = 4;
