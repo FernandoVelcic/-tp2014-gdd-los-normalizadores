@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,6 +60,7 @@
             this.button2.Size = new System.Drawing.Size(157, 49);
             this.button2.TabIndex = 4;
             this.button2.Text = "Volver a la pantalla principal";
+            this.toolTip1.SetToolTip(this.button2, "Haga click para volver");
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -68,6 +71,7 @@
             this.button1.Size = new System.Drawing.Size(157, 49);
             this.button1.TabIndex = 3;
             this.button1.Text = "Ingresar";
+            this.toolTip1.SetToolTip(this.button1, "Haga click para confirmar");
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -87,6 +91,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(242, 21);
             this.comboBox1.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.comboBox1, "Seleccione un rol");
             // 
             // label1
             // 
@@ -121,5 +126,6 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

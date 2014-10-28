@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Home));
             this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -35,6 +36,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,6 +48,7 @@
             this.button2.Size = new System.Drawing.Size(115, 41);
             this.button2.TabIndex = 5;
             this.button2.Text = "Salir";
+            this.toolTip1.SetToolTip(this.button2, "Haga click para salir de la aplicación");
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -69,6 +72,7 @@
             this.button1.Size = new System.Drawing.Size(183, 116);
             this.button1.TabIndex = 7;
             this.button1.Text = "Ingresar como Administrador/ Recepcionista";
+            this.toolTip1.SetToolTip(this.button1, "Haga click para hacer el login");
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -80,6 +84,7 @@
             this.button3.Size = new System.Drawing.Size(183, 116);
             this.button3.TabIndex = 8;
             this.button3.Text = "Ingresar como Guest";
+            this.toolTip1.SetToolTip(this.button3, "Haga click aqui para hacer el login");
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -93,6 +98,7 @@
             this.label2.Size = new System.Drawing.Size(213, 20);
             this.label2.TabIndex = 9;
             this.label2.Text = "LOS_NORMALIZADORES©";
+            this.toolTip1.SetToolTip(this.label2, "Derechos reservados, prohibida su copia");
             // 
             // pictureBox1
             // 
@@ -104,7 +110,7 @@
             this.pictureBox1.TabIndex = 10;
             this.pictureBox1.TabStop = false;
             // 
-            // Form1
+            // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -116,8 +122,9 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button2);
-            this.Name = "Form1";
+            this.Name = "Home";
             this.Text = "FrbaHotel";
+            this.toolTip1.SetToolTip(this, "Seleccione un método de login");
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -132,6 +139,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 

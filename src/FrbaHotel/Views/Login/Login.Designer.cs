@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -36,6 +37,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,6 +65,7 @@
             this.checkBox1.Size = new System.Drawing.Size(145, 22);
             this.checkBox1.TabIndex = 6;
             this.checkBox1.Text = "Mostrar contraseña";
+            this.toolTip1.SetToolTip(this.checkBox1, "Si es seleccionado, mostrara su password");
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
@@ -82,6 +85,7 @@
             this.textBox2.PasswordChar = '*';
             this.textBox2.Size = new System.Drawing.Size(155, 29);
             this.textBox2.TabIndex = 4;
+            this.toolTip1.SetToolTip(this.textBox2, "Por favor, ingrese su password");
             // 
             // textBox1
             // 
@@ -90,6 +94,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(155, 29);
             this.textBox1.TabIndex = 3;
+            this.toolTip1.SetToolTip(this.textBox1, "Por favor, ingrese su nombre de usuario");
             // 
             // label1
             // 
@@ -108,6 +113,7 @@
             this.button1.Size = new System.Drawing.Size(122, 39);
             this.button1.TabIndex = 6;
             this.button1.Text = "Ingresar";
+            this.toolTip1.SetToolTip(this.button1, "Haga click para validar su ingreso");
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -119,6 +125,7 @@
             this.button2.Size = new System.Drawing.Size(109, 39);
             this.button2.TabIndex = 8;
             this.button2.Text = "Volver";
+            this.toolTip1.SetToolTip(this.button2, "Haga click para volver atrás");
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -149,6 +156,7 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.ToolTip toolTip1;
 
     }
 }
