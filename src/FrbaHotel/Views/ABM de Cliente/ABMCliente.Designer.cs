@@ -128,7 +128,7 @@
             // 
             this.button4.AccessibleDescription = "";
             this.button4.AccessibleName = "";
-            this.button4.Location = new System.Drawing.Point(384, 72);
+            this.button4.Location = new System.Drawing.Point(254, 70);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(127, 23);
             this.button4.TabIndex = 22;
@@ -141,7 +141,7 @@
             // 
             this.btn_Filtrar.AccessibleDescription = "";
             this.btn_Filtrar.AccessibleName = "";
-            this.btn_Filtrar.Location = new System.Drawing.Point(258, 73);
+            this.btn_Filtrar.Location = new System.Drawing.Point(393, 70);
             this.btn_Filtrar.Name = "btn_Filtrar";
             this.btn_Filtrar.Size = new System.Drawing.Size(120, 23);
             this.btn_Filtrar.TabIndex = 21;
