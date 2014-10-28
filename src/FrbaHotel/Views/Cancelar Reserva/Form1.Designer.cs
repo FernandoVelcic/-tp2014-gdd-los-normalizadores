@@ -150,6 +150,7 @@
             this.btn_Vovler.TabIndex = 2;
             this.btn_Vovler.Text = "Volver";
             this.btn_Vovler.UseVisualStyleBackColor = true;
+            this.btn_Vovler.Click += new System.EventHandler(this.btn_Vovler_Click);
             // 
             // Form1
             // 

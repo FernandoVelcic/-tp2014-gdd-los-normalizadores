@@ -67,7 +67,7 @@
             this.groupBox2.Controls.Add(this.dataGridView1);
             this.groupBox2.Location = new System.Drawing.Point(12, 69);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(922, 518);
+            this.groupBox2.Size = new System.Drawing.Size(912, 290);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Top seleccionado";
@@ -78,7 +78,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(15, 30);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(887, 466);
+            this.dataGridView1.Size = new System.Drawing.Size(887, 238);
             this.dataGridView1.TabIndex = 0;
             // 
             // groupBox7

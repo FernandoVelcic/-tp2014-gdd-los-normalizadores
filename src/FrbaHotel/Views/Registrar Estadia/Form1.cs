@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using FrbaHotel;
+using FrbaHotel.Database_Helper;
 
 namespace FrbaHotel.Registrar_Estadia
 {
@@ -20,5 +22,19 @@ namespace FrbaHotel.Registrar_Estadia
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // this.nextForm(new Registrar_Estadia();   //completar con ingreso
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //validar si existe la reserva, mostrar mensajito y cerrar
+        }
+
+      
+
+        
     }
 }

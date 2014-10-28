@@ -36,6 +36,11 @@ namespace FrbaHotel.Cancelar_Reserva
 
         }
 
+        private void btn_Vovler_Click(object sender, EventArgs e)
+        {
+
+        }
+
 
 
 
