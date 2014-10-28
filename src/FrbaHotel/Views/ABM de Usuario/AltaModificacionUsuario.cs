@@ -39,18 +39,22 @@ namespace FrbaHotel.ABM_de_Usuario
         {
             BindingSource roles_binding = new BindingSource();
             roles_binding.DataSource = EntityManager.getEntityManager().findAll<Rol>();
-            this.Rol.DataSource = roles_binding;
-            this.Rol.DisplayMember = "descripcion";
-
+            comboBox1.DataSource = roles_binding;
+            
             BindingSource hoteles_binding = new BindingSource();
             hoteles_binding.DataSource = EntityManager.getEntityManager().findAll<Hotel>();
-            this.Hotel.DataSource = hoteles_binding;
-            this.Hotel.DisplayMember = "calle";
+            comboBox4.DataSource = hoteles_binding;
             
             BindingSource documentos_binding = new BindingSource();
             documentos_binding.DataSource = EntityManager.getEntityManager().findAll<TipoDocumento>();
             comboBox3.DataSource = documentos_binding;
             comboBox3.DisplayMember = "descripcion";
+
+            if (!esAlta)
+            {
+                List<RolUsuario> roles_usuario = EntityManager.getEntityManager().findAllBy<RolUsuario>("usuario_id", usuario.id.ToString());
+                roles_usuario.ForEach(r => listBox1.Items.Add(r));
+            }
 
             textBox1.DataBindings.Add("Text", usuario, "username");
             textBox3.DataBindings.Add("Text", usuario, "nombre");
@@ -66,27 +70,25 @@ namespace FrbaHotel.ABM_de_Usuario
       
         private void button1_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.Rows.Count == 1)
+            if (listBox1.Items.Count == 0)
             {
                 MessageBox.Show("Debe seleccionar al menos un rol para algun hotel");
                 return;
             }
             
             //Bindings especiales
-            usuario.password = new SHA256(textBox2.Text).ToString();
+            if(textBox2.Text != "" || esAlta)
+                usuario.password = new SHA256(textBox2.Text).ToString();
             usuario.documento_tipo = comboBox3.SelectedValue as TipoDocumento;
 
             try
             {
                 usuario.save();
-                
-                /*foreach(Rol rol in checkedListBox1.CheckedItems)
+
+                foreach (RolUsuario rol in listBox1.Items)
                 {
-                    RolUsuario rolUsuario = new RolUsuario();
-                    rolUsuario.rol = rol;
-                    rolUsuario.usuario = usuario;
-                    rolUsuario.insert();
-                }*/
+                    rol.save();
+                }
             }
             catch (ValidationException exception)
             {
@@ -110,6 +112,32 @@ namespace FrbaHotel.ABM_de_Usuario
         private void button2_Click(object sender, EventArgs e)
         {
             this.nextForm(new ABMUsuario());
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            RolUsuario rol_usuario = new RolUsuario();
+            rol_usuario.rol = comboBox1.SelectedItem as Rol;
+            rol_usuario.hotel = comboBox4.SelectedItem as Hotel;
+            rol_usuario.usuario = usuario;
+
+            foreach (RolUsuario rol in listBox1.Items)
+            {
+                if (rol.hotel.id == rol_usuario.hotel.id && rol.rol.id == rol_usuario.rol.id)
+                {
+                    MessageBox.Show("Este usuario ya posee este rol para este hotel");
+                    return;
+                }
+            }
+            
+            listBox1.Items.Add(rol_usuario);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (!esAlta)
+                (listBox1.SelectedItem as RolUsuario).delete();
+            listBox1.Items.Remove(listBox1.SelectedItem);
         }
     }
 }

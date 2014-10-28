@@ -43,7 +43,10 @@ namespace FrbaHotel.Views.Login
 
             if (roles.Count == 1)
             {
-                this.nextForm(new Operaciones(roles[0]));
+                if (roles[0].rol.estado == true)
+                    this.nextForm(new Operaciones(roles[0]));
+                else
+                    MessageBox.Show("El rol asociado a este usuario se encuentra inhabilitado");
             }
         }
 
@@ -60,7 +63,10 @@ namespace FrbaHotel.Views.Login
                 return;
             }
 
-            this.nextForm(new Operaciones(comboBox1.SelectedValue as RolUsuario));
+            if((comboBox1.SelectedValue as RolUsuario).rol.estado == true)
+                this.nextForm(new Operaciones(comboBox1.SelectedValue as RolUsuario));
+            else
+                MessageBox.Show("El rol seleccionado se encuentra inhabilitado");
         }
     }
 }

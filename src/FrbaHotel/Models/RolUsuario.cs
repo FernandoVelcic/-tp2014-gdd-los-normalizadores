@@ -18,7 +18,7 @@ namespace FrbaHotel.Models
 
         public override string ToString()
         {
-            return rol.descripcion;
+            return rol.ToString() + " en el hotel " + hotel.ToString();
         }
     }
 }
