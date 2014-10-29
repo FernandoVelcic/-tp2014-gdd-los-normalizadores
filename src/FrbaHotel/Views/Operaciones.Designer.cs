@@ -40,6 +40,7 @@
             this.button10 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -84,7 +85,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(74, 274);
+            this.button5.Location = new System.Drawing.Point(607, 166);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(142, 83);
             this.button5.TabIndex = 4;
@@ -104,7 +105,7 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(607, 274);
+            this.button7.Location = new System.Drawing.Point(426, 274);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(142, 83);
             this.button7.TabIndex = 6;
@@ -114,17 +115,17 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(607, 166);
+            this.button8.Location = new System.Drawing.Point(607, 274);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(142, 83);
             this.button8.TabIndex = 7;
-            this.button8.Text = "Login";
+            this.button8.Text = "Volver a la pantalla principal";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(247, 274);
+            this.button9.Location = new System.Drawing.Point(74, 274);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(142, 83);
             this.button9.TabIndex = 8;
@@ -134,7 +135,7 @@
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(426, 274);
+            this.button10.Location = new System.Drawing.Point(247, 274);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(142, 83);
             this.button10.TabIndex = 9;
@@ -162,11 +163,21 @@
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(71, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(0, 18);
+            this.label1.TabIndex = 12;
+            // 
             // Operaciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(856, 408);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.button12);
             this.Controls.Add(this.button11);
             this.Controls.Add(this.button10);
@@ -181,7 +192,9 @@
             this.Controls.Add(this.button1);
             this.Name = "Operaciones";
             this.Text = "Operaciones";
+            this.Shown += new System.EventHandler(this.Operaciones_Shown);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -199,5 +212,6 @@
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Label label1;
     }
 }

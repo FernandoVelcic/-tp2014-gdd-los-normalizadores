@@ -8,15 +8,50 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using FrbaHotel.Homes;
 using FrbaHotel.Database_Helper;
 
 namespace FrbaHotel
 {
     public partial class Operaciones : Form
     {
-        public Operaciones(RolUsuario rolUsuario) : this()
+        private Rol permisos;
+
+        public Operaciones(RolUsuario rolUsuario)
         {
-            Rol permisos = rolUsuario.rol;
+            SesionActual.rol_usuario = rolUsuario;
+            permisos = rolUsuario.rol;
+
+            InitializeComponent();
+            determinarPermisos();
+            button8.Text = "Cerrar Sesion";
+            label1.Text = "Usted se encuentra logeado como " + rolUsuario.ToString();
+        }
+
+        public Operaciones()
+        {
+            Rol GuestRol = EntityManager.getEntityManager().findById<Rol>(3); //Buscar rol guest
+            RolUsuario GuestRolUsuario = new RolUsuario();
+            GuestRolUsuario.rol = GuestRol;
+            SesionActual.rol_usuario = GuestRolUsuario;
+            permisos = GuestRol;
+
+            InitializeComponent();
+            //determinarPermisos();
+        }
+
+
+        private void Operaciones_Shown(object sender, EventArgs e)
+        {
+            if (permisos.id == 3 && permisos.estado == false) //Guests deshabilitados
+            {
+                this.nextForm(new Home());
+                MessageBox.Show("En este momento los guests no pueden acceder al sistema. Por favor intente mas tarde.");
+            }
+        }
+
+        public void determinarPermisos()
+        {
             button1.Visible = permisos.ABM_Cliente;
             button2.Visible = permisos.ABM_Habitación;
             button3.Visible = permisos.ABM_Regimen;
@@ -24,16 +59,11 @@ namespace FrbaHotel
             button5.Visible = permisos.Cancelar_Reserva;
             button6.Visible = permisos.Generar_Reserva;
             button7.Visible = permisos.Listado_Estadístico;
-            //button8.Visible = permisos.Login;
+            //button8.Visible Volver a pantalla principal
             button9.Visible = permisos.Registrar_Consumible;
             button10.Visible = permisos.Registrar_Estadía;
             button11.Visible = permisos.ABM_Usuario;
             button12.Visible = permisos.ABM_Hotel;
-        }
-
-        public Operaciones()
-        {
-            InitializeComponent();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -73,7 +103,7 @@ namespace FrbaHotel
 
         private void button8_Click(object sender, EventArgs e)
         {
-            this.nextForm(new FrbaHotel.Login.Login());
+            this.nextForm(new FrbaHotel.Home());
         }
 
         private void button9_Click(object sender, EventArgs e)
