@@ -102,7 +102,7 @@ namespace FrbaHotel.Database_Helper
             if (item.id != 0)
                 this.update(item);
             else
-                this.insert(item);
+                item.id = this.insert(item);
 
             item.afterSave();
         }
