@@ -29,7 +29,7 @@ namespace FrbaHotel.Models
 
         public override string ToString()
         {
-            return (nombre == "") ? calle : nombre;
+            return (nombre == "") ? calle + " " + nro_Calle : nombre;
         }
 
         public override void preSave()

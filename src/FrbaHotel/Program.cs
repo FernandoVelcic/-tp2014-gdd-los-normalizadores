@@ -22,23 +22,9 @@ namespace FrbaHotel
             }
             catch (Exception ex)
             {
-                MessageBox.Show("No se puede conectar al servidor\r\n" + ex.Message);
-                //return;
+                MessageBox.Show("No se puede conectar al servidor, verifique los datos en el persistent.xml\r\n" + ex.Message);
+                return;
             }
-            
-            /*Hoteles hoteles = new Hoteles();
-            hoteles.calle = "asdasd";
-            hoteles.cant_estrella = 5;
-            hoteles.ciudad = "asdasda";
-            hoteles.nro_Calle = 20;
-            hoteles.recarga_estrella = 20;
-            hoteles.insert();*/
-            //Hoteles hotel = Hoteles.find<Hoteles>(2);
-            //MessageBox.Show("asdad" + hotel.calle);
-            //ConnectionManager.getInstance().close();
-            //List<Usuarios> usuarios = EntityManager.findAll<Usuarios>();
-            //MessageBox.Show("Muestro al usuario: " + usuarios[0].id);
-            
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

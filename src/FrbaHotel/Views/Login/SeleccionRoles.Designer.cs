@@ -48,7 +48,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(440, 174);
+            this.groupBox1.Size = new System.Drawing.Size(536, 174);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Roles";
@@ -66,7 +66,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(266, 108);
+            this.button1.Location = new System.Drawing.Point(371, 108);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(157, 49);
             this.button1.TabIndex = 3;
@@ -89,7 +89,7 @@
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(181, 68);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(242, 21);
+            this.comboBox1.Size = new System.Drawing.Size(347, 21);
             this.comboBox1.TabIndex = 1;
             this.toolTip1.SetToolTip(this.comboBox1, "Seleccione un rol");
             // 
@@ -106,7 +106,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(464, 198);
+            this.ClientSize = new System.Drawing.Size(561, 198);
             this.Controls.Add(this.groupBox1);
             this.Name = "SeleccionRoles";
             this.Text = "SeleccionRoles";
