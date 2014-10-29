@@ -7,17 +7,17 @@ using MyActiveRecord;
 
 namespace FrbaHotel.Models
 {
-    public class Pais : ActiveRecord
+    public class HotelRegimen : ActiveRecord
     {
-        public override String table { get { return "paises"; } }
+        public override String table { get { return "hoteles_regimenes"; } }
 
         //public int id { get; set; } //INTEGER IDENTITY PRIMARY KEY
-        public String nombre { get; set; }  //[nvarchar](255)
-        public String gentilicio { get; set; } //[nvarchar](255)
+        public Hotel hotel { get; set; }
+        public Regimen regimen { get; set; }
 
         public override string ToString()
         {
-            return nombre;
+            return regimen.descripcion;
         }
     }
 }

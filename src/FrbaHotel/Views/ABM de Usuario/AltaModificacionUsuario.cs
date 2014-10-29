@@ -82,7 +82,7 @@ namespace FrbaHotel.ABM_de_Usuario
         {
             if (listBox1.Items.Count == 0)
             {
-                MessageBox.Show("Debe seleccionar al menos un rol para algun hotel");
+                MessageBox.Show("Debe agregar al menos un rol para algun hotel");
                 return;
             }
             

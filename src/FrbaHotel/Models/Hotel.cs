@@ -18,8 +18,7 @@ namespace FrbaHotel.Models
         public String mail { get; set; } //[nvarchar](255)
         public String telefono { get; set; } //[nvarchar](255)
         public String fecha_creacion { get; set; } //[datetime]
-        //[System.ComponentModel.Browsable(false)]
-        //public Pais pais { get; set; }
+        public Pais pais { get; set; }
         public String ciudad { get; set; } //[nvarchar](255)
         public String calle { get; set; } //[nvarchar](255)
         public int nro_Calle { get; set; } //[numeric](18, 0)

@@ -13,6 +13,8 @@ using FrbaHotel.Models;
 using FrbaHotel.Models.Exceptions;
 using FrbaHotel.Database_Helper;
 
+using FrbaHotel.Homes;
+
 namespace FrbaHotel.Views.ABM_de_Hotel
 {
     public partial class AltaModificacionHotel : Form
@@ -35,13 +37,28 @@ namespace FrbaHotel.Views.ABM_de_Hotel
 
         private void AltaModificacionHotel_Load(object sender, EventArgs e)
         {
+            //Binding nacionalidad
             BindingSource nacionalidad_binding = new BindingSource();
             nacionalidad_binding.DataSource = EntityManager.getEntityManager().findAll<Pais>();
             comboBox4.DataSource = nacionalidad_binding;
             comboBox4.DisplayMember = "nombre";
-            //if (!esAlta)
-            //    comboBox4.Text = hotel.pais.nombre;
+            if (!esAlta)
+                comboBox4.Text = hotel.pais.nombre;
 
+            //Binding lista de regimenes
+            BindingSource regimenes_binding = new BindingSource();
+            regimenes_binding.DataSource = EntityManager.getEntityManager().findAll<Regimen>();
+            comboBox3.DataSource = regimenes_binding;
+
+            //Binding lista de regimenes que ofrece
+            if (!esAlta)
+            {
+                //Lista de regimenes que ya poseia
+                List<HotelRegimen> regimenes_hotel = EntityManager.getEntityManager().findAllBy<HotelRegimen>("hotel_id", hotel.id.ToString());
+                regimenes_hotel.ForEach(r => listBox1.Items.Add(r));
+            }
+
+            //Binding varios
             textBox1.DataBindings.Add("Text", hotel, "nombre");
             textBox2.DataBindings.Add("Text", hotel, "mail");
             textBox3.DataBindings.Add("Text", hotel, "telefono");
@@ -55,9 +72,31 @@ namespace FrbaHotel.Views.ABM_de_Hotel
 
         private void button2_Click(object sender, EventArgs e)
         {
+            hotel.pais = comboBox4.SelectedItem as Pais;
+
+            if (listBox1.Items.Count == 0)
+            {
+                MessageBox.Show("Debe agregar al menos un regimen para el hotel");
+                return;
+            }
+
             try
             {
                 hotel.save();
+
+                if (esAlta) //Si se da de alta hay que agregarle al administrador este hotel
+                {
+                    RolUsuario rol_nuevo = new RolUsuario();
+                    rol_nuevo.rol = SesionActual.rol_usuario.rol;
+                    rol_nuevo.usuario = SesionActual.rol_usuario.usuario;
+                    rol_nuevo.hotel = hotel;
+                    rol_nuevo.insert();
+                }
+
+                foreach (HotelRegimen hotelRegimen in listBox1.Items)
+                {
+                    hotelRegimen.save();
+                }
             }
             catch (ValidationException exception)
             {
@@ -81,6 +120,31 @@ namespace FrbaHotel.Views.ABM_de_Hotel
         private void button1_Click(object sender, EventArgs e)
         {
             this.nextForm(new FrbaHotel.Views.ABM_de_Hotel.ABMHotel());
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            HotelRegimen hotel_regimen = new HotelRegimen();
+            hotel_regimen.regimen = comboBox3.SelectedItem as Regimen;
+            hotel_regimen.hotel = hotel;
+
+            foreach (HotelRegimen hotelRegimen in listBox1.Items)
+            {
+                if (hotelRegimen.regimen == hotel_regimen.regimen)
+                {
+                    MessageBox.Show("Este hotel ya posee este régimen");
+                    return;
+                }
+            }
+
+            listBox1.Items.Add(hotel_regimen);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (!esAlta)
+                (listBox1.SelectedItem as HotelRegimen).delete();
+            listBox1.Items.Remove(listBox1.SelectedItem);
         }
     }
 }
