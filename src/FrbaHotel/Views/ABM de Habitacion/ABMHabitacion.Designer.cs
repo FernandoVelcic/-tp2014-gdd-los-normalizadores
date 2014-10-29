@@ -33,13 +33,13 @@
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             this.button4 = new System.Windows.Forms.Button();
             this.btn_Filtrar = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.cmb_TipoHabitacion = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.cmb_Hoteles = new System.Windows.Forms.ComboBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -92,13 +92,13 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.textBox3);
             this.groupBox1.Controls.Add(this.button4);
             this.groupBox1.Controls.Add(this.btn_Filtrar);
-            this.groupBox1.Controls.Add(this.textBox2);
             this.groupBox1.Controls.Add(this.cmb_TipoHabitacion);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.comboBox2);
             this.groupBox1.Controls.Add(this.cmb_Hoteles);
             this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Controls.Add(this.label3);
@@ -111,9 +111,27 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Opciones de filtrado";
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "S",
+            "N"});
+            this.comboBox1.Location = new System.Drawing.Point(420, 24);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 20;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(148, 71);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(121, 20);
+            this.textBox3.TabIndex = 19;
+            // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(332, 112);
+            this.button4.Location = new System.Drawing.Point(267, 112);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(121, 27);
             this.button4.TabIndex = 11;
@@ -123,7 +141,7 @@
             // 
             // btn_Filtrar
             // 
-            this.btn_Filtrar.Location = new System.Drawing.Point(93, 112);
+            this.btn_Filtrar.Location = new System.Drawing.Point(420, 112);
             this.btn_Filtrar.Name = "btn_Filtrar";
             this.btn_Filtrar.Size = new System.Drawing.Size(121, 27);
             this.btn_Filtrar.TabIndex = 10;
@@ -131,17 +149,10 @@
             this.btn_Filtrar.UseVisualStyleBackColor = true;
             this.btn_Filtrar.Click += new System.EventHandler(this.btn_Filtrar_Click);
             // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(420, 25);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(121, 20);
-            this.textBox2.TabIndex = 18;
-            // 
             // cmb_TipoHabitacion
             // 
             this.cmb_TipoHabitacion.FormattingEnabled = true;
-            this.cmb_TipoHabitacion.Location = new System.Drawing.Point(420, 55);
+            this.cmb_TipoHabitacion.Location = new System.Drawing.Point(420, 48);
             this.cmb_TipoHabitacion.Name = "cmb_TipoHabitacion";
             this.cmb_TipoHabitacion.Size = new System.Drawing.Size(121, 21);
             this.cmb_TipoHabitacion.TabIndex = 17;
@@ -149,7 +160,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(290, 58);
+            this.label5.Location = new System.Drawing.Point(290, 51);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(98, 13);
             this.label5.TabIndex = 16;
@@ -160,17 +171,9 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(290, 28);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(110, 13);
+            this.label4.Size = new System.Drawing.Size(81, 13);
             this.label4.TabIndex = 15;
-            this.label4.Text = "Ubicacion en el hotel:";
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(148, 74);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
-            this.comboBox2.TabIndex = 14;
+            this.label4.Text = "Vista al exterior:";
             // 
             // cmb_Hoteles
             // 
@@ -199,7 +202,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 77);
+            this.label2.Location = new System.Drawing.Point(18, 74);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(75, 13);
             this.label2.TabIndex = 10;
@@ -241,17 +244,17 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.ComboBox cmb_Hoteles;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.ComboBox cmb_TipoHabitacion;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btn_Filtrar;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

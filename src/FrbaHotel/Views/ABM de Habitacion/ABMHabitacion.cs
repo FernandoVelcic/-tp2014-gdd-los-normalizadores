@@ -67,6 +67,10 @@ namespace FrbaHotel.Views.ABM_de_Habitacion
             condicionNumero.setLike("numero", textBox1.Text);
             condiciones.Add(condicionNumero);
 
+            FetchCondition condicionPiso = new FetchCondition();
+            condicionPiso.setLike("piso", textBox3.Text);
+            condiciones.Add(condicionPiso);
+
             if (cmb_Hoteles.Text != "")
             {
                 FetchCondition condicionHotel = new FetchCondition();
@@ -83,15 +87,22 @@ namespace FrbaHotel.Views.ABM_de_Habitacion
                 condiciones.Add(condicionTipoHabitacion);
             }
 
+            if (comboBox1.Text != "")
+            {
+                FetchCondition condicionVistaExterior = new FetchCondition();
+                condicionVistaExterior.setEquals("frente", comboBox1.Text);
+                condiciones.Add(condicionVistaExterior);
+            }
+
             Listar(condiciones);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             textBox1.Text = "";
-            textBox2.Text = "";
-            comboBox2.SelectedIndex = -1;
+            textBox3.Text = "";
             cmb_Hoteles.SelectedIndex = -1;
+            comboBox1.SelectedIndex = -1;
             cmb_TipoHabitacion.SelectedIndex = -1;
             Listar(new List<FetchCondition>());
         }
