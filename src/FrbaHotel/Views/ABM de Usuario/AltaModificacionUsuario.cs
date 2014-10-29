@@ -72,7 +72,8 @@ namespace FrbaHotel.ABM_de_Usuario
             textBox4.DataBindings.Add("Text", usuario, "apellido");
             textBox5.DataBindings.Add("Text", usuario, "mail");
             textBox6.DataBindings.Add("Text", usuario, "telefono");
-            textBox7.DataBindings.Add("Text", usuario, "direccion");
+            textBox7.DataBindings.Add("Text", usuario, "calle");
+            textBox9.DataBindings.Add("Text", usuario, "nro_Calle");
             dateTimePicker1.DataBindings.Add("Text", usuario, "fecha_nac", true);
             comboBox2.DataBindings.Add("SelectedIndex", usuario, "estado");
         }

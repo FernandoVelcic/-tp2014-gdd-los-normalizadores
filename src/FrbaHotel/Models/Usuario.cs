@@ -25,7 +25,8 @@ namespace FrbaHotel.Models
 
         public String mail { get; set; } //[nvarchar](255)
         public String telefono { get; set; } //[nvarchar](255)
-        public String direccion { get; set; } //[nvarchar](255)
+        public String calle { get; set; } //[nvarchar](255)
+        public int nro_Calle { get; set; } //[numeric](18, 0)
         public String fecha_nac { get; set; } //datetime
 
         public int intentos_fallidos { get; set; } //[tinyint]

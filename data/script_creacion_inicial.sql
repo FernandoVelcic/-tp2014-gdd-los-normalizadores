@@ -254,7 +254,7 @@ GO
 
 
 
-INSERT INTO [LOS_NORMALIZADORES].[Maestra] SELECT TOP 1000 * FROM [GD2C2014].[gd_esquema].[Maestra]
+INSERT INTO [LOS_NORMALIZADORES].[Maestra] SELECT TOP 10000 * FROM [GD2C2014].[gd_esquema].[Maestra]
 GO
   	
 
@@ -579,7 +579,8 @@ CREATE TABLE [LOS_NORMALIZADORES].[usuarios](
 	[apellido] [nvarchar](255) NOT NULL,
 	[mail] [nvarchar](255) NOT NULL,
 	[fecha_nac] [datetime] NOT NULL,
-	[direccion] [nvarchar](255) NOT NULL,
+	[calle] [nvarchar](255) NOT NULL,
+	[nro_Calle] [numeric](18, 0) NOT NULL,
 	[telefono] [nvarchar](255) NOT NULL,
 	[documento_tipo_id] INTEGER NOT NULL,
 	[documento_nro] [numeric](18, 0) NOT NULL
@@ -588,7 +589,7 @@ CREATE TABLE [LOS_NORMALIZADORES].[usuarios](
 ([id] ASC)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]) ON [PRIMARY]
 
 /* Agregando usuario (admin;w23e) como Administrador */
-INSERT INTO [LOS_NORMALIZADORES].[usuarios] (username, password, nombre, fecha_nac,  intentos_fallidos, estado, apellido, mail, telefono, direccion, documento_tipo_id, documento_nro) VALUES ('admin', 'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7', 'admin','', '', 1, 'admin', 'admin@admin.com.ar', '1112312311', 'Corrientes 3200', '1', '37000000')
+INSERT INTO [LOS_NORMALIZADORES].[usuarios] (username, password, nombre, fecha_nac,  intentos_fallidos, estado, apellido, mail, telefono, calle, nro_Calle, documento_tipo_id, documento_nro) VALUES ('admin', 'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7', 'admin','', '', 1, 'admin', 'admin@admin.com.ar', '1112312311', 'Corrientes', 3200, '1', '37000000')
 INSERT INTO [LOS_NORMALIZADORES].[rol_usuario] (usuario_id, rol_id, hotel_id) VALUES (1,1,1)
 
 /* tipo de documento */
