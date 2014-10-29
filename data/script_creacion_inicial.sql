@@ -660,6 +660,20 @@ INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[roles]
            ('Guest',1,0,0,0,0,0,0,1,1,0,0,0,1)
 */
 GO
+
+/* FK de otras tablas */
+ALTER TABLE [LOS_NORMALIZADORES].[usuarios] ADD CONSTRAINT documento_tipos_user_id FOREIGN KEY (documento_tipo_id) REFERENCES [LOS_NORMALIZADORES].[documento_tipos](id)
+
+ALTER TABLE [LOS_NORMALIZADORES].[clientes] ADD CONSTRAINT documento_tipos_clientes_id FOREIGN KEY (documento_tipo_id) REFERENCES [LOS_NORMALIZADORES].[documento_tipos](id)
+
+ALTER TABLE [LOS_NORMALIZADORES].[clientes] ADD CONSTRAINT paises_clientes_id FOREIGN KEY (pais_id) REFERENCES [LOS_NORMALIZADORES].[paises](id)
+
+ALTER TABLE [LOS_NORMALIZADORES].[rol_usuario] ADD CONSTRAINT rol_user_id FOREIGN KEY (usuario_id) REFERENCES [LOS_NORMALIZADORES].[usuarios](id)
+
+ALTER TABLE [LOS_NORMALIZADORES].[rol_usuario] ADD CONSTRAINT roles_id FOREIGN KEY (rol_id) REFERENCES [LOS_NORMALIZADORES].[roles](id)
+
+GO
+
 /* Procedimientos */
 
 CREATE PROCEDURE [LOS_NORMALIZADORES].[uspLogin]
