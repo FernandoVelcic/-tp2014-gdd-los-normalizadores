@@ -37,21 +37,31 @@ namespace FrbaHotel.ABM_de_Usuario
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //Lista de roles (sin incluir guest)
+            List<FetchCondition> condiciones = new List<FetchCondition>();
+            FetchCondition condicionNoGuest = new FetchCondition();
+            condicionNoGuest.setNotEquals("id", 3); //Guest id = 3
+            condiciones.Add(condicionNoGuest);
+
             BindingSource roles_binding = new BindingSource();
-            roles_binding.DataSource = EntityManager.getEntityManager().findAll<Rol>();
+            roles_binding.DataSource = EntityManager.getEntityManager().findList<Rol>(condiciones);
             comboBox1.DataSource = roles_binding;
             
+            //Lista de hoteles
             BindingSource hoteles_binding = new BindingSource();
             hoteles_binding.DataSource = EntityManager.getEntityManager().findAll<Hotel>();
             comboBox4.DataSource = hoteles_binding;
             
+            //Lista de tipos de documentos
             BindingSource documentos_binding = new BindingSource();
             documentos_binding.DataSource = EntityManager.getEntityManager().findAll<TipoDocumento>();
             comboBox3.DataSource = documentos_binding;
             comboBox3.DisplayMember = "descripcion";
 
+            //Bindings
             if (!esAlta)
             {
+                //Lista de roles que ya poseia
                 List<RolUsuario> roles_usuario = EntityManager.getEntityManager().findAllBy<RolUsuario>("usuario_id", usuario.id.ToString());
                 roles_usuario.ForEach(r => listBox1.Items.Add(r));
             }

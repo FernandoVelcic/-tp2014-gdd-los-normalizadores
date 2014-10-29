@@ -640,7 +640,7 @@ INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[roles]
 		   ,[Listado_Estadístico])
      VALUES
            ('Recepcionista',1,0,0,1,0,0,0,1,1,1,1,1,1)
-/*
+
 INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[roles]
            ([descripcion]
            ,[estado]
@@ -658,7 +658,7 @@ INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[roles]
 		   ,[Listado_Estadístico])
      VALUES
            ('Guest',1,0,0,0,0,0,0,1,1,0,0,0,1)
-*/
+
 GO
 
 /* FK de otras tablas */
