@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cmb_Habitacion = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.cmb_TipoHabitacion = new System.Windows.Forms.ComboBox();
             this.txt_Cant_Noches = new System.Windows.Forms.TextBox();
             this.txt_Desde = new System.Windows.Forms.TextBox();
@@ -46,8 +44,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.cmb_Habitacion);
-            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.cmb_TipoHabitacion);
             this.groupBox1.Controls.Add(this.txt_Cant_Noches);
             this.groupBox1.Controls.Add(this.txt_Desde);
@@ -63,24 +59,6 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos de la reserva";
-            // 
-            // cmb_Habitacion
-            // 
-            this.cmb_Habitacion.FormattingEnabled = true;
-            this.cmb_Habitacion.Location = new System.Drawing.Point(174, 168);
-            this.cmb_Habitacion.Name = "cmb_Habitacion";
-            this.cmb_Habitacion.Size = new System.Drawing.Size(121, 24);
-            this.cmb_Habitacion.TabIndex = 10;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(53, 170);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(67, 16);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "Habitacion: ";
             // 
             // cmb_TipoHabitacion
             // 
@@ -165,7 +143,7 @@
             this.btn_Generar.Name = "btn_Generar";
             this.btn_Generar.Size = new System.Drawing.Size(115, 46);
             this.btn_Generar.TabIndex = 2;
-            this.btn_Generar.Text = "Generar Reserva";
+            this.btn_Generar.Text = "Ver habitaciones disponibles";
             this.btn_Generar.UseVisualStyleBackColor = true;
             this.btn_Generar.Click += new System.EventHandler(this.btn_Generar_Click);
             // 
@@ -211,7 +189,5 @@
         private System.Windows.Forms.Button btn_Generar;
         private System.Windows.Forms.Button btn_Volver;
         private System.Windows.Forms.ComboBox cmb_TipoHabitacion;
-        private System.Windows.Forms.ComboBox cmb_Habitacion;
-        private System.Windows.Forms.Label label1;
     }
 }

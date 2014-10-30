@@ -107,7 +107,8 @@ CREATE TABLE [LOS_NORMALIZADORES].[habitaciones_tipos](
 	[id] INTEGER IDENTITY PRIMARY KEY,
 	[codigo] [numeric](18, 0),
 	[descripcion] [nvarchar](255),
-	[porcentual] [numeric](18, 2)
+	[porcentual] [numeric](18, 2),
+	[cantidad_maxima_personas]	INTEGER	DEFAULT 0			/* Deberia ir ??? */
 ) ON [PRIMARY]
 
 
@@ -134,7 +135,7 @@ CREATE TABLE [LOS_NORMALIZADORES].[reservas](
 	[codigo] [numeric](18, 0),
 	[cant_noches] [numeric](18, 0),
 	[regimen_id] INTEGER,
-	[tipo_habitacion_id] INTEGER,
+	[habitacion_id] INTEGER,
 	[cantidad_personas]	INTEGER				/* Deberia ir ??? */
 											/* Falta calcular en base a la habitacion y la cantidad de gente que entre */
 											/* Como calculo el precio?? */
@@ -228,7 +229,7 @@ ALTER TABLE [LOS_NORMALIZADORES].[hoteles_regimenes] ADD CONSTRAINT regimenes_un
 
 ALTER TABLE [LOS_NORMALIZADORES].[reservas] ADD CONSTRAINT reservas_regimen_id FOREIGN KEY (regimen_id) REFERENCES [LOS_NORMALIZADORES].[regimenes](id)
 
-ALTER TABLE [LOS_NORMALIZADORES].[reservas] ADD CONSTRAINT reservas_tipo_habitacion_id FOREIGN KEY (tipo_habitacion_id) REFERENCES [LOS_NORMALIZADORES].[habitaciones_tipos](id)
+ALTER TABLE [LOS_NORMALIZADORES].[reservas] ADD CONSTRAINT reservas_habitacion_id FOREIGN KEY (habitacion_id) REFERENCES [LOS_NORMALIZADORES].[habitaciones](id)
 
 ALTER TABLE [LOS_NORMALIZADORES].[estadias] ADD CONSTRAINT estadias_habitacion_id FOREIGN KEY (habitacion_id) REFERENCES [LOS_NORMALIZADORES].[habitaciones](id)
 
