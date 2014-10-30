@@ -33,14 +33,18 @@ namespace FrbaHotel.Generar_Modificar_Reserva
         private void Form1_Load(object sender, EventArgs e)
         {
             BindingSource tipo_habitacion_binding = new BindingSource();
-            tipo_habitacion_binding.DataSource = EntityManager.getEntityManager().findAll<TipoHabitacion>();
+            List<TipoHabitacion> tipoHabitaciones = EntityManager.getEntityManager().findAll<TipoHabitacion>();
+            tipo_habitacion_binding.DataSource = tipoHabitaciones;
             cmb_TipoHabitacion.DataSource = tipo_habitacion_binding;
             cmb_TipoHabitacion.DisplayMember = "descripcion";
+            cmb_TipoHabitacion.SelectedItem = tipoHabitaciones[0];
 
             BindingSource regimen_binding = new BindingSource();
-            regimen_binding.DataSource = EntityManager.getEntityManager().findAll<Regimen>();
+            List<Regimen> regimenes = EntityManager.getEntityManager().findAll<Regimen>();
+            regimen_binding.DataSource = regimenes;
             cmb_Regimen.DataSource = regimen_binding;
             cmb_Regimen.DisplayMember = "descripcion";
+            cmb_Regimen.SelectedItem = regimenes[0];
 
             txt_Cant_Noches.DataBindings.Add("Text", this.reserva, "cant_noches");
             txt_Desde.DataBindings.Add("Text", this.reserva, "fecha_inicio");
@@ -66,9 +70,9 @@ namespace FrbaHotel.Generar_Modificar_Reserva
             query.addInnerJoin("hoteles_regimenes", "hoteles.id = hoteles_regimenes.hotel_id");
             query.addInnerJoin("regimenes", "hoteles_regimenes.regimen_id = regimenes.id");
 
-            query.addWhere("regimenes.id", ((Regimen)cmb_Regimen.SelectedItem).id.ToString());
-            query.addWhere("habitaciones.tipo_id", ((TipoHabitacion)cmb_TipoHabitacion.SelectedItem).id.ToString());
-
+            query.addWhere("regimenes.id", ((Regimen)cmb_Regimen.SelectedItem));
+            query.addWhere("habitaciones.tipo_id", ((TipoHabitacion)cmb_TipoHabitacion.SelectedItem));
+  
             var sql = query.build();
             SqlCommand command = new SqlCommand(sql, ConnectionManager.getInstance().getConnection());
             List<Habitacion> habitaciones = new List<Habitacion>();

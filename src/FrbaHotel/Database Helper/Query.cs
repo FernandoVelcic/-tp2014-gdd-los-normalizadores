@@ -44,9 +44,16 @@ namespace MyActiveRecord
         }
 
 
+        public void addWhere(string key, ActiveRecord value)
+        {
+            if (value != null && key != null)
+                this.addWhere(key, value.id.ToString(), "=");
+        }
+
         public void addWhere(string key, string value)
         {
-            this.addWhere(key, value, "=");
+            if(value != null && key != null)
+                this.addWhere(key, value, "=");
         }
 
         public void addWhere(string key, List<string> value)
