@@ -16,25 +16,54 @@ namespace FrbaHotel.Registrar_Estadia
         public Form1()
         {
             InitializeComponent();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
+            this.FormClosing += new FormClosingEventHandler(Form1_FormClosing);
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+      private void button1_Click(object sender, EventArgs e)
         {
-            // this.nextForm(new Registrar_Estadia();   //completar con ingreso
+            recopilarDatos();  
+          // this.nextForm(new Registrar_Estadia();   //completar con ingreso
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //validar si existe la reserva, mostrar mensajito y cerrar
+            recopilarDatos();
+            //validar si existe la reserva, e ir a registrar consumible para luego facturar
         }
 
-      
+        public void recopilarDatos()
+        {
+            int nroReserva = int.Parse(textBox2.Text);
+            DateTime fecha = dateTimePicker1.Value;
+            string usuario = textBox1.Text;
+        }
 
+        void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            switch (e.CloseReason)  //la opcion de cierre que suceda, aunque podria ser default
+            {
+                case CloseReason.ApplicationExitCall:
+                    break;
+                case CloseReason.FormOwnerClosing:
+                    break;
+                case CloseReason.MdiFormClosing:
+                    break;
+                case CloseReason.None:
+                    break;
+                case CloseReason.TaskManagerClosing:
+                    break;
+                case CloseReason.UserClosing:
+                    //this.nextform….               
+                    break;
+                case CloseReason.WindowsShutDown:
+                    break;
+                default:
+                    break;
+            }
+
+
+        }
         
     }
 }

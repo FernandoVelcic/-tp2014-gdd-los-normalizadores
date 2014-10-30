@@ -14,12 +14,11 @@ namespace FrbaHotel.Listado_Estadistico
         public Form1()
         {
             InitializeComponent();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
+            this.FormClosing += new FormClosingEventHandler(Form1_FormClosing);
 
         }
+
+       
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -39,6 +38,31 @@ namespace FrbaHotel.Listado_Estadistico
             //seleccionarTop(anio, trimestre, categoria)  //logica que falta
         }
 
+        void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            switch (e.CloseReason)  //la opcion de cierre que suceda, aunque podria ser default
+            {
+                case CloseReason.ApplicationExitCall:
+                    break;
+                case CloseReason.FormOwnerClosing:
+                    break;
+                case CloseReason.MdiFormClosing:
+                    break;
+                case CloseReason.None:
+                    break;
+                case CloseReason.TaskManagerClosing:
+                    break;
+                case CloseReason.UserClosing:
+                    //this.nextform….               
+                    break;
+                case CloseReason.WindowsShutDown:
+                    break;
+                default:
+                    break;
+            }
+
+
+        }
 
        
     }

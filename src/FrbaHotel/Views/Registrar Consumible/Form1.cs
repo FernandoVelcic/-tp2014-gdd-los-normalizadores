@@ -34,6 +34,19 @@ namespace FrbaHotel.Registrar_Consumible
             this.Close();
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //modificar el que esta seleccionado en el datagrid
+        }
+
+        private void btn_Agregar_Click(object sender, EventArgs e)
+        {
+           //cargar los datos en la reserva que tiene que venir como parametro desde el checkout
+            string descripcion = textBox2.Text;
+            double precio = Double.Parse(textBox3.Text);
+            int unidades = int.Parse(textBox4.Text);    //chequear si va, para mi deberia, pero en la tabla no está
+         }
+
        
 
        

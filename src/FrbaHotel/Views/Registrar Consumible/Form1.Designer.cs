@@ -58,6 +58,7 @@
             this.btn_Agregar.TabIndex = 1;
             this.btn_Agregar.Text = "Agregar";
             this.btn_Agregar.UseVisualStyleBackColor = true;
+            this.btn_Agregar.Click += new System.EventHandler(this.btn_Agregar_Click);
             // 
             // dataGridView1
             // 
@@ -103,6 +104,7 @@
             this.button1.TabIndex = 6;
             this.button1.Text = "Modificar";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // groupBox1
             // 
@@ -192,9 +194,8 @@
             this.textBox5.Enabled = false;
             this.textBox5.Location = new System.Drawing.Point(43, 37);
             this.textBox5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.textBox5.Multiline = true;
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(199, 38);
+            this.textBox5.Size = new System.Drawing.Size(199, 22);
             this.textBox5.TabIndex = 0;
             // 
             // Form1
