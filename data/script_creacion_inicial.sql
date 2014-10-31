@@ -457,7 +457,7 @@ ALTER TABLE [LOS_NORMALIZADORES].[Maestra] ADD estadia_id INTEGER
 GO
 
 UPDATE [LOS_NORMALIZADORES].[Maestra]
-SET reserva_id = 
+SET estadia_id = 
 	(
 		SELECT id FROM [LOS_NORMALIZADORES].[estadias] as e
 		WHERE [LOS_NORMALIZADORES].[Maestra].Estadia_Fecha_Inicio = e.fecha_inicio
