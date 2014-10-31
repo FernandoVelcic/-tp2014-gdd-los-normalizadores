@@ -215,15 +215,6 @@ INSERT INTO [LOS_NORMALIZADORES].[paises] (nombre, gentilicio) VALUES ('ARGENTIN
 
 
 
-/* Creo vistas SQL */
-CREATE VIEW [LOS_NORMALIZADORES].[v_habitaciones] AS
-SELECT habitaciones.* FROM [LOS_NORMALIZADORES].[habitaciones] habitaciones
-INNER JOIN [LOS_NORMALIZADORES].[hoteles] hoteles on habitaciones.hotel_id = hoteles.id 
-
-GO
-
-
-
 INSERT INTO [LOS_NORMALIZADORES].[Maestra] SELECT TOP 10000 * FROM [GD2C2014].[gd_esquema].[Maestra]
 GO
   	
@@ -672,6 +663,15 @@ ALTER TABLE [LOS_NORMALIZADORES].[rol_usuario] ADD CONSTRAINT rol_user_id FOREIG
 ALTER TABLE [LOS_NORMALIZADORES].[rol_usuario] ADD CONSTRAINT roles_id FOREIGN KEY (rol_id) REFERENCES [LOS_NORMALIZADORES].[roles](id)
 
 GO
+
+
+/* Creo vistas SQL */
+CREATE VIEW [LOS_NORMALIZADORES].[v_habitaciones] AS
+SELECT habitaciones.* FROM [LOS_NORMALIZADORES].[habitaciones] habitaciones
+INNER JOIN [LOS_NORMALIZADORES].[hoteles] hoteles on habitaciones.hotel_id = hoteles.id 
+
+GO
+
 
 /* Procedimientos */
 
