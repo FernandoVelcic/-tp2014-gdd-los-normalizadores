@@ -44,31 +44,36 @@ namespace MyActiveRecord
         }
 
 
-        public void addWhere(string key, ActiveRecord value)
+        public Query addWhere(string key, ActiveRecord value)
         {
             if (value != null && key != null)
                 this.addWhere(key, value.id.ToString(), "=");
+            return this;
         }
 
-        public void addWhere(string key, string value)
+        public Query addWhere(string key, string value)
         {
             if(value != null && key != null)
                 this.addWhere(key, value, "=");
+            return this;
         }
 
-        public void addWhere(string key, List<string> value)
+        public Query addWhere(string key, List<string> value)
         {
             this.addWhere(key, string.Join(", ", value.ToArray()), " IN ");
+            return this;
         }
 
-        public void addWhere(string key, string value, string comparator)
+        public Query addWhere(string key, string value, string comparator)
         {
-            this.whereConditions.Add(key + comparator + value);
+            this.whereConditions.Add(key + " " + comparator + " " + value);
+            return this;
         }
 
-        public void addWhere(string condition)
+        public Query addWhere(string condition)
         {
             this.whereConditions.Add(condition);
+            return this;
         }
 
         

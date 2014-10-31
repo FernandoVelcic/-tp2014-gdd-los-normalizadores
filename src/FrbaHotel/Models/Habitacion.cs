@@ -6,6 +6,7 @@ using System.Text;
 using MyActiveRecord;
 using FrbaHotel.Database_Helper;
 using FrbaHotel.Models.Exceptions;
+using System.Data.SqlClient;
 
 namespace FrbaHotel.Models
 {
@@ -44,5 +45,24 @@ namespace FrbaHotel.Models
                 throw new ValidationException("El maximo de caracteres en la descripcion es de 255");
             }
         }
+
+
+        public Boolean estaDisponible(DateTime desde, int cantidadNoches)
+        {
+            SelectQuery<Reserva> query = new SelectQuery<Reserva>(typeof(Reserva));
+
+            query.addCount().addWhere("habitacion_id", id.ToString());
+
+            query.addWhere("desde", desde.AddDays(cantidadNoches).ToLongDateString(), ">");
+            query.addWhere("desde + cant_noches", desde.ToLongDateString(), "<");
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = query.build(); ;
+            Int32 count = (Int32)cmd.ExecuteScalar();
+
+            return count == 0;
+        }
+
+
     }
 }

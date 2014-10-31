@@ -19,7 +19,7 @@ namespace FrbaHotel.Models
         public Habitacion habitacion { get; set; } //Integer
         public int cant_noches { get; set; } //[numeric](18, 0)
         public int cantidad_personas { get; set; } //INTEGER
-
+        public int codigo { get; set; } // [numeric](18, 0) NULL
 
         public override void preInsert()
         {

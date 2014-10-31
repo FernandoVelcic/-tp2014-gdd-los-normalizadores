@@ -56,9 +56,16 @@ namespace MyActiveRecord
         }
 
 
+        private List<String> havings = new List<String>();
+        public SelectQuery<T> addHaving(string col)
+        {
+            return this;
+        }
+
 
         public SelectQuery<T> addCount()
         {
+            addSelect("COUNT(*)");
             return this;
         }
 
@@ -87,10 +94,19 @@ namespace MyActiveRecord
             return "FROM " + this.getTableName();
         }
 
+        private string buildHaving()
+        {
+            if (havings.Count == 0)
+            {
+                return "";
+            }
+            return " HAVING " + string.Join("AND ", havings.ToArray()) + " ";
+        }
+
 
         public override string build()
         {
-            String query = buildSelect() + buildFrom() + buildJoin() + buildWhere();
+            String query = buildSelect() + buildFrom() + buildJoin() + buildWhere() + buildHaving();
             Query.addLog(query);
             return query;
         }
