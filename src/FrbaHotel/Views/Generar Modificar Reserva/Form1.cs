@@ -19,9 +19,12 @@ namespace FrbaHotel.Generar_Modificar_Reserva
     {
         Reserva reserva;
 
-        public Form1() : this(new Reserva())
+        public Form1()
         {
-
+            InitializeComponent();
+            this.reserva = new Reserva();
+            reserva.cant_noches = 7;
+            reserva.fecha_inicio = DateTime.Now;
         }
 
 
@@ -29,6 +32,8 @@ namespace FrbaHotel.Generar_Modificar_Reserva
         {
             InitializeComponent();
             this.reserva = reserva;
+            reserva.cant_noches = 7;
+            reserva.fecha_inicio = DateTime.Now;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -59,12 +64,35 @@ namespace FrbaHotel.Generar_Modificar_Reserva
         private void btn_Generar_Click(object sender, EventArgs e)
         {
 
-            new HabitacionesDisponibles(
-                cmb_Regimen.SelectedItem as Regimen, cmb_TipoHabitacion.SelectedItem as TipoHabitacion, DateTime.Parse(txt_Desde.Text), Int32.Parse(txt_Cant_Noches.Text), new Hotel()).Show();
-
-
+            try
+            {
+                validate();
+                new HabitacionesDisponibles(
+               cmb_Regimen.SelectedItem as Regimen, cmb_TipoHabitacion.SelectedItem as TipoHabitacion, DateTime.Parse(txt_Desde.Text), Int32.Parse(txt_Cant_Noches.Text), new Hotel(), this).Show();
+                this.Hide();
+                
+            }
+            catch (ValidationException exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+           
         }
 
+        private void validate()
+        {
+
+            if (DateTime.Parse(txt_Desde.Text).Year < 1900)
+            {
+                throw new ValidationException("Por favor, seleccione una fecha valida");
+            }
+
+            if (Int32.Parse(txt_Cant_Noches.Text) < 0)
+            {
+                throw new ValidationException("Por favor, seleccione una cantidad de días valida");
+            }
+
+        }
 
         private void btn_Volver_Click(object sender, EventArgs e)
         {

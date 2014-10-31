@@ -15,8 +15,22 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
     public partial class HabitacionesDisponibles : Form
     {
 
-        public HabitacionesDisponibles(Regimen regimen, TipoHabitacion tipoHabitacion, DateTime desde, int canitadNoches, Hotel hotel)
+        private DateTime desde;
+        private int cantidadNoches;
+        private Regimen regimen;
+        private Hotel hotel;
+        private TipoHabitacion tipoHabitacion;
+        private Form previousForm;
+
+        public HabitacionesDisponibles(Regimen regimen, TipoHabitacion tipoHabitacion, DateTime desde, int cantidadNoches, Hotel hotel, Form previous)
         {
+            this.desde = desde;
+            this.cantidadNoches = cantidadNoches;
+            this.hotel = hotel;
+            this.regimen = regimen;
+            this.tipoHabitacion = tipoHabitacion;
+            this.previousForm = previous;
+
             InitializeComponent();
             load_Habitaciones(regimen, tipoHabitacion);
         }
@@ -26,11 +40,13 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
         {
 
             SelectQuery<Habitacion> query = new SelectQuery<Habitacion>(typeof(Habitacion));
+
             query.addSelect("habitaciones.id");
             query.addSelect("habitaciones.numero");
             query.addSelect("habitaciones.piso");
             query.addSelect("hoteles.calle");
             query.addSelect("hoteles.nombre");
+
             query.addInnerJoin("hoteles", "habitaciones.hotel_id = hoteles.id");
             query.addInnerJoin("habitaciones_tipos", "habitaciones.tipo_id = habitaciones_tipos.id");
             query.addInnerJoin("hoteles_regimenes", "hoteles.id = hoteles_regimenes.hotel_id");
@@ -38,6 +54,7 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
 
             query.addWhere("regimenes.id", regimen);
             query.addWhere("habitaciones.tipo_id", tipoHabitacion);
+
 
             var sql = query.build();
             SqlCommand command = new SqlCommand(sql, ConnectionManager.getInstance().getConnection());
@@ -66,6 +83,37 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
             list_Habitaciones.DataSource = habitaciones_binding;
             
 
+        }
+
+        private void btn_Confirmar_Click(object sender, EventArgs e)
+        {
+            Habitacion habitacion = list_Habitaciones.SelectedItem as Habitacion;
+            if (!habitacion.estaDisponible(desde, cantidadNoches))
+            {
+               MessageBox.Show("La habitación ya esta reservada para esa fecha, por favor seleccione otra.");
+               return;
+            }
+
+            Reserva reserva = new Reserva();
+            reserva.regimen = regimen;
+            reserva.habitacion = habitacion;
+            reserva.fecha_inicio = desde;
+            reserva.cant_noches = cantidadNoches;
+
+            /* Pasar a formulario datos del cliente */
+            MessageBox.Show("Deberia pasar a seleccionar al cliente!");
+
+        }
+
+        private void btn_Volver_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            this.previousForm.Show();
+        }
+
+        private void btn_CrearCliente_Click(object sender, EventArgs e)
+        {
+            new FrbaHotel.Views.ABM_de_Cliente.AltaModificacionCliente().Show();
         }
 
 

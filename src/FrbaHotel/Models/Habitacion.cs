@@ -53,11 +53,10 @@ namespace FrbaHotel.Models
 
             query.addCount().addWhere("habitacion_id", id.ToString());
 
-            query.addWhere("desde", desde.AddDays(cantidadNoches).ToLongDateString(), ">");
-            query.addWhere("desde + cant_noches", desde.ToLongDateString(), "<");
+            query.addWhere("fecha_inicio", "'" + desde.AddDays(cantidadNoches).ToShortDateString() + "'", ">");
+            query.addWhere("(fecha_inicio + cant_noches)", "'" + desde.ToShortDateString() + "'", "<");
 
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = query.build(); ;
+            SqlCommand cmd = new SqlCommand(query.build(), ConnectionManager.getInstance().getConnection());
             Int32 count = (Int32)cmd.ExecuteScalar();
 
             return count == 0;
