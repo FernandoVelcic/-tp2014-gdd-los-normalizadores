@@ -13,6 +13,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using FrbaHotel.Homes;
+
 namespace FrbaHotel.Generar_Modificar_Reserva
 {
     public partial class Form1 : Form
@@ -38,6 +40,18 @@ namespace FrbaHotel.Generar_Modificar_Reserva
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            BindingSource hoteles_binding = new BindingSource();
+            hoteles_binding.DataSource = EntityManager.getEntityManager().findAll<Hotel>();
+            cmb_Hotel.DataSource = hoteles_binding;
+
+            if (SesionActual.rol_usuario.rol.id != 3) //Si no es Guest
+            {
+                txt_Hotel.Visible = false;
+                cmb_Hotel.Visible = false;
+                cmb_Hotel.SelectedItem = SesionActual.rol_usuario.hotel;
+            }
+
+
             BindingSource tipo_habitacion_binding = new BindingSource();
             List<TipoHabitacion> tipoHabitaciones = EntityManager.getEntityManager().findAll<TipoHabitacion>();
             tipo_habitacion_binding.DataSource = tipoHabitaciones;
@@ -68,7 +82,7 @@ namespace FrbaHotel.Generar_Modificar_Reserva
             {
                 validate();
                 new HabitacionesDisponibles(
-               cmb_Regimen.SelectedItem as Regimen, cmb_TipoHabitacion.SelectedItem as TipoHabitacion, DateTime.Parse(txt_Desde.Text), Int32.Parse(txt_Cant_Noches.Text), new Hotel(), this).Show();
+               cmb_Regimen.SelectedItem as Regimen, cmb_TipoHabitacion.SelectedItem as TipoHabitacion, DateTime.Parse(txt_Desde.Text), Int32.Parse(txt_Cant_Noches.Text), cmb_Hotel.SelectedItem as Hotel, this).Show();
                 this.Hide();
                 
             }
@@ -96,7 +110,7 @@ namespace FrbaHotel.Generar_Modificar_Reserva
 
         private void btn_Volver_Click(object sender, EventArgs e)
         {
-            //TODO: Volver a formulario anterior
+            this.nextForm(new Operaciones());
         }
 
         private void update_habitaciones()

@@ -35,7 +35,10 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
             load_Habitaciones(regimen, tipoHabitacion);
         }
 
-        /* TODO pasar a una vista con las habitaciones disponibles o algo parecido */
+        /* TODO 
+         * pasar a una vista con las habitaciones disponibles o algo parecido 
+         * validar que los estados sean igual a 1, por ej si una habitacion tiene estado 0 no deberia aparecer
+         */
         private void load_Habitaciones(Regimen regimen, TipoHabitacion tipoHabitacion)
         {
 
@@ -44,8 +47,8 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
             query.addSelect("habitaciones.id");
             query.addSelect("habitaciones.numero");
             query.addSelect("habitaciones.piso");
-            query.addSelect("hoteles.calle");
-            query.addSelect("hoteles.nombre");
+            //query.addSelect("hoteles.calle");
+            //query.addSelect("hoteles.nombre");
 
             query.addInnerJoin("hoteles", "habitaciones.hotel_id = hoteles.id");
             query.addInnerJoin("habitaciones_tipos", "habitaciones.tipo_id = habitaciones_tipos.id");
@@ -54,6 +57,7 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
 
             query.addWhere("regimenes.id", regimen);
             query.addWhere("habitaciones.tipo_id", tipoHabitacion);
+            query.addWhere("habitaciones.hotel_id", hotel);
 
 
             var sql = query.build();
@@ -68,9 +72,9 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
                     habitacion.numero = Int32.Parse(result["numero"].ToString(), null);
                     habitacion.piso = Int32.Parse(result["piso"].ToString(), null);
 
-                    Hotel hotel = new Hotel();
+                    /*Hotel hotel = new Hotel();
                     hotel.calle = result["calle"].ToString();
-                    hotel.nombre = result["nombre"].ToString();
+                    hotel.nombre = result["nombre"].ToString();*/
 
                     habitacion.hotel = hotel;
 

@@ -39,11 +39,15 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btn_Generar = new System.Windows.Forms.Button();
             this.btn_Volver = new System.Windows.Forms.Button();
+            this.txt_Hotel = new System.Windows.Forms.Label();
+            this.cmb_Hotel = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cmb_Hotel);
+            this.groupBox1.Controls.Add(this.txt_Hotel);
             this.groupBox1.Controls.Add(this.cmb_TipoHabitacion);
             this.groupBox1.Controls.Add(this.txt_Cant_Noches);
             this.groupBox1.Controls.Add(this.txt_Desde);
@@ -62,13 +66,14 @@
             // 
             // cmb_TipoHabitacion
             // 
+            this.cmb_TipoHabitacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_TipoHabitacion.FormattingEnabled = true;
             this.cmb_TipoHabitacion.Location = new System.Drawing.Point(174, 107);
             this.cmb_TipoHabitacion.Name = "cmb_TipoHabitacion";
             this.cmb_TipoHabitacion.Size = new System.Drawing.Size(121, 24);
             this.cmb_TipoHabitacion.TabIndex = 8;
-            this.cmb_TipoHabitacion.SelectedIndexChanged += new System.EventHandler(this.update_habitaciones);
             this.cmb_TipoHabitacion.SelectionChangeCommitted += new System.EventHandler(this.update_habitaciones);
+            this.cmb_TipoHabitacion.SelectedIndexChanged += new System.EventHandler(this.update_habitaciones);
             this.cmb_TipoHabitacion.TextUpdate += new System.EventHandler(this.update_habitaciones);
             // 
             // txt_Cant_Noches
@@ -87,13 +92,14 @@
             // 
             // cmb_Regimen
             // 
+            this.cmb_Regimen.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_Regimen.FormattingEnabled = true;
             this.cmb_Regimen.Location = new System.Drawing.Point(175, 138);
             this.cmb_Regimen.Name = "cmb_Regimen";
             this.cmb_Regimen.Size = new System.Drawing.Size(121, 24);
             this.cmb_Regimen.TabIndex = 5;
-            this.cmb_Regimen.SelectedIndexChanged += new System.EventHandler(this.update_habitaciones);
             this.cmb_Regimen.SelectionChangeCommitted += new System.EventHandler(this.update_habitaciones);
+            this.cmb_Regimen.SelectedIndexChanged += new System.EventHandler(this.update_habitaciones);
             this.cmb_Regimen.TextUpdate += new System.EventHandler(this.update_habitaciones);
             // 
             // label5
@@ -158,6 +164,25 @@
             this.btn_Volver.UseVisualStyleBackColor = true;
             this.btn_Volver.Click += new System.EventHandler(this.btn_Volver_Click);
             // 
+            // txt_Hotel
+            // 
+            this.txt_Hotel.AutoSize = true;
+            this.txt_Hotel.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Hotel.Location = new System.Drawing.Point(53, 171);
+            this.txt_Hotel.Name = "txt_Hotel";
+            this.txt_Hotel.Size = new System.Drawing.Size(39, 16);
+            this.txt_Hotel.TabIndex = 9;
+            this.txt_Hotel.Text = "Hotel:";
+            // 
+            // cmb_Hotel
+            // 
+            this.cmb_Hotel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_Hotel.FormattingEnabled = true;
+            this.cmb_Hotel.Location = new System.Drawing.Point(175, 168);
+            this.cmb_Hotel.Name = "cmb_Hotel";
+            this.cmb_Hotel.Size = new System.Drawing.Size(121, 24);
+            this.cmb_Hotel.TabIndex = 10;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -189,5 +214,7 @@
         private System.Windows.Forms.Button btn_Generar;
         private System.Windows.Forms.Button btn_Volver;
         private System.Windows.Forms.ComboBox cmb_TipoHabitacion;
+        private System.Windows.Forms.ComboBox cmb_Hotel;
+        private System.Windows.Forms.Label txt_Hotel;
     }
 }
