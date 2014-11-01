@@ -12,7 +12,7 @@ namespace FrbaHotel
         public static void nextForm(this Form form1, Form form2)
         {
             form1.Hide();
-            form2.Closed += (s, a) => form1.Close();
+            form2.Closed += (s, a) => form1.Show();
             form2.Show();
         }
 

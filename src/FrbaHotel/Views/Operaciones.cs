@@ -68,62 +68,62 @@ namespace FrbaHotel
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.nextForm(new FrbaHotel.Views.ABM_de_Cliente.ABMCliente());
+            Navigator.nextForm(this, new FrbaHotel.Views.ABM_de_Cliente.ABMCliente());
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.nextForm(new FrbaHotel.Views.ABM_de_Habitacion.ABMHabitacion());
+            Navigator.nextForm(this, new FrbaHotel.Views.ABM_de_Habitacion.ABMHabitacion());
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            this.nextForm(new FrbaHotel.Views.ABM_de_Regimen.ABMRegimen());
+            Navigator.nextForm(this, new FrbaHotel.Views.ABM_de_Regimen.ABMRegimen());
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            this.nextForm(new FrbaHotel.Views.ABM_de_Rol.ABMRol());
+            Navigator.nextForm(this, new FrbaHotel.Views.ABM_de_Rol.ABMRol());
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            this.nextForm(new FrbaHotel.Cancelar_Reserva.Form1());
+            Navigator.nextForm(this, new FrbaHotel.Cancelar_Reserva.Form1());
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            this.nextForm(new FrbaHotel.Generar_Modificar_Reserva.Form1());
+            Navigator.nextForm(this, new FrbaHotel.Generar_Modificar_Reserva.Form1());
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            this.nextForm(new FrbaHotel.Listado_Estadistico.Form1());
+            Navigator.nextForm(this, new FrbaHotel.Listado_Estadistico.Form1());
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            this.nextForm(new FrbaHotel.Home());
+            Navigator.nextForm(this, new FrbaHotel.Home());
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            this.nextForm(new FrbaHotel.Registrar_Consumible.Form1());
+            Navigator.nextForm(this, new FrbaHotel.Registrar_Consumible.Form1());
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
-            this.nextForm(new FrbaHotel.Registrar_Estadia.Form1());
+            Navigator.nextForm(this, new FrbaHotel.Registrar_Estadia.Form1());
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-            this.nextForm(new FrbaHotel.ABM_de_Usuario.ABMUsuario());
+            Navigator.nextForm(this, new FrbaHotel.ABM_de_Usuario.ABMUsuario());
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
-            this.nextForm(new FrbaHotel.Views.ABM_de_Hotel.ABMHotel());
+            Navigator.nextForm(this, new FrbaHotel.Views.ABM_de_Hotel.ABMHotel());
         }
     }
 }
