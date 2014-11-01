@@ -8,36 +8,72 @@ using System.Text;
 using System.Windows.Forms;
 using FrbaHotel;
 using FrbaHotel.Database_Helper;
+using FrbaHotel.Models.Exceptions;
+using FrbaHotel.Models;
 
 namespace FrbaHotel.Registrar_Estadia
 {
     public partial class Form1 : Form
     {
+
+
         public Form1()
         {
             InitializeComponent();
             this.FormClosing += new FormClosingEventHandler(Form1_FormClosing);
-
         }
 
-      private void button1_Click(object sender, EventArgs e)
+
+        private void onCheckIn(object sender, EventArgs e)
         {
-            recopilarDatos();  
-          // this.nextForm(new Registrar_Estadia();   //completar con ingreso
+            try
+            {
+                recopilarDatos();
+            }
+            catch (ValidationException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void onCheckout(object sender, EventArgs e)
         {
-            recopilarDatos();
-            //validar si existe la reserva, e ir a registrar consumible para luego facturar
+            try
+            {
+                recopilarDatos();
+            }
+            catch (ValidationException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
+
+
 
         public void recopilarDatos()
         {
-            int nroReserva = int.Parse(textBox2.Text);
-            DateTime fecha = dateTimePicker1.Value;
-            string usuario = textBox1.Text;
+
+            try
+            {
+                int nroReserva = int.Parse(txt_NroReserva.Text); 
+                Reserva reserva = EntityManager.getEntityManager().findBy<Reserva>("reservas.codigo", nroReserva.ToString());
+            }
+            catch (FormatException e)
+            {
+                throw new ValidationException("Por favor, seleccione un numero de reserva valida.");
+            }
+            catch (NullReferenceException ex)
+            {
+                throw new ValidationException("La reserva seleccionada no existe");
+            }
+           
+            DateTime fecha = datepicker.Value;
+
+            /* Porque se usa el usuario? */
+            string usuario = txt_Usuario.Text;
         }
+
+
 
         void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
