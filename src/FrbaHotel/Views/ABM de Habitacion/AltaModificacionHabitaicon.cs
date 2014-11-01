@@ -54,6 +54,7 @@ namespace FrbaHotel.ABM_de_Habitacion
             {
                 cmb_Hotel.Text = habitacion.hotel.ToString();
                 cmb_TipoHabitacion.Text = habitacion.tipo.ToString();
+                cmb_TipoHabitacion.Enabled = false;
             }
         }
         

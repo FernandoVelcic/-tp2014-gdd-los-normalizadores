@@ -17,7 +17,7 @@ namespace FrbaHotel.Database_Helper
             this.comparator = "=";
         }
 
-        public void setEquals(string key, int value)
+        public void setEquals(string key, long value)
         {
             this.key = key;
             this.value = value.ToString();
@@ -31,7 +31,7 @@ namespace FrbaHotel.Database_Helper
             this.comparator = "=";
         }
 
-        public void setNotEquals(string key, int value)
+        public void setNotEquals(string key, long value)
         {
             this.key = key;
             this.value = value.ToString();

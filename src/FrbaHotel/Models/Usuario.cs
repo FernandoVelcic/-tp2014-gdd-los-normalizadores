@@ -4,8 +4,11 @@ using System.Linq;
 using System.Text;
 
 using MyActiveRecord;
+
+using FrbaHotel.Database_Helper;
 using FrbaHotel.Models.Exceptions;
 using FrbaHotel.Tools;
+
 
 namespace FrbaHotel.Models
 {
@@ -35,6 +38,20 @@ namespace FrbaHotel.Models
 
         public override void preSave()
         {
+            List<FetchCondition> condiciones = new List<FetchCondition>();
+            FetchCondition condicionId = new FetchCondition();
+            condicionId.setNotEquals("usuarios.id", id);
+            condiciones.Add(condicionId);
+            FetchCondition condicionUsername = new FetchCondition();
+            condicionUsername.setEquals("usuarios.username", username);
+            condiciones.Add(condicionUsername);
+
+            List<Usuario> usuarios = EntityManager.getEntityManager().findList<Usuario>(condiciones);
+            if (usuarios.Count != 0)
+            {
+                throw new ValidationException("Nombre de usuario duplicado");
+            }
+
             if (mail.isValidEmail() != true)
                 throw new ValidationException("Formato de email invalido");
         }

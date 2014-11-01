@@ -29,20 +29,23 @@ namespace FrbaHotel.Models
             return hotel.ToString() + " - " + numero.ToString() ;
         }
 
-        public override void preInsert()
+        public override void preSave()
         {
-            List<Habitacion> habitaciones = EntityManager.getEntityManager().findAllBy<Habitacion>("numero", numero.ToString());
+            List<FetchCondition> condiciones = new List<FetchCondition>();
+            FetchCondition condicionId = new FetchCondition();
+            condicionId.setNotEquals("habitaciones.id", id);
+            condiciones.Add(condicionId);
+            FetchCondition condicionHotel = new FetchCondition();
+            condicionHotel.setEquals("habitaciones.hotel_id", hotel.id);
+            condiciones.Add(condicionHotel);
+            FetchCondition condicionHabitacion = new FetchCondition();
+            condicionHabitacion.setEquals("habitaciones.numero", numero);
+            condiciones.Add(condicionHabitacion);
+
+            List<Habitacion> habitaciones = EntityManager.getEntityManager().findList<Habitacion>(condiciones);
             if (habitaciones.Count != 0)
             {
                 throw new ValidationException("Numero de habitacion duplicado");
-            }
-        }
-
-        public override void preSave()
-        {
-            if (descripcion.Length >= 255)
-            {
-                throw new ValidationException("El maximo de caracteres en la descripcion es de 255");
             }
         }
 
