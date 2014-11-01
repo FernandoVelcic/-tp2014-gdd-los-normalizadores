@@ -116,7 +116,9 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
 
         private void btn_CrearCliente_Click(object sender, EventArgs e)
         {
-            new FrbaHotel.Views.ABM_de_Cliente.AltaModificacionCliente().Show();
+            AltaModificacionCliente form = new ABM_de_Cliente.AltaModificacionCliente();
+            form.Show();
+            form.setModoSeleccion(this);
         }
 
 
@@ -135,6 +137,7 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
             MessageBox.Show("La reserva se guardo con exito!");
             this.Close();
             new Operaciones().Show();
+
         }
 
 

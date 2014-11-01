@@ -74,8 +74,10 @@ namespace FrbaHotel.Views.ABM_de_Cliente
             comboBox1.DataBindings.Add("SelectedIndex", cliente, "estado");
         }
 
+
         private void button1_Click(object sender, EventArgs e)
         {
+
             cliente.documento_tipo = comboBox3.SelectedValue as TipoDocumento;
             cliente.nacionalidad_id = comboBox2.SelectedIndex + 1;
             cliente.pais_id = comboBox4.SelectedIndex + 1;
@@ -95,18 +97,41 @@ namespace FrbaHotel.Views.ABM_de_Cliente
                 return;
             }
 
-            if(esAlta)
+            if(esAlta){
                 MessageBox.Show("Cliente creado correctamente!");
-            else
+            }else{
                 MessageBox.Show("Cliente modificado correctamente!");
+            }
 
-            this.nextForm(new FrbaHotel.Views.ABM_de_Cliente.ABMCliente());
+
+            /* Esto es para que se pueda dar de alta un cliente al dar de alta una reserva */
+            if (modoSeleccion)
+            {
+                this.Close();
+                previousForm.clienteSeleccionado(cliente);
+            }
+            else
+            {
+                this.nextForm(new FrbaHotel.Views.ABM_de_Cliente.ABMCliente());
+            }
+            
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
             this.nextForm(new FrbaHotel.Views.ABM_de_Cliente.ABMCliente());
         }
+
+
+
+        private Boolean modoSeleccion = false;
+        private SeleccionCliente previousForm;
+        public void setModoSeleccion(SeleccionCliente form)
+        {
+            modoSeleccion = true;
+            previousForm = form;
+        }
+
 
     }
 }

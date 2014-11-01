@@ -65,7 +65,15 @@ namespace FrbaHotel.Database_Helper
                 }
                 else if (property.PropertyType.IsPrimitive || property.PropertyType == typeof(Decimal) || property.PropertyType == typeof(String))
                 {
-                    properties.Add(property.Name, property.GetGetMethod().Invoke(item, null).ToString());
+                    try
+                    {
+                        properties.Add(property.Name, property.GetGetMethod().Invoke(item, null).ToString());
+                    }
+                    catch (NullReferenceException e)
+                    {
+
+                    }
+                    
                 }
                 else if (property.PropertyType == typeof(DateTime))
                 {
