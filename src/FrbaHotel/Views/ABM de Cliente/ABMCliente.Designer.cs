@@ -30,11 +30,11 @@
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btn_ModificarCliente = new System.Windows.Forms.Button();
+            this.btn_EliminarCliente = new System.Windows.Forms.Button();
+            this.btn_AltaDeCliente = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btn_Limpiar = new System.Windows.Forms.Button();
             this.btn_Filtrar = new System.Windows.Forms.Button();
             this.txt_Filter_Documento = new System.Windows.Forms.TextBox();
             this.txt_Filter_Apellido = new System.Windows.Forms.TextBox();
@@ -46,6 +46,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.btn_Seleccionar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -73,39 +74,39 @@
             this.dataGridView2.Size = new System.Drawing.Size(647, 463);
             this.dataGridView2.TabIndex = 0;
             // 
-            // button3
+            // btn_ModificarCliente
             // 
-            this.button3.Location = new System.Drawing.Point(543, 47);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(128, 29);
-            this.button3.TabIndex = 6;
-            this.button3.Text = "Modificar clientes";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.btn_ModificarCliente.Location = new System.Drawing.Point(543, 47);
+            this.btn_ModificarCliente.Name = "btn_ModificarCliente";
+            this.btn_ModificarCliente.Size = new System.Drawing.Size(128, 29);
+            this.btn_ModificarCliente.TabIndex = 6;
+            this.btn_ModificarCliente.Text = "Modificar clientes";
+            this.btn_ModificarCliente.UseVisualStyleBackColor = true;
+            this.btn_ModificarCliente.Click += new System.EventHandler(this.button3_Click);
             // 
-            // button2
+            // btn_EliminarCliente
             // 
-            this.button2.Location = new System.Drawing.Point(543, 82);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(128, 29);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "Eliminar cliente";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.onBtnEliminar);
+            this.btn_EliminarCliente.Location = new System.Drawing.Point(543, 82);
+            this.btn_EliminarCliente.Name = "btn_EliminarCliente";
+            this.btn_EliminarCliente.Size = new System.Drawing.Size(128, 29);
+            this.btn_EliminarCliente.TabIndex = 5;
+            this.btn_EliminarCliente.Text = "Eliminar cliente";
+            this.btn_EliminarCliente.UseVisualStyleBackColor = true;
+            this.btn_EliminarCliente.Click += new System.EventHandler(this.onBtnEliminar);
             // 
-            // button1
+            // btn_AltaDeCliente
             // 
-            this.button1.Location = new System.Drawing.Point(543, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(128, 29);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Alta de clientes";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.onBtnAlta);
+            this.btn_AltaDeCliente.Location = new System.Drawing.Point(543, 12);
+            this.btn_AltaDeCliente.Name = "btn_AltaDeCliente";
+            this.btn_AltaDeCliente.Size = new System.Drawing.Size(128, 29);
+            this.btn_AltaDeCliente.TabIndex = 4;
+            this.btn_AltaDeCliente.Text = "Alta de clientes";
+            this.btn_AltaDeCliente.UseVisualStyleBackColor = true;
+            this.btn_AltaDeCliente.Click += new System.EventHandler(this.onBtnAlta);
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button4);
+            this.groupBox2.Controls.Add(this.btn_Limpiar);
             this.groupBox2.Controls.Add(this.btn_Filtrar);
             this.groupBox2.Controls.Add(this.txt_Filter_Documento);
             this.groupBox2.Controls.Add(this.txt_Filter_Apellido);
@@ -124,18 +125,18 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Opciones de filtrado";
             // 
-            // button4
+            // btn_Limpiar
             // 
-            this.button4.AccessibleDescription = "";
-            this.button4.AccessibleName = "";
-            this.button4.Location = new System.Drawing.Point(254, 70);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(127, 23);
-            this.button4.TabIndex = 22;
-            this.button4.Tag = "0";
-            this.button4.Text = "Limpiar";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.btn_Limpiar.AccessibleDescription = "";
+            this.btn_Limpiar.AccessibleName = "";
+            this.btn_Limpiar.Location = new System.Drawing.Point(254, 70);
+            this.btn_Limpiar.Name = "btn_Limpiar";
+            this.btn_Limpiar.Size = new System.Drawing.Size(127, 23);
+            this.btn_Limpiar.TabIndex = 22;
+            this.btn_Limpiar.Tag = "0";
+            this.btn_Limpiar.Text = "Limpiar";
+            this.btn_Limpiar.UseVisualStyleBackColor = true;
+            this.btn_Limpiar.Click += new System.EventHandler(this.button4_Click);
             // 
             // btn_Filtrar
             // 
@@ -234,18 +235,30 @@
             this.label1.TabIndex = 9;
             this.label1.Text = "Nombre:";
             // 
+            // btn_Seleccionar
+            // 
+            this.btn_Seleccionar.Location = new System.Drawing.Point(543, 12);
+            this.btn_Seleccionar.Name = "btn_Seleccionar";
+            this.btn_Seleccionar.Size = new System.Drawing.Size(128, 29);
+            this.btn_Seleccionar.TabIndex = 8;
+            this.btn_Seleccionar.Text = "Seleccionar cliente";
+            this.btn_Seleccionar.UseVisualStyleBackColor = true;
+            this.btn_Seleccionar.Click += new System.EventHandler(this.btn_Seleccionar_Click);
+            // 
             // ABMCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(679, 607);
+            this.Controls.Add(this.btn_Seleccionar);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.btn_ModificarCliente);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btn_EliminarCliente);
+            this.Controls.Add(this.btn_AltaDeCliente);
             this.Name = "ABMCliente";
             this.Text = "ABM de Clientes";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ABMCliente_FormClosed);
             this.Load += new System.EventHandler(this.ABMCliente_Load);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
@@ -259,9 +272,9 @@
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_ModificarCliente;
+        private System.Windows.Forms.Button btn_EliminarCliente;
+        private System.Windows.Forms.Button btn_AltaDeCliente;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox txt_Filter_Mail;
         private System.Windows.Forms.Label label5;
@@ -274,6 +287,7 @@
         private System.Windows.Forms.TextBox txt_Filter_Documento;
         private System.Windows.Forms.TextBox txt_Filter_Apellido;
         private System.Windows.Forms.Button btn_Filtrar;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btn_Limpiar;
+        private System.Windows.Forms.Button btn_Seleccionar;
     }
 }

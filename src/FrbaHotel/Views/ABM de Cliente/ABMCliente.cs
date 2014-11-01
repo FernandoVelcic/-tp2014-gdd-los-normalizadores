@@ -27,6 +27,7 @@ namespace FrbaHotel.Views.ABM_de_Cliente
             comboBox2.DataSource = documentos_binding;
             comboBox2.Text = "";
             Listar(new List<FetchCondition>());
+            btn_Seleccionar.Hide();
         }
 
         private void Listar(List<FetchCondition> conditions)
@@ -102,6 +103,31 @@ namespace FrbaHotel.Views.ABM_de_Cliente
             Listar(new List<FetchCondition>());
         }
 
+
+
+        /* Usado para la seleccion de cliente en la reserva */
+        private SeleccionCliente previousForm;
+        public void setModoSeleccionCliente(SeleccionCliente form) 
+        {
+            btn_AltaDeCliente.Hide();
+            btn_EliminarCliente.Hide();
+            btn_ModificarCliente.Hide();
+            previousForm = form;
+            btn_Seleccionar.Show();
+        }
+
+        private void btn_Seleccionar_Click(object sender, EventArgs e)
+        {
+            Cliente cliente = dataGridView2.SelectedRows[0].DataBoundItem as Cliente;
+            previousForm.clienteSeleccionado(cliente);
+            this.Close();
+        }
+
+
+        private void ABMCliente_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
+        }
 
 
     }

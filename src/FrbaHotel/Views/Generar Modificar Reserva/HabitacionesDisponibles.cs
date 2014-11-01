@@ -1,4 +1,5 @@
 ﻿using FrbaHotel.Models;
+using FrbaHotel.Views.ABM_de_Cliente;
 using MyActiveRecord;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ using System.Windows.Forms;
 
 namespace FrbaHotel.Views.Generar_Modificar_Reserva
 {
-    public partial class HabitacionesDisponibles : Form
+    public partial class HabitacionesDisponibles : Form, SeleccionCliente
     {
 
         private DateTime desde;
@@ -21,6 +22,7 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
         private Hotel hotel;
         private TipoHabitacion tipoHabitacion;
         private Form previousForm;
+        private Habitacion habitacion; 
 
         public HabitacionesDisponibles(Regimen regimen, TipoHabitacion tipoHabitacion, DateTime desde, int cantidadNoches, Hotel hotel, Form previous)
         {
@@ -91,22 +93,19 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
 
         private void btn_Confirmar_Click(object sender, EventArgs e)
         {
-            Habitacion habitacion = list_Habitaciones.SelectedItem as Habitacion;
+            habitacion = list_Habitaciones.SelectedItem as Habitacion;
             if (!habitacion.estaDisponible(desde, cantidadNoches))
             {
                MessageBox.Show("La habitación ya esta reservada para esa fecha, por favor seleccione otra.");
                return;
             }
 
-            Reserva reserva = new Reserva();
-            reserva.regimen = regimen;
-            reserva.habitacion = habitacion;
-            reserva.fecha_inicio = desde;
-            reserva.cant_noches = cantidadNoches;
-
+           
             /* Pasar a formulario datos del cliente */
-            MessageBox.Show("Deberia pasar a seleccionar al cliente!");
-
+            ABMCliente form = new ABM_de_Cliente.ABMCliente();
+            form.Show();
+            form.setModoSeleccionCliente(this);
+            
         }
 
         private void btn_Volver_Click(object sender, EventArgs e)
@@ -118,6 +117,24 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
         private void btn_CrearCliente_Click(object sender, EventArgs e)
         {
             new FrbaHotel.Views.ABM_de_Cliente.AltaModificacionCliente().Show();
+        }
+
+
+        /* Cuando se selecciona un cliente */
+        void SeleccionCliente.clienteSeleccionado(Cliente cliente)
+        {
+
+            Reserva reserva = new Reserva();
+            reserva.regimen = regimen;
+            reserva.habitacion = habitacion;
+            reserva.fecha_inicio = desde;
+            reserva.cant_noches = cantidadNoches;
+            reserva.cliente = cliente;
+
+            reserva.save();
+            MessageBox.Show("La reserva se guardo con exito!");
+            this.Close();
+            new Operaciones().Show();
         }
 
 

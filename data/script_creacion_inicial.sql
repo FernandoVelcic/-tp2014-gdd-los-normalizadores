@@ -136,6 +136,7 @@ CREATE TABLE [LOS_NORMALIZADORES].[reservas](
 	[cant_noches] [numeric](18, 0),
 	[regimen_id] INTEGER,
 	[habitacion_id] INTEGER,
+	[cliente_id]	INTEGER,					/* Deberia ir ??? */
 	[cantidad_personas]	INTEGER				/* Deberia ir ??? */
 											/* Falta calcular en base a la habitacion y la cantidad de gente que entre */
 											/* Como calculo el precio?? */
@@ -334,32 +335,6 @@ GO
 
 
 
-/* Migracion de reservas */ 
-INSERT INTO [LOS_NORMALIZADORES].[reservas] ([fecha_inicio], [codigo], [cant_noches], [regimen_id])	
-	SELECT DISTINCT [Reserva_Fecha_Inicio], [Reserva_Codigo], [Reserva_Cant_Noches], [regimen_id] FROM [LOS_NORMALIZADORES].[Maestra]
-	WHERE [Reserva_Fecha_Inicio] IS NOT NULL 
-	AND   [Reserva_Codigo] IS NOT NULL
-	AND   [Reserva_Cant_Noches] IS NOT NULL
-	AND   [regimen_id] IS NOT NULL
-GO
-
-ALTER TABLE [LOS_NORMALIZADORES].[Maestra] ADD reserva_id INTEGER
-GO
-
-UPDATE [LOS_NORMALIZADORES].[Maestra]
-SET reserva_id = 
-	(
-		SELECT id FROM [LOS_NORMALIZADORES].[reservas] as r
-		WHERE [LOS_NORMALIZADORES].[Maestra].Reserva_Fecha_Inicio = r.fecha_inicio
-		AND   [LOS_NORMALIZADORES].[Maestra].Reserva_Codigo = r.codigo
-		AND   [LOS_NORMALIZADORES].[Maestra].Reserva_Cant_Noches = r.cant_noches
-		AND   [LOS_NORMALIZADORES].[Maestra].regimen_id = r.regimen_id
-	)
-GO
-
-
-
-
 /* Clientes */
 
 INSERT INTO [LOS_NORMALIZADORES].[clientes] ([documento_nro], [apellido], [nombre], [fecha_nac], [mail], [dom_calle], [nro_calle], [piso], [depto], [nacionalidad_id], [documento_tipo_id], [pais_id])	
@@ -400,6 +375,34 @@ GO
 
 DROP INDEX Clientes_Pasaporte_Nro_id ON [LOS_NORMALIZADORES].[clientes]
 CREATE INDEX Maestra_cliente_id ON [LOS_NORMALIZADORES].[Maestra] (cliente_id)
+
+
+/* Migracion de reservas */ 
+INSERT INTO [LOS_NORMALIZADORES].[reservas] ([cliente_id], [fecha_inicio], [codigo], [cant_noches], [regimen_id])	
+	SELECT DISTINCT [cliente_id], [Reserva_Fecha_Inicio], [Reserva_Codigo], [Reserva_Cant_Noches], [regimen_id] FROM [LOS_NORMALIZADORES].[Maestra]
+	WHERE [Reserva_Fecha_Inicio] IS NOT NULL 
+	AND   [Reserva_Codigo] IS NOT NULL
+	AND   [Reserva_Cant_Noches] IS NOT NULL
+	AND   [regimen_id] IS NOT NULL
+	AND   [cliente_id] IS NOT NULL
+GO
+
+ALTER TABLE [LOS_NORMALIZADORES].[Maestra] ADD reserva_id INTEGER
+GO
+
+UPDATE [LOS_NORMALIZADORES].[Maestra]
+SET reserva_id = 
+	(
+		SELECT id FROM [LOS_NORMALIZADORES].[reservas] as r
+		WHERE [LOS_NORMALIZADORES].[Maestra].Reserva_Fecha_Inicio = r.fecha_inicio
+		AND   [LOS_NORMALIZADORES].[Maestra].Reserva_Codigo = r.codigo
+		AND   [LOS_NORMALIZADORES].[Maestra].Reserva_Cant_Noches = r.cant_noches
+		AND   [LOS_NORMALIZADORES].[Maestra].regimen_id = r.regimen_id
+	)
+GO
+
+
+
 
 /* Estadias */
 
