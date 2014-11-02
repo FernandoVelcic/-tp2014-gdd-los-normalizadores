@@ -137,11 +137,14 @@ CREATE TABLE [LOS_NORMALIZADORES].[reservas](
 	[regimen_id] INTEGER,
 	[habitacion_id] INTEGER,
 	[cliente_id]	INTEGER,					/* Deberia ir ??? */
-	[cantidad_personas]	INTEGER				/* Deberia ir ??? */
+	[cantidad_personas]	INTEGER,				/* Deberia ir ??? */
+	[motivo_cancelacion] [nvarchar](255),
+	[fecha_cancelacion] [datetime],			/* Fecha en que se cancela la reserva */
+	[usuario_cancelacion] [nvarchar](30),					/* Usuario que cancela*/
+	[bit_cancelacion] [bit] NOT NULL,
 											/* Falta calcular en base a la habitacion y la cantidad de gente que entre */
 											/* Como calculo el precio?? */
 ) ON [PRIMARY]
-
 
 CREATE TABLE [LOS_NORMALIZADORES].[clientes](
 	[id] INTEGER IDENTITY PRIMARY KEY,

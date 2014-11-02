@@ -24,7 +24,7 @@ namespace FrbaHotel.Listado_Estadistico
         {
             
             textBox1.Text = "";
-            textBox2.Text = "";
+            comboBox2.SelectedIndex = -1;
             comboBox1.SelectedIndex = -1;
             dataGridView1.Rows.Clear();
 
@@ -33,7 +33,7 @@ namespace FrbaHotel.Listado_Estadistico
         private void button1_Click(object sender, EventArgs e)
         {
             int anio = int.Parse(textBox1.Text);
-            int trimestre = int.Parse(textBox2.Text);
+            string trimestre = comboBox2.SelectedItem.ToString();
             string categoria = comboBox1.SelectedItem.ToString();
             //seleccionarTop(anio, trimestre, categoria)  //logica que falta
         }

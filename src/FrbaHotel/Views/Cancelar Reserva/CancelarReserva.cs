@@ -9,6 +9,10 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Data.SqlClient;
+using FrbaHotel.Models.Exceptions;
+
+
 namespace FrbaHotel.Cancelar_Reserva
 {
     public partial class Form1 : Form
@@ -32,9 +36,38 @@ namespace FrbaHotel.Cancelar_Reserva
                 MessageBox.Show("La reserva no existe");
                 return;
             }
+           
+            DateTime fecha= DateTime.Parse(dateTimePicker1.Text);   
 
+            if (DateTime.Compare(reserva.fecha_inicio, fecha) < 0)
+            {
+                MessageBox.Show("No se puede cancelar una reserva una vez comenzada");   
+                return;
+            }
+            reserva.fecha_cancelacion = fecha;
+            reserva.motivo_cancelacion = txt_Motivo.Text;
+            reserva.usuario_cancelacion = txt_Usuario.Text;
+            reserva.bit_cancelacion = 0;
+            //el usuario deberia ser el mismo que la reservo??
+            try
+            {
+                reserva.save();
+
+            }
+            catch (ValidationException exception)
+            {
+                MessageBox.Show(exception.Message);
+                return;
+            }
+            catch (SqlException exception)
+            {
+                MessageBox.Show(exception.Message);
+                return;
+            }
+
+            
             MessageBox.Show("La reserva fue cancelada");
-
+            
             Close();
         }
 
