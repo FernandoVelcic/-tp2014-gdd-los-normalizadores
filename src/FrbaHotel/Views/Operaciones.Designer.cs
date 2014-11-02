@@ -192,6 +192,7 @@
             this.Controls.Add(this.button1);
             this.Name = "Operaciones";
             this.Text = "Operaciones";
+           
             this.Shown += new System.EventHandler(this.Operaciones_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -10,6 +10,7 @@ using FrbaHotel;
 using FrbaHotel.Database_Helper;
 using FrbaHotel.Models.Exceptions;
 using FrbaHotel.Models;
+using System.Data.SqlClient;
 
 namespace FrbaHotel.Registrar_Estadia
 {
@@ -28,29 +29,32 @@ namespace FrbaHotel.Registrar_Estadia
         {
             try
             {
-                recopilarDatos();
+                recopilarDatos("checkIn");
+
             }
             catch (ValidationException ex)
             {
                 MessageBox.Show(ex.Message);
             }
+            
         }
 
         private void onCheckout(object sender, EventArgs e)
         {
             try
             {
-                recopilarDatos();
+                recopilarDatos("checkOut");
             }
             catch (ValidationException ex)
             {
                 MessageBox.Show(ex.Message);
             }
+
         }
 
 
 
-        public void recopilarDatos()
+        public void recopilarDatos(String operacion)
         {
 
             try
@@ -73,10 +77,33 @@ namespace FrbaHotel.Registrar_Estadia
             /* Porque se usa el usuario? */
             string usuario = txt_Usuario.Text;
 
-            int nroReserva1 = int.Parse(txt_NroReserva.Text);
-            Reserva reserva1 = EntityManager.getEntityManager().findBy<Reserva>("reservas.codigo", nroReserva1.ToString());
-
-            this.nextForm(new FrbaHotel.Registrar_Consumible.Form1(reserva1.regimen));
+            if(operacion=="checkIn"){
+                int nroReserva1 = int.Parse(txt_NroReserva.Text);
+                Reserva reservain = EntityManager.getEntityManager().findBy<Reserva>("reservas.codigo", nroReserva1.ToString());
+                reservain.reserva_estado = 6;
+                try
+                {
+                    reservain.save();               //se updatea(?
+                }
+                catch (ValidationException exception)
+                {
+                    MessageBox.Show(exception.Message);
+                    return;
+                }
+                catch (SqlException exception)
+                {
+                    MessageBox.Show(exception.Message);
+                    return;
+                }
+               MessageBox.Show("La estadía ha sido validada");
+               // Navigator.nextForm(this, new FrbaHotel.Registrar_Estadia.Ingreso(reservain)); //no se como ponerlo
+            }
+            else if(operacion=="checkOut") {
+                int nroReserva1 = int.Parse(txt_NroReserva.Text);
+                Reserva reservaout = EntityManager.getEntityManager().findBy<Reserva>("reservas.codigo", nroReserva1.ToString());
+                Navigator.nextForm(this, new FrbaHotel.Registrar_Consumible.Form1(reservaout.regimen));
+            }
+            
         }
 
 
@@ -85,22 +112,8 @@ namespace FrbaHotel.Registrar_Estadia
         {
             switch (e.CloseReason)  //la opcion de cierre que suceda, aunque podria ser default
             {
-                case CloseReason.ApplicationExitCall:
-                    break;
-                case CloseReason.FormOwnerClosing:
-                    break;
-                case CloseReason.MdiFormClosing:
-                    break;
-                case CloseReason.None:
-                    break;
-                case CloseReason.TaskManagerClosing:
-                    break;
-                case CloseReason.UserClosing:
-                    //this.nextform….               
-                    break;
-                case CloseReason.WindowsShutDown:
-                    break;
                 default:
+                    Navigator.nextForm(this, new FrbaHotel.Operaciones());
                     break;
             }
 

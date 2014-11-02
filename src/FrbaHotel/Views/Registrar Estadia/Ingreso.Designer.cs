@@ -280,6 +280,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Ingreso";
             this.Text = "Ingreso";
+            
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);

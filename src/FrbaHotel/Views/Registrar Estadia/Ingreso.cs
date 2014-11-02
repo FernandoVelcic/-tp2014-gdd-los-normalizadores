@@ -6,14 +6,19 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using MyActiveRecord;
+using FrbaHotel.Models;
+using FrbaHotel.Database_Helper;
 
 namespace FrbaHotel.Views.Registrar_Estadia
 {
     public partial class Ingreso : Form
     {
-        public Ingreso()
+        public Ingreso(Reserva reserva)
         {
             InitializeComponent();
         }
+
+        
     }
 }

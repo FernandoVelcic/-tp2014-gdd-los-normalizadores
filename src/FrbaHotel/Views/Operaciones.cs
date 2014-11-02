@@ -126,5 +126,7 @@ namespace FrbaHotel
         {
             Navigator.nextForm(this, new FrbaHotel.Views.ABM_de_Hotel.ABMHotel());
         }
+
+       
     }
 }
