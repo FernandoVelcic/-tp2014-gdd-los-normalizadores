@@ -79,6 +79,9 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
                 }
             }
 
+            //Mostrar solo habitaciones no ocupadas
+            habitaciones = habitaciones.FindAll(h => h.estaDisponible(desde, cantidadNoches));
+
             BindingSource habitaciones_binding = new BindingSource();
             habitaciones_binding.DataSource = habitaciones;
             list_Habitaciones.DataSource = habitaciones_binding;
@@ -88,15 +91,6 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
 
         private void btn_Confirmar_Click(object sender, EventArgs e)
         {
-            habitacion = list_Habitaciones.SelectedItem as Habitacion;
-            if (!habitacion.estaDisponible(desde, cantidadNoches))
-            {
-               MessageBox.Show("La habitación ya esta reservada para esa fecha, por favor seleccione otra.");
-               return;
-            }
-
-           
-            /* Pasar a formulario datos del cliente */
             ABMCliente form = new ABM_de_Cliente.ABMCliente();
             form.Show();
             form.setModoSeleccionCliente(this);
@@ -122,7 +116,7 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
         {
             Reserva reserva = new Reserva();
             reserva.regimen = regimen;
-            reserva.habitacion = habitacion;
+            reserva.habitacion = list_Habitaciones.SelectedItem as Habitacion;
             reserva.fecha_inicio = desde;
             reserva.cant_noches = cantidadNoches;
             reserva.cliente = cliente;

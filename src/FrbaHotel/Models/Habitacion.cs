@@ -52,12 +52,25 @@ namespace FrbaHotel.Models
 
         public Boolean estaDisponible(DateTime desde, int cantidadNoches)
         {
+            /*List<FetchCondition> condiciones = new List<FetchCondition>();
+            FetchCondition condicionId = new FetchCondition();
+            condicionId.setEquals("habitacion_id", id);
+            condiciones.Add(condicionId);
+
+            FetchCondition condicionFecha = new FetchCondition();
+            condicionFecha.setNotBetween("fecha_inicio", "DATEADD(day,cant_noches,CAST('" + desde.ToShortDateString() + "' AS DATE))", "'" + desde.AddDays(cantidadNoches).ToShortDateString() + "'");
+            condiciones.Add(condicionFecha);
+
+            List<Reserva> reservas = EntityManager.getEntityManager().findList<Reserva>(condiciones);
+
+            return reservas.Count == 0;*/
+            
             SelectQuery<Reserva> query = new SelectQuery<Reserva>(typeof(Reserva));
 
             query.addCount().addWhere("habitacion_id", id.ToString());
 
-            query.addWhere("fecha_inicio", "'" + desde.AddDays(cantidadNoches).ToShortDateString() + "'", ">");
-            query.addWhere("(fecha_inicio + cant_noches)", "'" + desde.ToShortDateString() + "'", "<");
+            query.addWhere("fecha_inicio", "'" + desde.AddDays(cantidadNoches).ToShortDateString() + "'", "<=");
+            query.addWhere("(DATEADD(day,cant_noches,fecha_inicio))", "'" + desde.ToShortDateString() + "'", ">=");
 
             SqlCommand cmd = new SqlCommand(query.build(), ConnectionManager.getInstance().getConnection());
             Int32 count = (Int32)cmd.ExecuteScalar();

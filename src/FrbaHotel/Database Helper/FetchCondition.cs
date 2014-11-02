@@ -45,6 +45,20 @@ namespace FrbaHotel.Database_Helper
             this.comparator = "LIKE";
         }
 
+        public void setBetween(string key, string value1, string value2)
+        {
+            this.key = key;
+            this.value = value1.ToString() + " AND " + value2.ToString();
+            this.comparator = "BETWEEN";
+        }
+
+        public void setNotBetween(string key, string value1, string value2)
+        {
+            this.key = key;
+            this.value = value1.ToString() + " AND " + value2.ToString();
+            this.comparator = "NOT BETWEEN";
+        }
+
         public string build()
         {
             return this.key + " " + this.comparator + " " + this.value;
