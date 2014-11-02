@@ -141,10 +141,15 @@ CREATE TABLE [LOS_NORMALIZADORES].[reservas](
 	[motivo_cancelacion] [nvarchar](255),
 	[fecha_cancelacion] [datetime],			/* Fecha en que se cancela la reserva */
 	[usuario_cancelacion] [nvarchar](30),					/* Usuario que cancela*/
-	[bit_cancelacion] [bit] NOT NULL,
+	[reserva_estado] INTEGER NOT NULL,
 											/* Falta calcular en base a la habitacion y la cantidad de gente que entre */
 											/* Como calculo el precio?? */
 ) ON [PRIMARY]
+
+CREATE TABLE [LOS_NORMALIZADORES].[reserva_estado](
+	[id] INTEGER IDENTITY PRIMARY KEY,
+	[descripcion] [nvarchar] (255),
+) ON [PRIMARY]	
 
 CREATE TABLE [LOS_NORMALIZADORES].[clientes](
 	[id] INTEGER IDENTITY PRIMARY KEY,
@@ -381,8 +386,8 @@ CREATE INDEX Maestra_cliente_id ON [LOS_NORMALIZADORES].[Maestra] (cliente_id)
 
 
 /* Migracion de reservas */ 
-INSERT INTO [LOS_NORMALIZADORES].[reservas] ([cliente_id], [fecha_inicio], [codigo], [cant_noches], [regimen_id])	
-	SELECT DISTINCT [cliente_id], [Reserva_Fecha_Inicio], [Reserva_Codigo], [Reserva_Cant_Noches], [regimen_id] FROM [LOS_NORMALIZADORES].[Maestra]
+INSERT INTO [LOS_NORMALIZADORES].[reservas] ([cliente_id], [fecha_inicio], [codigo], [cant_noches], [regimen_id], [reserva_estado])	
+	SELECT DISTINCT [cliente_id], [Reserva_Fecha_Inicio], [Reserva_Codigo], [Reserva_Cant_Noches], [regimen_id],1 FROM [LOS_NORMALIZADORES].[Maestra]
 	WHERE [Reserva_Fecha_Inicio] IS NOT NULL 
 	AND   [Reserva_Codigo] IS NOT NULL
 	AND   [Reserva_Cant_Noches] IS NOT NULL
@@ -628,6 +633,21 @@ INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[roles]
            ('Guest',1,0,0,0,0,0,0,1,1,0,0,0,1)
 
 GO
+
+/* Estados de reserva*/
+
+INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[reserva_estado]
+	([descripcion]) VALUES ('Reserva correcta')
+INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[reserva_estado]
+	([descripcion]) VALUES ('Reserva modificada')
+INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[reserva_estado]
+	([descripcion]) VALUES ('Reserva cancelada por Recepción')
+INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[reserva_estado]
+	([descripcion]) VALUES ('Reserva cancelada por Cliente')
+INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[reserva_estado]
+	([descripcion]) VALUES ('Reserva cancelada por No-Show')
+INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[reserva_estado]
+	([descripcion]) VALUES ('Reserva con ingreso')
 
 
 /* FKs */

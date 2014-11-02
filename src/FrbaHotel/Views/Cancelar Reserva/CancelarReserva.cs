@@ -47,8 +47,8 @@ namespace FrbaHotel.Cancelar_Reserva
             reserva.fecha_cancelacion = fecha;
             reserva.motivo_cancelacion = txt_Motivo.Text;
             reserva.usuario_cancelacion = txt_Usuario.Text;
-            reserva.bit_cancelacion = 0;
-            //el usuario deberia ser el mismo que la reservo??
+            //if (rol_usuario == "Recepcionista") reserva.reserva_estado = 3;//fer completa
+            //if (rol_usuario == "Guest") reserva.reserva_estado = 4;       //fer completa            
             try
             {
                 reserva.save();

@@ -24,7 +24,7 @@ namespace FrbaHotel.Models
         public String motivo_cancelacion{ get; set; } //[nvarchar](255),
 	    public DateTime fecha_cancelacion { get; set; }//[datetime],			/* Fecha en que se cancela la reserva */
 	    public String usuario_cancelacion { get; set; } //[nvarchar](30),
-        public int bit_cancelacion { get; set; }//[bit] NOT NULL,
+        public int reserva_estado { get; set; } //Integer NOT NULL
         public override void preInsert()
         {
             fecha_carga = Config.getInstance().getCurrentDate();
