@@ -21,7 +21,6 @@ namespace FrbaHotel.Registrar_Estadia
         public Form1()
         {
             InitializeComponent();
-            this.FormClosing += new FormClosingEventHandler(Form1_FormClosing);
         }
 
 
@@ -83,7 +82,7 @@ namespace FrbaHotel.Registrar_Estadia
                 reservain.reserva_estado = 6;
                 try
                 {
-                    reservain.save();               //se updatea(?
+                    reservain.save();
                 }
                 catch (ValidationException exception)
                 {
@@ -105,20 +104,5 @@ namespace FrbaHotel.Registrar_Estadia
             }
             
         }
-
-
-
-        void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            switch (e.CloseReason)  //la opcion de cierre que suceda, aunque podria ser default
-            {
-                default:
-                    Navigator.nextForm(this, new FrbaHotel.Operaciones());
-                    break;
-            }
-
-
-        }
-        
     }
 }

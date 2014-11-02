@@ -14,11 +14,7 @@ namespace FrbaHotel.Listado_Estadistico
         public Form1()
         {
             InitializeComponent();
-            this.FormClosing += new FormClosingEventHandler(Form1_FormClosing);
-
         }
-
-       
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -35,35 +31,24 @@ namespace FrbaHotel.Listado_Estadistico
             int anio = int.Parse(textBox1.Text);
             string trimestre = comboBox2.SelectedItem.ToString();
             string categoria = comboBox1.SelectedItem.ToString();
-            //seleccionarTop(anio, trimestre, categoria)  //logica que falta
-        }
-
-        void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            switch (e.CloseReason)  //la opcion de cierre que suceda, aunque podria ser default
+            switch (comboBox1.SelectedIndex)
             {
-                case CloseReason.ApplicationExitCall:
+                case 0: //Hotel con mayor cantidad de reservas canceladas
                     break;
-                case CloseReason.FormOwnerClosing:
+
+                case 1: //Hotel con mayor cantidad de consumibles facturados
                     break;
-                case CloseReason.MdiFormClosing:
+
+                case 2: //Hotel con mayor cantidad de días fuera de servicio
                     break;
-                case CloseReason.None:
+
+                case 3: //Habitacion con mayor cantidad de días y veces ocupada
                     break;
-                case CloseReason.TaskManagerClosing:
-                    break;
-                case CloseReason.UserClosing:
-                    //this.nextform….               
-                    break;
-                case CloseReason.WindowsShutDown:
-                    break;
-                default:
+
+                case 4: //Cliente con mayor cantidad de puntos
                     break;
             }
-
-
+            //seleccionarTop(anio, trimestre, categoria)  //logica que falta
         }
-
-       
     }
 }

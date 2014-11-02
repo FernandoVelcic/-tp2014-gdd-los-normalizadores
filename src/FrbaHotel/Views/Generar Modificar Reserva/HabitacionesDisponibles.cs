@@ -120,6 +120,7 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
             reserva.fecha_inicio = desde;
             reserva.cant_noches = cantidadNoches;
             reserva.cliente = cliente;
+            reserva.reserva_estado = 1; //Reserva correcta
 
             try
             {
@@ -136,8 +137,8 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
                 return;
             }
 
-            MessageBox.Show("La reserva se guardo con exito!");
-            this.Close();
+            MessageBox.Show("La reserva se guardo con exito! El numero de reserva es: " + reserva.id);
+            Close();
             new Operaciones().Show();
 
         }

@@ -30,7 +30,7 @@ namespace FrbaHotel.Cancelar_Reserva
         private void btn_Cancelar_Click(object sender, EventArgs e)
         {
             
-            Reserva reserva = EntityManager.getEntityManager().findBy<Reserva>("codigo", txt_NroReserva.Text);
+            Reserva reserva = EntityManager.getEntityManager().findBy<Reserva>("reservas.codigo", txt_NroReserva.Text);
             if (reserva == null)
             {
                 MessageBox.Show("La reserva no existe");
@@ -44,7 +44,7 @@ namespace FrbaHotel.Cancelar_Reserva
                 MessageBox.Show("No se puede cancelar una reserva una vez comenzada");   
                 return;
             }
-            reserva.fecha_cancelacion = fecha;
+            //reserva.fecha_cancelacion = fecha;
             reserva.motivo_cancelacion = txt_Motivo.Text;
             reserva.usuario_cancelacion = txt_Usuario.Text;
             //if (rol_usuario == "Recepcionista") reserva.reserva_estado = 3;//fer completa

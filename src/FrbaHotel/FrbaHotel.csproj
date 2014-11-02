@@ -194,11 +194,11 @@
       <DependentUpon>GenerarReserva.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Habitacion.cs" />
-    <Compile Include="Views\Listado Estadistico\Form1.cs">
+    <Compile Include="Views\Listado Estadistico\ListadoEstadistico.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\Listado Estadistico\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Views\Listado Estadistico\ListadoEstadistico.Designer.cs">
+      <DependentUpon>ListadoEstadistico.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Login\Login.cs">
       <SubType>Form</SubType>
@@ -273,8 +273,8 @@
       <DependentUpon>GenerarReserva.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Listado Estadistico\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Views\Listado Estadistico\ListadoEstadistico.resx">
+      <DependentUpon>ListadoEstadistico.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Login\Login.resx">
@@ -290,8 +290,8 @@
       <DependentUpon>RegistrarConsumibles.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Registrar Estadia\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Views\Registrar Estadia\RegistrarEstadia.resx">
+      <DependentUpon>RegistrarEstadia.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Registrar Estadia\Ingreso.resx">
@@ -317,11 +317,11 @@
     <Compile Include="Views\Registrar Consumible\RegistrarConsumibles.Designer.cs">
       <DependentUpon>RegistrarConsumibles.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Registrar Estadia\Form1.cs">
+    <Compile Include="Views\Registrar Estadia\RegistrarEstadia.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\Registrar Estadia\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Views\Registrar Estadia\RegistrarEstadia.Designer.cs">
+      <DependentUpon>RegistrarEstadia.cs</DependentUpon>
     </Compile>
     <Compile Include="Tools\SHA256.cs" />
     <Compile Include="Views\Registrar Estadia\Ingreso.cs">
