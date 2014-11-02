@@ -106,6 +106,11 @@ namespace FrbaHotel.ABM_de_Usuario
             Listar(condiciones);
         }
 
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
         
     }
 }

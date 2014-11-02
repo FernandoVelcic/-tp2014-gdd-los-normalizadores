@@ -108,7 +108,8 @@ namespace FrbaHotel
 
         private void button9_Click(object sender, EventArgs e)
         {
-            Navigator.nextForm(this, new FrbaHotel.Registrar_Consumible.Form1());
+            //Lo comento porque no sirve sin que le pases el regimen de argumento
+           // Navigator.nextForm(this, new FrbaHotel.Registrar_Consumible.Form1());
         }
 
         private void button10_Click(object sender, EventArgs e)

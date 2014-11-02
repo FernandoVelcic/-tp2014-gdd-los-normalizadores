@@ -69,8 +69,14 @@ namespace FrbaHotel.Registrar_Estadia
            
             DateTime fecha = datepicker.Value;
 
+
             /* Porque se usa el usuario? */
             string usuario = txt_Usuario.Text;
+
+            int nroReserva1 = int.Parse(txt_NroReserva.Text);
+            Reserva reserva1 = EntityManager.getEntityManager().findBy<Reserva>("reservas.codigo", nroReserva1.ToString());
+
+            this.nextForm(new FrbaHotel.Registrar_Consumible.Form1(reserva1.regimen));
         }
 
 
