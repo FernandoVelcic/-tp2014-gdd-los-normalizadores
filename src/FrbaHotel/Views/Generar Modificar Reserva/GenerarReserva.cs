@@ -57,14 +57,12 @@ namespace FrbaHotel.Generar_Modificar_Reserva
             tipo_habitacion_binding.DataSource = tipoHabitaciones;
             cmb_TipoHabitacion.DataSource = tipo_habitacion_binding;
             cmb_TipoHabitacion.DisplayMember = "descripcion";
-            cmb_TipoHabitacion.SelectedItem = tipoHabitaciones[0];
 
             BindingSource regimen_binding = new BindingSource();
             List<Regimen> regimenes = EntityManager.getEntityManager().findAll<Regimen>();
             regimen_binding.DataSource = regimenes;
             cmb_Regimen.DataSource = regimen_binding;
             cmb_Regimen.DisplayMember = "descripcion";
-            cmb_Regimen.SelectedItem = regimenes[0];
 
             txt_Cant_Noches.DataBindings.Add("Text", this.reserva, "cant_noches");
             txt_Desde.DataBindings.Add("Text", this.reserva, "fecha_inicio");
@@ -110,7 +108,7 @@ namespace FrbaHotel.Generar_Modificar_Reserva
 
         private void btn_Volver_Click(object sender, EventArgs e)
         {
-            this.nextForm(new Operaciones());
+            Close();
         }
 
         private void update_habitaciones()

@@ -52,12 +52,12 @@ namespace FrbaHotel.ABM_de_Regimen
                 return;
             }
             MessageBox.Show("El regimen se guardo correctamente");
-            this.nextForm(new FrbaHotel.Views.ABM_de_Regimen.ABMRegimen());
+            Close();
         }
 
         private void btn_Volver_Click(object sender, EventArgs e)
         {
-            this.nextForm(new FrbaHotel.Views.ABM_de_Regimen.ABMRegimen());
+            Close();
         }
     }
 }

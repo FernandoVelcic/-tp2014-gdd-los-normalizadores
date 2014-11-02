@@ -117,12 +117,12 @@ namespace FrbaHotel.ABM_de_Usuario
             else
                 MessageBox.Show("Usuario modificado correctamente!");
 
-            this.nextForm(new ABMUsuario());
+            Close();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.nextForm(new ABMUsuario());
+            Close();
         }
 
         private void button3_Click(object sender, EventArgs e)

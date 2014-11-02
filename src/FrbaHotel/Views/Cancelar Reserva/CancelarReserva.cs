@@ -33,12 +33,14 @@ namespace FrbaHotel.Cancelar_Reserva
                 return;
             }
 
+            MessageBox.Show("La reserva fue cancelada");
 
+            Close();
         }
 
         private void btn_Vovler_Click(object sender, EventArgs e)
         {
-
+            Close();
         }
 
 

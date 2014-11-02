@@ -89,12 +89,12 @@ namespace FrbaHotel.ABM_de_Rol
                 MessageBox.Show("Rol creado correctamente!");
             else
                 MessageBox.Show("Rol modificado correctamente!");
-            this.nextForm(new ABMRol());
+            Close();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.nextForm(new ABMRol());
+            Close();
         }
     }
 }

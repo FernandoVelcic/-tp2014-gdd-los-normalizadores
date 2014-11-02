@@ -72,6 +72,12 @@ namespace FrbaHotel.Views.ABM_de_Cliente
 
             textBox8.DataBindings.Add("Text", cliente, "documento_nro");
             comboBox1.DataBindings.Add("SelectedIndex", cliente, "estado");
+
+            if (modoSeleccion)
+            {
+                comboBox1.Visible = false;
+                label15.Visible = false;
+            }
         }
 
 
@@ -103,23 +109,17 @@ namespace FrbaHotel.Views.ABM_de_Cliente
                 MessageBox.Show("Cliente modificado correctamente!");
             }
 
+            Close();
 
-            /* Esto es para que se pueda dar de alta un cliente al dar de alta una reserva */
             if (modoSeleccion)
             {
-                this.Close();
                 previousForm.clienteSeleccionado(cliente);
             }
-            else
-            {
-                this.nextForm(new FrbaHotel.Views.ABM_de_Cliente.ABMCliente());
-            }
-            
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            this.nextForm(new FrbaHotel.Views.ABM_de_Cliente.ABMCliente());
+            Close();
         }
 
 

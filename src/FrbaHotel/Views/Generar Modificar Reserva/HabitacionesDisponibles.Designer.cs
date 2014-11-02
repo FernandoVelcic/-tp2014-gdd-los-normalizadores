@@ -67,7 +67,7 @@
             // btn_CrearCliente
             // 
             this.btn_CrearCliente.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_CrearCliente.Location = new System.Drawing.Point(278, 294);
+            this.btn_CrearCliente.Location = new System.Drawing.Point(278, 296);
             this.btn_CrearCliente.Name = "btn_CrearCliente";
             this.btn_CrearCliente.Size = new System.Drawing.Size(139, 46);
             this.btn_CrearCliente.TabIndex = 6;

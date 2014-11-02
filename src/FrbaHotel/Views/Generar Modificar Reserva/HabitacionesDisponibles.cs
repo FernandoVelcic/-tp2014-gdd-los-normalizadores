@@ -1,7 +1,4 @@
-﻿using FrbaHotel.Models;
-using FrbaHotel.Views.ABM_de_Cliente;
-using MyActiveRecord;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,6 +7,11 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
+using FrbaHotel.Models;
+using FrbaHotel.Models.Exceptions;
+using FrbaHotel.Views.ABM_de_Cliente;
+using MyActiveRecord;
 
 namespace FrbaHotel.Views.Generar_Modificar_Reserva
 {
@@ -39,7 +41,6 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
 
         /* TODO 
          * pasar a una vista con las habitaciones disponibles o algo parecido 
-         * validar que los estados sean igual a 1, por ej si una habitacion tiene estado 0 no deberia aparecer
          */
         private void load_Habitaciones(Regimen regimen, TipoHabitacion tipoHabitacion)
         {
@@ -49,8 +50,6 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
             query.addSelect("habitaciones.id");
             query.addSelect("habitaciones.numero");
             query.addSelect("habitaciones.piso");
-            //query.addSelect("hoteles.calle");
-            //query.addSelect("hoteles.nombre");
 
             query.addInnerJoin("hoteles", "habitaciones.hotel_id = hoteles.id");
             query.addInnerJoin("habitaciones_tipos", "habitaciones.tipo_id = habitaciones_tipos.id");
@@ -60,7 +59,7 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
             query.addWhere("regimenes.id", regimen);
             query.addWhere("habitaciones.tipo_id", tipoHabitacion);
             query.addWhere("habitaciones.hotel_id", hotel);
-
+            query.addWhere("habitaciones.estado = 1"); //La habitacion dada de baja no se puede tener en cuenta
 
             var sql = query.build();
             SqlCommand command = new SqlCommand(sql, ConnectionManager.getInstance().getConnection());
@@ -73,10 +72,6 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
                     habitacion.id = Convert.ToInt64(result["id"]);
                     habitacion.numero = Int32.Parse(result["numero"].ToString(), null);
                     habitacion.piso = Int32.Parse(result["piso"].ToString(), null);
-
-                    /*Hotel hotel = new Hotel();
-                    hotel.calle = result["calle"].ToString();
-                    hotel.nombre = result["nombre"].ToString();*/
 
                     habitacion.hotel = hotel;
 
@@ -117,15 +112,14 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
         private void btn_CrearCliente_Click(object sender, EventArgs e)
         {
             AltaModificacionCliente form = new ABM_de_Cliente.AltaModificacionCliente();
-            form.Show();
             form.setModoSeleccion(this);
+            form.Show();
         }
 
 
         /* Cuando se selecciona un cliente */
         void SeleccionCliente.clienteSeleccionado(Cliente cliente)
         {
-
             Reserva reserva = new Reserva();
             reserva.regimen = regimen;
             reserva.habitacion = habitacion;
@@ -133,7 +127,21 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
             reserva.cant_noches = cantidadNoches;
             reserva.cliente = cliente;
 
-            reserva.save();
+            try
+            {
+                reserva.save();
+            }
+            catch (ValidationException exception)
+            {
+                MessageBox.Show(exception.Message);
+                return;
+            }
+            catch (SqlException exception)
+            {
+                MessageBox.Show(exception.Message);
+                return;
+            }
+
             MessageBox.Show("La reserva se guardo con exito!");
             this.Close();
             new Operaciones().Show();

@@ -114,12 +114,12 @@ namespace FrbaHotel.Views.ABM_de_Hotel
             else
                 MessageBox.Show("Hotel modificado correctamente!");
 
-            this.nextForm(new FrbaHotel.Views.ABM_de_Hotel.ABMHotel());
+            Close();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.nextForm(new FrbaHotel.Views.ABM_de_Hotel.ABMHotel());
+            Close();
         }
 
         private void button3_Click(object sender, EventArgs e)
