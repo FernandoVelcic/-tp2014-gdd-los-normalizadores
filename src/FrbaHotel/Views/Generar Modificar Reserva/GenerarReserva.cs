@@ -27,6 +27,7 @@ namespace FrbaHotel.Generar_Modificar_Reserva
             this.reserva = new Reserva();
             reserva.cant_noches = 7;
             reserva.fecha_inicio = DateTime.Now;
+            reserva.bit_cancelacion = 1;
         }
 
 
@@ -36,6 +37,7 @@ namespace FrbaHotel.Generar_Modificar_Reserva
             this.reserva = reserva;
             reserva.cant_noches = 7;
             reserva.fecha_inicio = DateTime.Now;
+            reserva.bit_cancelacion = 1;
         }
 
         private void Form1_Load(object sender, EventArgs e)
