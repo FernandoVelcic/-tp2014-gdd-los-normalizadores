@@ -52,7 +52,7 @@ namespace FrbaHotel.Views.Registrar_Estadia
                 return;
             }
 
-            if( clientes.Any(x => x.id == cliente.id) )
+            if( clientes.Any(elemento => elemento.id == cliente.id) )
             {
                 MessageBox.Show("Este cliente ya se encuentra en la grilla");
                 return;
@@ -63,11 +63,13 @@ namespace FrbaHotel.Views.Registrar_Estadia
 
         private void button4_Click(object sender, EventArgs e)
         {
-            
-            //obtener seleccionado del datagrid
-            //Cliente borrado = clientes.Find(elemento => elemento.id ==cliente.id);
-            //clientes.Remove(borrado);
-            //listar();
+            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            {
+                Cliente cliente = row.DataBoundItem as Cliente;
+                Cliente borrado = clientes.Find(elemento => elemento.id ==cliente.id);
+                clientes.Remove(borrado);
+            }
+            listar();
         }
 
         private void listar()
