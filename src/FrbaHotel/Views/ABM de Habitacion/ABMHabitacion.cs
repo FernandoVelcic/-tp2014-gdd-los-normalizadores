@@ -56,6 +56,7 @@ namespace FrbaHotel.Views.ABM_de_Habitacion
         private void onBtnEliminar(object sender, EventArgs e)
         {
             this.deleteRecord(dataGridView1);
+            btn_Filtrar_Click(null, null);
         }
 
 

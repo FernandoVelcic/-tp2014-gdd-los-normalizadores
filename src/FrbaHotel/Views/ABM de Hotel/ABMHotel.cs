@@ -45,6 +45,7 @@ namespace FrbaHotel.Views.ABM_de_Hotel
         private void button3_Click(object sender, EventArgs e)
         {
             this.deleteRecord(dataGridView1);
+            button4_Click(null, null);
         }
 
         private void button2_Click(object sender, EventArgs e)

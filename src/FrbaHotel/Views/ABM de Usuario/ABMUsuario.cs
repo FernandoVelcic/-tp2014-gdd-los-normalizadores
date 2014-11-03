@@ -59,6 +59,7 @@ namespace FrbaHotel.ABM_de_Usuario
                 return;
             }
             this.deleteRecord(dataGridView1);
+            button4_Click(null, null);
         }
 
         private void button3_Click(object sender, EventArgs e)
