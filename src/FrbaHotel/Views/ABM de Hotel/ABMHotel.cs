@@ -57,22 +57,33 @@ namespace FrbaHotel.Views.ABM_de_Hotel
         {
             List<FetchCondition> condiciones = new List<FetchCondition>();
 
+            if (textBox1.Text != "")
+            {
             FetchCondition condicionNombre = new FetchCondition();
             condicionNombre.setLike("hoteles.nombre", textBox1.Text);
             condiciones.Add(condicionNombre);
+             }
 
+            if (textBox3.Text != "")
+            {
             FetchCondition condicionCiudad = new FetchCondition();
             condicionCiudad.setLike("hoteles.ciudad", textBox3.Text);
             condiciones.Add(condicionCiudad);
+            }
 
+            if (textBox4.Text != "")
+            {
             FetchCondition condicionPais = new FetchCondition();
             condicionPais.setLike("hoteles.pais", textBox4.Text);
             condiciones.Add(condicionPais);
+            }
 
+            if (textBox2.Text != "")
+            {
             FetchCondition condicionEstrellas = new FetchCondition();
             condicionEstrellas.setLike("hoteles.cant_estrella", textBox2.Text);
             condiciones.Add(condicionEstrellas);
-
+            }
             Listar(condiciones);
         }
 
