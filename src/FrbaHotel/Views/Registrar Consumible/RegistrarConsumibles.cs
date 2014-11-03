@@ -43,6 +43,8 @@ namespace FrbaHotel.Registrar_Consumible
 
         private void button1_Click(object sender, EventArgs e)
         {
+            this.editRecord<ConsumibleUnidades, FrbaHotel.Registrar_Consumible.ModificacionConsumible>(dataGridView1);
+            
             //modificar el que esta seleccionado en el datagrid
         }
 

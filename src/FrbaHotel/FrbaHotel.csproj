@@ -307,6 +307,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Registrar Consumible\ModificacionConsumible.resx">
+      <DependentUpon>ModificacionConsumible.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Registrar Consumible\RegistrarConsumibles.resx">
       <DependentUpon>RegistrarConsumibles.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -331,6 +334,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Views\Registrar Consumible\ModificacionConsumible.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Registrar Consumible\ModificacionConsumible.Designer.cs">
+      <DependentUpon>ModificacionConsumible.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Registrar Consumible\RegistrarConsumibles.cs">
       <SubType>Form</SubType>
