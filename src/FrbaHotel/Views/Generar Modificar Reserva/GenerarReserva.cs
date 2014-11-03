@@ -21,13 +21,9 @@ namespace FrbaHotel.Generar_Modificar_Reserva
     {
         Reserva reserva;
 
-        public Form1()
+        public Form1() : this(new Reserva())
         {
-            InitializeComponent();
-            this.reserva = new Reserva();
-            reserva.cant_noches = 7;
-            reserva.fecha_inicio = DateTime.Today.ToString();
-            reserva.reserva_estado = 1;
+
         }
 
 
@@ -94,6 +90,10 @@ namespace FrbaHotel.Generar_Modificar_Reserva
 
         private void validate()
         {
+            if (DateTime.Parse(txt_Desde.Text) < Config.getInstance().getCurrentDate())
+            {
+                throw new ValidationException("No puede pedir reservas en fechas anteriores a la actual");
+            }
 
             if (DateTime.Parse(txt_Desde.Text).Year < 1900)
             {

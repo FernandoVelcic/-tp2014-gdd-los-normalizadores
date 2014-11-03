@@ -19,7 +19,6 @@ namespace FrbaHotel.Models
         public Habitacion habitacion { get; set; }
         public Cliente cliente { get; set; }
         public int cant_noches { get; set; } //[numeric](18, 0)
-        public int cantidad_personas { get; set; } //INTEGER
         public int reserva_estado { get; set; } //INTEGER NOT NULL
 
         public String motivo_cancelacion { get; set; } //[nvarchar](255)
@@ -32,6 +31,9 @@ namespace FrbaHotel.Models
             fecha_carga = Config.getInstance().getCurrentDate().ToString();
         }
 
-
+        public bool estaCancelada()
+        {
+            return reserva_estado == 3 || reserva_estado == 4 || reserva_estado == 5;
+        }
     }
 }
