@@ -700,6 +700,10 @@ INNER JOIN [LOS_NORMALIZADORES].[hoteles] hoteles on habitaciones.hotel_id = hot
 
 GO
 
+/*Primer TOP*/
+CREATE VIEW [LOS_NORMALIZADORES].[v_HotelesReservasCanceladas] AS
+SELECT hotel_id AS id, hotel_id, COUNT(*) AS cantidad FROM [LOS_NORMALIZADORES].[reservas] LEFT JOIN [LOS_NORMALIZADORES].[habitaciones] ON reservas.habitacion_id = habitaciones.id /*WHERE reserva_estado = 3 OR reserva_estado = 4 OR reserva_estado = 5*/ GROUP BY hotel_id
+GO
 
 /* Procedimientos */
 

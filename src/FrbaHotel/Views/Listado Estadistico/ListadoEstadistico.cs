@@ -7,18 +7,27 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using FrbaHotel.Models.Listado_Estadistico;
+using FrbaHotel.Database_Helper;
+
 namespace FrbaHotel.Listado_Estadistico
 {
     public partial class Form1 : Form
     {
+        private int anio;
+
         public Form1()
         {
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            textBox1.DataBindings.Add("Text", this, "anio");
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
-            
             textBox1.Text = "";
             comboBox2.SelectedIndex = -1;
             comboBox1.SelectedIndex = -1;
@@ -28,12 +37,29 @@ namespace FrbaHotel.Listado_Estadistico
         
         private void button1_Click(object sender, EventArgs e)
         {
-            int anio = int.Parse(textBox1.Text);
-            string trimestre = comboBox2.SelectedItem.ToString();
-            string categoria = comboBox1.SelectedItem.ToString();
+            switch (comboBox2.SelectedIndex)
+            {
+                case 0:
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+
+                default:
+                    MessageBox.Show("Debe seleccionar el trimestre que desea");
+                    return;
+            }
+
             switch (comboBox1.SelectedIndex)
             {
                 case 0: //Hotel con mayor cantidad de reservas canceladas
+                    List<HotelesReservasCanceladas> hoteles = EntityManager.getEntityManager().findAll<HotelesReservasCanceladas>();
+                    hoteles = hoteles.OrderByDescending(h => h.cantidad).Take(5).ToList();
+
+                    dataGridView1.DataSource = hoteles;
                     break;
 
                 case 1: //Hotel con mayor cantidad de consumibles facturados
@@ -47,8 +73,11 @@ namespace FrbaHotel.Listado_Estadistico
 
                 case 4: //Cliente con mayor cantidad de puntos
                     break;
+
+                default:
+                    MessageBox.Show("Debe seleccionar el top que desea");
+                    break;
             }
-            //seleccionarTop(anio, trimestre, categoria)  //logica que falta
         }
     }
 }
