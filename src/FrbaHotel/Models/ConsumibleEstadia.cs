@@ -13,8 +13,8 @@ namespace FrbaHotel.Models
 
         //public int id { get; set; } //INTEGER IDENTITY PRIMARY KEY
 
-        public int consumible_codigo; //int
-        public String estadia_codigo;  //[nvarchar](255)
+        public Consumible consumible; //int
+        public Regimen regimen;  //[nvarchar](255)
         public int unidades; //INTEGER
 
 
