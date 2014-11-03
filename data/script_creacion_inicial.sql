@@ -700,10 +700,20 @@ INNER JOIN [LOS_NORMALIZADORES].[hoteles] hoteles on habitaciones.hotel_id = hot
 
 GO
 
-/*Primer TOP*/
+/*Primer TOP posible idea futura*/
+CREATE FUNCTION [LOS_NORMALIZADORES].[uspHotelesReservasCanceladas] (@fecha1 DATE, @fecha2 DATE)
+    RETURNS @Results TABLE(id INTEGER, hotel_id INTEGER, cantidad INTEGER)
+AS
+BEGIN
+    INSERT @Results SELECT TOP 5 0, hotel_id, COUNT(*) AS cantidad FROM [LOS_NORMALIZADORES].[reservas] LEFT JOIN [LOS_NORMALIZADORES].[habitaciones] ON reservas.habitacion_id = habitaciones.id WHERE (reserva_estado = 3 OR reserva_estado = 4 OR reserva_estado = 5) AND [fecha_cancelacion] BETWEEN @fecha1 AND @fecha2 GROUP BY hotel_id ORDER BY COUNT(*) DESC
+
+    RETURN
+END
+GO
+/*
 CREATE VIEW [LOS_NORMALIZADORES].[v_HotelesReservasCanceladas] AS
 SELECT hotel_id AS id, hotel_id, COUNT(*) AS cantidad FROM [LOS_NORMALIZADORES].[reservas] LEFT JOIN [LOS_NORMALIZADORES].[habitaciones] ON reservas.habitacion_id = habitaciones.id /*WHERE reserva_estado = 3 OR reserva_estado = 4 OR reserva_estado = 5*/ GROUP BY hotel_id
-GO
+GO*/
 
 /* Procedimientos */
 
