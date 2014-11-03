@@ -29,8 +29,8 @@ namespace FrbaHotel.Registrar_Consumible
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Consumible consumible = EntityManager.getEntityManager().findBy<Consumible>("codigo", consumibleU.codigo.ToString());
-            ConsumibleEstadia consumibleEstadia = EntityManager.getEntityManager().findBy<ConsumibleEstadia>("consumible", consumible.ToString());
+            
+            ConsumibleEstadia consumibleEstadia = EntityManager.getEntityManager().findBy<ConsumibleEstadia>("codigo", consumibleU.codigo.ToString());
            
             if(textBox1.Text != null)
             {
