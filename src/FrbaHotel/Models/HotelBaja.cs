@@ -28,48 +28,8 @@ namespace FrbaHotel.Models
             if (DateTime.Parse(fecha_desde) > DateTime.Parse(fecha_hasta))
                 throw new ValidationException("Rango de fecha invalido");
 
-            FetchCondition condicion_hotel = new FetchCondition();
-            condicion_hotel.setEquals("hotel_id", hotel.id);
-
-            {
-                List<FetchCondition> condiciones = new List<FetchCondition>();
-                FetchCondition condicion_fecha = new FetchCondition();
-                condicion_fecha.setBetween("'" + fecha_desde + "'", "fecha_desde", "fecha_hasta");
-                condiciones.Add(condicion_fecha);
-                condiciones.Add(condicion_hotel);
-
-                List<HotelBaja> hoteles_bajas = EntityManager.getEntityManager().findList<HotelBaja>(condiciones);
-
-                if (hoteles_bajas.Count != 0)
-                    throw new ValidationException("Ya existe una baja en ese periodo");
-            }
-
-            {
-                List<FetchCondition> condiciones = new List<FetchCondition>();
-                FetchCondition condicion_fecha = new FetchCondition();
-                condicion_fecha.setBetween("'" + fecha_hasta + "'", "fecha_desde", "fecha_hasta");
-                condiciones.Add(condicion_fecha);
-                condiciones.Add(condicion_hotel);
-
-                List<HotelBaja> hoteles_bajas = EntityManager.getEntityManager().findList<HotelBaja>(condiciones);
-
-                if (hoteles_bajas.Count != 0)
-                    throw new ValidationException("Ya existe una baja en ese periodo");
-            }
-
-            {
-                List<FetchCondition> condiciones = new List<FetchCondition>();
-                FetchCondition condicion_fecha = new FetchCondition();
-                condicion_fecha.setBetween("fecha_desde", "'" + fecha_desde + "'", "'" + fecha_hasta + "'");
-                condiciones.Add(condicion_fecha);
-                condiciones.Add(condicion_hotel);
-
-                List<HotelBaja> hoteles_bajas = EntityManager.getEntityManager().findList<HotelBaja>(condiciones);
-
-                if (hoteles_bajas.Count != 0)
-                    throw new ValidationException("Ya existe una baja en ese periodo");
-            }
-
+            if (!hotel.estaLibre(fecha_desde, fecha_hasta))
+                throw new ValidationException("Ya existe una baja en ese periodo");
         }
     }
 }

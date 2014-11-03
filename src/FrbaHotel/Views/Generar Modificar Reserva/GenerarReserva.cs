@@ -68,20 +68,28 @@ namespace FrbaHotel.Generar_Modificar_Reserva
 
         private void btn_Generar_Click(object sender, EventArgs e)
         {
+            Hotel hotel_seleccionado = cmb_Hotel.SelectedItem as Hotel;
+            Regimen regimen_seleccionado = (cmb_Regimen.SelectedItem as HotelRegimen).regimen;
+            TipoHabitacion tipo_habitacion_seleccionado = cmb_TipoHabitacion.SelectedItem as TipoHabitacion;
+
+            if ( !hotel_seleccionado.estaLibre(reserva.fecha_inicio, DateTime.Parse(reserva.fecha_inicio).AddDays(reserva.cant_noches).ToShortDateString()) )
+            {
+                MessageBox.Show("El hotel no esta disponible para ese periodo");
+                return;
+            }
 
             try
             {
                 validate();
-                new HabitacionesDisponibles(
-               (cmb_Regimen.SelectedItem as HotelRegimen).regimen, cmb_TipoHabitacion.SelectedItem as TipoHabitacion, DateTime.Parse(txt_Desde.Text), Int32.Parse(txt_Cant_Noches.Text), cmb_Hotel.SelectedItem as Hotel, this).Show();
+                new HabitacionesDisponibles(regimen_seleccionado, tipo_habitacion_seleccionado, reserva.fecha_inicio, reserva.cant_noches, hotel_seleccionado, this).Show();
                 this.Hide();
-                
+
             }
             catch (ValidationException exception)
             {
                 MessageBox.Show(exception.Message);
             }
-           
+
         }
 
         private void validate()

@@ -18,7 +18,7 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
     public partial class HabitacionesDisponibles : Form, SeleccionCliente
     {
 
-        private DateTime desde;
+        private String desde;
         private int cantidadNoches;
         private Regimen regimen;
         private Hotel hotel;
@@ -26,7 +26,7 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
         private Form previousForm;
         private Habitacion habitacion; 
 
-        public HabitacionesDisponibles(Regimen regimen, TipoHabitacion tipoHabitacion, DateTime desde, int cantidadNoches, Hotel hotel, Form previous)
+        public HabitacionesDisponibles(Regimen regimen, TipoHabitacion tipoHabitacion, String desde, int cantidadNoches, Hotel hotel, Form previous)
         {
             this.desde = desde;
             this.cantidadNoches = cantidadNoches;
@@ -80,7 +80,7 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
             }
 
             //Mostrar solo habitaciones no ocupadas
-            habitaciones = habitaciones.FindAll(h => h.estaDisponible(desde, cantidadNoches));
+            habitaciones = habitaciones.FindAll(h => h.estaDisponible(DateTime.Parse(desde), cantidadNoches));
 
             BindingSource habitaciones_binding = new BindingSource();
             habitaciones_binding.DataSource = habitaciones;
