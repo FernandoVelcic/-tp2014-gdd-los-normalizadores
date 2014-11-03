@@ -20,7 +20,10 @@ namespace FrbaHotel.Models
 
         public override void preSave()
         {
-            if( DateTime.Parse(fecha_desde) <= DateTime.Parse(fecha_hasta) )
+            if (Config.getInstance().getCurrentDate() > DateTime.Parse(fecha_desde))
+                throw new ValidationException("No se pueden hacer bajas al pasado, la fecha_desde debe ser mayor que la fecha de sistema.");
+
+            if( DateTime.Parse(fecha_desde) > DateTime.Parse(fecha_hasta) )
                 throw new ValidationException("Rango de fecha invalido");
         }
     }
