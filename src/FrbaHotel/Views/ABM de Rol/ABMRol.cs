@@ -30,7 +30,7 @@ namespace FrbaHotel.Views.ABM_de_Rol
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.nextForm(new FrbaHotel.ABM_de_Rol.AltaModificacionRol());
+            Navigator.nextForm(this,new FrbaHotel.ABM_de_Rol.AltaModificacionRol());
         }
 
         private void button2_Click(object sender, EventArgs e)

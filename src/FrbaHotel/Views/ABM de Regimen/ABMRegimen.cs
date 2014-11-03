@@ -26,7 +26,7 @@ namespace FrbaHotel.Views.ABM_de_Regimen
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.nextForm(new FrbaHotel.ABM_de_Regimen.AltaModificacionRegimen());
+            Navigator.nextForm(this,new FrbaHotel.ABM_de_Regimen.AltaModificacionRegimen());
         }
 
         private void button2_Click_1(object sender, EventArgs e)

@@ -50,7 +50,7 @@ namespace FrbaHotel.Views.ABM_de_Habitacion
 
         private void onBtnAlta(object sender, EventArgs e)
         {
-            this.nextForm(new FrbaHotel.ABM_de_Habitacion.AltaModificacionHabitacion());
+            Navigator.nextForm(this,new FrbaHotel.ABM_de_Habitacion.AltaModificacionHabitacion());
         }
 
         private void onBtnEliminar(object sender, EventArgs e)

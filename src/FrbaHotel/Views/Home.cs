@@ -24,12 +24,12 @@ namespace FrbaHotel
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.nextForm(new FrbaHotel.Login.Login());
+            Navigator.nextForm(this,new FrbaHotel.Login.Login());
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            this.nextForm(new FrbaHotel.Operaciones());
+            Navigator.nextForm(this,new FrbaHotel.Operaciones());
         }
     }
 }

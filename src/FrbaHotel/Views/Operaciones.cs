@@ -46,7 +46,7 @@ namespace FrbaHotel
         {
             if (permisos.id == 3 && permisos.estado == false) //Guests deshabilitados
             {
-                this.nextForm(new Home());
+                Navigator.nextForm(this,new Home());
                 MessageBox.Show("En este momento los guests no pueden acceder al sistema. Por favor intente mas tarde.");
             }
         }

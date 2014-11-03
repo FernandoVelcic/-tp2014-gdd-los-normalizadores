@@ -48,7 +48,7 @@ namespace FrbaHotel.ABM_de_Usuario
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            this.nextForm(new FrbaHotel.ABM_de_Usuario.AltaModificaiconUsuario());
+            Navigator.nextForm(this,new FrbaHotel.ABM_de_Usuario.AltaModificaiconUsuario());
         }
 
         private void button2_Click(object sender, EventArgs e)

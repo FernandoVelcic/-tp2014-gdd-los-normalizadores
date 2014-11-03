@@ -38,13 +38,13 @@ namespace FrbaHotel.Views.Login
             if (roles.Count == 0)
             {
                 MessageBox.Show("Este usuario no posee roles", "Salir", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                this.nextForm(new Home());
+                Navigator.nextForm(this,new Home());
             }
 
             if (roles.Count == 1)
             {
                 if (roles[0].rol.estado == true)
-                    this.nextForm(new Operaciones(roles[0]));
+                    Navigator.nextForm(this,new Operaciones(roles[0]));
                 else
                     MessageBox.Show("El rol asociado a este usuario se encuentra inhabilitado");
             }
@@ -52,7 +52,7 @@ namespace FrbaHotel.Views.Login
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.nextForm(new Home());
+            Navigator.nextForm(this,new Home());
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -64,7 +64,7 @@ namespace FrbaHotel.Views.Login
             }
 
             if((comboBox1.SelectedValue as RolUsuario).rol.estado == true)
-                this.nextForm(new Operaciones(comboBox1.SelectedValue as RolUsuario));
+                Navigator.nextForm(this,new Operaciones(comboBox1.SelectedValue as RolUsuario));
             else
                 MessageBox.Show("El rol seleccionado se encuentra inhabilitado");
         }

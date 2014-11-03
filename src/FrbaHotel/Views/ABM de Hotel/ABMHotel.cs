@@ -39,7 +39,7 @@ namespace FrbaHotel.Views.ABM_de_Hotel
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.nextForm(new AltaModificacionHotel());
+            Navigator.nextForm(this,new AltaModificacionHotel());
         }
 
         private void button3_Click(object sender, EventArgs e)

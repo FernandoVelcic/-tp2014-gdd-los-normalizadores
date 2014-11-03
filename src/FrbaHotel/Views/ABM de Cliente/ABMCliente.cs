@@ -46,7 +46,7 @@ namespace FrbaHotel.Views.ABM_de_Cliente
 
         private void onBtnAlta(object sender, EventArgs e)
         {
-            this.nextForm(new FrbaHotel.Views.ABM_de_Cliente.AltaModificacionCliente());
+            Navigator.nextForm(this,new FrbaHotel.Views.ABM_de_Cliente.AltaModificacionCliente());
         }
 
 
