@@ -129,10 +129,9 @@ CREATE TABLE [LOS_NORMALIZADORES].[regimenes](
 
 
 CREATE TABLE [LOS_NORMALIZADORES].[reservas](
-	[id] INTEGER IDENTITY PRIMARY KEY,
+	[id] INTEGER IDENTITY(10001,1) PRIMARY KEY,
 	[fecha_carga] [datetime],				/* Fecha en que se realizo la reserva, debe ser por archivo de configuración */
 	[fecha_inicio] [datetime],				/* Fecha en del primer dia que se va a alojar el huesped */
-	[codigo] [numeric](18, 0),
 	[cant_noches] [numeric](18, 0),
 	[regimen_id] INTEGER,
 	[habitacion_id] INTEGER,
@@ -386,14 +385,17 @@ CREATE INDEX Maestra_cliente_id ON [LOS_NORMALIZADORES].[Maestra] (cliente_id)
 
 
 /* Migracion de reservas */ 
-INSERT INTO [LOS_NORMALIZADORES].[reservas] ([cliente_id], [fecha_inicio], [codigo], [cant_noches], [regimen_id], [reserva_estado])	
-	SELECT DISTINCT [cliente_id], [Reserva_Fecha_Inicio], [Reserva_Codigo], [Reserva_Cant_Noches], [regimen_id],1 FROM [LOS_NORMALIZADORES].[Maestra]
+SET IDENTITY_INSERT [LOS_NORMALIZADORES].[reservas] ON;
+INSERT INTO [LOS_NORMALIZADORES].[reservas] (id, [cliente_id], [fecha_inicio], [cant_noches], [regimen_id], [reserva_estado], [habitacion_id])	
+	SELECT DISTINCT [Reserva_Codigo], [cliente_id], [Reserva_Fecha_Inicio], [Reserva_Cant_Noches], [regimen_id], 1, [habitacion_id] FROM [LOS_NORMALIZADORES].[Maestra]
 	WHERE [Reserva_Fecha_Inicio] IS NOT NULL 
 	AND   [Reserva_Codigo] IS NOT NULL
 	AND   [Reserva_Cant_Noches] IS NOT NULL
 	AND   [regimen_id] IS NOT NULL
 	AND   [cliente_id] IS NOT NULL
+	AND	  [habitacion_id] IS NOT NULL
 GO
+SET IDENTITY_INSERT [LOS_NORMALIZADORES].[reservas] OFF;
 
 ALTER TABLE [LOS_NORMALIZADORES].[Maestra] ADD reserva_id INTEGER
 GO
@@ -403,7 +405,7 @@ SET reserva_id =
 	(
 		SELECT id FROM [LOS_NORMALIZADORES].[reservas] as r
 		WHERE [LOS_NORMALIZADORES].[Maestra].Reserva_Fecha_Inicio = r.fecha_inicio
-		AND   [LOS_NORMALIZADORES].[Maestra].Reserva_Codigo = r.codigo
+		AND   [LOS_NORMALIZADORES].[Maestra].Reserva_Codigo = r.id
 		AND   [LOS_NORMALIZADORES].[Maestra].Reserva_Cant_Noches = r.cant_noches
 		AND   [LOS_NORMALIZADORES].[Maestra].regimen_id = r.regimen_id
 	)
