@@ -10,6 +10,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Data.SqlClient;
+using FrbaHotel.Homes;
 using FrbaHotel.Models.Exceptions;
 
 
@@ -30,7 +31,7 @@ namespace FrbaHotel.Cancelar_Reserva
         private void btn_Cancelar_Click(object sender, EventArgs e)
         {
             
-            Reserva reserva = EntityManager.getEntityManager().findBy<Reserva>("reservas.codigo", txt_NroReserva.Text);
+            Reserva reserva = EntityManager.getEntityManager().findBy<Reserva>("reservas.id", txt_NroReserva.Text);
             if (reserva == null)
             {
                 MessageBox.Show("La reserva no existe");
@@ -47,12 +48,14 @@ namespace FrbaHotel.Cancelar_Reserva
             //reserva.fecha_cancelacion = fecha;
             reserva.motivo_cancelacion = txt_Motivo.Text;
             reserva.usuario_cancelacion = txt_Usuario.Text;
-            //if (rol_usuario == "Recepcionista") reserva.reserva_estado = 3;//fer completa
-            //if (rol_usuario == "Guest") reserva.reserva_estado = 4;       //fer completa            
+            if (SesionActual.rol_usuario.rol.id == 2) //Recepcionista
+                reserva.reserva_estado = 3;
+            if (SesionActual.rol_usuario.rol.id == 3) //Guest
+                reserva.reserva_estado = 4;
+           
             try
             {
                 reserva.save();
-
             }
             catch (ValidationException exception)
             {
@@ -65,8 +68,7 @@ namespace FrbaHotel.Cancelar_Reserva
                 return;
             }
 
-            
-            MessageBox.Show("La reserva fue cancelada");
+            MessageBox.Show("La reserva " + txt_NroReserva.Text + " fue cancelada");
             
             Close();
         }

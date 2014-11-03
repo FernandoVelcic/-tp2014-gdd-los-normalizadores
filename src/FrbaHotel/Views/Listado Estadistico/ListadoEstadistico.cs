@@ -37,15 +37,24 @@ namespace FrbaHotel.Listado_Estadistico
         
         private void button1_Click(object sender, EventArgs e)
         {
+            DateTime fecha1, fecha2;
             switch (comboBox2.SelectedIndex)
             {
-                case 0:
+                case 0: //Primer trimestre
+                    fecha1 = new DateTime(anio, 1, 1);
+                    fecha2 = new DateTime(anio, 3, 31);
                     break;
-                case 1:
+                case 1: //Segundo trimestre
+                    fecha1 = new DateTime(anio, 4, 1);
+                    fecha2 = new DateTime(anio, 6, 30);
                     break;
-                case 2:
+                case 2: //Tercer trimestre
+                    fecha1 = new DateTime(anio, 7, 1);
+                    fecha2 = new DateTime(anio, 9, 30);
                     break;
-                case 3:
+                case 3: //Cuarto trimestre
+                    fecha1 = new DateTime(anio, 10, 1);
+                    fecha2 = new DateTime(anio, 12, 31);
                     break;
 
                 default:

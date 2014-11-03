@@ -60,20 +60,11 @@ namespace FrbaHotel.Generar_Modificar_Reserva
             cmb_TipoHabitacion.DataSource = tipo_habitacion_binding;
             cmb_TipoHabitacion.DisplayMember = "descripcion";
 
-            BindingSource regimen_binding = new BindingSource();
-            List<Regimen> regimenes = EntityManager.getEntityManager().findAll<Regimen>();
-            regimen_binding.DataSource = regimenes;
-            cmb_Regimen.DataSource = regimen_binding;
-            cmb_Regimen.DisplayMember = "descripcion";
+            update_regimenes();
 
             txt_Cant_Noches.DataBindings.Add("Text", this.reserva, "cant_noches");
             txt_Desde.DataBindings.Add("Text", this.reserva, "fecha_inicio");
         }
-
-        public void update_habitaciones(object sender, EventArgs e)
-        {
-        }
-
 
         private void btn_Generar_Click(object sender, EventArgs e)
         {
@@ -82,7 +73,7 @@ namespace FrbaHotel.Generar_Modificar_Reserva
             {
                 validate();
                 new HabitacionesDisponibles(
-               cmb_Regimen.SelectedItem as Regimen, cmb_TipoHabitacion.SelectedItem as TipoHabitacion, DateTime.Parse(txt_Desde.Text), Int32.Parse(txt_Cant_Noches.Text), cmb_Hotel.SelectedItem as Hotel, this).Show();
+               (cmb_Regimen.SelectedItem as HotelRegimen).regimen, cmb_TipoHabitacion.SelectedItem as TipoHabitacion, DateTime.Parse(txt_Desde.Text), Int32.Parse(txt_Cant_Noches.Text), cmb_Hotel.SelectedItem as Hotel, this).Show();
                 this.Hide();
                 
             }
@@ -113,9 +104,17 @@ namespace FrbaHotel.Generar_Modificar_Reserva
             Close();
         }
 
-        private void update_habitaciones()
+        private void update_regimenes()
         {
+            BindingSource regimen_binding = new BindingSource();
+            List<HotelRegimen> regimenes = EntityManager.getEntityManager().findAllBy<HotelRegimen>("hotel_id", (cmb_Hotel.SelectedItem as Hotel).id.ToString());
+            regimen_binding.DataSource = regimenes;
+            cmb_Regimen.DataSource = regimen_binding;
+        }
 
+        private void cmb_Hotel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            update_regimenes();
         }
 
 
