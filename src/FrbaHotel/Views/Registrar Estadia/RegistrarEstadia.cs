@@ -11,6 +11,7 @@ using FrbaHotel.Database_Helper;
 using FrbaHotel.Models.Exceptions;
 using FrbaHotel.Models;
 using System.Data.SqlClient;
+using FrbaHotel.Views.Registrar_Estadia;
 
 namespace FrbaHotel.Registrar_Estadia
 {
@@ -95,7 +96,7 @@ namespace FrbaHotel.Registrar_Estadia
                     return;
                 }
                MessageBox.Show("La estadía ha sido validada");
-               // Navigator.nextForm(this, new FrbaHotel.Registrar_Estadia.Ingreso(reservain)); //no se como ponerlo
+               Navigator.nextForm(this, new FrbaHotel.Views.Registrar_Estadia.Ingreso(reservain)); //no se como ponerlo
             }
             else if(operacion=="checkOut") {
                 int nroReserva1 = int.Parse(txt_NroReserva.Text);

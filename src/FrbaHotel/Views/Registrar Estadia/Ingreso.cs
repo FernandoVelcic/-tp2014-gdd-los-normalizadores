@@ -10,7 +10,7 @@ using MyActiveRecord;
 using FrbaHotel.Models;
 using FrbaHotel.Database_Helper;
 using FrbaHotel.Views.ABM_de_Cliente;
-using MyActiveRecord;
+
 
 namespace FrbaHotel.Views.Registrar_Estadia
 {
@@ -32,9 +32,9 @@ namespace FrbaHotel.Views.Registrar_Estadia
 
         private void button2_Click(object sender, EventArgs e)
         {
-            /*AltaModificacionCliente form = new ABM_de_Cliente.AltaModificacionCliente();
+            AltaModificacionCliente form = new ABM_de_Cliente.AltaModificacionCliente();
             form.setModoSeleccion(this);
-            form.Show();      */
+            form.Show();      
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -52,13 +52,26 @@ namespace FrbaHotel.Views.Registrar_Estadia
                 return;
             }
 
-            if( clientes.Contains(cliente) )
+            if( clientes.Any(x => x.id == cliente.id) )
             {
                 MessageBox.Show("Este cliente ya se encuentra en la grilla");
                 return;
             }
+           clientes.Add(cliente);
+           listar();
+        }
 
-            clientes.Add(cliente);
+        private void button4_Click(object sender, EventArgs e)
+        {
+            
+            //obtener seleccionado del datagrid
+            //Cliente borrado = clientes.Find(elemento => elemento.id ==cliente.id);
+            //clientes.Remove(borrado);
+            //listar();
+        }
+
+        private void listar()
+        {
             var clientesBinding = new BindingList<Cliente>(clientes);
             dataGridView1.DataSource = new BindingSource(clientesBinding, null);
         }
