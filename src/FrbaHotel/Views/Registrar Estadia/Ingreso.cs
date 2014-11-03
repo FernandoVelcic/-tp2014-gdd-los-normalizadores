@@ -52,7 +52,7 @@ namespace FrbaHotel.Views.Registrar_Estadia
                 return;
             }
 
-            if( clientes.Any(x => x.id == cliente.id) )
+            if( clientes.Any(elemento => elemento.id == cliente.id) )
             {
                 MessageBox.Show("Este cliente ya se encuentra en la grilla");
                 return;

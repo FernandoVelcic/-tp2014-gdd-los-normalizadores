@@ -72,9 +72,6 @@ namespace FrbaHotel.Registrar_Estadia
             }
            
             DateTime fecha = datepicker.Value;
-
-
-            /* Porque se usa el usuario? */
             string usuario = txt_Usuario.Text;
 
             if(operacion=="checkIn"){
@@ -96,7 +93,7 @@ namespace FrbaHotel.Registrar_Estadia
                     return;
                 }
                MessageBox.Show("La estadía ha sido validada");
-               Navigator.nextForm(this, new FrbaHotel.Views.Registrar_Estadia.Ingreso(reservain)); //no se como ponerlo
+               Navigator.nextForm(this, new FrbaHotel.Views.Registrar_Estadia.Ingreso(reservain)); 
             }
             else if(operacion=="checkOut") {
                 int nroReserva1 = int.Parse(txt_NroReserva.Text);
