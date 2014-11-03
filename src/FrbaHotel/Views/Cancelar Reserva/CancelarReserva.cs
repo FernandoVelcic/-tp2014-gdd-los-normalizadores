@@ -40,12 +40,12 @@ namespace FrbaHotel.Cancelar_Reserva
            
             DateTime fecha= DateTime.Parse(dateTimePicker1.Text);   
 
-            if (DateTime.Compare(reserva.fecha_inicio, fecha) < 0)
+            if (DateTime.Compare(DateTime.Parse(reserva.fecha_inicio), fecha) < 0)
             {
                 MessageBox.Show("No se puede cancelar una reserva una vez comenzada");   
                 return;
             }
-            //reserva.fecha_cancelacion = fecha;
+            reserva.fecha_cancelacion = fecha.ToString();
             reserva.motivo_cancelacion = txt_Motivo.Text;
             reserva.usuario_cancelacion = txt_Usuario.Text;
             if (SesionActual.rol_usuario.rol.id == 2) //Recepcionista

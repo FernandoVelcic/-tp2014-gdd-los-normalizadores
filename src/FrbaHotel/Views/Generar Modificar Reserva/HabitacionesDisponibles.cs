@@ -123,7 +123,7 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
             Reserva reserva = new Reserva();
             reserva.regimen = regimen;
             reserva.habitacion = list_Habitaciones.SelectedItem as Habitacion;
-            reserva.fecha_inicio = desde;
+            reserva.fecha_inicio = desde.ToString();
             reserva.cant_noches = cantidadNoches;
             reserva.cliente = cliente;
             reserva.reserva_estado = 1; //Reserva correcta

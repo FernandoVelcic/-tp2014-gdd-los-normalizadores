@@ -59,7 +59,7 @@ namespace FrbaHotel.Registrar_Estadia
             try
             {
                 int nroReserva = int.Parse(txt_NroReserva.Text); 
-                Reserva reserva = EntityManager.getEntityManager().findBy<Reserva>("reservas.codigo", nroReserva.ToString());
+                Reserva reserva = EntityManager.getEntityManager().findBy<Reserva>("reservas.id", nroReserva.ToString());
             }
             catch (FormatException e)
             {
@@ -78,7 +78,7 @@ namespace FrbaHotel.Registrar_Estadia
 
             if(operacion=="checkIn"){
                 int nroReserva1 = int.Parse(txt_NroReserva.Text);
-                Reserva reservain = EntityManager.getEntityManager().findBy<Reserva>("reservas.codigo", nroReserva1.ToString());
+                Reserva reservain = EntityManager.getEntityManager().findBy<Reserva>("reservas.id", nroReserva1.ToString());
                 reservain.reserva_estado = 6;
                 try
                 {
@@ -99,7 +99,7 @@ namespace FrbaHotel.Registrar_Estadia
             }
             else if(operacion=="checkOut") {
                 int nroReserva1 = int.Parse(txt_NroReserva.Text);
-                Reserva reservaout = EntityManager.getEntityManager().findBy<Reserva>("reservas.codigo", nroReserva1.ToString());
+                Reserva reservaout = EntityManager.getEntityManager().findBy<Reserva>("reservas.id", nroReserva1.ToString());
                 Navigator.nextForm(this, new FrbaHotel.Registrar_Consumible.Form1(reservaout.regimen));
             }
             

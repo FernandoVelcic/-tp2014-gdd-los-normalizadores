@@ -26,7 +26,7 @@ namespace FrbaHotel.Generar_Modificar_Reserva
             InitializeComponent();
             this.reserva = new Reserva();
             reserva.cant_noches = 7;
-            reserva.fecha_inicio = DateTime.Now;
+            reserva.fecha_inicio = DateTime.Today.ToString();
             reserva.reserva_estado = 1;
         }
 
@@ -36,7 +36,7 @@ namespace FrbaHotel.Generar_Modificar_Reserva
             InitializeComponent();
             this.reserva = reserva;
             reserva.cant_noches = 7;
-            reserva.fecha_inicio = DateTime.Now;
+            reserva.fecha_inicio = DateTime.Today.ToString();
             reserva.reserva_estado = 1;
         }
 
