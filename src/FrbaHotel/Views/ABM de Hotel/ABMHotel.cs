@@ -44,7 +44,7 @@ namespace FrbaHotel.Views.ABM_de_Hotel
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //this.deleteRecord(dataGridView1);
+            Navigator.nextForm(this, new BajaHotel(dataGridView1.SelectedRows[0].DataBoundItem as Hotel));
             button4_Click(null, null);
         }
 

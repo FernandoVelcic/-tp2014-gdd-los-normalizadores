@@ -6,12 +6,14 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using FrbaHotel.Database_Helper;
+using FrbaHotel.Models;
 
 namespace FrbaHotel.Views.Facturar_Estadia
 {
     public partial class Facturar : Form
     {
-        public Facturar()
+        public Facturar(Reserva reserva)
         {
             InitializeComponent();
         }

@@ -66,7 +66,6 @@ namespace FrbaHotel.Views.ABM_de_Hotel
             textBox5.DataBindings.Add("Text", hotel, "cant_estrella");
             textBox6.DataBindings.Add("Text", hotel, "ciudad");
             dateTimePicker1.DataBindings.Add("Text", hotel, "fecha_creacion", true);
-            comboBox1.DataBindings.Add("SelectedIndex", hotel, "estado");
         }
 
         private void button2_Click(object sender, EventArgs e)
