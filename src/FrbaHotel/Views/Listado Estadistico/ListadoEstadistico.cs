@@ -82,6 +82,7 @@ namespace FrbaHotel.Listado_Estadistico
                     break;
 
                 case 2: //Hotel con mayor cantidad de días fuera de servicio
+                    HotelMayorCantidadDiasFueraServicio();
                     break;
 
                 case 3: //Habitacion con mayor cantidad de días y veces ocupada
@@ -118,6 +119,32 @@ namespace FrbaHotel.Listado_Estadistico
 
             hoteles.ForEach(h => h.hotel = EntityManager.getEntityManager().findById<Hotel>(h.hotel.id));
             
+            //List<HotelesReservasCanceladas> hoteles = EntityManager.getEntityManager().findAll<HotelesReservasCanceladas>();
+            dataGridView1.DataSource = hoteles;
+        }
+
+        private void HotelMayorCantidadDiasFueraServicio()
+        {
+            List<HotelesReservasCanceladas> hoteles = new List<HotelesReservasCanceladas>();
+            string query = "SELECT TOP 5 hotel_id, SUM(DATEDIFF(d, hoteles_bajas.fecha_desde, hoteles_bajas.fecha_hasta)+1) AS cantidad_dias FROM [LOS_NORMALIZADORES].[hoteles] RIGHT JOIN [LOS_NORMALIZADORES].[hoteles_bajas] ON hoteles.id = hoteles_bajas.hotel_id WHERE fecha_desde BETWEEN '" + fecha1 + "' AND '" + fecha2 + "' GROUP BY hotel_id ORDER BY 2 DESC";
+
+            SqlCommand command = new SqlCommand(query, ConnectionManager.getInstance().getConnection());
+            using (SqlDataReader result = command.ExecuteReader())
+            {
+                while (result.Read())
+                {
+                    HotelesReservasCanceladas reserva_cancelada = new HotelesReservasCanceladas();
+                    Hotel hotel_temporal = new Hotel();
+                    hotel_temporal.id = Convert.ToInt32(result["hotel_id"].ToString());
+                    reserva_cancelada.hotel = hotel_temporal;
+                    reserva_cancelada.cantidad = Convert.ToInt32(result["cantidad_dias"]);
+
+                    hoteles.Add(reserva_cancelada);
+                }
+            }
+
+            hoteles.ForEach(h => h.hotel = EntityManager.getEntityManager().findById<Hotel>(h.hotel.id));
+
             //List<HotelesReservasCanceladas> hoteles = EntityManager.getEntityManager().findAll<HotelesReservasCanceladas>();
             dataGridView1.DataSource = hoteles;
         }
