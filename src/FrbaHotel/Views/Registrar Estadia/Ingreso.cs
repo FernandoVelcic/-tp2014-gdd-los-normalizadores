@@ -14,8 +14,10 @@ using MyActiveRecord;
 
 namespace FrbaHotel.Views.Registrar_Estadia
 {
-    public partial class Ingreso : Form
+    public partial class Ingreso : Form, SeleccionCliente
     {
+        public List<Cliente> clientes = new List<Cliente>();
+
         public Ingreso(Reserva reserva)
         {
             InitializeComponent();
@@ -23,9 +25,9 @@ namespace FrbaHotel.Views.Registrar_Estadia
 
         private void button1_Click(object sender, EventArgs e)
         {
-            /*ABMCliente form = new ABM_de_Cliente.ABMCliente();
+            ABMCliente form = new ABM_de_Cliente.ABMCliente();
             form.Show();
-            form.setModoSeleccionCliente(this);*/
+            form.setModoSeleccionCliente(this);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -41,16 +43,24 @@ namespace FrbaHotel.Views.Registrar_Estadia
         }
       
     
-    /* Cuando se selecciona un cliente */
-    /*void SeleccionCliente.clienteSeleccionado(Cliente cliente)
-    {
-        if (cliente.estado == false)
+        /* Cuando se selecciona un cliente */
+        void SeleccionCliente.clienteSeleccionado(Cliente cliente)
         {
-            MessageBox.Show("Este cliente no tiene permitido hacer el check-in");
-            return;
-        }
+            if (cliente.estado == false)
+            {
+                MessageBox.Show("Este cliente no tiene permitido hacer el check-in");
+                return;
+            }
 
-        //cargar datos en el data grid.
-    }    */
+            if( clientes.Contains(cliente) )
+            {
+                MessageBox.Show("Este cliente ya se encuentra en la grilla");
+                return;
+            }
+
+            clientes.Add(cliente);
+            var clientesBinding = new BindingList<Cliente>(clientes);
+            dataGridView1.DataSource = new BindingSource(clientesBinding, null);
+        }
     }
 }
