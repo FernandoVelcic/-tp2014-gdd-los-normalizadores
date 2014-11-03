@@ -114,6 +114,12 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
         /* Cuando se selecciona un cliente */
         void SeleccionCliente.clienteSeleccionado(Cliente cliente)
         {
+            if (cliente.estado == false)
+            {
+                MessageBox.Show("Este cliente no tiene permitido realizar reservas");
+                return;
+            }
+
             Reserva reserva = new Reserva();
             reserva.regimen = regimen;
             reserva.habitacion = list_Habitaciones.SelectedItem as Habitacion;

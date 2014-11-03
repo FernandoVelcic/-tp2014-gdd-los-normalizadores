@@ -62,7 +62,8 @@
             this.comboBox2.Items.AddRange(new object[] {
             "1er Trimestre",
             "2do Trimestre",
-            "3er Trimestre"});
+            "3er Trimestre",
+            "4to Trimestre"});
             this.comboBox2.Location = new System.Drawing.Point(6, 21);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(110, 21);

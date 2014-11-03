@@ -55,5 +55,10 @@ namespace FrbaHotel.Models
             if (mail.isValidEmail() != true)
                 throw new ValidationException("Formato de email invalido");
         }
+
+        public List<RolUsuario> getRoles()
+        {
+            return EntityManager.getEntityManager().findAllBy<RolUsuario>("usuario_id", id.ToString());
+        }
     }
 }
