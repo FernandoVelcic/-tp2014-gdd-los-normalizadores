@@ -37,6 +37,7 @@ namespace FrbaHotel
             permisos = GuestRol;
 
             InitializeComponent();
+            label1.Text = "Damos la bienvenida a los futuros clientes de la cadena FRBAHotel, Por favor, tenga a bien escoger una operación";
             //determinarPermisos();
         }
 
