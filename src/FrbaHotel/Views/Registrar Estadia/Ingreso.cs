@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using MyActiveRecord;
 using FrbaHotel.Models;
 using FrbaHotel.Database_Helper;
+using FrbaHotel.Views.ABM_de_Cliente;
+using MyActiveRecord;
 
 namespace FrbaHotel.Views.Registrar_Estadia
 {
@@ -19,6 +21,36 @@ namespace FrbaHotel.Views.Registrar_Estadia
             InitializeComponent();
         }
 
-        
+        private void button1_Click(object sender, EventArgs e)
+        {
+            /*ABMCliente form = new ABM_de_Cliente.ABMCliente();
+            form.Show();
+            form.setModoSeleccionCliente(this);*/
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            /*AltaModificacionCliente form = new ABM_de_Cliente.AltaModificacionCliente();
+            form.setModoSeleccion(this);
+            form.Show();      */
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //recorrer el datagrid y agregarlos al check-in
+        }
+      
+    
+    /* Cuando se selecciona un cliente */
+    /*void SeleccionCliente.clienteSeleccionado(Cliente cliente)
+    {
+        if (cliente.estado == false)
+        {
+            MessageBox.Show("Este cliente no tiene permitido hacer el check-in");
+            return;
+        }
+
+        //cargar datos en el data grid.
+    }    */
     }
 }

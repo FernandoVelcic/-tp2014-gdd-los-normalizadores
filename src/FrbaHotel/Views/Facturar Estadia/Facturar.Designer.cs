@@ -262,7 +262,7 @@
             this.groupBox3.Size = new System.Drawing.Size(343, 323);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Consumibles:";
+            this.groupBox3.Text = "Items a cobrar:";
             // 
             // dataGridView1
             // 
