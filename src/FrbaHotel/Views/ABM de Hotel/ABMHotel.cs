@@ -44,7 +44,7 @@ namespace FrbaHotel.Views.ABM_de_Hotel
 
         private void button3_Click(object sender, EventArgs e)
         {
-            this.deleteRecord(dataGridView1);
+            //this.deleteRecord(dataGridView1);
             button4_Click(null, null);
         }
 
@@ -59,30 +59,30 @@ namespace FrbaHotel.Views.ABM_de_Hotel
 
             if (textBox1.Text != "")
             {
-            FetchCondition condicionNombre = new FetchCondition();
-            condicionNombre.setLike("hoteles.nombre", textBox1.Text);
-            condiciones.Add(condicionNombre);
+                FetchCondition condicionNombre = new FetchCondition();
+                condicionNombre.setLike("hoteles.nombre", textBox1.Text);
+                condiciones.Add(condicionNombre);
              }
 
             if (textBox3.Text != "")
             {
-            FetchCondition condicionCiudad = new FetchCondition();
-            condicionCiudad.setLike("hoteles.ciudad", textBox3.Text);
-            condiciones.Add(condicionCiudad);
+                FetchCondition condicionCiudad = new FetchCondition();
+                condicionCiudad.setLike("hoteles.ciudad", textBox3.Text);
+                condiciones.Add(condicionCiudad);
             }
 
             if (textBox4.Text != "")
             {
-            FetchCondition condicionPais = new FetchCondition();
-            condicionPais.setLike("hoteles.pais", textBox4.Text);
-            condiciones.Add(condicionPais);
+                FetchCondition condicionPais = new FetchCondition();
+                condicionPais.setLike("hoteles.pais", textBox4.Text);
+                condiciones.Add(condicionPais);
             }
 
             if (textBox2.Text != "")
             {
-            FetchCondition condicionEstrellas = new FetchCondition();
-            condicionEstrellas.setLike("hoteles.cant_estrella", textBox2.Text);
-            condiciones.Add(condicionEstrellas);
+                FetchCondition condicionEstrellas = new FetchCondition();
+                condicionEstrellas.setLike("hoteles.cant_estrella", textBox2.Text);
+                condiciones.Add(condicionEstrellas);
             }
             Listar(condiciones);
         }

@@ -25,7 +25,6 @@ namespace FrbaHotel.Views.ABM_de_Hotel
         public AltaModificacionHotel() : this(new Hotel())
         {
             esAlta = true;
-            hotel.estado = true;
             hotel.fecha_creacion = DateTime.Today.ToString();
         }
 
