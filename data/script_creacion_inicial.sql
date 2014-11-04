@@ -139,7 +139,6 @@ CREATE TABLE [LOS_NORMALIZADORES].[reservas](
 	[fecha_inicio] [datetime],				/* Fecha en del primer dia que se va a alojar el huesped */
 	[cant_noches] [numeric](18, 0),
 	[regimen_id] INTEGER,
-	[habitacion_id] INTEGER,
 	[cliente_id]	INTEGER,					/* Deberia ir ??? */
 	[motivo_cancelacion] [nvarchar](255),
 	[fecha_cancelacion] [datetime],			/* Fecha en que se cancela la reserva */
@@ -408,8 +407,8 @@ CREATE INDEX Maestra_cliente_id ON [LOS_NORMALIZADORES].[Maestra] (cliente_id)
 
 /* Migracion de reservas */ 
 SET IDENTITY_INSERT [LOS_NORMALIZADORES].[reservas] ON;
-INSERT INTO [LOS_NORMALIZADORES].[reservas] (id, [cliente_id], [fecha_inicio], [cant_noches], [regimen_id], [reserva_estado], [habitacion_id])	
-	SELECT DISTINCT [Reserva_Codigo], [cliente_id], [Reserva_Fecha_Inicio], [Reserva_Cant_Noches], [regimen_id], 1, [habitacion_id] FROM [LOS_NORMALIZADORES].[Maestra]
+INSERT INTO [LOS_NORMALIZADORES].[reservas] (id, [cliente_id], [fecha_inicio], [cant_noches], [regimen_id], [reserva_estado])	
+	SELECT DISTINCT [Reserva_Codigo], [cliente_id], [Reserva_Fecha_Inicio], [Reserva_Cant_Noches], [regimen_id], 1 FROM [LOS_NORMALIZADORES].[Maestra]
 	WHERE [Reserva_Fecha_Inicio] IS NOT NULL 
 	AND   [Reserva_Codigo] IS NOT NULL
 	AND   [Reserva_Cant_Noches] IS NOT NULL
@@ -433,7 +432,11 @@ SET reserva_id =
 	)
 GO
 
-
+/* Migracion de reservas_habitaciones */
+INSERT INTO [LOS_NORMALIZADORES].[reservas_habitaciones] ([reserva_id], [habitacion_id])	
+	SELECT DISTINCT [reserva_id], [habitacion_id] FROM [LOS_NORMALIZADORES].[Maestra]
+	WHERE [reserva_id] IS NOT NULL
+	AND	  [habitacion_id] IS NOT NULL
 
 
 /* Estadias */
@@ -688,8 +691,6 @@ ALTER TABLE [LOS_NORMALIZADORES].[hoteles_regimenes] ADD CONSTRAINT regimenes_un
 
 ALTER TABLE [LOS_NORMALIZADORES].[reservas] ADD CONSTRAINT reservas_regimen_id FOREIGN KEY (regimen_id) REFERENCES [LOS_NORMALIZADORES].[regimenes](id)
 
-ALTER TABLE [LOS_NORMALIZADORES].[reservas] ADD CONSTRAINT reservas_habitacion_id FOREIGN KEY (habitacion_id) REFERENCES [LOS_NORMALIZADORES].[habitaciones](id)
-
 ALTER TABLE [LOS_NORMALIZADORES].[estadias] ADD CONSTRAINT estadias_reserva_id FOREIGN KEY (reserva_id) REFERENCES [LOS_NORMALIZADORES].[reservas](id)
 
 ALTER TABLE [LOS_NORMALIZADORES].[estadias] ADD CONSTRAINT estadias_regimen_id FOREIGN KEY (cliente_id) REFERENCES [LOS_NORMALIZADORES].[clientes](id)
@@ -723,15 +724,15 @@ INNER JOIN [LOS_NORMALIZADORES].[hoteles] hoteles on habitaciones.hotel_id = hot
 GO
 
 /*Primer TOP posible idea futura*/
-CREATE FUNCTION [LOS_NORMALIZADORES].[uspHotelesReservasCanceladas] (@fecha1 DATE, @fecha2 DATE)
+/*CREATE FUNCTION [LOS_NORMALIZADORES].[uspHotelesReservasCanceladas] (@fecha1 DATE, @fecha2 DATE)
     RETURNS @Results TABLE(id INTEGER, hotel_id INTEGER, cantidad INTEGER)
 AS
 BEGIN
-    INSERT @Results SELECT TOP 5 0, hotel_id, COUNT(*) AS cantidad FROM [LOS_NORMALIZADORES].[reservas] LEFT JOIN [LOS_NORMALIZADORES].[habitaciones] ON reservas.habitacion_id = habitaciones.id WHERE (reserva_estado = 3 OR reserva_estado = 4 OR reserva_estado = 5) AND [fecha_cancelacion] BETWEEN @fecha1 AND @fecha2 GROUP BY hotel_id ORDER BY COUNT(*) DESC
+    INSERT @Results SELECT TOP 5 0, hotel_id, COUNT(*) AS cantidad FROM [LOS_NORMALIZADORES].[reservas] LEFT JOIN [LOS_NORMALIZADORES].[reservas_habitaciones] LEFT JOIN [LOS_NORMALIZADORES].[habitaciones] ON reservas.habitacion_id = habitaciones.id WHERE (reserva_estado = 3 OR reserva_estado = 4 OR reserva_estado = 5) AND [fecha_cancelacion] BETWEEN @fecha1 AND @fecha2 GROUP BY hotel_id ORDER BY COUNT(*) DESC
 
     RETURN
 END
-GO
+GO*/
 /*
 CREATE VIEW [LOS_NORMALIZADORES].[v_HotelesReservasCanceladas] AS
 SELECT hotel_id AS id, hotel_id, COUNT(*) AS cantidad FROM [LOS_NORMALIZADORES].[reservas] LEFT JOIN [LOS_NORMALIZADORES].[habitaciones] ON reservas.habitacion_id = habitaciones.id /*WHERE reserva_estado = 3 OR reserva_estado = 4 OR reserva_estado = 5*/ GROUP BY hotel_id

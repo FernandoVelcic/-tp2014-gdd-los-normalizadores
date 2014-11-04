@@ -61,6 +61,7 @@
             this.list_Habitaciones.FormattingEnabled = true;
             this.list_Habitaciones.Location = new System.Drawing.Point(12, 11);
             this.list_Habitaciones.Name = "list_Habitaciones";
+            this.list_Habitaciones.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.list_Habitaciones.Size = new System.Drawing.Size(405, 264);
             this.list_Habitaciones.TabIndex = 5;
             // 

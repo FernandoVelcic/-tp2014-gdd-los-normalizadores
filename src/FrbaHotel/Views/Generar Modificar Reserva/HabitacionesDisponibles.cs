@@ -122,7 +122,6 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
 
             Reserva reserva = new Reserva();
             reserva.regimen = regimen;
-            //reserva.habitacion = list_Habitaciones.SelectedItem as Habitacion;
             reserva.fecha_inicio = desde.ToString();
             reserva.cant_noches = cantidadNoches;
             reserva.cliente = cliente;
@@ -131,6 +130,14 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
             try
             {
                 reserva.save();
+
+                foreach (Habitacion habitacion in list_Habitaciones.SelectedItems)
+                {
+                    ReservaHabitacion reserva_habitacion = new ReservaHabitacion();
+                    reserva_habitacion.habitacion = habitacion;
+                    reserva_habitacion.reserva = reserva;
+                    reserva_habitacion.insert();
+                }
             }
             catch (ValidationException exception)
             {

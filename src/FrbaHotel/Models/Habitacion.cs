@@ -67,10 +67,13 @@ namespace FrbaHotel.Models
             
             SelectQuery<Reserva> query = new SelectQuery<Reserva>(typeof(Reserva));
 
-            query.addCount().addWhere("habitacion_id", id.ToString());
+            query.addCount();
 
+            query.addLeftJoin("reservas_habitaciones", "reservas.id = reservas_habitaciones.reserva_id");
+            query.addWhere("reservas_habitaciones.habitacion_id", id.ToString());
             query.addWhere("fecha_inicio", "'" + desde.AddDays(cantidadNoches).ToShortDateString() + "'", "<=");
             query.addWhere("(DATEADD(day,cant_noches,fecha_inicio))", "'" + desde.ToShortDateString() + "'", ">=");
+            
 
             SqlCommand cmd = new SqlCommand(query.build(), ConnectionManager.getInstance().getConnection());
             Int32 count = (Int32)cmd.ExecuteScalar();
