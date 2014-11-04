@@ -71,13 +71,14 @@ namespace FrbaHotel.Registrar_Estadia
                 throw new ValidationException("La reserva seleccionada no existe");
             }
            
-            DateTime fecha = datepicker.Value;
+            String fecha = datepicker.Value.ToString();
             string usuario = txt_Usuario.Text;
-
+            
             if(operacion=="checkIn"){
                 int nroReserva1 = int.Parse(txt_NroReserva.Text);
                 Reserva reservain = EntityManager.getEntityManager().findBy<Reserva>("reservas.id", nroReserva1.ToString());
                 reservain.reserva_estado = 6;
+                reservain.fecha_checkin = fecha;
                 try
                 {
                     reservain.save();
@@ -96,8 +97,25 @@ namespace FrbaHotel.Registrar_Estadia
                Navigator.nextForm(this, new FrbaHotel.Views.Registrar_Estadia.Ingreso(reservain)); 
             }
             else if(operacion=="checkOut") {
+                
                 int nroReserva1 = int.Parse(txt_NroReserva.Text);
                 Reserva reservaout = EntityManager.getEntityManager().findBy<Reserva>("reservas.id", nroReserva1.ToString());
+                reservaout.fecha_checkout = fecha;
+                try
+                {
+                    reservaout.save();
+                }
+                catch (ValidationException exception)
+                {
+                    MessageBox.Show(exception.Message);
+                    return;
+                }
+                catch (SqlException exception)
+                {
+                    MessageBox.Show(exception.Message);
+                    return;
+                }
+                
                 Navigator.nextForm(this, new FrbaHotel.Registrar_Consumible.Form1(reservaout.regimen));
             }
             

@@ -147,6 +147,8 @@ CREATE TABLE [LOS_NORMALIZADORES].[reservas](
 	[fecha_cancelacion] [datetime],			/* Fecha en que se cancela la reserva */
 	[usuario_cancelacion] [nvarchar](30),					/* Usuario que cancela*/
 	[reserva_estado] INTEGER NOT NULL,
+	[fecha_checkin] [datetime],
+	[fecha_checkout] [datetime],
 											/* Falta calcular en base a la habitacion y la cantidad de gente que entre */
 											/* Como calculo el precio?? */
 ) ON [PRIMARY]

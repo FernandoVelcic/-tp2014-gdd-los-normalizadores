@@ -13,11 +13,23 @@ namespace FrbaHotel.Views.Facturar_Estadia
 {
     public partial class Facturar : Form
     {
-        public Facturar(Reserva reserva)
+        Reserva reserva;
+
+        public Facturar(Reserva res)
         {
+            reserva = res;
             InitializeComponent();
         }
 
+        public void Facturar_load(object sender, EventArgs e)
+        {
+            textBox1.Text = reserva.id.ToString();
+            textBox2.Text = reserva.fecha_inicio.ToString();
+            textBox3.Text = (reserva.fecha_inicio + reserva.cant_noches).ToString();
+            textBox4.Text = reserva.fecha_checkin.ToString();
+            textBox5.Text = reserva.fecha_checkout.ToString();
+
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             string forma_de_pago = comboBox1.SelectedItem.ToString();

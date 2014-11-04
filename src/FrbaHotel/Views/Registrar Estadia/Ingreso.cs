@@ -10,6 +10,8 @@ using MyActiveRecord;
 using FrbaHotel.Models;
 using FrbaHotel.Database_Helper;
 using FrbaHotel.Views.ABM_de_Cliente;
+using FrbaHotel.Models.Exceptions;
+using System.Data.SqlClient;
 
 
 namespace FrbaHotel.Views.Registrar_Estadia
@@ -49,7 +51,20 @@ namespace FrbaHotel.Views.Registrar_Estadia
                 reservaCliente.cliente = cliente;
                 reservaCliente.reserva = this.reserva;
 
-                reservaCliente.save();
+                try
+                {
+                    reservaCliente.save();
+                }
+                catch (ValidationException exception)
+                {
+                    MessageBox.Show(exception.Message);
+                    return;
+                }
+                catch (SqlException exception)
+                {
+                    MessageBox.Show(exception.Message);
+                    return;
+                }
             }
             MessageBox.Show("Reserva confirmada con exito");
         }
