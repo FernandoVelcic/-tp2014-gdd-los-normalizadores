@@ -17,9 +17,11 @@ namespace FrbaHotel.Views.Registrar_Estadia
     public partial class Ingreso : Form, SeleccionCliente
     {
         public List<Cliente> clientes = new List<Cliente>();
-
-        public Ingreso(Reserva reserva)
+        public Reserva reserva;
+        
+        public Ingreso(Reserva res)
         {
+            reserva = res;
             InitializeComponent();
         }
 
@@ -39,7 +41,17 @@ namespace FrbaHotel.Views.Registrar_Estadia
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //recorrer el datagrid y agregarlos al check-in
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                ReservaCliente reservaCliente = new ReservaCliente();
+
+                Cliente cliente = row.DataBoundItem as Cliente;
+                reservaCliente.cliente = cliente;
+                reservaCliente.reserva = this.reserva;
+
+                reservaCliente.save();
+            }
+            MessageBox.Show("Reserva confirmada con exito");
         }
       
     

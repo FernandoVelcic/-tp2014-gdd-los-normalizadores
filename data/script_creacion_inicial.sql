@@ -156,6 +156,12 @@ CREATE TABLE [LOS_NORMALIZADORES].[reserva_estado](
 	[descripcion] [nvarchar] (255),
 ) ON [PRIMARY]	
 
+CREATE TABLE [LOS_NORMALIZADORES].[reserva_cliente](
+	[id] iNTEGER IDENTITY PRIMARY KEY,
+	[reserva_id] INTEGER,
+	[cliente_id] INTEGER,
+) ON [PRIMARY]
+
 CREATE TABLE [LOS_NORMALIZADORES].[clientes](
 	[id] INTEGER IDENTITY PRIMARY KEY,
 	[apellido] [nvarchar](255),
