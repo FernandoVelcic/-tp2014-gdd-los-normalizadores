@@ -242,7 +242,12 @@ namespace FrbaHotel.Database_Helper
 
         public T findBy<T>(String key, String value)
         {
-            return findAllBy<T>(key, value)[0];
+            List<T> lista =findAllBy<T>(key, value);
+            if(lista.Count()==0)
+            {
+                return default(T);
+            }
+            return lista[0];
         }
 
         public T findById<T>(long id)

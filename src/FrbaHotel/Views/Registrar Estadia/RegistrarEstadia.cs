@@ -59,8 +59,16 @@ namespace FrbaHotel.Registrar_Estadia
 
             try
             {
-                int nroReserva = int.Parse(txt_NroReserva.Text); 
-                Reserva reserva = EntityManager.getEntityManager().findBy<Reserva>("reservas.id", nroReserva.ToString());
+                if(txt_NroReserva.Text!="")
+                   {
+                        int nroReserva = int.Parse(txt_NroReserva.Text); 
+                        Reserva reserva = EntityManager.getEntityManager().findBy<Reserva>("reservas.id", nroReserva.ToString());
+                        if(reserva==null)
+                             {
+                                    MessageBox.Show("Por favor, ingrese un número de reserva correcto.");
+                                    return; 
+                             }
+                    }
             }
             catch (FormatException e)
             {
@@ -74,7 +82,7 @@ namespace FrbaHotel.Registrar_Estadia
             String fecha = datepicker.Value.ToString();
             string usuario = txt_Usuario.Text;
             
-            if(operacion=="checkIn"){
+            if(operacion=="checkIn" && txt_NroReserva.Text!=""){
                 int nroReserva1 = int.Parse(txt_NroReserva.Text);
                 Reserva reservain = EntityManager.getEntityManager().findBy<Reserva>("reservas.id", nroReserva1.ToString());
                 reservain.reserva_estado = 6;
@@ -96,7 +104,7 @@ namespace FrbaHotel.Registrar_Estadia
                MessageBox.Show("La estadía ha sido validada");
                Navigator.nextForm(this, new FrbaHotel.Views.Registrar_Estadia.Ingreso(reservain)); 
             }
-            else if(operacion=="checkOut") {
+            else if(operacion=="checkOut" && txt_NroReserva.Text!="") {
                 
                 int nroReserva1 = int.Parse(txt_NroReserva.Text);
                 Reserva reservaout = EntityManager.getEntityManager().findBy<Reserva>("reservas.id", nroReserva1.ToString());
@@ -117,8 +125,10 @@ namespace FrbaHotel.Registrar_Estadia
                 }
                 
                 Navigator.nextForm(this, new FrbaHotel.Registrar_Consumible.Form1(reservaout.regimen));
+            } else 
+            {
+                MessageBox.Show("Debe ingresar un numero de reserva válido para poder operar");
             }
-            
         }
     }
 }
