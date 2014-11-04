@@ -13,7 +13,6 @@ namespace FrbaHotel.Models
         public override String table { get { return "habitaciones_tipos"; } }
 
         public float porcentual { get; set; }
-        public String codigo { get; set; }
         public String descripcion { get; set; }
         public int cantidad_maxima_personas { get; set; } //INTEGER
 

@@ -100,7 +100,7 @@ CREATE TABLE [LOS_NORMALIZADORES].[hoteles_bajas](
 
 CREATE TABLE [LOS_NORMALIZADORES].[habitaciones](
 	[id] INTEGER IDENTITY PRIMARY KEY,
-	[hotel_id] INTEGER,						/* A obtener de forma dificil */
+	[hotel_id] INTEGER,	
 	[numero] [numeric](18, 0),
 	[piso] [numeric](18, 0),
 	[frente] [nvarchar](50),
@@ -111,11 +111,10 @@ CREATE TABLE [LOS_NORMALIZADORES].[habitaciones](
 
 
 CREATE TABLE [LOS_NORMALIZADORES].[habitaciones_tipos](
-	[id] INTEGER IDENTITY PRIMARY KEY,
-	[codigo] [numeric](18, 0),
+	[id] INTEGER IDENTITY(1001,1) PRIMARY KEY,
 	[descripcion] [nvarchar](255),
 	[porcentual] [numeric](18, 2),
-	[cantidad_maxima_personas]	INTEGER	DEFAULT 0			/* Deberia ir ??? */
+	[cantidad_maxima_personas]	INTEGER	DEFAULT 0	/*Hace falta? */
 ) ON [PRIMARY]
 
 
@@ -128,7 +127,6 @@ CREATE TABLE [LOS_NORMALIZADORES].[hoteles_regimenes](
 
 CREATE TABLE [LOS_NORMALIZADORES].[regimenes](
 	[id] INTEGER IDENTITY PRIMARY KEY,
-	[codigo] [nvarchar](255),
 	[descripcion] [nvarchar](255),
 	[precio] [numeric](18, 2),
 	[estado] [bit]
@@ -151,6 +149,14 @@ CREATE TABLE [LOS_NORMALIZADORES].[reservas](
 	[fecha_checkout] [datetime],
 											/* Falta calcular en base a la habitacion y la cantidad de gente que entre */
 											/* Como calculo el precio?? */
+) ON [PRIMARY]
+
+
+
+CREATE TABLE [LOS_NORMALIZADORES].[reservas_habitaciones](
+	[id] INTEGER IDENTITY PRIMARY KEY,
+	[reserva_id]	INTEGER,
+	[habitacion_id] INTEGER
 ) ON [PRIMARY]
 
 CREATE TABLE [LOS_NORMALIZADORES].[reserva_estado](
@@ -186,8 +192,8 @@ CREATE TABLE [LOS_NORMALIZADORES].[clientes](
 
 CREATE TABLE [LOS_NORMALIZADORES].[estadias](
 	[id] INTEGER IDENTITY PRIMARY KEY,
-	[habitacion_id] INTEGER,				
-	[cliente_id] INTEGER,
+	[reserva_id] INTEGER,				
+	[cliente_id] INTEGER, /* hace falta? */
 	[fecha_inicio] [datetime],
 	[cant_noches] [numeric](18, 0),
 ) ON [PRIMARY]
@@ -271,13 +277,15 @@ CREATE INDEX Maestra_hotel_id ON [LOS_NORMALIZADORES].[Maestra] (hotel_id)
 
 
 /* Migracion de habitaciones */
-
-INSERT [LOS_NORMALIZADORES].[habitaciones_tipos] (codigo, descripcion, porcentual)
+SET IDENTITY_INSERT [LOS_NORMALIZADORES].[habitaciones_tipos] ON;
+INSERT [LOS_NORMALIZADORES].[habitaciones_tipos] (id, descripcion, porcentual)
 SELECT DISTINCT Habitacion_Tipo_Codigo, Habitacion_Tipo_Descripcion, Habitacion_Tipo_Porcentual  
 FROM [LOS_NORMALIZADORES].[Maestra] 
 WHERE Habitacion_Tipo_Codigo IS NOT NULL
 AND Habitacion_Tipo_Descripcion IS NOT NULL
 AND Habitacion_Tipo_Porcentual IS NOT NULL
+
+SET IDENTITY_INSERT [LOS_NORMALIZADORES].[habitaciones_tipos] OFF;
 
 ALTER TABLE [LOS_NORMALIZADORES].[Maestra] ADD habitacion_tipo_id INTEGER
 GO
@@ -286,7 +294,7 @@ UPDATE [LOS_NORMALIZADORES].[Maestra]
 SET habitacion_tipo_id = 
 	(
 		SELECT id FROM [LOS_NORMALIZADORES].[habitaciones_tipos] as h
-		WHERE [LOS_NORMALIZADORES].[Maestra].Habitacion_Tipo_Codigo = h.codigo
+		WHERE [LOS_NORMALIZADORES].[Maestra].Habitacion_Tipo_Codigo = h.id
 		AND [LOS_NORMALIZADORES].[Maestra].Habitacion_Tipo_Descripcion = h.descripcion
 		AND [LOS_NORMALIZADORES].[Maestra].Habitacion_Tipo_Porcentual = h.porcentual
 	)
@@ -432,11 +440,11 @@ GO
 
 /*TODO agregar cantidad de personas en base al tipo de habitacion*/
 
-INSERT INTO [LOS_NORMALIZADORES].[estadias] ([fecha_inicio], [cant_noches], [habitacion_id], [cliente_id])	
-	SELECT DISTINCT [Estadia_Fecha_Inicio], [Estadia_Cant_Noches], [habitacion_id], [cliente_id] FROM [LOS_NORMALIZADORES].[Maestra]
+INSERT INTO [LOS_NORMALIZADORES].[estadias] ([fecha_inicio], [cant_noches], [reserva_id], [cliente_id])	
+	SELECT DISTINCT [Estadia_Fecha_Inicio], [Estadia_Cant_Noches], [reserva_id], [cliente_id] FROM [LOS_NORMALIZADORES].[Maestra]
 	WHERE [Estadia_Fecha_Inicio] IS NOT NULL 
 	AND   [Estadia_Cant_Noches] IS NOT NULL
-	AND   [habitacion_id] IS NOT NULL
+	AND   [reserva_id] IS NOT NULL
 	AND   [cliente_id] IS NOT NULL
 GO
 
@@ -449,7 +457,7 @@ SET estadia_id =
 		SELECT id FROM [LOS_NORMALIZADORES].[estadias] as e
 		WHERE [LOS_NORMALIZADORES].[Maestra].Estadia_Fecha_Inicio = e.fecha_inicio
 		AND   [LOS_NORMALIZADORES].[Maestra].Estadia_Cant_Noches = e.cant_noches
-		AND   [LOS_NORMALIZADORES].[Maestra].habitacion_id = e.habitacion_id
+		AND   [LOS_NORMALIZADORES].[Maestra].reserva_id = e.reserva_id
 		AND   [LOS_NORMALIZADORES].[Maestra].cliente_id = e.cliente_id
 	)
 GO
@@ -682,7 +690,7 @@ ALTER TABLE [LOS_NORMALIZADORES].[reservas] ADD CONSTRAINT reservas_regimen_id F
 
 ALTER TABLE [LOS_NORMALIZADORES].[reservas] ADD CONSTRAINT reservas_habitacion_id FOREIGN KEY (habitacion_id) REFERENCES [LOS_NORMALIZADORES].[habitaciones](id)
 
-ALTER TABLE [LOS_NORMALIZADORES].[estadias] ADD CONSTRAINT estadias_habitacion_id FOREIGN KEY (habitacion_id) REFERENCES [LOS_NORMALIZADORES].[habitaciones](id)
+ALTER TABLE [LOS_NORMALIZADORES].[estadias] ADD CONSTRAINT estadias_reserva_id FOREIGN KEY (reserva_id) REFERENCES [LOS_NORMALIZADORES].[reservas](id)
 
 ALTER TABLE [LOS_NORMALIZADORES].[estadias] ADD CONSTRAINT estadias_regimen_id FOREIGN KEY (cliente_id) REFERENCES [LOS_NORMALIZADORES].[clientes](id)
 

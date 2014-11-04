@@ -16,7 +16,6 @@ namespace FrbaHotel.Models
         public String fecha_carga { get; set; } //[datetime]
         public String fecha_inicio { get; set; } //[datetime]
         public Regimen regimen { get; set; } //[numeric](18, 0)
-        public Habitacion habitacion { get; set; }
         public Cliente cliente { get; set; }
         public int cant_noches { get; set; } //[numeric](18, 0)
         public int reserva_estado { get; set; } //INTEGER NOT NULL

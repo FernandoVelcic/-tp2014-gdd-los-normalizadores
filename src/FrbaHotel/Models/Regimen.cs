@@ -12,7 +12,6 @@ namespace FrbaHotel.Models
         public override String table { get { return "regimenes"; } }
 
         //public int id { get; set; } //INTEGER IDENTITY PRIMARY KEY
-        public String codigo { get; set; }//[nvarchar](255)
         public String descripcion { get; set; } //[nvarchar](255)
         public float precio { get; set; } //[numeric](18, 2)
         public Boolean estado { get; set; } //[bit]

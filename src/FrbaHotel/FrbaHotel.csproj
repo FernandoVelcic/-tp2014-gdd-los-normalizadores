@@ -56,6 +56,7 @@
     <Compile Include="Models\Listado Estadistico\HotelesReservasCanceladas.cs" />
     <Compile Include="Models\Pais.cs" />
     <Compile Include="Models\ReservaCliente.cs" />
+    <Compile Include="Models\ReservaHabitacion.cs" />
     <Compile Include="Tools\Navigator.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Consumible.cs" />

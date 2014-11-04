@@ -55,7 +55,7 @@ namespace FrbaHotel.Registrar_Consumible
             int unidades = int.Parse(textBox4.Text);    //chequear si va, para mi deberia, pero en la tabla no está
             Consumible consumible_seleccionado = comboBox1.SelectedItem as Consumible;
 
-            consumible_estadia.regimen.codigo = regimen.codigo;
+            consumible_estadia.regimen.id = regimen.id;
             consumible_estadia.consumible.codigo = consumible_seleccionado.codigo;
             consumible_estadia.unidades = unidades;
 
