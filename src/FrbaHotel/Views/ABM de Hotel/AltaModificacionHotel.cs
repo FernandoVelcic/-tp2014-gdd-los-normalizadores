@@ -143,16 +143,20 @@ namespace FrbaHotel.Views.ABM_de_Hotel
             HotelRegimen regimen = listBox1.SelectedItem as HotelRegimen;
             if (!esAlta)
             {
-                List<Reserva> reservas = EntityManager.getEntityManager().findAllBy<Reserva>("habitaciones.hotel_id", hotel.id.ToString());
+                List<ReservaHabitacion> reservas_habitaciones = EntityManager.getEntityManager().findAllBy<ReservaHabitacion>("habitaciones.hotel_id", hotel.id.ToString());
+                List<Reserva> reservas = new List<Reserva>();
+
+                //HACK porque el ORM no llega a mappear a ese nivel de profundidad
+                reservas_habitaciones.ForEach(r => reservas.Add(EntityManager.getEntityManager().findById<Reserva>(r.reserva.id)));
                 //Reservas no canceladas, no tener en cuenta las que ya pasaron y ver que sean del regimen que se quiere borrar
                 reservas = reservas.FindAll(r => !r.estaCancelada() && DateTime.Parse(r.fecha_inicio).AddDays(r.cant_noches) >= Config.getInstance().getCurrentDate() && r.regimen.id == regimen.regimen.id);
-                
+
                 if(reservas.Count != 0)
                 {
                     MessageBox.Show("No se puede eliminar este regimen dado que hay reservas tomadas");
                     return;
                 }
-
+                
                 regimen.delete();
             }
                 

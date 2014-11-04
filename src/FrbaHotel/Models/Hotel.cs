@@ -35,7 +35,7 @@ namespace FrbaHotel.Models
 
         public override void preSave()
         {
-            if (mail.isValidEmail() != true)
+            if (mail.isValidEmail() != true && mail != "")
                 throw new ValidationException("Formato de email invalido");
         }
 
