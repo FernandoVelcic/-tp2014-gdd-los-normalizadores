@@ -43,29 +43,28 @@ namespace FrbaHotel.Views.Registrar_Estadia
 
         private void button3_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in dataGridView1.Rows)
+            try
             {
-                ReservaCliente reservaCliente = new ReservaCliente();
-
-                Cliente cliente = row.DataBoundItem as Cliente;
-                reservaCliente.cliente = cliente;
-                reservaCliente.reserva = this.reserva;
-
-                try
+                foreach (Cliente cliente in clientes)
                 {
+                    ReservaCliente reservaCliente = new ReservaCliente();
+                    reservaCliente.cliente = cliente;
+                    reservaCliente.reserva = reserva;
+
                     reservaCliente.save();
                 }
-                catch (ValidationException exception)
-                {
-                    MessageBox.Show(exception.Message);
-                    return;
-                }
-                catch (SqlException exception)
-                {
-                    MessageBox.Show(exception.Message);
-                    return;
-                }
             }
+            catch (ValidationException exception)
+            {
+                MessageBox.Show(exception.Message);
+                return;
+            }
+            catch (SqlException exception)
+            {
+                MessageBox.Show(exception.Message);
+                return;
+            }
+
             MessageBox.Show("Reserva confirmada con exito");
         }
       
@@ -84,8 +83,15 @@ namespace FrbaHotel.Views.Registrar_Estadia
                 MessageBox.Show("Este cliente ya se encuentra en la grilla");
                 return;
             }
-           clientes.Add(cliente);
-           listar();
+
+            if (clientes.Count > reserva.cantidad_maxima_personas())
+            {
+                MessageBox.Show("La estadía alcanzo el maximo de ocupantes");
+                return;
+            }
+
+            clientes.Add(cliente);
+            listar();
         }
 
         private void button4_Click(object sender, EventArgs e)
