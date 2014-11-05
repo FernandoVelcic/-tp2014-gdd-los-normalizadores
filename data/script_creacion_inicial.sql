@@ -144,10 +144,7 @@ CREATE TABLE [LOS_NORMALIZADORES].[reservas](
 	[fecha_cancelacion] [datetime],			/* Fecha en que se cancela la reserva */
 	[usuario_cancelacion] [nvarchar](30),					/* Usuario que cancela*/
 	[reserva_estado] INTEGER NOT NULL,
-	[fecha_checkin] [datetime],
-	[fecha_checkout] [datetime],
-											/* Falta calcular en base a la habitacion y la cantidad de gente que entre */
-											/* Como calculo el precio?? */
+									/* Como calculo el precio?? */
 ) ON [PRIMARY]
 
 
@@ -192,9 +189,8 @@ CREATE TABLE [LOS_NORMALIZADORES].[clientes](
 CREATE TABLE [LOS_NORMALIZADORES].[estadias](
 	[id] INTEGER IDENTITY PRIMARY KEY,
 	[reserva_id] INTEGER,				
-	[cliente_id] INTEGER, /* hace falta? */
 	[fecha_inicio] [datetime],
-	[cant_noches] [numeric](18, 0),
+	[cant_noches] [numeric] (18,0),
 ) ON [PRIMARY]
 
 
@@ -443,12 +439,11 @@ INSERT INTO [LOS_NORMALIZADORES].[reservas_habitaciones] ([reserva_id], [habitac
 
 /*TODO agregar cantidad de personas en base al tipo de habitacion*/
 
-INSERT INTO [LOS_NORMALIZADORES].[estadias] ([fecha_inicio], [cant_noches], [reserva_id], [cliente_id])	
-	SELECT DISTINCT [Estadia_Fecha_Inicio], [Estadia_Cant_Noches], [reserva_id], [cliente_id] FROM [LOS_NORMALIZADORES].[Maestra]
+INSERT INTO [LOS_NORMALIZADORES].[estadias] ([fecha_inicio], [cant_noches], [reserva_id])	
+	SELECT DISTINCT [Estadia_Fecha_Inicio], [Estadia_Cant_Noches], [reserva_id] FROM [LOS_NORMALIZADORES].[Maestra]
 	WHERE [Estadia_Fecha_Inicio] IS NOT NULL 
 	AND   [Estadia_Cant_Noches] IS NOT NULL
 	AND   [reserva_id] IS NOT NULL
-	AND   [cliente_id] IS NOT NULL
 GO
 
 ALTER TABLE [LOS_NORMALIZADORES].[Maestra] ADD estadia_id INTEGER
@@ -461,7 +456,6 @@ SET estadia_id =
 		WHERE [LOS_NORMALIZADORES].[Maestra].Estadia_Fecha_Inicio = e.fecha_inicio
 		AND   [LOS_NORMALIZADORES].[Maestra].Estadia_Cant_Noches = e.cant_noches
 		AND   [LOS_NORMALIZADORES].[Maestra].reserva_id = e.reserva_id
-		AND   [LOS_NORMALIZADORES].[Maestra].cliente_id = e.cliente_id
 	)
 GO
 
@@ -692,8 +686,6 @@ ALTER TABLE [LOS_NORMALIZADORES].[hoteles_regimenes] ADD CONSTRAINT regimenes_un
 ALTER TABLE [LOS_NORMALIZADORES].[reservas] ADD CONSTRAINT reservas_regimen_id FOREIGN KEY (regimen_id) REFERENCES [LOS_NORMALIZADORES].[regimenes](id)
 
 ALTER TABLE [LOS_NORMALIZADORES].[estadias] ADD CONSTRAINT estadias_reserva_id FOREIGN KEY (reserva_id) REFERENCES [LOS_NORMALIZADORES].[reservas](id)
-
-ALTER TABLE [LOS_NORMALIZADORES].[estadias] ADD CONSTRAINT estadias_regimen_id FOREIGN KEY (cliente_id) REFERENCES [LOS_NORMALIZADORES].[clientes](id)
 
 ALTER TABLE [LOS_NORMALIZADORES].[consumibles_estadias] ADD CONSTRAINT consumibles_estadia_id FOREIGN KEY (estadia_id) REFERENCES [LOS_NORMALIZADORES].[estadias](id)
 

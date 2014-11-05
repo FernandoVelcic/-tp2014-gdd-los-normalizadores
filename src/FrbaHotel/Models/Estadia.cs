@@ -1,4 +1,4 @@
-﻿using MyActiveRecord;
+﻿﻿using MyActiveRecord;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +11,9 @@ namespace FrbaHotel.Models
 
         public override String table { get { return "estadias"; } }
 
-
-        /* Sincronizar la db con esto */
         public Reserva reserva { get; set; }
-        public DateTime fecha_llegada { get; set; }
-        public DateTime fecha_salida { get; set; }
-
-
+        public String fecha_llegada { get; set; }
+        public int cant_noches { get; set; }
 
     }
 }
