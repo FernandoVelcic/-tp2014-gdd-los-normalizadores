@@ -33,10 +33,10 @@
             this.txt_NroReserva = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txt_Usuario = new System.Windows.Forms.TextBox();
-            this.datepicker = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btn_Checkout = new System.Windows.Forms.Button();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,10 +52,10 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.dateTimePicker1);
             this.groupBox1.Controls.Add(this.txt_NroReserva);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.txt_Usuario);
-            this.groupBox1.Controls.Add(this.datepicker);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -90,13 +90,6 @@
             this.txt_Usuario.Size = new System.Drawing.Size(200, 22);
             this.txt_Usuario.TabIndex = 3;
             // 
-            // datepicker
-            // 
-            this.datepicker.Location = new System.Drawing.Point(100, 73);
-            this.datepicker.Name = "datepicker";
-            this.datepicker.Size = new System.Drawing.Size(200, 22);
-            this.datepicker.TabIndex = 2;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -125,6 +118,15 @@
             this.btn_Checkout.UseVisualStyleBackColor = true;
             this.btn_Checkout.Click += new System.EventHandler(this.onCheckout);
             // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.CustomFormat = "dd/MM/yyyy";
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker1.Location = new System.Drawing.Point(100, 73);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 22);
+            this.dateTimePicker1.TabIndex = 22;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -136,6 +138,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
             this.Text = "Registrar Estadia";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -149,10 +152,10 @@
         private System.Windows.Forms.TextBox txt_NroReserva;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txt_Usuario;
-        private System.Windows.Forms.DateTimePicker datepicker;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btn_Checkout;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
 
 
     }
