@@ -84,7 +84,7 @@ namespace FrbaHotel.Views.Registrar_Estadia
                 return;
             }
 
-            if (clientes.Count > reserva.cantidad_maxima_personas())
+            if (clientes.Count >= reserva.cantidad_maxima_personas())
             {
                 MessageBox.Show("La estadía alcanzo el maximo de ocupantes");
                 return;
