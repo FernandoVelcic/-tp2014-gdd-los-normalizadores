@@ -779,7 +779,7 @@ END
 
 GO
 
-CREATE PROCEDURE uspCancelarReservasPorNoShow 
+CREATE PROCEDURE [LOS_NORMALIZADORES].[uspCancelarReservasPorNoShow] 
 	@fecha_sistema datetime
 AS
 BEGIN

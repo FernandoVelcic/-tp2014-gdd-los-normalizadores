@@ -12,7 +12,7 @@ namespace FrbaHotel.Models
         public override String table { get { return "estadias"; } }
 
         public Reserva reserva { get; set; }
-        public String fecha_llegada { get; set; }
+        public String fecha_inicio { get; set; }
         public int cant_noches { get; set; }
 
     }

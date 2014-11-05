@@ -39,10 +39,10 @@ namespace FrbaHotel.Models
 
         public int cantidad_maxima_personas()
         {
-            List<ReservaHabitacion> habitaciones_reservadas = EntityManager.getEntityManager().findAllBy<ReservaHabitacion>("reserva_id", id.ToString());
-            TipoHabitacion habitacion_tipo = EntityManager.getEntityManager().findBy<TipoHabitacion>("id", habitaciones_reservadas[0].habitacion.tipo.id.ToString());
-            
-            return habitaciones_reservadas.Count() * habitacion_tipo.cantidad_maxima_personas;
+            List<ReservaHabitacion> habitaciones_reservadas = EntityManager.getEntityManager().findAllBy<ReservaHabitacion>("reservas_habitaciones.reserva_id", id.ToString());
+            Habitacion habitacion = EntityManager.getEntityManager().findBy<Habitacion>("habitaciones.id", habitaciones_reservadas[0].id.ToString());
+
+            return habitaciones_reservadas.Count() * habitacion.tipo.cantidad_maxima_personas;
         }
     }
 }

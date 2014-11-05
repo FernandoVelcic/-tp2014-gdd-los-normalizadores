@@ -17,15 +17,16 @@ namespace FrbaHotel.Registrar_Estadia
 {
     public partial class Form1 : Form
     {
-        int reserva_numero;
-        String fecha;
-        String usuario;
+        public int reserva_numero { get; set; }
+        public String fecha { get; set; }
+        public String usuario { get; set; }
 
         Reserva reserva;
 
         public Form1()
         {
             InitializeComponent();
+            fecha = Config.getInstance().getCurrentDate().ToShortDateString();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -46,7 +47,7 @@ namespace FrbaHotel.Registrar_Estadia
                 reserva.reserva_estado = 6;
 
                 Estadia estadia = new Estadia();
-                estadia.fecha_llegada = fecha;
+                estadia.fecha_inicio = fecha;
                 estadia.reserva = reserva;
 
                 try
@@ -81,7 +82,7 @@ namespace FrbaHotel.Registrar_Estadia
 
             Estadia estadiaout = EntityManager.getEntityManager().findBy<Estadia>("reserva_id", reserva_numero.ToString());
 
-            estadiaout.cant_noches = int.Parse(DateTime.Parse(fecha).Subtract(DateTime.Parse(estadiaout.fecha_llegada)).ToString());
+            estadiaout.cant_noches = int.Parse(DateTime.Parse(fecha).Subtract(DateTime.Parse(estadiaout.fecha_inicio)).ToString());
 
             try
             {
@@ -103,7 +104,8 @@ namespace FrbaHotel.Registrar_Estadia
 
         public bool obtenerReserva()
         {
-            Reserva reserva = EntityManager.getEntityManager().findBy<Reserva>("reservas.id", reserva_numero.ToString());
+            reserva = EntityManager.getEntityManager().findBy<Reserva>("reservas.id", reserva_numero.ToString());
+            
             if (reserva == null)
             {
                 MessageBox.Show("Por favor, ingrese un número de reserva correcto.");
