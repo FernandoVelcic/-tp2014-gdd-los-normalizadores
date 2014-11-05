@@ -84,8 +84,14 @@ namespace FrbaHotel.Views.Registrar_Estadia
                 MessageBox.Show("Este cliente ya se encuentra en la grilla");
                 return;
             }
-           clientes.Add(cliente);
-           listar();
+           //buscar por el id de reserva, en la tabla de reservas para sacar la cantidad maxima de personas
+          //  if(clientes.Count<cantidadMaxima)
+            //    {
+                        clientes.Add(cliente);
+                        listar();
+              //  }else {
+                //        MessageBox.Show("La estadía alcanzo el maximo de ocupantes");
+               //       }
         }
 
         private void button4_Click(object sender, EventArgs e)
