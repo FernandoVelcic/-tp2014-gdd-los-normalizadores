@@ -713,6 +713,16 @@ ALTER TABLE [LOS_NORMALIZADORES].[rol_usuario] ADD CONSTRAINT rol_user_id FOREIG
 
 ALTER TABLE [LOS_NORMALIZADORES].[rol_usuario] ADD CONSTRAINT roles_id FOREIGN KEY (rol_id) REFERENCES [LOS_NORMALIZADORES].[roles](id)
 
+ALTER TABLE [LOS_NORMALIZADORES].[reservas_habitaciones] ADD CONSTRAINT fk_reserva_id FOREIGN KEY (reserva_id) REFERENCES [LOS_NORMALIZADORES].[reservas](id)
+
+ALTER TABLE [LOS_NORMALIZADORES].[reservas_habitaciones] ADD CONSTRAINT fk_habitacion_id FOREIGN KEY (habitacion_id) REFERENCES [LOS_NORMALIZADORES].[habitaciones](id)
+
+ALTER TABLE [LOS_NORMALIZADORES].[reserva_cliente] ADD CONSTRAINT fk_reserva_cliente_id FOREIGN KEY (reserva_id) REFERENCES [LOS_NORMALIZADORES].[reservas](id)
+
+ALTER TABLE [LOS_NORMALIZADORES].[reserva_cliente] ADD CONSTRAINT fk_cliente_reserva_id FOREIGN KEY (cliente_id) REFERENCES [LOS_NORMALIZADORES].[clientes](id)
+
+ALTER TABLE [LOS_NORMALIZADORES].[reservas] ADD CONSTRAINT fk_reserva_estado_id FOREIGN KEY (reserva_estado) REFERENCES [LOS_NORMALIZADORES].[reserva_estado](id)
+
 GO
 
 
