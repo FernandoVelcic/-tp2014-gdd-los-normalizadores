@@ -32,6 +32,7 @@
             this.btn_Confirmar = new System.Windows.Forms.Button();
             this.list_Habitaciones = new System.Windows.Forms.ListBox();
             this.btn_CrearCliente = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btn_Volver
@@ -62,8 +63,9 @@
             this.list_Habitaciones.Location = new System.Drawing.Point(12, 11);
             this.list_Habitaciones.Name = "list_Habitaciones";
             this.list_Habitaciones.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.list_Habitaciones.Size = new System.Drawing.Size(405, 264);
+            this.list_Habitaciones.Size = new System.Drawing.Size(405, 251);
             this.list_Habitaciones.TabIndex = 5;
+            this.list_Habitaciones.SelectedIndexChanged += new System.EventHandler(this.list_Habitaciones_SelectedIndexChanged);
             // 
             // btn_CrearCliente
             // 
@@ -76,11 +78,21 @@
             this.btn_CrearCliente.UseVisualStyleBackColor = true;
             this.btn_CrearCliente.Click += new System.EventHandler(this.btn_CrearCliente_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 265);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(124, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Costo total de la reserva:";
+            // 
             // HabitacionesDisponibles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(428, 352);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_CrearCliente);
             this.Controls.Add(this.list_Habitaciones);
             this.Controls.Add(this.btn_Confirmar);
@@ -88,6 +100,7 @@
             this.Name = "HabitacionesDisponibles";
             this.Text = "Habitaciones disponibles";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -97,5 +110,6 @@
         private System.Windows.Forms.Button btn_Confirmar;
         private System.Windows.Forms.ListBox list_Habitaciones;
         private System.Windows.Forms.Button btn_CrearCliente;
+        private System.Windows.Forms.Label label1;
     }
 }

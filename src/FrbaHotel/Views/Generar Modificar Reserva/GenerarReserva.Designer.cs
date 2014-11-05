@@ -33,7 +33,6 @@
             this.txt_Hotel = new System.Windows.Forms.Label();
             this.cmb_TipoHabitacion = new System.Windows.Forms.ComboBox();
             this.txt_Cant_Noches = new System.Windows.Forms.TextBox();
-            this.txt_Desde = new System.Windows.Forms.TextBox();
             this.cmb_Regimen = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -41,16 +40,19 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btn_Generar = new System.Windows.Forms.Button();
             this.btn_Volver = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.dateTimePicker1);
+            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.cmb_Hotel);
             this.groupBox1.Controls.Add(this.txt_Hotel);
             this.groupBox1.Controls.Add(this.cmb_TipoHabitacion);
             this.groupBox1.Controls.Add(this.txt_Cant_Noches);
-            this.groupBox1.Controls.Add(this.txt_Desde);
             this.groupBox1.Controls.Add(this.cmb_Regimen);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
@@ -59,7 +61,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(363, 232);
+            this.groupBox1.Size = new System.Drawing.Size(458, 232);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos de la reserva";
@@ -70,7 +72,7 @@
             this.cmb_Hotel.FormattingEnabled = true;
             this.cmb_Hotel.Location = new System.Drawing.Point(175, 168);
             this.cmb_Hotel.Name = "cmb_Hotel";
-            this.cmb_Hotel.Size = new System.Drawing.Size(121, 24);
+            this.cmb_Hotel.Size = new System.Drawing.Size(225, 24);
             this.cmb_Hotel.TabIndex = 10;
             this.cmb_Hotel.SelectedIndexChanged += new System.EventHandler(this.cmb_Hotel_SelectedIndexChanged);
             // 
@@ -90,22 +92,16 @@
             this.cmb_TipoHabitacion.FormattingEnabled = true;
             this.cmb_TipoHabitacion.Location = new System.Drawing.Point(174, 107);
             this.cmb_TipoHabitacion.Name = "cmb_TipoHabitacion";
-            this.cmb_TipoHabitacion.Size = new System.Drawing.Size(121, 24);
+            this.cmb_TipoHabitacion.Size = new System.Drawing.Size(226, 24);
             this.cmb_TipoHabitacion.TabIndex = 8;
+            this.cmb_TipoHabitacion.SelectedIndexChanged += new System.EventHandler(this.cmb_TipoHabitacion_SelectedIndexChanged);
             // 
             // txt_Cant_Noches
             // 
             this.txt_Cant_Noches.Location = new System.Drawing.Point(174, 76);
             this.txt_Cant_Noches.Name = "txt_Cant_Noches";
-            this.txt_Cant_Noches.Size = new System.Drawing.Size(121, 22);
+            this.txt_Cant_Noches.Size = new System.Drawing.Size(96, 22);
             this.txt_Cant_Noches.TabIndex = 7;
-            // 
-            // txt_Desde
-            // 
-            this.txt_Desde.Location = new System.Drawing.Point(175, 46);
-            this.txt_Desde.Name = "txt_Desde";
-            this.txt_Desde.Size = new System.Drawing.Size(121, 22);
-            this.txt_Desde.TabIndex = 7;
             // 
             // cmb_Regimen
             // 
@@ -113,7 +109,7 @@
             this.cmb_Regimen.FormattingEnabled = true;
             this.cmb_Regimen.Location = new System.Drawing.Point(175, 138);
             this.cmb_Regimen.Name = "cmb_Regimen";
-            this.cmb_Regimen.Size = new System.Drawing.Size(121, 24);
+            this.cmb_Regimen.Size = new System.Drawing.Size(225, 24);
             this.cmb_Regimen.TabIndex = 5;
             // 
             // label5
@@ -150,7 +146,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(53, 49);
+            this.label2.Location = new System.Drawing.Point(53, 53);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(43, 16);
             this.label2.TabIndex = 1;
@@ -159,7 +155,7 @@
             // btn_Generar
             // 
             this.btn_Generar.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Generar.Location = new System.Drawing.Point(260, 250);
+            this.btn_Generar.Location = new System.Drawing.Point(355, 250);
             this.btn_Generar.Name = "btn_Generar";
             this.btn_Generar.Size = new System.Drawing.Size(115, 46);
             this.btn_Generar.TabIndex = 2;
@@ -178,12 +174,30 @@
             this.btn_Volver.UseVisualStyleBackColor = true;
             this.btn_Volver.Click += new System.EventHandler(this.btn_Volver_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(53, 202);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(148, 16);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Costo por dia por habitacion";
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.CustomFormat = "dd/MM/yyyy";
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker1.Location = new System.Drawing.Point(175, 48);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(95, 22);
+            this.dateTimePicker1.TabIndex = 35;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ClientSize = new System.Drawing.Size(385, 305);
+            this.ClientSize = new System.Drawing.Size(482, 305);
             this.Controls.Add(this.btn_Volver);
             this.Controls.Add(this.btn_Generar);
             this.Controls.Add(this.groupBox1);
@@ -204,12 +218,13 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txt_Cant_Noches;
-        private System.Windows.Forms.TextBox txt_Desde;
         private System.Windows.Forms.ComboBox cmb_Regimen;
         private System.Windows.Forms.Button btn_Generar;
         private System.Windows.Forms.Button btn_Volver;
         private System.Windows.Forms.ComboBox cmb_TipoHabitacion;
         private System.Windows.Forms.ComboBox cmb_Hotel;
         private System.Windows.Forms.Label txt_Hotel;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
     }
 }

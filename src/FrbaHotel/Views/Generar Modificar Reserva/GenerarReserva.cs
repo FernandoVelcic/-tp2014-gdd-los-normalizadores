@@ -54,12 +54,13 @@ namespace FrbaHotel.Generar_Modificar_Reserva
             List<TipoHabitacion> tipoHabitaciones = EntityManager.getEntityManager().findAll<TipoHabitacion>();
             tipo_habitacion_binding.DataSource = tipoHabitaciones;
             cmb_TipoHabitacion.DataSource = tipo_habitacion_binding;
-            cmb_TipoHabitacion.DisplayMember = "descripcion";
 
             update_regimenes();
 
             txt_Cant_Noches.DataBindings.Add("Text", this.reserva, "cant_noches");
-            txt_Desde.DataBindings.Add("Text", this.reserva, "fecha_inicio");
+            dateTimePicker1.DataBindings.Add("Text", this.reserva, "fecha_inicio");
+
+            update_precio_habitacion();
         }
 
         private void btn_Generar_Click(object sender, EventArgs e)
@@ -90,12 +91,12 @@ namespace FrbaHotel.Generar_Modificar_Reserva
 
         private void validate()
         {
-            if (DateTime.Parse(txt_Desde.Text) < Config.getInstance().getCurrentDate())
+            if (DateTime.Parse(reserva.fecha_inicio) < Config.getInstance().getCurrentDate())
             {
                 throw new ValidationException("No puede pedir reservas en fechas anteriores a la actual");
             }
 
-            if (DateTime.Parse(txt_Desde.Text).Year < 1900)
+            if (DateTime.Parse(reserva.fecha_inicio).Year < 1900)
             {
                 throw new ValidationException("Por favor, seleccione una fecha valida");
             }
@@ -120,9 +121,28 @@ namespace FrbaHotel.Generar_Modificar_Reserva
             cmb_Regimen.DataSource = regimen_binding;
         }
 
+        private void update_precio_habitacion()
+        {
+            Hotel hotel_seleccionado = cmb_Hotel.SelectedItem as Hotel;
+            Regimen regimen_seleccionado = (cmb_Regimen.SelectedItem as HotelRegimen).regimen;
+            TipoHabitacion tipo_habitacion_seleccionado = cmb_TipoHabitacion.SelectedItem as TipoHabitacion;
+
+            //FORMULA
+            if (regimen_seleccionado != null && tipo_habitacion_seleccionado != null && hotel_seleccionado != null)
+                label1.Text = "Costo por dia por habitacion: $" + tipo_habitacion_seleccionado.porcentual* regimen_seleccionado.precio * tipo_habitacion_seleccionado.cantidad_maxima_personas + hotel_seleccionado.cant_estrella * hotel_seleccionado.recarga_estrella;
+            else
+                label1.Text = "Costo por dia por habitacion:";
+        }
+
         private void cmb_Hotel_SelectedIndexChanged(object sender, EventArgs e)
         {
             update_regimenes();
+            update_precio_habitacion();
+        }
+
+        private void cmb_TipoHabitacion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            update_precio_habitacion();
         }
 
 

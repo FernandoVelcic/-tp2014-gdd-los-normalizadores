@@ -18,7 +18,7 @@ namespace FrbaHotel.Models
 
         public override string ToString()
         {
-            return descripcion;
+            return descripcion + " para " + cantidad_maxima_personas + " personas";
         }
 
     }
