@@ -777,6 +777,14 @@ BEGIN
 	RETURN
 END
 
+GO
 
+CREATE PROCEDURE uspCancelarReservasPorNoShow 
+	@fecha_sistema datetime
+AS
+BEGIN
+	UPDATE [LOS_NORMALIZADORES].[reservas] SET reserva_estado = 5 WHERE (reserva_estado = 1 OR reserva_estado = 2) AND fecha_inicio < @fecha_sistema
+END
+GO
 
 

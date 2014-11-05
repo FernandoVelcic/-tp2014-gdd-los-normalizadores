@@ -51,20 +51,7 @@ namespace FrbaHotel.Models
 
 
         public Boolean estaDisponible(DateTime desde, int cantidadNoches)
-        {
-            /*List<FetchCondition> condiciones = new List<FetchCondition>();
-            FetchCondition condicionId = new FetchCondition();
-            condicionId.setEquals("habitacion_id", id);
-            condiciones.Add(condicionId);
-
-            FetchCondition condicionFecha = new FetchCondition();
-            condicionFecha.setNotBetween("fecha_inicio", "DATEADD(day,cant_noches,CAST('" + desde.ToShortDateString() + "' AS DATE))", "'" + desde.AddDays(cantidadNoches).ToShortDateString() + "'");
-            condiciones.Add(condicionFecha);
-
-            List<Reserva> reservas = EntityManager.getEntityManager().findList<Reserva>(condiciones);
-
-            return reservas.Count == 0;*/
-            
+        {           
             SelectQuery<Reserva> query = new SelectQuery<Reserva>(typeof(Reserva));
 
             query.addCount();
@@ -73,7 +60,8 @@ namespace FrbaHotel.Models
             query.addWhere("reservas_habitaciones.habitacion_id", id.ToString());
             query.addWhere("fecha_inicio", "'" + desde.AddDays(cantidadNoches).ToShortDateString() + "'", "<=");
             query.addWhere("(DATEADD(day,cant_noches,fecha_inicio))", "'" + desde.ToShortDateString() + "'", ">=");
-            
+            //Si esta cancelada no tiene que ser tenida en cuenta
+            query.addWhere("reservas.reserva_estado = 1 OR reservas.reserva_estado = 2 OR reservas.reserva_estado = 6");
 
             SqlCommand cmd = new SqlCommand(query.build(), ConnectionManager.getInstance().getConnection());
             Int32 count = (Int32)cmd.ExecuteScalar();

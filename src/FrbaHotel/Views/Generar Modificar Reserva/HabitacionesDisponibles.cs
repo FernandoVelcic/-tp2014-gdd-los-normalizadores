@@ -8,9 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using FrbaHotel.Database_Helper;
 using FrbaHotel.Models;
 using FrbaHotel.Models.Exceptions;
 using FrbaHotel.Views.ABM_de_Cliente;
+
 using MyActiveRecord;
 
 namespace FrbaHotel.Views.Generar_Modificar_Reserva
@@ -44,7 +46,11 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
          */
         private void load_Habitaciones(Regimen regimen, TipoHabitacion tipoHabitacion)
         {
+            //Cancelar reservas por no show
+            String execUspCancelarReservas = "EXECUTE [LOS_NORMALIZADORES].[uspCancelarReservasPorNoShow] @fecha_sistema = '" + Config.getInstance().getCurrentDate().ToShortDateString() + "'";
+            new SqlCommand(execUspCancelarReservas, ConnectionManager.getInstance().getConnection()).ExecuteNonQuery();
 
+            //Obtener habitaciones
             SelectQuery<Habitacion> query = new SelectQuery<Habitacion>(typeof(Habitacion));
 
             query.addSelect("habitaciones.id");

@@ -26,8 +26,8 @@ namespace FrbaHotel.Views.Facturar_Estadia
             textBox1.Text = reserva.id.ToString();
             textBox2.Text = reserva.fecha_inicio.ToString();
             textBox3.Text = (reserva.fecha_inicio + reserva.cant_noches).ToString();
-            textBox4.Text = reserva.fecha_checkin.ToString();
-            textBox5.Text = reserva.fecha_checkout.ToString();
+            //textBox4.Text = reserva.fecha_checkin.ToString();
+            //textBox5.Text = reserva.fecha_checkout.ToString();
 
         }
         private void button1_Click(object sender, EventArgs e)
