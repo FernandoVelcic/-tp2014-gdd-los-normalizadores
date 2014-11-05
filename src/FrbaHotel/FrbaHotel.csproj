@@ -51,6 +51,7 @@
     <Compile Include="Homes\SesionActual.cs" />
     <Compile Include="Models\ConsumibleEstadia.cs" />
     <Compile Include="Models\ConsumibleUnidades.cs" />
+    <Compile Include="Models\Estadia.cs" />
     <Compile Include="Models\HotelBaja.cs" />
     <Compile Include="Models\HotelRegimen.cs" />
     <Compile Include="Models\Listado Estadistico\HotelesReservasCanceladas.cs" />

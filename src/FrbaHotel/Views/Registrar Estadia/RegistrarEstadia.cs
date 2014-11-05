@@ -86,10 +86,15 @@ namespace FrbaHotel.Registrar_Estadia
                 int nroReserva1 = int.Parse(txt_NroReserva.Text);
                 Reserva reservain = EntityManager.getEntityManager().findBy<Reserva>("reservas.id", nroReserva1.ToString());
                 reservain.reserva_estado = 6;
-                reservain.fecha_checkin = fecha;
+
+                Estadia estadia = new Estadia();
+                estadia.fecha_llegada = fecha;
+                estadia.reserva = reservain;
+
                 try
                 {
                     reservain.save();
+                    estadia.save();
                 }
                 catch (ValidationException exception)
                 {
@@ -107,11 +112,13 @@ namespace FrbaHotel.Registrar_Estadia
             else if(operacion=="checkOut" && txt_NroReserva.Text!="") {
                 
                 int nroReserva1 = int.Parse(txt_NroReserva.Text);
-                Reserva reservaout = EntityManager.getEntityManager().findBy<Reserva>("reservas.id", nroReserva1.ToString());
-                reservaout.fecha_checkout = fecha;
+                Estadia estadiaout = EntityManager.getEntityManager().findBy<Estadia>("reserva_id", nroReserva1.ToString());
+
+                estadiaout.cant_noches = int.Parse( DateTime.Parse(fecha).Subtract(DateTime.Parse(estadiaout.fecha_llegada)).ToString());
+
                 try
                 {
-                    reservaout.save();
+                    estadiaout.save();
                 }
                 catch (ValidationException exception)
                 {
@@ -124,7 +131,7 @@ namespace FrbaHotel.Registrar_Estadia
                     return;
                 }
                 
-                Navigator.nextForm(this, new FrbaHotel.Registrar_Consumible.Form1(reservaout.regimen));
+                Navigator.nextForm(this, new FrbaHotel.Registrar_Consumible.Form1(estadiaout.reserva.regimen));
             } else 
             {
                 MessageBox.Show("Debe ingresar un numero de reserva válido para poder operar");
