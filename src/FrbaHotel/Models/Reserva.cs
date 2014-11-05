@@ -4,7 +4,10 @@ using System.Linq;
 using System.Text;
 
 using MyActiveRecord;
-using System.Windows.Forms;
+
+using FrbaHotel.Database_Helper;
+using FrbaHotel.Models;
+
 
 namespace FrbaHotel.Models
 {
@@ -32,6 +35,14 @@ namespace FrbaHotel.Models
         public bool estaCancelada()
         {
             return reserva_estado == 3 || reserva_estado == 4 || reserva_estado == 5;
+        }
+
+        public int cantidad_maxima_personas()
+        {
+            List<ReservaHabitacion> habitaciones_reservadas = EntityManager.getEntityManager().findAllBy<ReservaHabitacion>("reserva_id", id.ToString());
+            TipoHabitacion habitacion_tipo = EntityManager.getEntityManager().findBy<TipoHabitacion>("id", habitaciones_reservadas[0].habitacion.tipo.id.ToString());
+            
+            return habitaciones_reservadas.Count() * habitacion_tipo.cantidad_maxima_personas;
         }
     }
 }
