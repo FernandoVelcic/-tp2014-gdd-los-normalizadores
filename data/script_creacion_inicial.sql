@@ -211,20 +211,20 @@ CREATE TABLE [LOS_NORMALIZADORES].[consumibles_estadias](
 
 CREATE TABLE [LOS_NORMALIZADORES].[facturas](
 	[id] INTEGER IDENTITY PRIMARY KEY,
-	[estadia_id] INTEGER,					
-	[nro] [numeric](18, 0),
-	[fecha] [datetime],
-	[cant_dias_reales] INTEGER,					/* Este dato no esta en la Maestra */
-	[forma_pago] [nvarchar](255)				/* Este dato no esta en la Maestra */
+	[estadia_id] INTEGER NOT NULL,					
+	[nro] [numeric](18, 0) NOT NULL,
+	[fecha] [datetime] NOT NULL,					
+	[forma_pago] [nvarchar](255)NOT NULL				/* Este dato no esta en la Maestra */
 ) ON [PRIMARY]
 
 
 /* Deberian salir estos datos de items ?? */
 CREATE TABLE [LOS_NORMALIZADORES].[items](
 	[id] INTEGER IDENTITY PRIMARY KEY,
-	[factura_id] INTEGER,					
-	[factura_cantidad] [numeric](18, 0),
-	[monto] [numeric](18, 2),
+	[factura_id] INTEGER,
+	[descripcion] [nvarchar] (255) NOT NULL,					
+	[factura_cantidad] [numeric](18, 0) NOT NULL,
+	[monto] [numeric](18, 2) NOT NULL,
 ) ON [PRIMARY]
 
 CREATE TABLE [LOS_NORMALIZADORES].[paises](

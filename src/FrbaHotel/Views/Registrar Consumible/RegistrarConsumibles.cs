@@ -13,11 +13,11 @@ namespace FrbaHotel.Registrar_Consumible
 {
     public partial class Form1 : Form
     {
-        Regimen regimen;
+        Estadia estadia;
 
-        public Form1(Regimen r)
+        public Form1(Estadia e)
         {
-            regimen = r;
+            estadia = e;
             InitializeComponent();
             
         }
@@ -32,7 +32,7 @@ namespace FrbaHotel.Registrar_Consumible
             comboBox1.DataSource = consumibles_binding;
             comboBox1.Text = "";
 
-            textBox5.Text = regimen.descripcion;
+            textBox5.Text = estadia.reserva.regimen.descripcion;
 
         }
 
@@ -55,7 +55,7 @@ namespace FrbaHotel.Registrar_Consumible
             int unidades = int.Parse(textBox4.Text);    //chequear si va, para mi deberia, pero en la tabla no está
             Consumible consumible_seleccionado = comboBox1.SelectedItem as Consumible;
 
-            consumible_estadia.regimen.id = regimen.id;
+            consumible_estadia.estadia.id = estadia.id;
             consumible_estadia.consumible.codigo = consumible_seleccionado.codigo;
             consumible_estadia.unidades = unidades;
 
@@ -65,7 +65,7 @@ namespace FrbaHotel.Registrar_Consumible
 
         private void cargarConsumibles()
         {
-            List<ConsumibleEstadia> consumiblesEstadia = new List<ConsumibleEstadia>(EntityManager.getEntityManager().findAllBy<ConsumibleEstadia>("estadia_id", regimen.id.ToString()));
+            List<ConsumibleEstadia> consumiblesEstadia = new List<ConsumibleEstadia>(EntityManager.getEntityManager().findAllBy<ConsumibleEstadia>("estadia_id", estadia.id.ToString()));
 
             BindingList<ConsumibleUnidades> consumibleUnidadesBinding = new BindingList<ConsumibleUnidades>();
             foreach (ConsumibleEstadia consumibleEstadia in consumiblesEstadia)

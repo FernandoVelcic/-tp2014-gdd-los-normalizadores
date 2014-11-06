@@ -99,7 +99,7 @@ namespace FrbaHotel.Registrar_Estadia
                 return;
             }
 
-            Navigator.nextForm(this, new FrbaHotel.Registrar_Consumible.Form1(estadiaout.reserva.regimen));
+            Navigator.nextForm(this, new FrbaHotel.Registrar_Consumible.Form1(estadiaout));
         }
 
         public bool obtenerReserva()
