@@ -129,7 +129,7 @@ namespace FrbaHotel.Generar_Modificar_Reserva
 
             //FORMULA
             if (regimen_seleccionado != null && tipo_habitacion_seleccionado != null && hotel_seleccionado != null)
-                label1.Text = "Costo por dia por habitacion: $" + tipo_habitacion_seleccionado.porcentual* regimen_seleccionado.precio * tipo_habitacion_seleccionado.cantidad_maxima_personas + hotel_seleccionado.cant_estrella * hotel_seleccionado.recarga_estrella;
+                label1.Text = "Costo por dia por habitacion: $" + (tipo_habitacion_seleccionado.porcentual* regimen_seleccionado.precio * tipo_habitacion_seleccionado.cantidad_maxima_personas + hotel_seleccionado.cant_estrella * hotel_seleccionado.recarga_estrella);
             else
                 label1.Text = "Costo por dia por habitacion:";
         }
