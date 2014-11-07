@@ -31,7 +31,7 @@ namespace FrbaHotel.Registrar_Consumible
             consumibles_binding.DataSource = EntityManager.getEntityManager().findAll<Consumible>();
             comboBox1.DataSource = consumibles_binding;
             comboBox1.Text = "";
-
+            label1.Text = estadia.reserva.id.ToString();
             textBox5.Text = estadia.reserva.regimen.descripcion;
 
         }
@@ -81,5 +81,12 @@ namespace FrbaHotel.Registrar_Consumible
             }
             dataGridView1.DataSource = new BindingSource(consumibleUnidadesBinding, null);
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Navigator.nextForm(this, new FrbaHotel.Views.Facturar_Estadia.Facturar(estadia));
+        }
+
+       
     }
 }
