@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.cmb_Trimestre = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txt_Anio = new System.Windows.Forms.TextBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmb_Tipo = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
@@ -47,7 +47,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.comboBox2);
+            this.groupBox1.Controls.Add(this.cmb_Trimestre);
             this.groupBox1.Location = new System.Drawing.Point(152, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(122, 51);
@@ -55,19 +55,19 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ingrese el trimestre:";
             // 
-            // comboBox2
+            // cmb_Trimestre
             // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
+            this.cmb_Trimestre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_Trimestre.FormattingEnabled = true;
+            this.cmb_Trimestre.Items.AddRange(new object[] {
             "1er Trimestre",
             "2do Trimestre",
             "3er Trimestre",
             "4to Trimestre"});
-            this.comboBox2.Location = new System.Drawing.Point(6, 21);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(110, 21);
-            this.comboBox2.TabIndex = 0;
+            this.cmb_Trimestre.Location = new System.Drawing.Point(6, 21);
+            this.cmb_Trimestre.Name = "cmb_Trimestre";
+            this.cmb_Trimestre.Size = new System.Drawing.Size(110, 21);
+            this.cmb_Trimestre.TabIndex = 0;
             // 
             // groupBox2
             // 
@@ -90,7 +90,7 @@
             // 
             // groupBox7
             // 
-            this.groupBox7.Controls.Add(this.textBox1);
+            this.groupBox7.Controls.Add(this.txt_Anio);
             this.groupBox7.Location = new System.Drawing.Point(12, 12);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(127, 51);
@@ -98,16 +98,17 @@
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Ingrese el año:";
             // 
-            // textBox1
+            // txt_Anio
             // 
-            this.textBox1.Location = new System.Drawing.Point(21, 21);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 0;
+            this.txt_Anio.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.txt_Anio.Location = new System.Drawing.Point(21, 21);
+            this.txt_Anio.Name = "txt_Anio";
+            this.txt_Anio.Size = new System.Drawing.Size(100, 20);
+            this.txt_Anio.TabIndex = 0;
             // 
             // groupBox8
             // 
-            this.groupBox8.Controls.Add(this.comboBox1);
+            this.groupBox8.Controls.Add(this.cmb_Tipo);
             this.groupBox8.Location = new System.Drawing.Point(290, 12);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(357, 51);
@@ -115,20 +116,20 @@
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Seleccione el top:";
             // 
-            // comboBox1
+            // cmb_Tipo
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.cmb_Tipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_Tipo.FormattingEnabled = true;
+            this.cmb_Tipo.Items.AddRange(new object[] {
             "Hotel con mayor cantidad de reservas canceladas",
             "Hotel con mayor cantidad de consumibles facturados",
             "Hotel con mayor cantidad de días fuera de servicio",
             "Habitacion con mayor cantidad de días y veces ocupada",
             "Cliente con mayor cantidad de puntos"});
-            this.comboBox1.Location = new System.Drawing.Point(6, 20);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(345, 21);
-            this.comboBox1.TabIndex = 0;
+            this.cmb_Tipo.Location = new System.Drawing.Point(6, 20);
+            this.cmb_Tipo.Name = "cmb_Tipo";
+            this.cmb_Tipo.Size = new System.Drawing.Size(345, 21);
+            this.cmb_Tipo.TabIndex = 0;
             // 
             // button1
             // 
@@ -139,7 +140,7 @@
             this.button1.TabIndex = 8;
             this.button1.Text = "Filtrar";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.btnFiltrar);
             // 
             // button2
             // 
@@ -150,7 +151,7 @@
             this.button2.TabIndex = 9;
             this.button2.Text = "Limpiar";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.btnLimpiar);
             // 
             // Form1
             // 
@@ -186,8 +187,8 @@
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.TextBox txt_Anio;
+        private System.Windows.Forms.ComboBox cmb_Tipo;
+        private System.Windows.Forms.ComboBox cmb_Trimestre;
     }
 }

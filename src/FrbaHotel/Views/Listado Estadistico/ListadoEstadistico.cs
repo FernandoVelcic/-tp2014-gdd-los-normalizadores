@@ -29,26 +29,27 @@ namespace FrbaHotel.Listado_Estadistico
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            textBox1.DataBindings.Add("Text", this, "anio");
+            txt_Anio.DataBindings.Add("Text", this, "anio");
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnLimpiar(object sender, EventArgs e)
         {
-            textBox1.Text = "";
-            comboBox2.SelectedIndex = -1;
-            comboBox1.SelectedIndex = -1;
+            txt_Anio.Text = "";
+            cmb_Trimestre.SelectedIndex = -1;
+            cmb_Tipo.SelectedIndex = -1;
             dataGridView1.Rows.Clear();
 
         }
         
-        private void button1_Click(object sender, EventArgs e)
+        private void btnFiltrar(object sender, EventArgs e)
         {
-            if (anio < 1900)
+            if (anio < 1900 || anio > 2020)
             {
                 MessageBox.Show("Por favor, seleccione un año valido");
+                return;
             }
 
-            switch (comboBox2.SelectedIndex)
+            switch (cmb_Trimestre.SelectedIndex)
             {
                 case 0: //Primer trimestre
                     fecha1 = new DateTime(anio, 1, 1);
@@ -72,13 +73,14 @@ namespace FrbaHotel.Listado_Estadistico
                     return;
             }
 
-            switch (comboBox1.SelectedIndex)
+            switch (cmb_Tipo.SelectedIndex)
             {
                 case 0: //Hotel con mayor cantidad de reservas canceladas
                     HotelMayorCantidadReservasCanceladas();
                     break;
 
                 case 1: //Hotel con mayor cantidad de consumibles facturados
+                    HotelConMasConsumibles();
                     break;
 
                 case 2: //Hotel con mayor cantidad de días fuera de servicio
@@ -86,9 +88,11 @@ namespace FrbaHotel.Listado_Estadistico
                     break;
 
                 case 3: //Habitacion con mayor cantidad de días y veces ocupada
+                    HabitacionConMayorCantidadDeDiasYVecesOcupada();
                     break;
 
                 case 4: //Cliente con mayor cantidad de puntos
+                    ClienteConMasPuntos();
                     break;
 
                 default:
@@ -97,10 +101,25 @@ namespace FrbaHotel.Listado_Estadistico
             }
         }
 
+
+
         private void HotelMayorCantidadReservasCanceladas()
         {
+            
             List<HotelesReservasCanceladas> hoteles = new List<HotelesReservasCanceladas>();
-            string query = "SELECT TOP 5 hotel_id, COUNT(*) AS cantidad FROM [LOS_NORMALIZADORES].[reservas] LEFT JOIN [LOS_NORMALIZADORES].[habitaciones] ON reservas.habitacion_id = habitaciones.id WHERE (reserva_estado = 3 OR reserva_estado = 4 OR reserva_estado = 5) AND [fecha_cancelacion] BETWEEN '" + fecha1.ToShortDateString() + "' AND '" + fecha2.ToShortDateString() + "' GROUP BY hotel_id ORDER BY COUNT(*) DESC";
+            
+            var query = "SELECT TOP 5 hotel_id, COUNT(*) AS cantidad ";
+            
+            query += "FROM [LOS_NORMALIZADORES].[reservas] ";
+
+            query += "INNER JOIN [LOS_NORMALIZADORES].[reservas_habitaciones] ON [reservas].id = reservas_habitaciones.reserva_id ";
+            query += "INNER JOIN [LOS_NORMALIZADORES].[habitaciones] ON [reservas_habitaciones].habitacion_id = habitaciones.id ";
+	        query += "INNER JOIN [LOS_NORMALIZADORES].[hoteles] ON [hoteles].id = [habitaciones].hotel_id ";
+
+            query += "WHERE (reserva_estado = 3 OR reserva_estado = 4 OR reserva_estado = 5) ";
+            query += "AND [fecha_cancelacion] BETWEEN '" + fecha1.ToShortDateString() + "' AND '" + fecha2.ToShortDateString() + "' "; 
+            query += "GROUP BY hotel_id ORDER BY COUNT(*) DESC";
+
 
             SqlCommand command = new SqlCommand(query, ConnectionManager.getInstance().getConnection());
             using (SqlDataReader result = command.ExecuteReader())
@@ -121,12 +140,40 @@ namespace FrbaHotel.Listado_Estadistico
             
             //List<HotelesReservasCanceladas> hoteles = EntityManager.getEntityManager().findAll<HotelesReservasCanceladas>();
             dataGridView1.DataSource = hoteles;
+
         }
 
+
+        /* TODO aca se vuelve complicado, los consumibles se facturan por estadias,*/
+        /* pero las estadias segun el modelo de datos podria tener mas de una habitacion/hotel */
+        /* Si bien desde la app no permitimos eso, es muy dificil de calcular */
+        /* Hay que joinear consuibles_estadias, estadias, habitacion y hotel ?? */
+        private void HotelConMasConsumibles()
+        {
+            var query = "SELECT hotel_id, ";
+            
+            query += " (SELECT COUNT(*) FROM [" + Config.getInstance().schema + "].[consumibles_estadias] ";
+            query += " INNER JOIN [" + Config.getInstance().schema + "].[estadias] ON consumibles_estadias.estadia_id = estadias.id";
+            query += " INNER JOIN [" + Config.getInstance().schema + "].[reservas] ON estadias.reserva_id = reservas.id";
+
+            query += " WHERE estadias.ho ) as cantidad "; 
+            
+            query += " FROM [" + Config.getInstance().schema + "].[hoteles]";
+
+        }
+
+        /* TODO revisar, en vez de usar top, usar numrow */
         private void HotelMayorCantidadDiasFueraServicio()
         {
+
             List<HotelesReservasCanceladas> hoteles = new List<HotelesReservasCanceladas>();
-            string query = "SELECT TOP 5 hotel_id, SUM(DATEDIFF(d, hoteles_bajas.fecha_desde, hoteles_bajas.fecha_hasta)+1) AS cantidad_dias FROM [LOS_NORMALIZADORES].[hoteles] RIGHT JOIN [LOS_NORMALIZADORES].[hoteles_bajas] ON hoteles.id = hoteles_bajas.hotel_id WHERE fecha_desde BETWEEN '" + fecha1 + "' AND '" + fecha2 + "' GROUP BY hotel_id ORDER BY 2 DESC";
+
+            var query = " SELECT TOP 5 hotel_id, SUM(DATEDIFF(d, hoteles_bajas.fecha_desde, hoteles_bajas.fecha_hasta)+1) AS cantidad_dias ";
+            query += " FROM [LOS_NORMALIZADORES].[hoteles] ";
+            query += " RIGHT JOIN [LOS_NORMALIZADORES].[hoteles_bajas] ON hoteles.id = hoteles_bajas.hotel_id ";
+            query += " WHERE fecha_desde BETWEEN '" + fecha1 + "' AND '" + fecha2 + "' ";
+            query += " GROUP BY hotel_id ORDER BY 2 DESC";
+
 
             SqlCommand command = new SqlCommand(query, ConnectionManager.getInstance().getConnection());
             using (SqlDataReader result = command.ExecuteReader())
@@ -148,5 +195,92 @@ namespace FrbaHotel.Listado_Estadistico
             //List<HotelesReservasCanceladas> hoteles = EntityManager.getEntityManager().findAll<HotelesReservasCanceladas>();
             dataGridView1.DataSource = hoteles;
         }
+
+
+        private void HabitacionConMayorCantidadDeDiasYVecesOcupada()
+        {
+
+            var query = "SELECT habitaciones.id, hoteles.calle, hoteles.ciudad, ";
+
+            query += " (SELECT COUNT(*) FROM [" + Config.getInstance().schema + "].[estadias] ";
+            query += " INNER JOIN [" + Config.getInstance().schema + "].[reservas] ON estadias.reserva_id = reservas.id";
+            query += " INNER JOIN [" + Config.getInstance().schema + "].[reservas_habitaciones] ON reservas_habitaciones.reserva_id = reservas.id";
+            query += " WHERE reservas_habitaciones.habitacion_id = habitaciones.id";
+            query += " AND estadias.fecha_inicio > '" + fecha1 + "'";     
+            query += " ) veces, ";
+
+            query += " (SELECT ISNULL(SUM(estadias.cant_noches), 0) FROM [" + Config.getInstance().schema + "].[estadias] ";
+            query += " INNER JOIN [" + Config.getInstance().schema + "].[reservas] ON estadias.reserva_id = reservas.id";
+            query += " INNER JOIN [" + Config.getInstance().schema + "].[reservas_habitaciones] ON reservas_habitaciones.reserva_id = reservas.id";
+            query += " WHERE reservas_habitaciones.habitacion_id = habitaciones.id";
+            query += " AND estadias.fecha_inicio > '" + fecha1 + "'";
+            query += " ) cantidad_noches ";
+
+            query += " FROM [LOS_NORMALIZADORES].[habitaciones] ";
+            query += " INNER JOIN [" + Config.getInstance().schema + "].[hoteles] ON habitaciones.hotel_id = hoteles.id";
+
+            List<HabitacionTrending> habitaciones = new List<HabitacionTrending>();
+
+            SqlCommand command = new SqlCommand(query, ConnectionManager.getInstance().getConnection());
+            using (SqlDataReader result = command.ExecuteReader())
+            {
+                while (result.Read())
+                {
+                    HabitacionTrending habitacion = new HabitacionTrending();
+                    habitacion.habitacion_id = Convert.ToInt32(result["id"]);
+                    habitacion.cantidad_veces = Convert.ToInt32(result["veces"]);
+                    habitacion.cantidad_noches = Convert.ToInt32(result["cantidad_noches"]);
+                    habitacion.Hotel = result["ciudad"].ToString() + " - " + result["calle"].ToString();
+                    habitaciones.Add(habitacion);
+                }
+            }
+
+
+            dataGridView1.DataSource = habitaciones;
+
+        }
+
+
+
+        /* TODO ver esto */
+        /* Cliente con mayor cantidad de puntos, donde cada $10 en estadías vale 1 puntos */
+        /* y cada $5 de consumibles es 1 punto, de la sumatoria de todas las facturaciones que haya tenido */
+        /* dentro de un periodo independientemente del Hotel. */
+        /* Tener en cuenta que la facturación siempre es a quien haya realizado la reserva. */
+        private void ClienteConMasPuntos()
+        {
+
+            var query = "SELECT clientes.nombre, ";
+
+
+            query += "(SELECT 48) as puntos_estadias";
+            query += "(SELECT 25) as puntos_consumibles";
+
+
+            query += " FROM [LOS_NORMALIZADORES].[clientes] ";
+
+
+
+            List<ClienteTrending> clientes = new List<ClienteTrending>();
+
+            SqlCommand command = new SqlCommand(query, ConnectionManager.getInstance().getConnection());
+            using (SqlDataReader result = command.ExecuteReader())
+            {
+                while (result.Read())
+                {
+                    ClienteTrending cliente = new ClienteTrending();
+                    cliente.nombre_cliente = result["nombre"].ToString();
+                    cliente.puntos = Convert.ToInt32(result["puntos"]);
+                    clientes.Add(cliente);
+                }
+            }
+
+            dataGridView1.DataSource = clientes;
+
+
+        }
+
+
+
     }
 }
