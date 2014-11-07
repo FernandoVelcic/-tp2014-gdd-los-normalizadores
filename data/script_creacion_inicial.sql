@@ -507,6 +507,7 @@ GO
 INSERT INTO [LOS_NORMALIZADORES].[formas_de_pago] (descripcion) VALUES ('Sin especificar')
 INSERT INTO [LOS_NORMALIZADORES].[formas_de_pago] (descripcion) VALUES ('Efectivo')
 INSERT INTO [LOS_NORMALIZADORES].[formas_de_pago] (descripcion) VALUES ('Tarjeta de crédito')
+INSERT INTO [LOS_NORMALIZADORES].[formas_de_pago] (descripcion) VALUES ('Tarjeta de débito')
 GO
 
 INSERT INTO [LOS_NORMALIZADORES].[facturas] ([nro], [estadia_id], [fecha], [forma_pago_id])	

@@ -141,9 +141,22 @@ namespace FrbaHotel.Views.Facturar_Estadia
             
             string forma_de_pago = cmb_FormaDePago.SelectedItem.ToString();
             
-            /* Se agrego harcodeado en el script de migracion que 1: sin especificar, 2: efectivo, 3: tarjeta */
-            factura.forma_pago_id = forma_de_pago == "Efectivo" ? 2 : 3;
-
+            /* Se agrego harcodeado en el script de migracion que 1: sin especificar, 2: efectivo, 3: credito 4:debito*/
+            switch(forma_de_pago)
+            {
+                case "Efectivo":
+                    factura.forma_pago_id =2;
+                break;
+                case "Tarjeta de Crédito":
+                    factura.forma_pago_id =3;
+                break;
+                case "Tarjeta de Débito":
+                    factura.forma_pago_id =4;
+                break;
+                default:
+                    factura.forma_pago_id =1;
+                break;
+            }
             //Update de la factura para guardar la forma de pago
             try
             {
