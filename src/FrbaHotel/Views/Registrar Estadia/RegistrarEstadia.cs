@@ -12,6 +12,7 @@ using FrbaHotel.Models.Exceptions;
 using FrbaHotel.Models;
 using System.Data.SqlClient;
 using FrbaHotel.Views.Registrar_Estadia;
+using FrbaHotel.Homes;
 
 namespace FrbaHotel.Registrar_Estadia
 {
@@ -70,8 +71,7 @@ namespace FrbaHotel.Registrar_Estadia
             }
             else if (DateTime.Compare(DateTime.Parse(fecha).Date, DateTime.Parse(reserva.fecha_inicio).Date) != 0)
             {
-                MessageBox.Show("El resultado fue" + DateTime.Compare(DateTime.Parse(fecha).Date, DateTime.Parse(reserva.fecha_inicio).Date));
-                MessageBox.Show("La fecha ingresada no es igual a la reservada");
+                 MessageBox.Show("La fecha ingresada no es igual a la reservada");
             }
         }
 
@@ -111,7 +111,14 @@ namespace FrbaHotel.Registrar_Estadia
                 MessageBox.Show("Por favor, ingrese un número de reserva correcto.");
                 return false;
             }
-
+            List<ReservaHabitacion> habitaciones_reservadas = EntityManager.getEntityManager().findAllBy<ReservaHabitacion>("reservas_habitaciones.reserva_id", reserva.id.ToString());
+            Habitacion habitacion = EntityManager.getEntityManager().findBy<Habitacion>("habitaciones.id", habitaciones_reservadas[0].id.ToString());
+            
+            if(habitacion.hotel!=SesionActual.rol_usuario.hotel)
+            {
+                MessageBox.Show("La reserva no corresponde al hotel en el cual se esta trabajando");
+                return false;
+            }
             return true;
         }
     }

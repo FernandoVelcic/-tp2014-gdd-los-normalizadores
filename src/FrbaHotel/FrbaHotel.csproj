@@ -53,6 +53,7 @@
     <Compile Include="Models\ConsumibleEstadia.cs" />
     <Compile Include="Models\ConsumibleUnidades.cs" />
     <Compile Include="Models\Estadia.cs" />
+    <Compile Include="Models\FormaDePago.cs" />
     <Compile Include="Models\HotelBaja.cs" />
     <Compile Include="Models\HotelRegimen.cs" />
     <Compile Include="Models\ItemFactura.cs" />

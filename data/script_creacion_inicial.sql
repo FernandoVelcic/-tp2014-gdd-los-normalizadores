@@ -217,6 +217,13 @@ CREATE TABLE [LOS_NORMALIZADORES].[facturas](
 	[forma_pago] [nvarchar](255)NOT NULL				/* Este dato no esta en la Maestra */
 ) ON [PRIMARY]
 
+CREATE TABLE [LOS_NORMALIZADORES].[formas_de_pago](
+	[id] INTEGER IDENTITY PRIMARY KEY,
+	[cliente_id] INTEGER NOT NULL,				
+	[tipo] [nvarchar](30) NOT NULL,
+	[nro_tarjeta] INTEGER,
+	[nro_pin] INTEGER,
+) ON [PRIMARY]
 
 /* Deberian salir estos datos de items ?? */
 CREATE TABLE [LOS_NORMALIZADORES].[items](
