@@ -29,27 +29,27 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.btn_Facturar = new System.Windows.Forms.Button();
+            this.txt_Usuario = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.txt_Pin = new System.Windows.Forms.TextBox();
+            this.txt_Tarjeta = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmb_FormaDePago = new System.Windows.Forms.ComboBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txt_CheckOut = new System.Windows.Forms.TextBox();
+            this.txt_CheckIn = new System.Windows.Forms.TextBox();
+            this.txt_Hasta = new System.Windows.Forms.TextBox();
+            this.txt_Desde = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txt_FacturaNro = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -60,13 +60,13 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.textBox6);
+            this.groupBox1.Controls.Add(this.btn_Facturar);
+            this.groupBox1.Controls.Add(this.txt_Usuario);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.groupBox4);
             this.groupBox1.Controls.Add(this.groupBox3);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.txt_FacturaNro);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(43, 17);
@@ -77,23 +77,23 @@
             this.groupBox1.Tag = "";
             this.groupBox1.Text = "Detalle:";
             // 
-            // button1
+            // btn_Facturar
             // 
-            this.button1.Location = new System.Drawing.Point(593, 351);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(131, 38);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Facturar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btn_Facturar.Location = new System.Drawing.Point(593, 351);
+            this.btn_Facturar.Name = "btn_Facturar";
+            this.btn_Facturar.Size = new System.Drawing.Size(131, 38);
+            this.btn_Facturar.TabIndex = 6;
+            this.btn_Facturar.Text = "Facturar";
+            this.btn_Facturar.UseVisualStyleBackColor = true;
+            this.btn_Facturar.Click += new System.EventHandler(this.onBtnFacturar);
             // 
-            // textBox6
+            // txt_Usuario
             // 
-            this.textBox6.Enabled = false;
-            this.textBox6.Location = new System.Drawing.Point(276, 24);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 22);
-            this.textBox6.TabIndex = 5;
+            this.txt_Usuario.Enabled = false;
+            this.txt_Usuario.Location = new System.Drawing.Point(276, 24);
+            this.txt_Usuario.Name = "txt_Usuario";
+            this.txt_Usuario.Size = new System.Drawing.Size(100, 22);
+            this.txt_Usuario.TabIndex = 5;
             // 
             // label6
             // 
@@ -106,11 +106,11 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.textBox8);
-            this.groupBox2.Controls.Add(this.textBox7);
+            this.groupBox2.Controls.Add(this.txt_Pin);
+            this.groupBox2.Controls.Add(this.txt_Tarjeta);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.comboBox1);
+            this.groupBox2.Controls.Add(this.cmb_FormaDePago);
             this.groupBox2.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(18, 192);
             this.groupBox2.Name = "groupBox2";
@@ -119,21 +119,21 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Forma de Pago:";
             // 
-            // textBox8
+            // txt_Pin
             // 
-            this.textBox8.Location = new System.Drawing.Point(106, 113);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(100, 22);
-            this.textBox8.TabIndex = 4;
-            this.textBox8.Visible = false;
+            this.txt_Pin.Location = new System.Drawing.Point(106, 113);
+            this.txt_Pin.Name = "txt_Pin";
+            this.txt_Pin.Size = new System.Drawing.Size(100, 22);
+            this.txt_Pin.TabIndex = 4;
+            this.txt_Pin.Visible = false;
             // 
-            // textBox7
+            // txt_Tarjeta
             // 
-            this.textBox7.Location = new System.Drawing.Point(106, 74);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(100, 22);
-            this.textBox7.TabIndex = 3;
-            this.textBox7.Visible = false;
+            this.txt_Tarjeta.Location = new System.Drawing.Point(106, 74);
+            this.txt_Tarjeta.Name = "txt_Tarjeta";
+            this.txt_Tarjeta.Size = new System.Drawing.Size(100, 22);
+            this.txt_Tarjeta.TabIndex = 3;
+            this.txt_Tarjeta.Visible = false;
             // 
             // label8
             // 
@@ -155,26 +155,26 @@
             this.label7.Text = "Nro Tarjeta:";
             this.label7.Visible = false;
             // 
-            // comboBox1
+            // cmb_FormaDePago
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.cmb_FormaDePago.FormattingEnabled = true;
+            this.cmb_FormaDePago.Items.AddRange(new object[] {
             "Efectivo",
             "Tarjeta de Crédito",
             "Tarjeta de Débito"});
-            this.comboBox1.Location = new System.Drawing.Point(47, 30);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(261, 24);
-            this.comboBox1.TabIndex = 0;
-            this.comboBox1.Text = "Seleccione una forma de pago...";
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.cmb_FormaDePago.Location = new System.Drawing.Point(47, 30);
+            this.cmb_FormaDePago.Name = "cmb_FormaDePago";
+            this.cmb_FormaDePago.Size = new System.Drawing.Size(261, 24);
+            this.cmb_FormaDePago.TabIndex = 0;
+            this.cmb_FormaDePago.Text = "Seleccione una forma de pago...";
+            this.cmb_FormaDePago.SelectedIndexChanged += new System.EventHandler(this.onCambioFormaDePago);
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.textBox5);
-            this.groupBox4.Controls.Add(this.textBox4);
-            this.groupBox4.Controls.Add(this.textBox3);
-            this.groupBox4.Controls.Add(this.textBox2);
+            this.groupBox4.Controls.Add(this.txt_CheckOut);
+            this.groupBox4.Controls.Add(this.txt_CheckIn);
+            this.groupBox4.Controls.Add(this.txt_Hasta);
+            this.groupBox4.Controls.Add(this.txt_Desde);
             this.groupBox4.Controls.Add(this.label5);
             this.groupBox4.Controls.Add(this.label4);
             this.groupBox4.Controls.Add(this.label3);
@@ -186,37 +186,37 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Fechas reservadas:";
             // 
-            // textBox5
+            // txt_CheckOut
             // 
-            this.textBox5.Enabled = false;
-            this.textBox5.Location = new System.Drawing.Point(235, 77);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 22);
-            this.textBox5.TabIndex = 7;
+            this.txt_CheckOut.Enabled = false;
+            this.txt_CheckOut.Location = new System.Drawing.Point(235, 77);
+            this.txt_CheckOut.Name = "txt_CheckOut";
+            this.txt_CheckOut.Size = new System.Drawing.Size(100, 22);
+            this.txt_CheckOut.TabIndex = 7;
             // 
-            // textBox4
+            // txt_CheckIn
             // 
-            this.textBox4.Enabled = false;
-            this.textBox4.Location = new System.Drawing.Point(235, 34);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 22);
-            this.textBox4.TabIndex = 6;
+            this.txt_CheckIn.Enabled = false;
+            this.txt_CheckIn.Location = new System.Drawing.Point(235, 34);
+            this.txt_CheckIn.Name = "txt_CheckIn";
+            this.txt_CheckIn.Size = new System.Drawing.Size(100, 22);
+            this.txt_CheckIn.TabIndex = 6;
             // 
-            // textBox3
+            // txt_Hasta
             // 
-            this.textBox3.Enabled = false;
-            this.textBox3.Location = new System.Drawing.Point(50, 83);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 22);
-            this.textBox3.TabIndex = 5;
+            this.txt_Hasta.Enabled = false;
+            this.txt_Hasta.Location = new System.Drawing.Point(50, 83);
+            this.txt_Hasta.Name = "txt_Hasta";
+            this.txt_Hasta.Size = new System.Drawing.Size(100, 22);
+            this.txt_Hasta.TabIndex = 5;
             // 
-            // textBox2
+            // txt_Desde
             // 
-            this.textBox2.Enabled = false;
-            this.textBox2.Location = new System.Drawing.Point(52, 34);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 22);
-            this.textBox2.TabIndex = 4;
+            this.txt_Desde.Enabled = false;
+            this.txt_Desde.Location = new System.Drawing.Point(52, 34);
+            this.txt_Desde.Name = "txt_Desde";
+            this.txt_Desde.Size = new System.Drawing.Size(100, 22);
+            this.txt_Desde.TabIndex = 4;
             // 
             // label5
             // 
@@ -272,13 +272,13 @@
             this.dataGridView1.Size = new System.Drawing.Size(322, 282);
             this.dataGridView1.TabIndex = 0;
             // 
-            // textBox1
+            // txt_FacturaNro
             // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(103, 23);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(94, 22);
-            this.textBox1.TabIndex = 1;
+            this.txt_FacturaNro.Enabled = false;
+            this.txt_FacturaNro.Location = new System.Drawing.Point(103, 23);
+            this.txt_FacturaNro.Name = "txt_FacturaNro";
+            this.txt_FacturaNro.Size = new System.Drawing.Size(94, 22);
+            this.txt_FacturaNro.TabIndex = 1;
             // 
             // label1
             // 
@@ -315,23 +315,23 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txt_FacturaNro;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmb_FormaDePago;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txt_CheckOut;
+        private System.Windows.Forms.TextBox txt_CheckIn;
+        private System.Windows.Forms.TextBox txt_Hasta;
+        private System.Windows.Forms.TextBox txt_Desde;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox txt_Usuario;
+        private System.Windows.Forms.Button btn_Facturar;
+        private System.Windows.Forms.TextBox txt_Pin;
+        private System.Windows.Forms.TextBox txt_Tarjeta;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
     }

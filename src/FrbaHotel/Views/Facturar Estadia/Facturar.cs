@@ -45,11 +45,11 @@ namespace FrbaHotel.Views.Facturar_Estadia
                 return;
             }
 
-            textBox1.Text = factura.nro.ToString(); //nro de factura
-            textBox2.Text = estadia.reserva.fecha_inicio.ToString(); //Fecha de inicio que se reservo
-            textBox3.Text = (estadia.reserva.fecha_inicio + estadia.reserva.cant_noches).ToString(); //Fecha de supuesta salida
-            textBox4.Text = estadia.fecha_inicio.ToString();//Fecha de inicio real( check in) Las dos de inicio deberian ser iguales porque sino no te dejarian entrar o ya estaria cancelada
-            textBox5.Text = (estadia.fecha_inicio + estadia.cant_noches).ToString();//Fecha de salida real ( check out)
+            txt_FacturaNro.Text = factura.nro.ToString(); //nro de factura
+            txt_Desde.Text = estadia.reserva.fecha_inicio.ToString(); //Fecha de inicio que se reservo
+            txt_Hasta.Text = (estadia.reserva.fecha_inicio + estadia.reserva.cant_noches).ToString(); //Fecha de supuesta salida
+            txt_CheckIn.Text = estadia.fecha_inicio.ToString();//Fecha de inicio real( check in) Las dos de inicio deberian ser iguales porque sino no te dejarian entrar o ya estaria cancelada
+            txt_CheckOut.Text = (estadia.fecha_inicio + estadia.cant_noches).ToString();//Fecha de salida real ( check out)
 
             List<ConsumibleEstadia> consumiblesEstadia = EntityManager.getEntityManager().findAllBy<ConsumibleEstadia>("estadia_id", estadia.id.ToString());
 
@@ -136,10 +136,13 @@ namespace FrbaHotel.Views.Facturar_Estadia
 
 
 
-        private void button1_Click(object sender, EventArgs e)
+        private void onBtnFacturar(object sender, EventArgs e)
         {
-            string forma_de_pago = comboBox1.SelectedItem.ToString();
-            factura.forma_pago = forma_de_pago;
+            
+            string forma_de_pago = cmb_FormaDePago.SelectedItem.ToString();
+            
+            /* Se agrego harcodeado en el script de migracion que 1: sin especificar, 2: efectivo, 3: tarjeta */
+            factura.forma_pago_id = forma_de_pago == "Efectivo" ? 2 : 3;
 
             //Update de la factura para guardar la forma de pago
             try
@@ -160,9 +163,9 @@ namespace FrbaHotel.Views.Facturar_Estadia
             Close();
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void onCambioFormaDePago(object sender, EventArgs e)
         {
-            string forma_de_pago = comboBox1.SelectedItem.ToString();
+            string forma_de_pago = cmb_FormaDePago.SelectedItem.ToString();
             if (forma_de_pago == "Tarjeta de Crédito" || forma_de_pago == "Tarjeta de Débito") activarDatosTarjeta();
             if (forma_de_pago == "Efectivo") desactivarDatosTarjeta();
         }
@@ -171,15 +174,15 @@ namespace FrbaHotel.Views.Facturar_Estadia
         {
             label7.Visible = true;
             label8.Visible = true;
-            textBox7.Visible = true;
-            textBox8.Visible = true;
+            txt_Tarjeta.Visible = true;
+            txt_Pin.Visible = true;
         }
         public void desactivarDatosTarjeta()
         {
             label7.Visible = false;
             label8.Visible = false;
-            textBox7.Visible = false;
-            textBox8.Visible = false;
+            txt_Tarjeta.Visible = false;
+            txt_Pin.Visible = false;
         }
     }
 }

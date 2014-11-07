@@ -26,6 +26,8 @@ namespace FrbaHotel.Models
         public int piso { get; set; } //[numeric](18, 0)
         public String depto { get; set; } //[nvarchar](50)
 
+        public String nro_tarjeta { get; set; } //[nvarchar](250)
+
         public String localidad { get; set; } //[nvarchar](255)
         [System.ComponentModel.Browsable(false)]
         public int nacionalidad_id { get; set; }

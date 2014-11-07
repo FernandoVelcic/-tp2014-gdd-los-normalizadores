@@ -14,8 +14,7 @@ namespace FrbaHotel.Models
         public Estadia estadia { get; set; }
         public int nro { get; set; }
         public String fecha { get; set; }
-        public String forma_pago { get; set; }
-
+        public int forma_pago_id { get; set; }
 
     }
 }

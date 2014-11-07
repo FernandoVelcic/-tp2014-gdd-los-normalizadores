@@ -182,7 +182,8 @@ CREATE TABLE [LOS_NORMALIZADORES].[clientes](
 	[documento_tipo_id] INTEGER NOT NULL,
 	[documento_nro] [numeric](18, 0) NOT NULL,
 	[telefono] [nvarchar](255) NULL,
-	[estado] [bit] default 1
+	[estado] [bit] default 1,
+	[nro_tarjeta] [nvarchar] (255)
 ) ON [PRIMARY]
 
 
@@ -214,15 +215,12 @@ CREATE TABLE [LOS_NORMALIZADORES].[facturas](
 	[estadia_id] INTEGER NOT NULL,					
 	[nro] [numeric](18, 0) NOT NULL,
 	[fecha] [datetime] NOT NULL,					
-	[forma_pago] [nvarchar](255)NOT NULL				/* Este dato no esta en la Maestra */
+	[forma_pago_id] INTEGER NOT NULL				/* Este dato no esta en la Maestra */
 ) ON [PRIMARY]
 
 CREATE TABLE [LOS_NORMALIZADORES].[formas_de_pago](
-	[id] INTEGER IDENTITY PRIMARY KEY,
-	[cliente_id] INTEGER NOT NULL,				
-	[tipo] [nvarchar](30) NOT NULL,
-	[nro_tarjeta] INTEGER,
-	[nro_pin] INTEGER,
+	[id] INTEGER IDENTITY PRIMARY KEY,			
+	[descripcion] [nvarchar](30) NOT NULL
 ) ON [PRIMARY]
 
 /* Deberian salir estos datos de items ?? */
@@ -505,8 +503,13 @@ GO
 
 
 /* Facturas */
-INSERT INTO [LOS_NORMALIZADORES].[facturas] ([nro], [estadia_id], [fecha])	
-	SELECT DISTINCT [Factura_Nro], [estadia_id], [Factura_Fecha] FROM [LOS_NORMALIZADORES].[Maestra]
+INSERT INTO [LOS_NORMALIZADORES].[formas_de_pago] (descripcion) VALUES ('Sin especificar')
+INSERT INTO [LOS_NORMALIZADORES].[formas_de_pago] (descripcion) VALUES ('Efectivo')
+INSERT INTO [LOS_NORMALIZADORES].[formas_de_pago] (descripcion) VALUES ('Tarjeta de crédito')
+GO
+
+INSERT INTO [LOS_NORMALIZADORES].[facturas] ([nro], [estadia_id], [fecha], [forma_pago_id])	
+	SELECT DISTINCT [Factura_Nro], [estadia_id], [Factura_Fecha], 1 FROM [LOS_NORMALIZADORES].[Maestra]
 	WHERE [Factura_Nro] IS NOT NULL 
 	AND   [estadia_id] IS NOT NULL
 	AND   [Factura_Fecha] IS NOT NULL
@@ -700,6 +703,8 @@ ALTER TABLE [LOS_NORMALIZADORES].[consumibles_estadias] ADD CONSTRAINT consumibl
 
 ALTER TABLE [LOS_NORMALIZADORES].[facturas] ADD CONSTRAINT facturas_estadia_id FOREIGN KEY (estadia_id) REFERENCES [LOS_NORMALIZADORES].[estadias](id)
 
+ALTER TABLE [LOS_NORMALIZADORES].[facturas] ADD CONSTRAINT facturas_forma_de_pago_id FOREIGN KEY (forma_pago_id) REFERENCES [LOS_NORMALIZADORES].[formas_de_pago](id)
+
 ALTER TABLE [LOS_NORMALIZADORES].[items] ADD CONSTRAINT items_factura_id FOREIGN KEY (factura_id) REFERENCES [LOS_NORMALIZADORES].[facturas](id)
 
 ALTER TABLE [LOS_NORMALIZADORES].[usuarios] ADD CONSTRAINT documento_tipos_user_id FOREIGN KEY (documento_tipo_id) REFERENCES [LOS_NORMALIZADORES].[documento_tipos](id)
@@ -726,11 +731,21 @@ GO
 
 
 /* Creo vistas SQL */
+
 CREATE VIEW [LOS_NORMALIZADORES].[v_habitaciones] AS
 SELECT habitaciones.* FROM [LOS_NORMALIZADORES].[habitaciones] habitaciones
 INNER JOIN [LOS_NORMALIZADORES].[hoteles] hoteles on habitaciones.hotel_id = hoteles.id 
 
 GO
+
+/*
+
+	----------------
+	VISTAS PARA TOPS
+	----------------
+
+*/
+
 
 /*Primer TOP posible idea futura*/
 /*CREATE FUNCTION [LOS_NORMALIZADORES].[uspHotelesReservasCanceladas] (@fecha1 DATE, @fecha2 DATE)
@@ -746,6 +761,14 @@ GO*/
 CREATE VIEW [LOS_NORMALIZADORES].[v_HotelesReservasCanceladas] AS
 SELECT hotel_id AS id, hotel_id, COUNT(*) AS cantidad FROM [LOS_NORMALIZADORES].[reservas] LEFT JOIN [LOS_NORMALIZADORES].[habitaciones] ON reservas.habitacion_id = habitaciones.id /*WHERE reserva_estado = 3 OR reserva_estado = 4 OR reserva_estado = 5*/ GROUP BY hotel_id
 GO*/
+
+
+
+
+
+
+
+
 
 /* Procedimientos */
 
