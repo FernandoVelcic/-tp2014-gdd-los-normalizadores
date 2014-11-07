@@ -157,6 +157,47 @@ namespace FrbaHotel.Views.Facturar_Estadia
                     factura.forma_pago_id =1;
                 break;
             }
+            //update del numero de tarjeta del usuario
+            Cliente cliente = EntityManager.getEntityManager().findBy<Cliente>("cliente.id", estadia.reserva.cliente.ToString());
+            if(cliente.nro_tarjeta==null)
+            {
+                cliente.nro_tarjeta=txt_Tarjeta.Text;
+                try
+                {
+                    cliente.save();
+                }
+                catch (ValidationException exception)
+                {
+                    MessageBox.Show(exception.Message);
+                    return;
+                }
+                catch (SqlException exception)
+                {
+                    MessageBox.Show(exception.Message);
+                    return;
+                }
+            }else if(cliente.nro_tarjeta!=txt_Tarjeta.Text) 
+            {
+                DialogResult result1 = MessageBox.Show("El usuario tiene asignado el siguiente numero de tarjeta, desea cambiarlo?" + cliente.nro_tarjeta, "Importante", MessageBoxButtons.YesNo);
+                if (result1 == DialogResult.Yes)
+                {
+                    cliente.nro_tarjeta = txt_Tarjeta.Text;
+                    try
+                    {
+                        cliente.save();
+                    }
+                    catch (ValidationException exception)
+                    {
+                        MessageBox.Show(exception.Message);
+                        return;
+                    }
+                    catch (SqlException exception)
+                    {
+                        MessageBox.Show(exception.Message);
+                        return;
+                    }
+                }
+            }
             //Update de la factura para guardar la forma de pago
             try
             {
