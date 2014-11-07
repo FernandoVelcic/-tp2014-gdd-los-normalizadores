@@ -207,6 +207,7 @@ CREATE TABLE [LOS_NORMALIZADORES].[consumibles_estadias](
 	[id] INTEGER IDENTITY PRIMARY KEY,
 	[consumible_id] INTEGER,
 	[estadia_id] INTEGER,
+	[unidades] INTEGER
 ) ON [PRIMARY]
 
 
@@ -681,6 +682,8 @@ INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[reserva_estado]
 	([descripcion]) VALUES ('Reserva con ingreso')
 
 
+
+/* TODO faltan las FK de consumibles estadias y facturas */
 /* FKs */
 
 ALTER TABLE [LOS_NORMALIZADORES].[habitaciones] ADD CONSTRAINT habitaciones_hotel_id FOREIGN KEY (hotel_id) REFERENCES [LOS_NORMALIZADORES].[hoteles](id)

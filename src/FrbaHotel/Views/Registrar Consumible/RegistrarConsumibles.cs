@@ -29,10 +29,11 @@ namespace FrbaHotel.Registrar_Consumible
             
             BindingSource consumibles_binding = new BindingSource();
             consumibles_binding.DataSource = EntityManager.getEntityManager().findAll<Consumible>();
-            comboBox1.DataSource = consumibles_binding;
-            comboBox1.Text = "";
-            label1.Text = estadia.reserva.id.ToString();
-            textBox5.Text = estadia.reserva.regimen.descripcion;
+            cmb_DescripcionArticulo.DataSource = consumibles_binding;
+            cmb_DescripcionArticulo.Text = "";
+
+            txt_reserva_id.Text = estadia.reserva.id.ToString();
+            txt_TipoRegimen.Text = estadia.reserva.regimen.descripcion;
 
         }
 
@@ -41,7 +42,7 @@ namespace FrbaHotel.Registrar_Consumible
             this.Close();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btn_Modificar_Click(object sender, EventArgs e)
         {
             this.editRecord<ConsumibleUnidades, FrbaHotel.Registrar_Consumible.ModificacionConsumible>(dataGridView1);
             
@@ -52,8 +53,8 @@ namespace FrbaHotel.Registrar_Consumible
         {
             ConsumibleEstadia consumible_estadia = new ConsumibleEstadia();
 
-            int unidades = int.Parse(textBox4.Text);    //chequear si va, para mi deberia, pero en la tabla no está
-            Consumible consumible_seleccionado = comboBox1.SelectedItem as Consumible;
+            int unidades = int.Parse(txt_UnidadesArticulo.Text);    //chequear si va, para mi deberia, pero en la tabla no está
+            Consumible consumible_seleccionado = cmb_DescripcionArticulo.SelectedItem as Consumible;
 
             consumible_estadia.estadia.id = estadia.id;
             consumible_estadia.consumible.codigo = consumible_seleccionado.codigo;
@@ -65,7 +66,7 @@ namespace FrbaHotel.Registrar_Consumible
 
         private void cargarConsumibles()
         {
-            List<ConsumibleEstadia> consumiblesEstadia = new List<ConsumibleEstadia>(EntityManager.getEntityManager().findAllBy<ConsumibleEstadia>("estadia_id", estadia.id.ToString()));
+            List<ConsumibleEstadia> consumiblesEstadia = EntityManager.getEntityManager().findAllBy<ConsumibleEstadia>("estadia_id", estadia.id.ToString());
 
             BindingList<ConsumibleUnidades> consumibleUnidadesBinding = new BindingList<ConsumibleUnidades>();
             foreach (ConsumibleEstadia consumibleEstadia in consumiblesEstadia)
@@ -82,14 +83,16 @@ namespace FrbaHotel.Registrar_Consumible
             dataGridView1.DataSource = new BindingSource(consumibleUnidadesBinding, null);
         }
 
-        private void button2_Click(object sender, EventArgs e)
+
+        private void btn_Facturar_Click(object sender, EventArgs e)
         {
-            DialogResult result1 = MessageBox.Show("¿Está seguro que ya ingreso todo lo consumido y desea facturar?",
-        "Importante",MessageBoxButtons.YesNo);
+
+            DialogResult result1 = MessageBox.Show("¿Está seguro que ya ingreso todo lo consumido y desea facturar?","Importante",MessageBoxButtons.YesNo);
             if(result1==DialogResult.Yes)
             {
                      Navigator.nextForm(this, new FrbaHotel.Views.Facturar_Estadia.Facturar(estadia));
             }
+
         }
 
        

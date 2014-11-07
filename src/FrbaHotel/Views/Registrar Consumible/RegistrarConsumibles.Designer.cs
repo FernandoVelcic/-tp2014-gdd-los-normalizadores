@@ -32,17 +32,17 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btn_Volver = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btn_Modificar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.cmb_DescripcionArticulo = new System.Windows.Forms.ComboBox();
+            this.txt_UnidadesArticulo = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.txt_TipoRegimen = new System.Windows.Forms.TextBox();
+            this.btn_Facturar = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.txt_reserva_id = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -96,22 +96,22 @@
             this.btn_Volver.UseVisualStyleBackColor = true;
             this.btn_Volver.Click += new System.EventHandler(this.btn_Volver_Click);
             // 
-            // button1
+            // btn_Modificar
             // 
-            this.button1.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(517, 461);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(141, 60);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Modificar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btn_Modificar.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Modificar.Location = new System.Drawing.Point(517, 461);
+            this.btn_Modificar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btn_Modificar.Name = "btn_Modificar";
+            this.btn_Modificar.Size = new System.Drawing.Size(141, 60);
+            this.btn_Modificar.TabIndex = 6;
+            this.btn_Modificar.Text = "Modificar";
+            this.btn_Modificar.UseVisualStyleBackColor = true;
+            this.btn_Modificar.Click += new System.EventHandler(this.btn_Modificar_Click);
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.Controls.Add(this.textBox4);
+            this.groupBox1.Controls.Add(this.cmb_DescripcionArticulo);
+            this.groupBox1.Controls.Add(this.txt_UnidadesArticulo);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -124,21 +124,21 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Artículo:";
             // 
-            // comboBox1
+            // cmb_DescripcionArticulo
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(129, 78);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 24);
-            this.comboBox1.TabIndex = 15;
+            this.cmb_DescripcionArticulo.FormattingEnabled = true;
+            this.cmb_DescripcionArticulo.Location = new System.Drawing.Point(129, 78);
+            this.cmb_DescripcionArticulo.Name = "cmb_DescripcionArticulo";
+            this.cmb_DescripcionArticulo.Size = new System.Drawing.Size(121, 24);
+            this.cmb_DescripcionArticulo.TabIndex = 15;
             // 
-            // textBox4
+            // txt_UnidadesArticulo
             // 
-            this.textBox4.Location = new System.Drawing.Point(129, 126);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(116, 22);
-            this.textBox4.TabIndex = 14;
+            this.txt_UnidadesArticulo.Location = new System.Drawing.Point(129, 126);
+            this.txt_UnidadesArticulo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txt_UnidadesArticulo.Name = "txt_UnidadesArticulo";
+            this.txt_UnidadesArticulo.Size = new System.Drawing.Size(116, 22);
+            this.txt_UnidadesArticulo.TabIndex = 14;
             // 
             // label4
             // 
@@ -160,7 +160,7 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.textBox5);
+            this.groupBox3.Controls.Add(this.txt_TipoRegimen);
             this.groupBox3.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(12, 13);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -171,45 +171,44 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Tipo Régimen:";
             // 
-            // textBox5
+            // txt_TipoRegimen
             // 
-            this.textBox5.Enabled = false;
-            this.textBox5.Location = new System.Drawing.Point(64, 23);
-            this.textBox5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(199, 22);
-            this.textBox5.TabIndex = 0;
+            this.txt_TipoRegimen.Enabled = false;
+            this.txt_TipoRegimen.Location = new System.Drawing.Point(64, 23);
+            this.txt_TipoRegimen.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txt_TipoRegimen.Name = "txt_TipoRegimen";
+            this.txt_TipoRegimen.Size = new System.Drawing.Size(199, 22);
+            this.txt_TipoRegimen.TabIndex = 0;
             // 
-            // button2
+            // btn_Facturar
             // 
-            this.button2.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(679, 461);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(141, 60);
-            this.button2.TabIndex = 10;
-            this.button2.Text = "Facturar";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btn_Facturar.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Facturar.Location = new System.Drawing.Point(679, 461);
+            this.btn_Facturar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btn_Facturar.Name = "btn_Facturar";
+            this.btn_Facturar.Size = new System.Drawing.Size(141, 60);
+            this.btn_Facturar.TabIndex = 10;
+            this.btn_Facturar.Text = "Facturar";
+            this.btn_Facturar.UseVisualStyleBackColor = true;
+            this.btn_Facturar.Click += new System.EventHandler(this.btn_Facturar_Click);
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.label1);
+            this.groupBox4.Controls.Add(this.txt_reserva_id);
             this.groupBox4.Location = new System.Drawing.Point(12, 86);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(302, 48);
             this.groupBox4.TabIndex = 11;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Numero reserva";
-           
             // 
-            // label1
+            // txt_reserva_id
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(109, 23);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 16);
-            this.label1.TabIndex = 0;
+            this.txt_reserva_id.AutoSize = true;
+            this.txt_reserva_id.Location = new System.Drawing.Point(109, 23);
+            this.txt_reserva_id.Name = "txt_reserva_id";
+            this.txt_reserva_id.Size = new System.Drawing.Size(0, 16);
+            this.txt_reserva_id.TabIndex = 0;
             // 
             // Form1
             // 
@@ -218,10 +217,10 @@
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(850, 534);
             this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btn_Facturar);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btn_Modificar);
             this.Controls.Add(this.btn_Volver);
             this.Controls.Add(this.btn_Agregar);
             this.Controls.Add(this.groupBox2);
@@ -248,16 +247,16 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btn_Volver;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_Modificar;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox txt_UnidadesArticulo;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox txt_TipoRegimen;
+        private System.Windows.Forms.ComboBox cmb_DescripcionArticulo;
+        private System.Windows.Forms.Button btn_Facturar;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label txt_reserva_id;
     }
 }

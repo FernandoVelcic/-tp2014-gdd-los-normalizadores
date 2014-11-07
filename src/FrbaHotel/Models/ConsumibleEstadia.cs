@@ -13,9 +13,9 @@ namespace FrbaHotel.Models
 
         //public int id { get; set; } //INTEGER IDENTITY PRIMARY KEY
 
-        public Consumible consumible{ get; set;} //int
-        public Estadia estadia{ get; set;}  //int
-        public int unidades{ get; set; }  //INTEGER
+        public Consumible consumible { get; set;} //int
+        public Estadia estadia { get; set;}  //int
+        public int unidades { get; set; }  //INTEGER
 
 
 

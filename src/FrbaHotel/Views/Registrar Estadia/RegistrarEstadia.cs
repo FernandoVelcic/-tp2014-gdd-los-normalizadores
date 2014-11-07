@@ -82,7 +82,7 @@ namespace FrbaHotel.Registrar_Estadia
 
             Estadia estadiaout = EntityManager.getEntityManager().findBy<Estadia>("reserva_id", reserva_numero.ToString());
 
-            estadiaout.cant_noches = int.Parse(DateTime.Parse(fecha).Subtract(DateTime.Parse(estadiaout.fecha_inicio)).ToString());
+            estadiaout.cant_noches = int.Parse(DateTime.Parse(fecha).Subtract(DateTime.Parse(estadiaout.fecha_inicio)).TotalDays.ToString());
 
             try
             {
@@ -114,11 +114,11 @@ namespace FrbaHotel.Registrar_Estadia
             List<ReservaHabitacion> habitaciones_reservadas = EntityManager.getEntityManager().findAllBy<ReservaHabitacion>("reservas_habitaciones.reserva_id", reserva.id.ToString());
             Habitacion habitacion = EntityManager.getEntityManager().findBy<Habitacion>("habitaciones.id", habitaciones_reservadas[0].id.ToString());
             
-            if(habitacion.hotel!=SesionActual.rol_usuario.hotel)
+            /*if(habitacion.hotel!=SesionActual.rol_usuario.hotel)
             {
                 MessageBox.Show("La reserva no corresponde al hotel en el cual se esta trabajando");
                 return false;
-            }
+            }*/
             return true;
         }
     }
