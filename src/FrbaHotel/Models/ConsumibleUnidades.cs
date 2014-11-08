@@ -14,7 +14,8 @@ namespace FrbaHotel.Models
         public int codigo { get; set; }  //[numeric](18, 0)
         public String descripcion { get; set; } //[nvarchar](255)
         public float precio { get; set; }  // [numeric](18, 2)
-        public int unidades;
+        public int unidades { get; set; }
+        public float monto { get; set; }
 
 
     }
