@@ -29,7 +29,14 @@ namespace FrbaHotel.Listado_Estadistico
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.anio = 2013;
             txt_Anio.DataBindings.Add("Text", this, "anio");
+            cmb_Tipo.SelectedIndex = 3;
+            cmb_Trimestre.SelectedIndex = 0;
+
+            fecha1 = new DateTime(anio, 1, 1);
+            fecha2 = new DateTime(anio, 3, 31);
+            HabitacionConMayorCantidadDeDiasYVecesOcupada();
         }
 
         private void btnLimpiar(object sender, EventArgs e)
@@ -150,15 +157,34 @@ namespace FrbaHotel.Listado_Estadistico
         /* Hay que joinear consuibles_estadias, estadias, habitacion y hotel ?? */
         private void HotelConMasConsumibles()
         {
-            var query = "SELECT hotel_id, ";
-            
-            query += " (SELECT COUNT(*) FROM [" + Config.getInstance().schema + "].[consumibles_estadias] ";
+            var query = "SELECT hotel_id, SUM(consumibles_estadias.monto * consumibles_estadias.unidades) as total ";
+
+            query += " FROM [" + Config.getInstance().schema + "].[consumibles_estadias] ";
+
             query += " INNER JOIN [" + Config.getInstance().schema + "].[estadias] ON consumibles_estadias.estadia_id = estadias.id";
             query += " INNER JOIN [" + Config.getInstance().schema + "].[reservas] ON estadias.reserva_id = reservas.id";
+            query += " INNER JOIN [" + Config.getInstance().schema + "].[reservas_habitaciones] ON reservas_habitaciones.reserva_id = reservas.id";
+            query += " INNER JOIN [" + Config.getInstance().schema + "].[habitaciones] ON reservas_habitaciones.habitacion_id = habitaciones.id";
+            query += " INNER JOIN [" + Config.getInstance().schema + "].[hoteles] ON habitaciones.hotel_id = hoteles.id";
 
-            query += " WHERE estadias.ho ) as cantidad "; 
-            
-            query += " FROM [" + Config.getInstance().schema + "].[hoteles]";
+            query += " WHERE reservas.fecha_inicio BETWEEN '" + fecha1.ToShortDateString() + "' AND '" + fecha2.ToShortDateString() + "' ";
+            query += " GROUP BY hotel_id ";
+
+            List<HotelCaro> hoteles = new List<HotelCaro>();
+
+            SqlCommand command = new SqlCommand(query, ConnectionManager.getInstance().getConnection());
+            using (SqlDataReader result = command.ExecuteReader())
+            {
+                while (result.Read())
+                {
+                    HotelCaro hotel = new HotelCaro();
+                    hotel.hotel_id = Convert.ToInt32(result["hotel_id"]);
+                    hotel.total = Convert.ToInt32(result["total"]);
+                    hoteles.Add(hotel);
+                }
+            }
+
+            dataGridView1.DataSource = hoteles;
 
         }
 
@@ -215,7 +241,7 @@ namespace FrbaHotel.Listado_Estadistico
             query += " WHERE reservas_habitaciones.habitacion_id = habitaciones.id";
             query += " AND estadias.fecha_inicio > '" + fecha1 + "'";
             query += " ) cantidad_noches ";
-
+            
             query += " FROM [LOS_NORMALIZADORES].[habitaciones] ";
             query += " INNER JOIN [" + Config.getInstance().schema + "].[hoteles] ON habitaciones.hotel_id = hoteles.id";
 
@@ -250,11 +276,28 @@ namespace FrbaHotel.Listado_Estadistico
         private void ClienteConMasPuntos()
         {
 
+            /*
+             Seria algo asi el tema es que no hay totales de facturacion ni nada
+             
+             
+             SELECT *, (puntos_estadia + puntos_facturacion) puntos_totales 
+
+                FROM (
+	                SELECT nombre, apellido, 
+                	
+		                (SELECT 45/10) as puntos_estadia, 
+		                (SELECT (total_item_facturados/5) FROM [LOS_NORMALIZADORES].[gastos_facturacion]) as puntos_facturacion 
+                		
+	                FROM LOS_NORMALIZADORES.clientes
+                ) as clientes
+             
+             
+             */
+
             var query = "SELECT clientes.nombre, ";
 
 
-            query += "(SELECT 48) as puntos_estadias";
-            query += "(SELECT 25) as puntos_consumibles";
+            query += "SUM((SELECT 48) UNION (SELECT 26)) as puntos ";
 
 
             query += " FROM [LOS_NORMALIZADORES].[clientes] ";

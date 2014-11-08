@@ -27,6 +27,7 @@ namespace FrbaHotel.Views.Facturar_Estadia
 
         public void Facturar_load(object sender, EventArgs e)
         {
+
             factura = new Factura();
             factura.fecha = (int.Parse(estadia.fecha_inicio) + estadia.cant_noches).ToString();  
             //Insert de factura porque sino de otro modo no podria insertar los items sin el id de la misma
@@ -105,7 +106,8 @@ namespace FrbaHotel.Views.Facturar_Estadia
                     MessageBox.Show(exception.Message);
                     return;
                 }
- }
+            }
+
             foreach (ReservaHabitacion reservaHabitacion1 in reservaHabitaciones)
             {
                 if ( estadia.cant_noches < estadia.reserva.cant_noches)
@@ -225,6 +227,7 @@ namespace FrbaHotel.Views.Facturar_Estadia
             try
             {
                 factura.save();
+                MessageBox.Show("La factura se genero con exito!");
             }
             catch (ValidationException exception)
             {
@@ -254,6 +257,7 @@ namespace FrbaHotel.Views.Facturar_Estadia
             txt_Tarjeta.Visible = true;
             txt_Pin.Visible = true;
         }
+
         public void desactivarDatosTarjeta()
         {
             label7.Visible = false;
@@ -261,5 +265,6 @@ namespace FrbaHotel.Views.Facturar_Estadia
             txt_Tarjeta.Visible = false;
             txt_Pin.Visible = false;
         }
+
     }
 }
