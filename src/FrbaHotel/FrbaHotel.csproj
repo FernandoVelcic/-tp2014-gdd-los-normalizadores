@@ -56,7 +56,6 @@
     <Compile Include="Models\FormaDePago.cs" />
     <Compile Include="Models\HotelBaja.cs" />
     <Compile Include="Models\HotelRegimen.cs" />
-    <Compile Include="Models\ItemFactura.cs" />
     <Compile Include="Models\Listado Estadistico\ClienteTrending.cs" />
     <Compile Include="Models\Listado Estadistico\HabitacionTrending.cs" />
     <Compile Include="Models\Listado Estadistico\HotelesReservasCanceladas.cs" />
