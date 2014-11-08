@@ -35,6 +35,7 @@ namespace FrbaHotel.Registrar_Consumible
             if(textBox1.Text != null)
             {
                 consumibleEstadia.unidades = int.Parse(textBox1.Text);
+                consumibleEstadia.monto = consumibleEstadia.consumible.precio * consumibleEstadia.unidades;
                 consumibleEstadia.save();
                 Close();
             }

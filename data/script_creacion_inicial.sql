@@ -207,6 +207,7 @@ CREATE TABLE [LOS_NORMALIZADORES].[consumibles_estadias](
 	[id] INTEGER IDENTITY PRIMARY KEY,
 	[consumible_id] INTEGER,
 	[estadia_id] INTEGER,
+	[monto] [numeric] (18,2),
 	[unidades] INTEGER
 ) ON [PRIMARY]
 
@@ -224,14 +225,6 @@ CREATE TABLE [LOS_NORMALIZADORES].[formas_de_pago](
 	[descripcion] [nvarchar](30) NOT NULL
 ) ON [PRIMARY]
 
-/* Deberian salir estos datos de items ?? */
-CREATE TABLE [LOS_NORMALIZADORES].[items](
-	[id] INTEGER IDENTITY PRIMARY KEY,
-	[factura_id] INTEGER,
-	[descripcion] [nvarchar] (255) NOT NULL,					
-	[factura_cantidad] [numeric](18, 0) NOT NULL,
-	[monto] [numeric](18, 2) NOT NULL,
-) ON [PRIMARY]
 
 CREATE TABLE [LOS_NORMALIZADORES].[paises](
 	[id] INTEGER IDENTITY PRIMARY KEY,
@@ -708,8 +701,6 @@ ALTER TABLE [LOS_NORMALIZADORES].[consumibles_estadias] ADD CONSTRAINT consumibl
 ALTER TABLE [LOS_NORMALIZADORES].[facturas] ADD CONSTRAINT facturas_estadia_id FOREIGN KEY (estadia_id) REFERENCES [LOS_NORMALIZADORES].[estadias](id)
 
 ALTER TABLE [LOS_NORMALIZADORES].[facturas] ADD CONSTRAINT facturas_forma_de_pago_id FOREIGN KEY (forma_pago_id) REFERENCES [LOS_NORMALIZADORES].[formas_de_pago](id)
-
-ALTER TABLE [LOS_NORMALIZADORES].[items] ADD CONSTRAINT items_factura_id FOREIGN KEY (factura_id) REFERENCES [LOS_NORMALIZADORES].[facturas](id)
 
 ALTER TABLE [LOS_NORMALIZADORES].[usuarios] ADD CONSTRAINT documento_tipos_user_id FOREIGN KEY (documento_tipo_id) REFERENCES [LOS_NORMALIZADORES].[documento_tipos](id)
 

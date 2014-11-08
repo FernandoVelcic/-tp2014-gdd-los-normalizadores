@@ -53,20 +53,24 @@ namespace FrbaHotel.Views.Facturar_Estadia
 
             List<ConsumibleEstadia> consumiblesEstadia = EntityManager.getEntityManager().findAllBy<ConsumibleEstadia>("estadia_id", estadia.id.ToString());
 
-            BindingList<ItemFactura> itemsFactura = new BindingList<ItemFactura>();
+            List<HotelRegimen> hotelesRegimen = EntityManager.getEntityManager().findAllBy<HotelRegimen>("regimen_id", estadia.reserva.regimen.id.ToString());
+            List<ReservaHabitacion> reservaHabitaciones = EntityManager.getEntityManager().findAllBy<ReservaHabitacion>("reserva_id", estadia.reserva.id.ToString());
 
-            foreach (ConsumibleEstadia consumible in consumiblesEstadia)
+            Habitacion habitacion = (reservaHabitaciones.Take(1) as ReservaHabitacion).habitacion;
+            hotel = hotelesRegimen.Find(hotelr => hotelr.hotel.id == habitacion.hotel.id).hotel;
+
+
+
+            //tipo_habitacion_seleccionado.porcentual* regimen_seleccionado.precio * tipo_habitacion_seleccionado.cantidad_maxima_personas + hotel_seleccionado.cant_estrella * hotel_seleccionado.recarga_estrella;
+            foreach (ReservaHabitacion reservaHabitacion in reservaHabitaciones)
             {
-                ItemFactura item = new ItemFactura();
-                item.descripcion = consumible.consumible.descripcion;
-                item.factura_cantidad = consumible.unidades;
-                item.monto = consumible.consumible.precio * consumible.unidades;
-                item.factura_id = factura.id;
-                itemsFactura.Add(item);
+                Consumible consumibleHabitacion = new Consumible();
+                consumibleHabitacion.descripcion = "Regimen" + reservaHabitacion.reserva.regimen.descripcion + ". Habitacion tipo" + reservaHabitacion.habitacion.descripcion + "-Dias que realmente se hospedo";
+                consumibleHabitacion.precio = 0;
 
                 try
                 {
-                    item.save();
+                    consumibleHabitacion.save();
                 }
                 catch (ValidationException exception)
                 {
@@ -78,46 +82,62 @@ namespace FrbaHotel.Views.Facturar_Estadia
                     MessageBox.Show(exception.Message);
                     return;
                 }
-            }
-          
 
+                ConsumibleEstadia consumibleEstadiaHab = new ConsumibleEstadia();
+                consumibleEstadiaHab.estadia = estadia;
+                consumibleEstadiaHab.consumible = consumibleHabitacion;
 
-            List<HotelRegimen> hotelesRegimen = EntityManager.getEntityManager().findAllBy<HotelRegimen>("regimen_id", estadia.reserva.regimen.id.ToString());
-            List<ReservaHabitacion> reservaHabitaciones = EntityManager.getEntityManager().findAllBy<ReservaHabitacion>("reserva_id", estadia.reserva.id.ToString());
+                //CALCULO PRECIO DE HABITACION
+                consumibleEstadiaHab.monto = (reservaHabitacion.habitacion.tipo.porcentual * estadia.reserva.regimen.precio * reservaHabitacion.habitacion.tipo.cantidad_maxima_personas + hotel.cant_estrella * hotel.recarga_estrella) * estadia.reserva.cant_noches;
+                consumibleEstadiaHab.unidades = estadia.cant_noches;
 
-            Habitacion habitacion = (reservaHabitaciones.Take(1) as ReservaHabitacion).habitacion;
-            hotel = hotelesRegimen.Find(hotelr => hotelr.hotel.id == habitacion.hotel.id).hotel;
-
-            //tipo_habitacion_seleccionado.porcentual* regimen_seleccionado.precio * tipo_habitacion_seleccionado.cantidad_maxima_personas + hotel_seleccionado.cant_estrella * hotel_seleccionado.recarga_estrella;
-            foreach (ReservaHabitacion reservaHabitacion in reservaHabitaciones)
-            {
-                ItemFactura item = new ItemFactura();
-                item.descripcion = reservaHabitacion.habitacion.descripcion + estadia.reserva.regimen.descripcion + "Monto por reserva de habitaciones";//La descripcion te la dejo a vos redactador
-                item.factura_cantidad = estadia.cant_noches;
-                
-                //CALCULO DE PRECIO DE HABITACION
-                
-                item.monto = (habitacion.tipo.porcentual * estadia.reserva.regimen.precio * habitacion.tipo.cantidad_maxima_personas + hotel.cant_estrella * hotel.recarga_estrella) * estadia.reserva.cant_noches;
-                item.factura_id = factura.id;
-                item.save();
-                itemsFactura.Add(item);
-
-                
-            }
+                try
+                {
+                    consumibleEstadiaHab.save();
+                }
+                catch (ValidationException exception)
+                {
+                    MessageBox.Show(exception.Message);
+                    return;
+                }
+                catch (SqlException exception)
+                {
+                    MessageBox.Show(exception.Message);
+                    return;
+                }
+ }
             foreach (ReservaHabitacion reservaHabitacion1 in reservaHabitaciones)
             {
                 if ( estadia.cant_noches < estadia.reserva.cant_noches)
                 {
-                    ItemFactura item1 = new ItemFactura();
-                    item1.descripcion = "Dias que no se alojo";
-                    item1.factura_cantidad = estadia.reserva.cant_noches - estadia.cant_noches;
-                    item1.monto = 0;
-                    item1.factura_id = factura.id;
+                    Consumible consumibleHabiNoHospedada = new Consumible();
+                    consumibleHabiNoHospedada.descripcion = "Regimen" + reservaHabitacion1.reserva.regimen.descripcion + ". Habitacion tipo" + reservaHabitacion1.habitacion.descripcion + "-Dias que no se hospedo";
+                    consumibleHabiNoHospedada.precio = 0;
 
-                    itemsFactura.Add(item1);
                     try
                     {
-                        item1.save();
+                        consumibleHabiNoHospedada.save();
+                    }
+                    catch (ValidationException exception)
+                    {
+                        MessageBox.Show(exception.Message);
+                        return;
+                    }
+                    catch (SqlException exception)
+                    {
+                        MessageBox.Show(exception.Message);
+                        return;
+                    }
+
+                    ConsumibleEstadia consumibleEstadiaNoHospedada = new ConsumibleEstadia();
+                    consumibleEstadiaNoHospedada.estadia = estadia;
+                    consumibleEstadiaNoHospedada.consumible = consumibleHabiNoHospedada;
+                    consumibleEstadiaNoHospedada.monto = 0;
+                    consumibleEstadiaNoHospedada.unidades = estadia.reserva.cant_noches - estadia.cant_noches;
+
+                    try
+                    {
+                        consumibleEstadiaNoHospedada.save();
                     }
                     catch (ValidationException exception)
                     {
@@ -131,7 +151,10 @@ namespace FrbaHotel.Views.Facturar_Estadia
                     }
                 }
             }
-            dataGridView1.DataSource = itemsFactura;
+            BindingSource consEstadia_binding = new BindingSource();
+            consEstadia_binding.DataSource = EntityManager.getEntityManager().findAllBy<ConsumibleEstadia>("estadia_id", estadia.id.ToString());
+            dataGridView1.DataSource = consEstadia_binding;
+
         }
 
 

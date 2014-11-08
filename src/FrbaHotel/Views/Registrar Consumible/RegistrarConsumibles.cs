@@ -59,6 +59,7 @@ namespace FrbaHotel.Registrar_Consumible
             consumible_estadia.estadia.id = estadia.id;
             consumible_estadia.consumible.codigo = consumible_seleccionado.codigo;
             consumible_estadia.unidades = unidades;
+            consumible_estadia.monto = unidades * consumible_seleccionado.precio;
 
             consumible_estadia.save();
             this.cargarConsumibles();
@@ -77,6 +78,7 @@ namespace FrbaHotel.Registrar_Consumible
                 consumibleUnidades.descripcion = consumibleEstadia.consumible.descripcion;
                 consumibleUnidades.precio = consumibleEstadia.consumible.precio;
                 consumibleUnidades.unidades = consumibleEstadia.unidades;
+                consumibleUnidades.monto = consumibleEstadia.monto;
 
                 consumibleUnidadesBinding.Add(consumibleUnidades);
             }
