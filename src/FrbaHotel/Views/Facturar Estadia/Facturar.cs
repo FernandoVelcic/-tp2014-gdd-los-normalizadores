@@ -21,19 +21,28 @@ namespace FrbaHotel.Views.Facturar_Estadia
         public Facturar(Estadia e)
         {
             estadia = e;
-            
             InitializeComponent();
         }
 
         public void Facturar_load(object sender, EventArgs e)
         {
 
-            factura = new Factura();
-            factura.fecha = (int.Parse(estadia.fecha_inicio) + estadia.cant_noches).ToString();  
-            //Insert de factura porque sino de otro modo no podria insertar los items sin el id de la misma
             try
             {
+
+                //Insert de factura porque sino de otro modo no podria insertar los items sin el id de la misma
+                factura = new Factura();
+                factura.fecha = (int.Parse(estadia.fecha_inicio) + estadia.cant_noches).ToString();  
                 factura.save();
+                setTexts();
+                /* ??? */
+                List<ConsumibleEstadia> consumiblesEstadia = EntityManager.getEntityManager().findAllBy<ConsumibleEstadia>("estadia_id", estadia.id.ToString());
+                List<HotelRegimen> hotelesRegimen = EntityManager.getEntityManager().findAllBy<HotelRegimen>("regimen_id", estadia.reserva.regimen.id.ToString());
+                List<ReservaHabitacion> reservaHabitaciones = EntityManager.getEntityManager().findAllBy<ReservaHabitacion>("reserva_id", estadia.reserva.id.ToString());
+                Habitacion habitacion = (reservaHabitaciones.Take(1) as ReservaHabitacion).habitacion;
+                hotel = hotelesRegimen.Find(hotelr => hotelr.hotel.id == habitacion.hotel.id).hotel;
+                setConsumibleHabitacion(reservaHabitaciones);
+                setconsumibleHabiNoHospedada(reservaHabitaciones);
             }
             catch (ValidationException exception)
             {
@@ -46,22 +55,26 @@ namespace FrbaHotel.Views.Facturar_Estadia
                 return;
             }
 
+
+            BindingSource consEstadia_binding = new BindingSource();
+            consEstadia_binding.DataSource = EntityManager.getEntityManager().findAllBy<ConsumibleEstadia>("estadia_id", estadia.id.ToString());
+            dataGridView1.DataSource = consEstadia_binding;
+
+        }
+
+
+
+        private void setTexts()
+        {
             txt_FacturaNro.Text = factura.nro.ToString(); //nro de factura
             txt_Desde.Text = estadia.reserva.fecha_inicio.ToString(); //Fecha de inicio que se reservo
             txt_Hasta.Text = (estadia.reserva.fecha_inicio + estadia.reserva.cant_noches).ToString(); //Fecha de supuesta salida
             txt_CheckIn.Text = estadia.fecha_inicio.ToString();//Fecha de inicio real( check in) Las dos de inicio deberian ser iguales porque sino no te dejarian entrar o ya estaria cancelada
             txt_CheckOut.Text = (estadia.fecha_inicio + estadia.cant_noches).ToString();//Fecha de salida real ( check out)
+        }
 
-            List<ConsumibleEstadia> consumiblesEstadia = EntityManager.getEntityManager().findAllBy<ConsumibleEstadia>("estadia_id", estadia.id.ToString());
-
-            List<HotelRegimen> hotelesRegimen = EntityManager.getEntityManager().findAllBy<HotelRegimen>("regimen_id", estadia.reserva.regimen.id.ToString());
-            List<ReservaHabitacion> reservaHabitaciones = EntityManager.getEntityManager().findAllBy<ReservaHabitacion>("reserva_id", estadia.reserva.id.ToString());
-
-            Habitacion habitacion = (reservaHabitaciones.Take(1) as ReservaHabitacion).habitacion;
-            hotel = hotelesRegimen.Find(hotelr => hotelr.hotel.id == habitacion.hotel.id).hotel;
-
-
-
+        private void setConsumibleHabitacion(List<ReservaHabitacion> reservaHabitaciones)
+        {
             //tipo_habitacion_seleccionado.porcentual* regimen_seleccionado.precio * tipo_habitacion_seleccionado.cantidad_maxima_personas + hotel_seleccionado.cant_estrella * hotel_seleccionado.recarga_estrella;
             foreach (ReservaHabitacion reservaHabitacion in reservaHabitaciones)
             {
@@ -107,59 +120,30 @@ namespace FrbaHotel.Views.Facturar_Estadia
                     return;
                 }
             }
+        }
 
+        private void setconsumibleHabiNoHospedada(List<ReservaHabitacion> reservaHabitaciones)
+        {
             foreach (ReservaHabitacion reservaHabitacion1 in reservaHabitaciones)
             {
-                if ( estadia.cant_noches < estadia.reserva.cant_noches)
+                if (estadia.cant_noches < estadia.reserva.cant_noches)
                 {
                     Consumible consumibleHabiNoHospedada = new Consumible();
                     consumibleHabiNoHospedada.descripcion = "Regimen" + reservaHabitacion1.reserva.regimen.descripcion + ". Habitacion tipo" + reservaHabitacion1.habitacion.descripcion + "-Dias que no se hospedo";
                     consumibleHabiNoHospedada.precio = 0;
+                    consumibleHabiNoHospedada.save();
 
-                    try
-                    {
-                        consumibleHabiNoHospedada.save();
-                    }
-                    catch (ValidationException exception)
-                    {
-                        MessageBox.Show(exception.Message);
-                        return;
-                    }
-                    catch (SqlException exception)
-                    {
-                        MessageBox.Show(exception.Message);
-                        return;
-                    }
 
                     ConsumibleEstadia consumibleEstadiaNoHospedada = new ConsumibleEstadia();
                     consumibleEstadiaNoHospedada.estadia = estadia;
                     consumibleEstadiaNoHospedada.consumible = consumibleHabiNoHospedada;
                     consumibleEstadiaNoHospedada.monto = 0;
                     consumibleEstadiaNoHospedada.unidades = estadia.reserva.cant_noches - estadia.cant_noches;
+                    consumibleEstadiaNoHospedada.save();
 
-                    try
-                    {
-                        consumibleEstadiaNoHospedada.save();
-                    }
-                    catch (ValidationException exception)
-                    {
-                        MessageBox.Show(exception.Message);
-                        return;
-                    }
-                    catch (SqlException exception)
-                    {
-                        MessageBox.Show(exception.Message);
-                        return;
-                    }
                 }
             }
-            BindingSource consEstadia_binding = new BindingSource();
-            consEstadia_binding.DataSource = EntityManager.getEntityManager().findAllBy<ConsumibleEstadia>("estadia_id", estadia.id.ToString());
-            dataGridView1.DataSource = consEstadia_binding;
-
         }
-
-
 
         private void onBtnFacturar(object sender, EventArgs e)
         {
