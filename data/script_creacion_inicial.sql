@@ -114,7 +114,7 @@ CREATE TABLE [LOS_NORMALIZADORES].[habitaciones_tipos](
 	[id] INTEGER IDENTITY(1001,1) PRIMARY KEY,
 	[descripcion] [nvarchar](255),
 	[porcentual] [numeric](18, 2),
-	[cantidad_maxima_personas]	INTEGER	DEFAULT 0	/*Hace falta? */
+	[cantidad_maxima_personas]	INTEGER	DEFAULT 0	/* Hace falta? */
 ) ON [PRIMARY]
 
 
@@ -134,17 +134,18 @@ CREATE TABLE [LOS_NORMALIZADORES].[regimenes](
 
 
 CREATE TABLE [LOS_NORMALIZADORES].[reservas](
+
 	[id] INTEGER IDENTITY(10001,1) PRIMARY KEY,
-	[fecha_carga] [datetime],				/* Fecha en que se realizo la reserva, debe ser por archivo de configuración */
-	[fecha_inicio] [datetime],				/* Fecha en del primer dia que se va a alojar el huesped */
+	[fecha_carga] [datetime],					/* Fecha en que se realizo la reserva, debe ser por archivo de configuración */
+	[fecha_inicio] [datetime],					/* Fecha en del primer dia que se va a alojar el huesped */
 	[cant_noches] [numeric](18, 0),
 	[regimen_id] INTEGER,
-	[cliente_id]	INTEGER,					/* Deberia ir ??? */
+	[cliente_id]	INTEGER,				
 	[motivo_cancelacion] [nvarchar](255),
-	[fecha_cancelacion] [datetime],			/* Fecha en que se cancela la reserva */
-	[usuario_cancelacion] [nvarchar](30),					/* Usuario que cancela*/
+	[fecha_cancelacion] [datetime],				/* Fecha en que se cancela la reserva */
+	[usuario_cancelacion] [nvarchar](30),		/* Usuario que cancela */
 	[reserva_estado] INTEGER NOT NULL,
-									/* Como calculo el precio?? */
+												/* Como calculo el precio?? */
 ) ON [PRIMARY]
 
 
@@ -294,6 +295,11 @@ SET habitacion_tipo_id =
 	)
 GO
 
+UPDATE [LOS_NORMALIZADORES].[habitaciones_tipos] SET cantidad_maxima_personas = 1 WHERE [habitaciones_tipos].descripcion = 'Base Simple'
+UPDATE [LOS_NORMALIZADORES].[habitaciones_tipos] SET cantidad_maxima_personas = 2 WHERE [habitaciones_tipos].descripcion = 'Base Doble'
+UPDATE [LOS_NORMALIZADORES].[habitaciones_tipos] SET cantidad_maxima_personas = 3 WHERE [habitaciones_tipos].descripcion = 'Base Triple'
+UPDATE [LOS_NORMALIZADORES].[habitaciones_tipos] SET cantidad_maxima_personas = 4 WHERE [habitaciones_tipos].descripcion = 'Base Cuadruple'
+UPDATE [LOS_NORMALIZADORES].[habitaciones_tipos] SET cantidad_maxima_personas = 5 WHERE [habitaciones_tipos].descripcion = 'King'
 
 
 INSERT [LOS_NORMALIZADORES].[habitaciones] (hotel_id, numero, piso, frente, tipo_id, estado, descripcion)
@@ -457,7 +463,6 @@ SET estadia_id =
 		AND   [LOS_NORMALIZADORES].[Maestra].reserva_id = e.reserva_id
 	)
 GO
-
 
 
 /* Consumibles */ 
@@ -742,6 +747,15 @@ GO
 */
 
 
+CREATE VIEW [LOS_NORMALIZADORES].[gastos_facturacion] AS
+	SELECT estadias.id, reservas.cliente_id,  SUM(consumibles_estadias.monto * consumibles_estadias.unidades) as total_item_facturados
+	FROM [LOS_NORMALIZADORES].consumibles_estadias
+	INNER JOIN [LOS_NORMALIZADORES].estadias ON consumibles_estadias.estadia_id = estadias.id
+	INNER JOIN [LOS_NORMALIZADORES].reservas ON estadias.reserva_id = reservas.id
+	GROUP BY estadias.id, reservas.cliente_id
+GO
+
+
 /*Primer TOP posible idea futura*/
 /*CREATE FUNCTION [LOS_NORMALIZADORES].[uspHotelesReservasCanceladas] (@fecha1 DATE, @fecha2 DATE)
     RETURNS @Results TABLE(id INTEGER, hotel_id INTEGER, cantidad INTEGER)
@@ -756,13 +770,6 @@ GO*/
 CREATE VIEW [LOS_NORMALIZADORES].[v_HotelesReservasCanceladas] AS
 SELECT hotel_id AS id, hotel_id, COUNT(*) AS cantidad FROM [LOS_NORMALIZADORES].[reservas] LEFT JOIN [LOS_NORMALIZADORES].[habitaciones] ON reservas.habitacion_id = habitaciones.id /*WHERE reserva_estado = 3 OR reserva_estado = 4 OR reserva_estado = 5*/ GROUP BY hotel_id
 GO*/
-
-
-
-
-
-
-
 
 
 /* Procedimientos */
