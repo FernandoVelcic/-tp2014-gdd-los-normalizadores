@@ -235,10 +235,10 @@ CREATE TABLE [LOS_NORMALIZADORES].[paises](
 
 INSERT INTO [LOS_NORMALIZADORES].[paises] (nombre, gentilicio) VALUES ('', '')
 INSERT INTO [LOS_NORMALIZADORES].[paises] (nombre, gentilicio) VALUES ('ARGENTINA', 'ARGENTINO')
+	
 
 
-
-INSERT INTO [LOS_NORMALIZADORES].[Maestra] SELECT TOP 10000 * FROM [GD2C2014].[gd_esquema].[Maestra]
+INSERT INTO [LOS_NORMALIZADORES].[Maestra] SELECT TOP 50000 * FROM [GD2C2014].[gd_esquema].[Maestra]
 GO
   	
 
@@ -303,12 +303,12 @@ UPDATE [LOS_NORMALIZADORES].[habitaciones_tipos] SET cantidad_maxima_personas = 
 
 
 INSERT [LOS_NORMALIZADORES].[habitaciones] (hotel_id, numero, piso, frente, tipo_id, estado, descripcion)
-SELECT DISTINCT hotel_id, Habitacion_Numero, Habitacion_Piso, Habitacion_Frente, habitacion_tipo_id, 1, '' 
-FROM [LOS_NORMALIZADORES].[Maestra] 
-WHERE Habitacion_Numero IS NOT NULL 
-AND Habitacion_Piso IS NOT NULL
-AND Habitacion_Frente IS NOT NULL
-AND habitacion_tipo_id IS NOT NULL
+	SELECT DISTINCT hotel_id, Habitacion_Numero, Habitacion_Piso, Habitacion_Frente, habitacion_tipo_id, 1, '' 
+	FROM [LOS_NORMALIZADORES].[Maestra] 
+		WHERE Habitacion_Numero IS NOT NULL 
+			AND Habitacion_Piso IS NOT NULL
+			AND Habitacion_Frente IS NOT NULL
+			AND habitacion_tipo_id IS NOT NULL
 
 ALTER TABLE [LOS_NORMALIZADORES].[Maestra] ADD habitacion_id INTEGER
 GO
@@ -317,11 +317,11 @@ UPDATE [LOS_NORMALIZADORES].[Maestra]
 SET habitacion_id = 
 	(
 		SELECT id FROM [LOS_NORMALIZADORES].[habitaciones] as h
-		WHERE [LOS_NORMALIZADORES].[Maestra].Habitacion_Numero = h.numero
-		AND [LOS_NORMALIZADORES].[Maestra].hotel_id = h.id
-		AND [LOS_NORMALIZADORES].[Maestra].Habitacion_Piso = h.piso
-		AND [LOS_NORMALIZADORES].[Maestra].Habitacion_Frente = h.frente
-		AND [LOS_NORMALIZADORES].[Maestra].habitacion_tipo_id = h.tipo_id
+			WHERE [LOS_NORMALIZADORES].[Maestra].Habitacion_Numero = h.numero
+				AND [LOS_NORMALIZADORES].[Maestra].hotel_id = h.hotel_id
+				AND [LOS_NORMALIZADORES].[Maestra].Habitacion_Piso = h.piso
+				AND [LOS_NORMALIZADORES].[Maestra].Habitacion_Frente = h.frente
+				AND [LOS_NORMALIZADORES].[Maestra].habitacion_tipo_id = h.tipo_id
 	)
 GO
 
@@ -407,6 +407,8 @@ CREATE INDEX Maestra_cliente_id ON [LOS_NORMALIZADORES].[Maestra] (cliente_id)
 
 
 /* Migracion de reservas */ 
+
+/* Se toma el codigo como id */
 SET IDENTITY_INSERT [LOS_NORMALIZADORES].[reservas] ON;
 INSERT INTO [LOS_NORMALIZADORES].[reservas] (id, [cliente_id], [fecha_inicio], [cant_noches], [regimen_id], [reserva_estado])	
 	SELECT DISTINCT [Reserva_Codigo], [cliente_id], [Reserva_Fecha_Inicio], [Reserva_Cant_Noches], [regimen_id], 1 FROM [LOS_NORMALIZADORES].[Maestra]
@@ -417,6 +419,7 @@ INSERT INTO [LOS_NORMALIZADORES].[reservas] (id, [cliente_id], [fecha_inicio], [
 	AND   [cliente_id] IS NOT NULL
 	AND	  [habitacion_id] IS NOT NULL
 GO
+
 SET IDENTITY_INSERT [LOS_NORMALIZADORES].[reservas] OFF;
 
 ALTER TABLE [LOS_NORMALIZADORES].[Maestra] ADD reserva_id INTEGER
@@ -491,12 +494,15 @@ GO
 
 DROP INDEX  Consumibles_codigo ON [LOS_NORMALIZADORES].[consumibles]
 
+
 /* Relacion entre consumibles y estadia */
 
-INSERT INTO [LOS_NORMALIZADORES].[consumibles_estadias] (consumible_id, estadia_id)
-	SELECT DISTINCT consumible_id, estadia_id FROM  [LOS_NORMALIZADORES].[Maestra]
+INSERT INTO [LOS_NORMALIZADORES].[consumibles_estadias] (consumible_id, estadia_id, monto, unidades)
+	SELECT DISTINCT consumible_id, estadia_id, Item_Factura_Monto, Item_Factura_Cantidad FROM  [LOS_NORMALIZADORES].[Maestra]
 	WHERE consumible_id is NOT NULL
 	AND   estadia_id IS NOT NULL
+	AND   Item_Factura_Monto IS NOT NULL
+	AND   Item_Factura_Cantidad IS NOT NULL
 GO
 
 
