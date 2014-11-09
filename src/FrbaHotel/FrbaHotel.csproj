@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Homes\SesionActual.cs" />
     <Compile Include="Models\Factura.cs" />
+    <Compile Include="Models\ItemAFacturar.cs" />
     <Compile Include="Models\ItemFactura.cs" />
     <Compile Include="Models\ConsumibleItemsUnidades.cs" />
     <Compile Include="Models\Estadia.cs" />

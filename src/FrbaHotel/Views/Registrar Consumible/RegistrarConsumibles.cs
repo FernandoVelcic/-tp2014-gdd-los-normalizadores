@@ -18,6 +18,7 @@ namespace FrbaHotel.Registrar_Consumible
     public partial class Form1 : Form
     {
         Estadia estadia;
+        List<ItemAFacturar> items= new List<ItemAFacturar>();
 
         public Form1(Estadia e)
         {
@@ -54,35 +55,36 @@ namespace FrbaHotel.Registrar_Consumible
 
         private void btn_Modificar_Click(object sender, EventArgs e)
         {
-            this.editRecord<ConsumibleItemsUnidades, FrbaHotel.Registrar_Consumible.ModificacionConsumible>(dataGridView1);
-            
+            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            {
+               ConsumibleItemsUnidades record = (ConsumibleItemsUnidades)row.DataBoundItem;
+                Navigator.nextForm(this, new FrbaHotel.Registrar_Consumible.ModificacionConsumible(record));
+                
+            }
             //modificar el que esta seleccionado en el datagrid
         }
 
         private void btn_Agregar_Click(object sender, EventArgs e)
         {
-            ItemFactura consumible_estadia = new ItemFactura();
+            ItemAFacturar consumible_estadia = new ItemAFacturar();
 
             int unidades = int.Parse(txt_UnidadesArticulo.Text);    //chequear si va, para mi deberia, pero en la tabla no está
             Consumible consumible_seleccionado = comboBox1.SelectedItem as Consumible;
-
 
             consumible_estadia.estadia = estadia;
             consumible_estadia.consumible = consumible_seleccionado;
             consumible_estadia.unidades = unidades;
             consumible_estadia.monto = unidades * consumible_seleccionado.precio;
-            consumible_estadia.save();
+            items.Add(consumible_estadia);
             this.cargarConsumibles();
             
          }
 
         private void cargarConsumibles()
         {
-            
-            List<ItemFactura> consumiblesEstadia = EntityManager.getEntityManager().findAllBy<ItemFactura>("items_facturas.estadia_id", estadia.id.ToString());
-            //aca cuando tiene que actualizar rompe
+           
             BindingList<ConsumibleItemsUnidades> consumibleUnidadesBinding = new BindingList<ConsumibleItemsUnidades>();
-            foreach (ItemFactura consumibleEstadia in consumiblesEstadia)
+            foreach (ItemAFacturar consumibleEstadia in items)
             {
                 ConsumibleItemsUnidades consumibleUnidades = new ConsumibleItemsUnidades();
 
@@ -105,7 +107,7 @@ namespace FrbaHotel.Registrar_Consumible
             DialogResult result1 = MessageBox.Show("¿Está seguro que ya ingreso todo lo consumido y desea facturar?","Importante",MessageBoxButtons.YesNo);
             if(result1==DialogResult.Yes)
             {
-                     Navigator.nextForm(this, new FrbaHotel.Views.Facturar_Estadia.Facturar(estadia));
+                     Navigator.nextForm(this, new FrbaHotel.Views.Facturar_Estadia.Facturar(estadia, items));
             }
 
         }

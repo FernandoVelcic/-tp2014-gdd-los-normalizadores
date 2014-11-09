@@ -19,11 +19,13 @@ namespace FrbaHotel.Views.Facturar_Estadia
         Factura factura;
         Hotel hotel;
         List<ItemFactura> itemsEstadia;
+        List<ItemAFacturar> itemsParaFacturar;
         List<ConsumibleItemsUnidades> itemsVisibles;
 
-        public Facturar(Estadia e)
+        public Facturar(Estadia e, List<ItemAFacturar> items)
         {
             estadia = e;
+            itemsParaFacturar = items;
             InitializeComponent();
         }
 
@@ -40,9 +42,7 @@ namespace FrbaHotel.Views.Facturar_Estadia
                 setTexts();
                 /* ??? */
 
-                itemsEstadia = EntityManager.getEntityManager().findAllBy<ItemFactura>("items_facturas.estadia_id", estadia.id.ToString());
-                
-                foreach( ItemFactura item in itemsEstadia)
+                foreach( ItemAFacturar item in itemsParaFacturar)
                 {
                     ConsumibleItemsUnidades itemVisible = new ConsumibleItemsUnidades();
 
