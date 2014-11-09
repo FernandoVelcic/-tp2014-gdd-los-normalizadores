@@ -33,7 +33,7 @@ namespace FrbaHotel.Registrar_Estadia
         private void Form1_Load(object sender, EventArgs e)
         {
             txt_NroReserva.DataBindings.Add("Text", this, "reserva_numero");
-            dateTimePicker1.DataBindings.Add("Text", this, "fecha");
+            dateTimePicker1.DataBindings.Add("Text", this, "fecha", true);
             txt_Usuario.DataBindings.Add("Text", this, "usuario");
         }
 
