@@ -13,6 +13,7 @@ using FrbaHotel.Models;
 using System.Data.SqlClient;
 using FrbaHotel.Views.Registrar_Estadia;
 using FrbaHotel.Homes;
+using MyActiveRecord;
 
 namespace FrbaHotel.Registrar_Estadia
 {
@@ -80,7 +81,7 @@ namespace FrbaHotel.Registrar_Estadia
             if (!obtenerReserva())
                 return;
 
-            Estadia estadiaout = EntityManager.getEntityManager().findBy<Estadia>("reserva_id", reserva_numero.ToString());
+            Estadia estadiaout = EntityManager.getEntityManager().findBy<Estadia>("estadias.reserva_id", reserva_numero.ToString());
 
             estadiaout.cant_noches = int.Parse(DateTime.Parse(fecha).Subtract(DateTime.Parse(estadiaout.fecha_inicio)).TotalDays.ToString());
 

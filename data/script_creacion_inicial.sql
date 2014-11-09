@@ -204,8 +204,9 @@ CREATE TABLE [LOS_NORMALIZADORES].[consumibles](
 ) ON [PRIMARY]
 
 
-CREATE TABLE [LOS_NORMALIZADORES].[consumibles_estadias](
+CREATE TABLE [LOS_NORMALIZADORES].[items_facturas](
 	[id] INTEGER IDENTITY PRIMARY KEY,
+	[factura_id] INTEGER,
 	[consumible_id] INTEGER,
 	[estadia_id] INTEGER,
 	[monto] [numeric] (18,2),
@@ -238,7 +239,7 @@ INSERT INTO [LOS_NORMALIZADORES].[paises] (nombre, gentilicio) VALUES ('ARGENTIN
 	
 
 
-INSERT INTO [LOS_NORMALIZADORES].[Maestra] SELECT TOP 50000 * FROM [GD2C2014].[gd_esquema].[Maestra]
+INSERT INTO [LOS_NORMALIZADORES].[Maestra] SELECT  * FROM [GD2C2014].[gd_esquema].[Maestra]
 GO
   	
 
@@ -497,8 +498,8 @@ DROP INDEX  Consumibles_codigo ON [LOS_NORMALIZADORES].[consumibles]
 
 /* Relacion entre consumibles y estadia */
 
-INSERT INTO [LOS_NORMALIZADORES].[consumibles_estadias] (consumible_id, estadia_id, monto, unidades)
-	SELECT DISTINCT consumible_id, estadia_id, Item_Factura_Monto, Item_Factura_Cantidad FROM  [LOS_NORMALIZADORES].[Maestra]
+INSERT INTO [LOS_NORMALIZADORES].[items_facturas] (consumible_id, estadia_id, monto, unidades)
+	SELECT DISTINCT  consumible_id, estadia_id, Item_Factura_Monto, Item_Factura_Cantidad FROM  [LOS_NORMALIZADORES].[Maestra]
 	WHERE consumible_id is NOT NULL
 	AND   estadia_id IS NOT NULL
 	AND   Item_Factura_Monto IS NOT NULL
@@ -705,9 +706,11 @@ ALTER TABLE [LOS_NORMALIZADORES].[reservas] ADD CONSTRAINT reservas_regimen_id F
 
 ALTER TABLE [LOS_NORMALIZADORES].[estadias] ADD CONSTRAINT estadias_reserva_id FOREIGN KEY (reserva_id) REFERENCES [LOS_NORMALIZADORES].[reservas](id)
 
-ALTER TABLE [LOS_NORMALIZADORES].[consumibles_estadias] ADD CONSTRAINT consumibles_estadia_id FOREIGN KEY (estadia_id) REFERENCES [LOS_NORMALIZADORES].[estadias](id)
+ALTER TABLE [LOS_NORMALIZADORES].[items_facturas] ADD CONSTRAINT items_factura_id FOREIGN KEY (estadia_id) REFERENCES [LOS_NORMALIZADORES].[estadias](id)
 
-ALTER TABLE [LOS_NORMALIZADORES].[consumibles_estadias] ADD CONSTRAINT consumibles_consumible_id FOREIGN KEY (consumible_id) REFERENCES [LOS_NORMALIZADORES].[consumibles](id)
+ALTER TABLE [LOS_NORMALIZADORES].[items_facturas] ADD CONSTRAINT consumibles_consumible_id FOREIGN KEY (consumible_id) REFERENCES [LOS_NORMALIZADORES].[consumibles](id)
+
+
 
 ALTER TABLE [LOS_NORMALIZADORES].[facturas] ADD CONSTRAINT facturas_estadia_id FOREIGN KEY (estadia_id) REFERENCES [LOS_NORMALIZADORES].[estadias](id)
 
@@ -754,9 +757,9 @@ GO
 
 
 CREATE VIEW [LOS_NORMALIZADORES].[gastos_facturacion] AS
-	SELECT estadias.id, reservas.cliente_id,  SUM(consumibles_estadias.monto * consumibles_estadias.unidades) as total_item_facturados
-	FROM [LOS_NORMALIZADORES].consumibles_estadias
-	INNER JOIN [LOS_NORMALIZADORES].estadias ON consumibles_estadias.estadia_id = estadias.id
+	SELECT estadias.id, reservas.cliente_id,  SUM(items_facturas.monto * items_facturas.unidades) as total_item_facturados
+	FROM [LOS_NORMALIZADORES].items_facturas
+	INNER JOIN [LOS_NORMALIZADORES].estadias ON items_facturas.estadia_id = estadias.id
 	INNER JOIN [LOS_NORMALIZADORES].reservas ON estadias.reserva_id = reservas.id
 	GROUP BY estadias.id, reservas.cliente_id
 GO

@@ -34,7 +34,6 @@
             this.btn_Volver = new System.Windows.Forms.Button();
             this.btn_Modificar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cmb_DescripcionArticulo = new System.Windows.Forms.ComboBox();
             this.txt_UnidadesArticulo = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -43,6 +42,7 @@
             this.btn_Facturar = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.txt_reserva_id = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -110,7 +110,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.cmb_DescripcionArticulo);
+            this.groupBox1.Controls.Add(this.comboBox1);
             this.groupBox1.Controls.Add(this.txt_UnidadesArticulo);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label2);
@@ -123,14 +123,6 @@
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Artículo:";
-            // 
-            // cmb_DescripcionArticulo
-            // 
-            this.cmb_DescripcionArticulo.FormattingEnabled = true;
-            this.cmb_DescripcionArticulo.Location = new System.Drawing.Point(129, 78);
-            this.cmb_DescripcionArticulo.Name = "cmb_DescripcionArticulo";
-            this.cmb_DescripcionArticulo.Size = new System.Drawing.Size(121, 24);
-            this.cmb_DescripcionArticulo.TabIndex = 15;
             // 
             // txt_UnidadesArticulo
             // 
@@ -210,6 +202,14 @@
             this.txt_reserva_id.Size = new System.Drawing.Size(0, 16);
             this.txt_reserva_id.TabIndex = 0;
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(124, 76);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 24);
+            this.comboBox1.TabIndex = 15;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -254,9 +254,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TextBox txt_TipoRegimen;
-        private System.Windows.Forms.ComboBox cmb_DescripcionArticulo;
         private System.Windows.Forms.Button btn_Facturar;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label txt_reserva_id;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
