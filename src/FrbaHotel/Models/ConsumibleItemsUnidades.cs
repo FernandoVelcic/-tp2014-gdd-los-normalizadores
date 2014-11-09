@@ -8,7 +8,7 @@ using MyActiveRecord;
 //No es un modelo en si, se usa para presentar la grilla en Registrar Consumible
 namespace FrbaHotel.Models
 {
-    public class ConsumibleUnidades
+    public class ConsumibleItemsUnidades
     {
         
         public int codigo { get; set; }  //[numeric](18, 0)

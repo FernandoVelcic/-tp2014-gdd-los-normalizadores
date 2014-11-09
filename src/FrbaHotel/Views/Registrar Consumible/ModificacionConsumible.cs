@@ -13,9 +13,9 @@ namespace FrbaHotel.Registrar_Consumible
 {
     public partial class ModificacionConsumible : Form
     {
-        ConsumibleUnidades consumibleU;
+        ConsumibleItemsUnidades consumibleU;
 
-        public ModificacionConsumible( ConsumibleUnidades consu)
+        public ModificacionConsumible( ConsumibleItemsUnidades consu)
         {
             consumibleU = consu;
             InitializeComponent();
@@ -30,7 +30,7 @@ namespace FrbaHotel.Registrar_Consumible
         private void button2_Click(object sender, EventArgs e)
         {
             
-            ConsumibleEstadia consumibleEstadia = EntityManager.getEntityManager().findBy<ConsumibleEstadia>("codigo", consumibleU.codigo.ToString());
+            ItemFactura consumibleEstadia = EntityManager.getEntityManager().findBy<ItemFactura>("codigo", consumibleU.codigo.ToString());
            
             if(textBox1.Text != null)
             {

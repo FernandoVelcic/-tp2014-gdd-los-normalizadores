@@ -6,13 +6,14 @@ using System.Text;
 
 namespace FrbaHotel.Models
 {
-    public class ConsumibleEstadia : ActiveRecord
+    public class ItemFactura : ActiveRecord
     {
 
-        public override String table { get { return "consumibles_estadias"; } }
+        public override String table { get { return "items_facturas"; } }
 
         //public int id { get; set; } //INTEGER IDENTITY PRIMARY KEY
 
+        public Factura factura { get; set; }
         public Consumible consumible { get; set;} //int
         public Estadia estadia { get; set;}  //int
         public float monto { get; set; } //int

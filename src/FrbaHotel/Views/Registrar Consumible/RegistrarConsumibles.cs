@@ -44,14 +44,14 @@ namespace FrbaHotel.Registrar_Consumible
 
         private void btn_Modificar_Click(object sender, EventArgs e)
         {
-            this.editRecord<ConsumibleUnidades, FrbaHotel.Registrar_Consumible.ModificacionConsumible>(dataGridView1);
+            this.editRecord<ConsumibleItemsUnidades, FrbaHotel.Registrar_Consumible.ModificacionConsumible>(dataGridView1);
             
             //modificar el que esta seleccionado en el datagrid
         }
 
         private void btn_Agregar_Click(object sender, EventArgs e)
         {
-            ConsumibleEstadia consumible_estadia = new ConsumibleEstadia();
+            ItemFactura consumible_estadia = new ItemFactura();
 
             int unidades = int.Parse(txt_UnidadesArticulo.Text);    //chequear si va, para mi deberia, pero en la tabla no está
             Consumible consumible_seleccionado = cmb_DescripcionArticulo.SelectedItem as Consumible;
@@ -67,12 +67,12 @@ namespace FrbaHotel.Registrar_Consumible
 
         private void cargarConsumibles()
         {
-            List<ConsumibleEstadia> consumiblesEstadia = EntityManager.getEntityManager().findAllBy<ConsumibleEstadia>("estadia_id", estadia.id.ToString());
+            List<ItemFactura> consumiblesEstadia = EntityManager.getEntityManager().findAllBy<ItemFactura>("estadia_id", estadia.id.ToString());
 
-            BindingList<ConsumibleUnidades> consumibleUnidadesBinding = new BindingList<ConsumibleUnidades>();
-            foreach (ConsumibleEstadia consumibleEstadia in consumiblesEstadia)
+            BindingList<ConsumibleItemsUnidades> consumibleUnidadesBinding = new BindingList<ConsumibleItemsUnidades>();
+            foreach (ItemFactura consumibleEstadia in consumiblesEstadia)
             {
-                ConsumibleUnidades consumibleUnidades = new ConsumibleUnidades();
+                ConsumibleItemsUnidades consumibleUnidades = new ConsumibleItemsUnidades();
 
                 consumibleUnidades.codigo = consumibleEstadia.consumible.codigo;
                 consumibleUnidades.descripcion = consumibleEstadia.consumible.descripcion;
