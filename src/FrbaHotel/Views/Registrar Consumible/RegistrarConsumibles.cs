@@ -22,7 +22,7 @@ namespace FrbaHotel.Registrar_Consumible
         public Form1(Estadia e)
         {
             estadia = e;
-            /*InitializeComponent();*/
+            InitializeComponent();
             
         }
 
@@ -68,18 +68,19 @@ namespace FrbaHotel.Registrar_Consumible
 
 
             consumible_estadia.estadia = estadia;
-            consumible_estadia.consumible.codigo = consumible_seleccionado.codigo;
+            consumible_estadia.consumible = consumible_seleccionado;
             consumible_estadia.unidades = unidades;
             consumible_estadia.monto = unidades * consumible_seleccionado.precio;
-
             consumible_estadia.save();
             this.cargarConsumibles();
+            
          }
 
         private void cargarConsumibles()
         {
+            
             List<ItemFactura> consumiblesEstadia = EntityManager.getEntityManager().findAllBy<ItemFactura>("items_facturas.estadia_id", estadia.id.ToString());
-
+            //aca cuando tiene que actualizar rompe
             BindingList<ConsumibleItemsUnidades> consumibleUnidadesBinding = new BindingList<ConsumibleItemsUnidades>();
             foreach (ItemFactura consumibleEstadia in consumiblesEstadia)
             {
@@ -90,7 +91,7 @@ namespace FrbaHotel.Registrar_Consumible
                 consumibleUnidades.precio = consumibleEstadia.consumible.precio;
                 consumibleUnidades.unidades = consumibleEstadia.unidades;
                 consumibleUnidades.monto = consumibleEstadia.monto;
-                
+                                
                 consumibleUnidadesBinding.Add(consumibleUnidades);
 
             }
