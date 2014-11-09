@@ -105,6 +105,7 @@ namespace FrbaHotel.Views.Facturar_Estadia
                 itemHabitacion.estadia = estadia;
                 itemHabitacion.consumible = null;
                 itemHabitacion.factura = factura;
+                itemHabitacion.tipo = "H";
 
                 //CALCULO PRECIO DE HABITACION
                 itemHabitacion.monto = (reservaHabitacion.habitacion.tipo.porcentual * estadia.reserva.regimen.precio * reservaHabitacion.habitacion.tipo.cantidad_maxima_personas + hotel.cant_estrella * hotel.recarga_estrella) * estadia.reserva.cant_noches;
@@ -149,6 +150,7 @@ namespace FrbaHotel.Views.Facturar_Estadia
                     itemHabitacionNoHospedada.consumible = null;
                     itemHabitacionNoHospedada.factura = factura;
                     itemHabitacionNoHospedada.monto = 0;
+                    itemHabitacionNoHospedada.tipo = "N";
                     itemHabitacionNoHospedada.unidades = estadia.reserva.cant_noches - estadia.cant_noches;
               
                     try
@@ -189,6 +191,7 @@ namespace FrbaHotel.Views.Facturar_Estadia
             itemDescuento.consumible = null;
             itemDescuento.factura = factura;
 
+            itemDescuento.tipo = "D";
             itemDescuento.unidades = 0;
             itemDescuento.monto = suma * (-1);
 

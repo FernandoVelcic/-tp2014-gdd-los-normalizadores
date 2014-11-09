@@ -18,7 +18,13 @@ namespace FrbaHotel.Models
         public Estadia estadia { get; set;}  //int
         public float monto { get; set; } //int
         public int unidades { get; set; }  //INTEGER
-
+        
+        /* C: por un consumible 
+           H: por una habitacion
+           N: por una habitacion no ocupada
+           D: descuento
+         */
+        public String tipo { get; set; }
 
 
     }

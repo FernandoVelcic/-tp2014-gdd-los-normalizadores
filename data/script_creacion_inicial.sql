@@ -210,7 +210,8 @@ CREATE TABLE [LOS_NORMALIZADORES].[items_facturas](
 	[consumible_id] INTEGER,
 	[estadia_id] INTEGER,
 	[monto] [numeric] (18,2),
-	[unidades] INTEGER
+	[unidades] INTEGER,
+	[tipo] [char] (1),
 ) ON [PRIMARY]
 
 
@@ -528,8 +529,8 @@ GO
 
 /* Items */
 TRUNCATE table [LOS_NORMALIZADORES].[items_facturas]
-INSERT INTO [LOS_NORMALIZADORES].[items_facturas] (factura_id, consumible_id, estadia_id, monto, unidades)
-	SELECT DISTINCT  factura_id, consumible_id, estadia_id, Item_Factura_Monto, Item_Factura_Cantidad FROM  [LOS_NORMALIZADORES].[Maestra]
+INSERT INTO [LOS_NORMALIZADORES].[items_facturas] (factura_id, consumible_id, estadia_id, monto, unidades, tipo)
+	SELECT DISTINCT  factura_id, consumible_id, estadia_id, Item_Factura_Monto, Item_Factura_Cantidad, 'C' FROM  [LOS_NORMALIZADORES].[Maestra]
 	WHERE consumible_id is NOT NULL
 	AND   estadia_id IS NOT NULL
 	AND   Item_Factura_Monto IS NOT NULL
@@ -701,7 +702,7 @@ ALTER TABLE [LOS_NORMALIZADORES].[items_facturas] ADD CONSTRAINT items_factura_i
 
 ALTER TABLE [LOS_NORMALIZADORES].[items_facturas] ADD CONSTRAINT consumibles_consumible_id FOREIGN KEY (consumible_id) REFERENCES [LOS_NORMALIZADORES].[consumibles](id)
 
-
+ALTER TABLE [LOS_NORMALIZADORES].[items_facturas] ADD CHECK (tipo in ('C', 'H','N', 'D'))
 
 ALTER TABLE [LOS_NORMALIZADORES].[facturas] ADD CONSTRAINT facturas_estadia_id FOREIGN KEY (estadia_id) REFERENCES [LOS_NORMALIZADORES].[estadias](id)
 
