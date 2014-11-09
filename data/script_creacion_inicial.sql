@@ -240,7 +240,7 @@ INSERT INTO [LOS_NORMALIZADORES].[paises] (nombre, gentilicio) VALUES ('ARGENTIN
 	
 
 
-INSERT INTO [LOS_NORMALIZADORES].[Maestra] SELECT TOP 10000 * FROM [GD2C2014].[gd_esquema].[Maestra] ORDER BY Consumible_Codigo DESC
+INSERT INTO [LOS_NORMALIZADORES].[Maestra] SELECT * FROM [GD2C2014].[gd_esquema].[Maestra]
 GO
   	
 
@@ -528,7 +528,6 @@ GO
 
 
 /* Items */
-TRUNCATE table [LOS_NORMALIZADORES].[items_facturas]
 INSERT INTO [LOS_NORMALIZADORES].[items_facturas] (factura_id, consumible_id, estadia_id, monto, unidades, tipo)
 	SELECT DISTINCT  factura_id, consumible_id, estadia_id, Item_Factura_Monto, Item_Factura_Cantidad, 'C' FROM  [LOS_NORMALIZADORES].[Maestra]
 	WHERE consumible_id is NOT NULL
@@ -537,11 +536,14 @@ INSERT INTO [LOS_NORMALIZADORES].[items_facturas] (factura_id, consumible_id, es
 	AND   Item_Factura_Cantidad IS NOT NULL
 GO
 
-
-/* TODO:
-	- Normalizar calles, descripciones, ubicaciones y todo lo repetido
- */
-
+INSERT INTO [LOS_NORMALIZADORES].[items_facturas] (factura_id, estadia_id, monto, unidades, tipo)
+	SELECT DISTINCT  factura_id, estadia_id, Item_Factura_Monto, Item_Factura_Cantidad, 'H' FROM  [LOS_NORMALIZADORES].[Maestra]
+	WHERE Factura_Total is NOT NULL
+	AND   estadia_id IS NOT NULL
+	AND   habitacion_id IS NOT NULL
+	AND   Item_Factura_Monto IS NOT NULL
+	AND   Item_Factura_Cantidad IS NOT NULL
+GO
 
 /* LOGIN y ROLES */
 CREATE TABLE [LOS_NORMALIZADORES].[roles](
