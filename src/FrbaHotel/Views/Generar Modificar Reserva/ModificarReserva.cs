@@ -13,14 +13,11 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
 {
     public partial class ModificarReserva : Form
     {
-        private FrbaHotel.Generar_Modificar_Reserva.FormGenerarReserva formRetorno;
-
         public int codigo { get; set; }
 
-        public ModificarReserva(FrbaHotel.Generar_Modificar_Reserva.FormGenerarReserva formRetorno)
+        public ModificarReserva()
         {
             InitializeComponent();
-            this.formRetorno = formRetorno;
         }
 
         private void ModificarReserva_Load(object sender, EventArgs e)
@@ -38,9 +35,25 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
                 return;
             }
 
-            this.Close();
-            formRetorno.onReservaSeleccionada(reserva);
+            if (DateTime.Parse(reserva.fecha_inicio) < Config.getInstance().getCurrentDate().Date)
+            {
+                MessageBox.Show("No se puede modificar reservas en fechas anteriores a la actual");
+                return;
+            }
 
+            if (reserva.estaCancelada())
+            {
+                MessageBox.Show("No se puede modificar una reserva ya cancelada");
+                return;
+            }
+
+            if (reserva.reserva_estado == 6)
+            {
+                MessageBox.Show("No se puede modificar una reserva despues de haber hecho el check-in");
+                return;
+            }
+
+            this.nextForm(new Generar_Modificar_Reserva.FormGenerarReserva(reserva));
         }
 
         private void btn_Volver_Click(object sender, EventArgs e)

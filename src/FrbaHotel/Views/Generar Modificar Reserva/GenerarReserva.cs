@@ -16,12 +16,12 @@ using System.Windows.Forms;
 using FrbaHotel.Homes;
 using System.Globalization;
 
-namespace FrbaHotel.Generar_Modificar_Reserva
+namespace FrbaHotel.Views.Generar_Modificar_Reserva
 {
     public partial class FormGenerarReserva : Form
     {
-        Reserva reserva;
-        bool esModificacion;
+        private Reserva reserva;
+        private bool esModificacion;
 
         public FormGenerarReserva()
         {
@@ -30,8 +30,19 @@ namespace FrbaHotel.Generar_Modificar_Reserva
             reserva = new Reserva();
             reserva.cant_noches = 7;
             reserva.fecha_inicio = Config.getInstance().getCurrentDate().ToShortDateString();
-            reserva.reserva_estado = 1;
+            reserva.reserva_estado = 1; //Reserva correcta
             InitializeComponent();
+        }
+
+        public FormGenerarReserva(Reserva reserva)
+        {
+            esModificacion = true;
+
+            this.reserva = reserva;
+            reserva.reserva_estado = 2; //Reserva modificada
+
+            InitializeComponent();
+            btn_Generar.Text = "Siguiente (puede cambiar habitaciones)";
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -53,6 +64,14 @@ namespace FrbaHotel.Generar_Modificar_Reserva
             tipo_habitacion_binding.DataSource = tipoHabitaciones;
             cmb_TipoHabitacion.DataSource = tipo_habitacion_binding;
 
+            if (esModificacion)
+            {
+                Habitacion habitacion = reserva.obtener_una_habitacion();
+                cmb_Hotel.Text = habitacion.hotel.ToString();
+                cmb_Regimen.Text = reserva.regimen.descripcion;
+                cmb_TipoHabitacion.Text = habitacion.tipo.ToString();
+            }
+
             update_regimenes();
 
             txt_Cant_Noches.DataBindings.Add("Text", this.reserva, "cant_noches");
@@ -64,7 +83,7 @@ namespace FrbaHotel.Generar_Modificar_Reserva
         private void btn_Generar_Click(object sender, EventArgs e)
         {
             Hotel hotel_seleccionado = cmb_Hotel.SelectedItem as Hotel;
-            Regimen regimen_seleccionado = (cmb_Regimen.SelectedItem as HotelRegimen).regimen;
+            reserva.regimen = (cmb_Regimen.SelectedItem as HotelRegimen).regimen;
             TipoHabitacion tipo_habitacion_seleccionado = cmb_TipoHabitacion.SelectedItem as TipoHabitacion;
 
             if ( !hotel_seleccionado.estaLibre(reserva.fecha_inicio, DateTime.Parse(reserva.fecha_inicio).AddDays(reserva.cant_noches).ToShortDateString()) )
@@ -76,7 +95,7 @@ namespace FrbaHotel.Generar_Modificar_Reserva
             try
             {
                 validate();
-                new HabitacionesDisponibles(regimen_seleccionado, tipo_habitacion_seleccionado, reserva.fecha_inicio, reserva.cant_noches, hotel_seleccionado, this).Show();
+                new HabitacionesDisponibles(reserva, tipo_habitacion_seleccionado, hotel_seleccionado, esModificacion, this).Show();
                 this.Hide();
 
             }
@@ -142,24 +161,5 @@ namespace FrbaHotel.Generar_Modificar_Reserva
         {
             update_precio_habitacion();
         }
-
-
-
-        private void btn_Modificar_Click(object sender, EventArgs e)
-        {
-            Navigator.nextForm(this, new ModificarReserva(this));
-        }
-
-        public void onReservaSeleccionada(Reserva reserva)
-        {
-            this.reserva = reserva;
-            Habitacion habitacion = reserva.obtener_una_habitacion();
-            cmb_Hotel.Text = habitacion.hotel.ToString();
-            cmb_Regimen.Text = reserva.regimen.descripcion;
-            cmb_TipoHabitacion.Text = habitacion.tipo.ToString();
-            esModificacion = true;
-        }
-
-
     }
 }

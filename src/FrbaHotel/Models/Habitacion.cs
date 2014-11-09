@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data.SqlClient;
+using System.Windows.Forms;
 
 using MyActiveRecord;
 using FrbaHotel.Database_Helper;
 using FrbaHotel.Models.Exceptions;
-using System.Data.SqlClient;
 
 namespace FrbaHotel.Models
 {
@@ -61,7 +62,7 @@ namespace FrbaHotel.Models
             query.addWhere("fecha_inicio", "'" + desde.AddDays(cantidadNoches).ToShortDateString() + "'", "<=");
             query.addWhere("(DATEADD(day,cant_noches,fecha_inicio))", "'" + desde.ToShortDateString() + "'", ">=");
             //Si esta cancelada no tiene que ser tenida en cuenta
-            query.addWhere("reservas.reserva_estado = 1 OR reservas.reserva_estado = 2 OR reservas.reserva_estado = 6");
+            query.addWhere("(reservas.reserva_estado = 1 OR reservas.reserva_estado = 2 OR reservas.reserva_estado = 6)");
 
             SqlCommand cmd = new SqlCommand(query.build(), ConnectionManager.getInstance().getConnection());
             Int32 count = (Int32)cmd.ExecuteScalar();

@@ -94,7 +94,7 @@ namespace FrbaHotel
 
         private void button6_Click(object sender, EventArgs e)
         {
-            Navigator.nextForm(this, new FrbaHotel.Generar_Modificar_Reserva.FormGenerarReserva());
+            Navigator.nextForm(this, new FrbaHotel.Views.Generar_Modificar_Reserva.GenerarModificarReserva());
         }
 
         private void button7_Click(object sender, EventArgs e)

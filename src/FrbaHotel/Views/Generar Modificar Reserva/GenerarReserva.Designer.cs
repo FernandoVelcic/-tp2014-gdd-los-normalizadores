@@ -1,4 +1,4 @@
-﻿namespace FrbaHotel.Generar_Modificar_Reserva
+﻿namespace FrbaHotel.Views.Generar_Modificar_Reserva
 {
     partial class FormGenerarReserva
     {
@@ -42,7 +42,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btn_Generar = new System.Windows.Forms.Button();
             this.btn_Volver = new System.Windows.Forms.Button();
-            this.btn_Modificar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -193,28 +192,16 @@
             this.btn_Volver.UseVisualStyleBackColor = true;
             this.btn_Volver.Click += new System.EventHandler(this.btn_Volver_Click);
             // 
-            // btn_Modificar
-            // 
-            this.btn_Modificar.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Modificar.Location = new System.Drawing.Point(133, 250);
-            this.btn_Modificar.Name = "btn_Modificar";
-            this.btn_Modificar.Size = new System.Drawing.Size(216, 46);
-            this.btn_Modificar.TabIndex = 4;
-            this.btn_Modificar.Text = "Modificar reserva existente";
-            this.btn_Modificar.UseVisualStyleBackColor = true;
-            this.btn_Modificar.Click += new System.EventHandler(this.btn_Modificar_Click);
-            // 
-            // Form1
+            // FormGenerarReserva
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(482, 305);
-            this.Controls.Add(this.btn_Modificar);
             this.Controls.Add(this.btn_Volver);
             this.Controls.Add(this.btn_Generar);
             this.Controls.Add(this.groupBox1);
-            this.Name = "Form1";
+            this.Name = "FormGenerarReserva";
             this.Text = "Reservas";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
@@ -239,6 +226,5 @@
         private System.Windows.Forms.Label txt_Hotel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.Button btn_Modificar;
     }
 }

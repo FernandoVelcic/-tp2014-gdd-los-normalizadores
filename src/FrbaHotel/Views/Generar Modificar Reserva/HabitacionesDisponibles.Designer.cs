@@ -99,6 +99,7 @@
             this.Controls.Add(this.btn_Volver);
             this.Name = "HabitacionesDisponibles";
             this.Text = "Habitaciones disponibles";
+            this.Load += new System.EventHandler(this.HabitacionesDisponibles_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

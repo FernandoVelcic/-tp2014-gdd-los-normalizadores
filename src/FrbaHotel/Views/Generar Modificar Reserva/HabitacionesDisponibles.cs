@@ -19,32 +19,35 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
 {
     public partial class HabitacionesDisponibles : Form, SeleccionCliente
     {
-
-        private String desde;
-        private int cantidadNoches;
-        private Regimen regimen;
         private Hotel hotel;
         private TipoHabitacion tipoHabitacion;
         private Form previousForm;
-        private Habitacion habitacion; 
+        private Reserva reserva;
 
-        public HabitacionesDisponibles(Regimen regimen, TipoHabitacion tipoHabitacion, String desde, int cantidadNoches, Hotel hotel, Form previous)
+        private bool esModificacion;
+
+        public HabitacionesDisponibles(Reserva reserva, TipoHabitacion tipoHabitacion, Hotel hotel, bool esModificacion, Form previous)
         {
-            this.desde = desde;
-            this.cantidadNoches = cantidadNoches;
-            this.hotel = hotel;
-            this.regimen = regimen;
+            this.reserva = reserva;
             this.tipoHabitacion = tipoHabitacion;
+            this.hotel = hotel;
+            
             this.previousForm = previous;
+            this.esModificacion = esModificacion;
 
             InitializeComponent();
-            load_Habitaciones(regimen, tipoHabitacion);
+
+            if (esModificacion)
+            {
+                btn_Confirmar.Visible = false;
+                btn_CrearCliente.Text = "Modificar reserva";
+            }
         }
 
         /* TODO 
          * pasar a una vista con las habitaciones disponibles o algo parecido 
          */
-        private void load_Habitaciones(Regimen regimen, TipoHabitacion tipoHabitacion)
+        private void HabitacionesDisponibles_Load(object sender, EventArgs e)
         {
             //Cancelar reservas por no show
             String execUspCancelarReservas = "EXECUTE [LOS_NORMALIZADORES].[uspCancelarReservasPorNoShow] @fecha_sistema = '" + Config.getInstance().getCurrentDate().ToShortDateString() + "'";
@@ -62,7 +65,7 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
             query.addInnerJoin("hoteles_regimenes", "hoteles.id = hoteles_regimenes.hotel_id");
             query.addInnerJoin("regimenes", "hoteles_regimenes.regimen_id = regimenes.id");
 
-            query.addWhere("regimenes.id", regimen);
+            query.addWhere("regimenes.id", reserva.regimen);
             query.addWhere("habitaciones.tipo_id", tipoHabitacion);
             query.addWhere("habitaciones.hotel_id", hotel);
             query.addWhere("habitaciones.estado = 1"); //La habitacion dada de baja no se puede tener en cuenta
@@ -86,13 +89,21 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
             }
 
             //Mostrar solo habitaciones no ocupadas
-            habitaciones = habitaciones.FindAll(h => h.estaDisponible(DateTime.Parse(desde), cantidadNoches));
+            List<ReservaHabitacion> habitaciones_reservadas = new List<ReservaHabitacion>();
+            if (esModificacion)
+                habitaciones_reservadas = reserva.obtener_habitaciones();
+
+            habitaciones = habitaciones.FindAll(h => h.estaDisponible(DateTime.Parse(reserva.fecha_inicio), reserva.cant_noches) || habitaciones_reservadas.Exists(hr => hr.habitacion.id == h.id));
 
             BindingSource habitaciones_binding = new BindingSource();
             habitaciones_binding.DataSource = habitaciones;
             list_Habitaciones.DataSource = habitaciones_binding;
-            
 
+            for (int i = 0; i < list_Habitaciones.Items.Count; i++)
+            {
+                Habitacion habitacion = list_Habitaciones.Items[i] as Habitacion;
+                list_Habitaciones.SetSelected(i, habitaciones_reservadas.Exists(hr => hr.habitacion.id == habitacion.id));
+            }
         }
 
         private void btn_Confirmar_Click(object sender, EventArgs e)
@@ -100,7 +111,6 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
             ABMCliente form = new ABM_de_Cliente.ABMCliente();
             form.Show();
             form.setModoSeleccionCliente(this);
-            
         }
 
         private void btn_Volver_Click(object sender, EventArgs e)
@@ -111,31 +121,25 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
 
         private void btn_CrearCliente_Click(object sender, EventArgs e)
         {
+            if (esModificacion)
+            {
+                guardarReserva();
+                return;
+            }
+
             AltaModificacionCliente form = new ABM_de_Cliente.AltaModificacionCliente();
             form.setModoSeleccion(this);
             form.Show();
         }
 
-
-        /* Cuando se selecciona un cliente */
-        void SeleccionCliente.clienteSeleccionado(Cliente cliente)
+        void guardarReserva()
         {
-            if (cliente.estado == false)
-            {
-                MessageBox.Show("Este cliente no tiene permitido realizar reservas");
-                return;
-            }
-
-            Reserva reserva = new Reserva();
-            reserva.regimen = regimen;
-            reserva.fecha_inicio = desde.ToString();
-            reserva.cant_noches = cantidadNoches;
-            reserva.cliente = cliente;
-            reserva.reserva_estado = 1; //Reserva correcta
-
             try
             {
                 reserva.save();
+
+                if (esModificacion)
+                    reserva.obtener_habitaciones().ForEach(h => h.delete());
 
                 foreach (Habitacion habitacion in list_Habitaciones.SelectedItems)
                 {
@@ -159,13 +163,26 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
             MessageBox.Show("La reserva se guardo con exito! El numero de reserva es: " + reserva.id);
             Close();
             new Operaciones().Show();
+        }
 
+        /* Cuando se selecciona un cliente */
+        void SeleccionCliente.clienteSeleccionado(Cliente cliente)
+        {
+            if (cliente.estado == false)
+            {
+                MessageBox.Show("Este cliente no tiene permitido realizar reservas");
+                return;
+            }
+
+            
+            reserva.cliente = cliente;
+            guardarReserva();
         }
 
         private void list_Habitaciones_SelectedIndexChanged(object sender, EventArgs e)
         {
             //FORMULA
-            label1.Text = "Costo total de la reserva: $" + list_Habitaciones.SelectedItems.Count * (tipoHabitacion.porcentual * regimen.precio * tipoHabitacion.cantidad_maxima_personas + hotel.cant_estrella * hotel.recarga_estrella);
+            label1.Text = "Costo total de la reserva: $" + list_Habitaciones.SelectedItems.Count * (tipoHabitacion.porcentual * reserva.regimen.precio * tipoHabitacion.cantidad_maxima_personas + hotel.cant_estrella * hotel.recarga_estrella);
         }
 
 
