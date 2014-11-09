@@ -27,17 +27,20 @@ namespace FrbaHotel.Views.Facturar_Estadia
             estadia = e;
             itemsParaFacturar = items;
             InitializeComponent();
+            
         }
 
         public void Facturar_load(object sender, EventArgs e)
         {
-            itemsVisibles = new List<ConsumibleItemsUnidades>();
-
+            //itemsVisibles = new List<ConsumibleItemsUnidades>();
+            BindingList<ConsumibleItemsUnidades> itemsVisibles = new BindingList<ConsumibleItemsUnidades>();
             try
             {
                 //Insert de factura porque sino de otro modo no podria insertar los items sin el id de la misma
                 factura = new Factura();
-                factura.fecha = (int.Parse(estadia.fecha_inicio) + estadia.cant_noches).ToString();  
+                factura.fecha = (DateTime.Parse(estadia.fecha_inicio).AddDays(estadia.cant_noches)).ToString();
+                factura.forma_pago_id = 1;
+                factura.estadia = estadia;
                 factura.save();
                 setTexts();
                 /* ??? */
@@ -55,11 +58,14 @@ namespace FrbaHotel.Views.Facturar_Estadia
                     itemsVisibles.Add(itemVisible);
 
                 }
-                
-                List<HotelRegimen> hotelesRegimen = EntityManager.getEntityManager().findAllBy<HotelRegimen>("regimen_id", estadia.reserva.regimen.id.ToString());
+
+                Reserva reserva = EntityManager.getEntityManager().findBy<Reserva>("reservas.id", estadia.reserva.id.ToString());
+                Habitacion habitacionPosta = reserva.obtener_una_habitacion();
+                hotel = habitacionPosta.hotel;
+                //List<HotelRegimen> hotelesRegimen = EntityManager.getEntityManager().findAllBy<HotelRegimen>("regimen_id", reserva.regimen.id.ToString());
                 List<ReservaHabitacion> reservaHabitaciones = EntityManager.getEntityManager().findAllBy<ReservaHabitacion>("reserva_id", estadia.reserva.id.ToString());
-                Habitacion habitacion = (reservaHabitaciones.Take(1) as ReservaHabitacion).habitacion;
-                hotel = hotelesRegimen.Find(hotelr => hotelr.hotel.id == habitacion.hotel.id).hotel;
+                //Habitacion habitacion = reservaHabitaciones[0].habitacion;
+                //hotel = hotelesRegimen.Find(hotelr => hotelr.hotel.id == habitacion.hotel.id).hotel;
                 setItemHabitacion(reservaHabitaciones);
                 setItemHabiNoHospedada(reservaHabitaciones);
 
@@ -80,16 +86,14 @@ namespace FrbaHotel.Views.Facturar_Estadia
                 return;
             }
 
-            BindingSource itemsVisiblesBinding = new BindingSource();
-            itemsVisiblesBinding.DataSource = itemsVisibles;
-            dataGridView1.DataSource = itemsVisibles;
+            dataGridView1.DataSource = new BindingSource(itemsVisibles, null);
         }
 
 
 
         private void setTexts()
         {
-            txt_FacturaNro.Text = factura.nro.ToString(); //nro de factura
+            //txt_FacturaNro.Text = factura.nro.ToString(); //nro de factura
             txt_Desde.Text = estadia.reserva.fecha_inicio.ToString(); //Fecha de inicio que se reservo
             txt_Hasta.Text = (estadia.reserva.fecha_inicio + estadia.reserva.cant_noches).ToString(); //Fecha de supuesta salida
             txt_CheckIn.Text = estadia.fecha_inicio.ToString();//Fecha de inicio real( check in) Las dos de inicio deberian ser iguales porque sino no te dejarian entrar o ya estaria cancelada
@@ -107,8 +111,10 @@ namespace FrbaHotel.Views.Facturar_Estadia
                 itemHabitacion.factura = factura;
                 itemHabitacion.tipo = "H";
 
+                Habitacion habitacion = reservaHabitacion.habitacion;
+                Reserva reserva = estadia.reserva;
                 //CALCULO PRECIO DE HABITACION
-                itemHabitacion.monto = (reservaHabitacion.habitacion.tipo.porcentual * estadia.reserva.regimen.precio * reservaHabitacion.habitacion.tipo.cantidad_maxima_personas + hotel.cant_estrella * hotel.recarga_estrella) * estadia.reserva.cant_noches;
+                itemHabitacion.monto = (habitacion.tipo.porcentual * reserva.regimen.precio * habitacion.tipo.cantidad_maxima_personas + hotel.cant_estrella * hotel.recarga_estrella) * reserva.cant_noches;
                 itemHabitacion.unidades = estadia.cant_noches;
 
                 try
@@ -128,8 +134,8 @@ namespace FrbaHotel.Views.Facturar_Estadia
 
                 ConsumibleItemsUnidades itemVisible = new ConsumibleItemsUnidades();
                 itemVisible.codigo = 0;
-                itemVisible.descripcion = "Regimen" + reservaHabitacion.reserva.regimen.descripcion + ". Habitacion tipo" + reservaHabitacion.habitacion.descripcion + "-Dias que realmente se hospedo";
-                itemVisible.precio = (reservaHabitacion.habitacion.tipo.porcentual * estadia.reserva.regimen.precio * reservaHabitacion.habitacion.tipo.cantidad_maxima_personas + hotel.cant_estrella * hotel.recarga_estrella);
+                itemVisible.descripcion = "Regimen" + reserva.regimen.descripcion + ". Habitacion tipo" + habitacion.descripcion + "-Dias que realmente se hospedo";
+                itemVisible.precio = (habitacion.tipo.porcentual * reserva.regimen.precio * habitacion.tipo.cantidad_maxima_personas + hotel.cant_estrella * hotel.recarga_estrella);
                 itemVisible.unidades = itemHabitacion.unidades;
                 itemVisible.monto = itemHabitacion.monto;
 
@@ -152,7 +158,8 @@ namespace FrbaHotel.Views.Facturar_Estadia
                     itemHabitacionNoHospedada.monto = 0;
                     itemHabitacionNoHospedada.tipo = "N";
                     itemHabitacionNoHospedada.unidades = estadia.reserva.cant_noches - estadia.cant_noches;
-              
+                    Reserva reserva = estadia.reserva;
+                    Habitacion habitacion = reservaHabitacion.habitacion;
                     try
                     {
                         itemHabitacionNoHospedada.save();
@@ -170,7 +177,7 @@ namespace FrbaHotel.Views.Facturar_Estadia
 
                     ConsumibleItemsUnidades itemVisible = new ConsumibleItemsUnidades();
                     itemVisible.codigo = 0;
-                    itemVisible.descripcion = "Regimen" + reservaHabitacion.reserva.regimen.descripcion + ". Habitacion tipo" + reservaHabitacion.habitacion.descripcion + "-Dias que no se hospedo";
+                    itemVisible.descripcion = "Regimen" + reserva.regimen.descripcion + ". Habitacion tipo" + habitacion.descripcion + "-Dias que no se hospedo";
                     itemVisible.precio = 0;
                     itemVisible.unidades = itemHabitacionNoHospedada.unidades;
                     itemVisible.monto = 0;
