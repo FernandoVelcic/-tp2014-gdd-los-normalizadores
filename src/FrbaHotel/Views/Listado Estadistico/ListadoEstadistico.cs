@@ -157,18 +157,22 @@ namespace FrbaHotel.Listado_Estadistico
         /* Hay que joinear consuibles_estadias, estadias, habitacion y hotel ?? */
         private void HotelConMasConsumibles()
         {
-            var query = "SELECT hotel_id, SUM(consumibles_estadias.monto * consumibles_estadias.unidades) as total ";
 
-            query += " FROM [" + Config.getInstance().schema + "].[consumibles_estadias] ";
+            var query = "SELECT TOP 5 hotel_id, COUNT(*) as total ";
 
-            query += " INNER JOIN [" + Config.getInstance().schema + "].[estadias] ON consumibles_estadias.estadia_id = estadias.id";
+            query += " FROM [" + Config.getInstance().schema + "].[items_facturas] ";
+
+            query += " INNER JOIN [" + Config.getInstance().schema + "].[facturas] ON facturas.id = items_facturas.factura_id";
+            query += " INNER JOIN [" + Config.getInstance().schema + "].[estadias] ON facturas.estadia_id = estadias.id";
             query += " INNER JOIN [" + Config.getInstance().schema + "].[reservas] ON estadias.reserva_id = reservas.id";
             query += " INNER JOIN [" + Config.getInstance().schema + "].[reservas_habitaciones] ON reservas_habitaciones.reserva_id = reservas.id";
             query += " INNER JOIN [" + Config.getInstance().schema + "].[habitaciones] ON reservas_habitaciones.habitacion_id = habitaciones.id";
             query += " INNER JOIN [" + Config.getInstance().schema + "].[hoteles] ON habitaciones.hotel_id = hoteles.id";
 
             query += " WHERE reservas.fecha_inicio BETWEEN '" + fecha1.ToShortDateString() + "' AND '" + fecha2.ToShortDateString() + "' ";
+            query += " AND items_facturas.tipo = 'C' ";
             query += " GROUP BY hotel_id ";
+            query += " ORDER BY total DESC ";
 
             List<HotelCaro> hoteles = new List<HotelCaro>();
 
@@ -188,7 +192,6 @@ namespace FrbaHotel.Listado_Estadistico
 
         }
 
-        /* TODO revisar, en vez de usar top, usar numrow */
         private void HotelMayorCantidadDiasFueraServicio()
         {
 
@@ -198,7 +201,8 @@ namespace FrbaHotel.Listado_Estadistico
             query += " FROM [LOS_NORMALIZADORES].[hoteles] ";
             query += " RIGHT JOIN [LOS_NORMALIZADORES].[hoteles_bajas] ON hoteles.id = hoteles_bajas.hotel_id ";
             query += " WHERE fecha_desde BETWEEN '" + fecha1 + "' AND '" + fecha2 + "' ";
-            query += " GROUP BY hotel_id ORDER BY 2 DESC";
+            query += " GROUP BY hotel_id";
+            query += " ORDER BY cantidad_dias DESC ";
 
 
             SqlCommand command = new SqlCommand(query, ConnectionManager.getInstance().getConnection());
@@ -227,7 +231,7 @@ namespace FrbaHotel.Listado_Estadistico
         private void HabitacionConMayorCantidadDeDiasYVecesOcupada()
         {
 
-            var query = "SELECT habitaciones.id, hoteles.calle, hoteles.ciudad, ";
+            var query = "SELECT TOP 5 habitaciones.id, hoteles.calle, hoteles.ciudad, ";
 
             query += " (SELECT COUNT(*) FROM [" + Config.getInstance().schema + "].[estadias] ";
             query += " INNER JOIN [" + Config.getInstance().schema + "].[reservas] ON estadias.reserva_id = reservas.id";
@@ -245,6 +249,8 @@ namespace FrbaHotel.Listado_Estadistico
             
             query += " FROM [LOS_NORMALIZADORES].[habitaciones] ";
             query += " INNER JOIN [" + Config.getInstance().schema + "].[hoteles] ON habitaciones.hotel_id = hoteles.id";
+            query += " ORDER BY veces DESC ";
+
 
             List<HabitacionTrending> habitaciones = new List<HabitacionTrending>();
 
@@ -278,12 +284,13 @@ namespace FrbaHotel.Listado_Estadistico
         {
 
 
-            var query = "SELECT SUM((consumidos/5) + (habitaciones/10)) as puntos, clientes.id as cliente_id ";
+            var query = "SELECT TOP 5 SUM((consumidos/5) + (habitaciones/10)) as puntos, clientes.id as cliente_id ";
             query += " FROM [LOS_NORMALIZADORES].[gastos_estadia] ";
             query += " INNER JOIN [" + Config.getInstance().schema + "].[clientes] ON clientes.id = gastos_estadia.cliente_id";
             query += " WHERE fecha > '" + fecha1 + "'";
             query += " AND fecha < '" + fecha2 + "'";
             query += " GROUP BY clientes.id ";
+            query += " ORDER BY puntos DESC ";
 
             List<ClienteTrending> clientes = new List<ClienteTrending>();
 
