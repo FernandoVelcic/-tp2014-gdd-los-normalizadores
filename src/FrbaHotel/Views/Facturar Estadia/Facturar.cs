@@ -18,9 +18,9 @@ namespace FrbaHotel.Views.Facturar_Estadia
         Estadia estadia;
         Factura factura;
         Hotel hotel;
-        List<ItemFactura> itemsEstadia;
+        List<ItemFactura> itemsEstadia=new List<ItemFactura>();
         List<ItemAFacturar> itemsParaFacturar;
-        List<ConsumibleItemsUnidades> itemsVisibles;
+        List<ConsumibleItemsUnidades> itemsVisibles=new List<ConsumibleItemsUnidades>();
         Cliente cliente;
 
         public Facturar(Estadia e, List<ItemAFacturar> items)
@@ -45,7 +45,7 @@ namespace FrbaHotel.Views.Facturar_Estadia
                 factura.estadia = estadia;
                 factura.save();
                 setTexts();
-                /* ??? */
+           
 
                 foreach( ItemAFacturar item in itemsParaFacturar)
                 {
@@ -66,10 +66,6 @@ namespace FrbaHotel.Views.Facturar_Estadia
                 txt_Usuario.Text = cliente.nombre.ToString() +" "+ cliente.apellido.ToString();
                 Habitacion habitacionPosta = reserva.obtener_una_habitacion();
                 hotel = habitacionPosta.hotel;
-                //List<HotelRegimen> hotelesRegimen = EntityManager.getEntityManager().findAllBy<HotelRegimen>("regimen_id", reserva.regimen.id.ToString());
-                //List<ReservaHabitacion> reservaHabitaciones = EntityManager.getEntityManager().findAllBy<ReservaHabitacion>("reserva_id", estadia.reserva.id.ToString());
-                //Habitacion habitacion = reservaHabitaciones[0].habitacion;
-                //hotel = hotelesRegimen.Find(hotelr => hotelr.hotel.id == habitacion.hotel.id).hotel;
                 setItemHabitacionNoHospedada();
                 setItemHabitacionHospedada();
                 
@@ -172,11 +168,30 @@ namespace FrbaHotel.Views.Facturar_Estadia
                     return;
                 }
 
-                Reserva reserva = estadia.reserva;
+                Reserva reserva = EntityManager.getEntityManager().findBy<Reserva>("reservas.id", estadia.reserva.id.ToString());
                 Habitacion habitacion = reserva.obtener_una_habitacion();
+               
                 ConsumibleItemsUnidades itemVisible = new ConsumibleItemsUnidades();
                 itemVisible.codigo = 0;
-                itemVisible.descripcion = "Regimen" + reserva.regimen.descripcion + ". Habitacion tipo" + habitacion.descripcion + "-Dias que no se hospedo";
+                string descHab;
+                if (habitacion.descripcion == "") 
+                    {
+                        descHab = "Sin desc";
+                    }
+                    else
+                {
+                    descHab = habitacion.descripcion;
+                }
+                string descReg;
+                if (reserva.regimen.descripcion == "")
+                {
+                    descReg = "Sin desc";
+                }
+                else
+                {
+                    descReg = reserva.regimen.descripcion;
+                }
+                itemVisible.descripcion = "Regimen" + descReg + ". Habitacion tipo" + descHab + "-Dias que no se hospedo";
                 itemVisible.precio = 0;
                 itemVisible.unidades = itemHabitacionNoHospedada.unidades;
                 itemVisible.monto = 0;
@@ -213,10 +228,10 @@ namespace FrbaHotel.Views.Facturar_Estadia
                 MessageBox.Show(exception.Message);
                 return;
             }
-
+            Reserva reserva = estadia.reserva;
             ConsumibleItemsUnidades itemVisible = new ConsumibleItemsUnidades();
             itemVisible.codigo = 0;
-            itemVisible.descripcion = "Descuento por regimen" + estadia.reserva.regimen.descripcion;
+            itemVisible.descripcion = "Descuento por regimen" + reserva.regimen.descripcion;
             itemVisible.precio = 0;
             itemVisible.unidades = 0;
             itemVisible.monto = itemDescuento.monto;
