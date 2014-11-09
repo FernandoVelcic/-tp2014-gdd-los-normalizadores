@@ -239,7 +239,7 @@ INSERT INTO [LOS_NORMALIZADORES].[paises] (nombre, gentilicio) VALUES ('ARGENTIN
 	
 
 
-INSERT INTO [LOS_NORMALIZADORES].[Maestra] SELECT  * FROM [GD2C2014].[gd_esquema].[Maestra]
+INSERT INTO [LOS_NORMALIZADORES].[Maestra] SELECT TOP 10000 * FROM [GD2C2014].[gd_esquema].[Maestra] ORDER BY Consumible_Codigo DESC
 GO
   	
 
@@ -496,16 +496,6 @@ GO
 DROP INDEX  Consumibles_codigo ON [LOS_NORMALIZADORES].[consumibles]
 
 
-/* Relacion entre consumibles y estadia */
-
-INSERT INTO [LOS_NORMALIZADORES].[items_facturas] (consumible_id, estadia_id, monto, unidades)
-	SELECT DISTINCT  consumible_id, estadia_id, Item_Factura_Monto, Item_Factura_Cantidad FROM  [LOS_NORMALIZADORES].[Maestra]
-	WHERE consumible_id is NOT NULL
-	AND   estadia_id IS NOT NULL
-	AND   Item_Factura_Monto IS NOT NULL
-	AND   Item_Factura_Cantidad IS NOT NULL
-GO
-
 
 
 /* Facturas */
@@ -537,13 +527,14 @@ GO
 
 
 /* Items */
-
-
-
-
-
-/* Aca hay un tema bastante raro... */
-
+TRUNCATE table [LOS_NORMALIZADORES].[items_facturas]
+INSERT INTO [LOS_NORMALIZADORES].[items_facturas] (factura_id, consumible_id, estadia_id, monto, unidades)
+	SELECT DISTINCT  factura_id, consumible_id, estadia_id, Item_Factura_Monto, Item_Factura_Cantidad FROM  [LOS_NORMALIZADORES].[Maestra]
+	WHERE consumible_id is NOT NULL
+	AND   estadia_id IS NOT NULL
+	AND   Item_Factura_Monto IS NOT NULL
+	AND   Item_Factura_Cantidad IS NOT NULL
+GO
 
 
 /* TODO:
@@ -714,6 +705,8 @@ ALTER TABLE [LOS_NORMALIZADORES].[items_facturas] ADD CONSTRAINT consumibles_con
 
 ALTER TABLE [LOS_NORMALIZADORES].[facturas] ADD CONSTRAINT facturas_estadia_id FOREIGN KEY (estadia_id) REFERENCES [LOS_NORMALIZADORES].[estadias](id)
 
+ALTER TABLE [LOS_NORMALIZADORES].[items_facturas] ADD CONSTRAINT items_facturas_id FOREIGN KEY (factura_id) REFERENCES [LOS_NORMALIZADORES].[facturas](id)
+
 ALTER TABLE [LOS_NORMALIZADORES].[facturas] ADD CONSTRAINT facturas_forma_de_pago_id FOREIGN KEY (forma_pago_id) REFERENCES [LOS_NORMALIZADORES].[formas_de_pago](id)
 
 ALTER TABLE [LOS_NORMALIZADORES].[usuarios] ADD CONSTRAINT documento_tipos_user_id FOREIGN KEY (documento_tipo_id) REFERENCES [LOS_NORMALIZADORES].[documento_tipos](id)
@@ -748,11 +741,9 @@ INNER JOIN [LOS_NORMALIZADORES].[hoteles] hoteles on habitaciones.hotel_id = hot
 GO
 
 /*
-
 	----------------
 	VISTAS PARA TOPS
 	----------------
-
 */
 
 
