@@ -37,12 +37,20 @@ namespace FrbaHotel.Models
             return reserva_estado == 3 || reserva_estado == 4 || reserva_estado == 5;
         }
 
+        public List<ReservaHabitacion> obtener_habitaciones()
+        {
+            return EntityManager.getEntityManager().findAllBy<ReservaHabitacion>("reservas_habitaciones.reserva_id", id.ToString());
+        }
+
+        public Habitacion obtener_una_habitacion() //HACK
+        {
+            List<ReservaHabitacion> habitaciones_reservadas = obtener_habitaciones();
+            return EntityManager.getEntityManager().findById<Habitacion>(habitaciones_reservadas[0].habitacion.id);
+        }
+
         public int cantidad_maxima_personas()
         {
-            List<ReservaHabitacion> habitaciones_reservadas = EntityManager.getEntityManager().findAllBy<ReservaHabitacion>("reservas_habitaciones.reserva_id", id.ToString());
-            Habitacion habitacion = EntityManager.getEntityManager().findBy<Habitacion>("habitaciones.id", habitaciones_reservadas[0].id.ToString());
-
-            return habitaciones_reservadas.Count() * habitacion.tipo.cantidad_maxima_personas;
+            return obtener_habitaciones().Count() * obtener_una_habitacion().tipo.cantidad_maxima_personas;
         }
     }
 }

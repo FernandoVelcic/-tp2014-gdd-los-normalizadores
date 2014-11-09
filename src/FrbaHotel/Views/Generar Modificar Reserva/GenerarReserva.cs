@@ -21,14 +21,17 @@ namespace FrbaHotel.Generar_Modificar_Reserva
     public partial class FormGenerarReserva : Form
     {
         Reserva reserva;
+        bool esModificacion;
 
         public FormGenerarReserva()
         {
+            esModificacion = false;
+
             reserva = new Reserva();
-            InitializeComponent();
             reserva.cant_noches = 7;
             reserva.fecha_inicio = Config.getInstance().getCurrentDate().ToShortDateString();
             reserva.reserva_estado = 1;
+            InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -149,7 +152,12 @@ namespace FrbaHotel.Generar_Modificar_Reserva
 
         public void onReservaSeleccionada(Reserva reserva)
         {
-
+            this.reserva = reserva;
+            Habitacion habitacion = reserva.obtener_una_habitacion();
+            cmb_Hotel.Text = habitacion.hotel.ToString();
+            cmb_Regimen.Text = reserva.regimen.descripcion;
+            cmb_TipoHabitacion.Text = habitacion.tipo.ToString();
+            esModificacion = true;
         }
 
 

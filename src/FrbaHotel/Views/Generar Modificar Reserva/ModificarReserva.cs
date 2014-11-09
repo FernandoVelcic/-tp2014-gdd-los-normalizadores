@@ -13,8 +13,9 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
 {
     public partial class ModificarReserva : Form
     {
-
         private FrbaHotel.Generar_Modificar_Reserva.FormGenerarReserva formRetorno;
+
+        public int codigo { get; set; }
 
         public ModificarReserva(FrbaHotel.Generar_Modificar_Reserva.FormGenerarReserva formRetorno)
         {
@@ -22,28 +23,23 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
             this.formRetorno = formRetorno;
         }
 
+        private void ModificarReserva_Load(object sender, EventArgs e)
+        {
+            txt_Codigo.DataBindings.Add("Text", this, "codigo");
+        }
+
 
         private void btn_Modificar_Click(object sender, EventArgs e)
         {
-
-            try
+            Reserva reserva = EntityManager.getEntityManager().findById<Reserva>(codigo);
+            if (reserva == null)
             {
-                long codigo = Convert.ToInt64(txt_Codigo.Text);
-                Reserva reserva = EntityManager.getEntityManager().findById<Reserva>(codigo);
-                if (reserva == null)
-                {
-                    MessageBox.Show("La reserva no existe");
-                    return;
-                }
-
-                this.Close();
-                formRetorno.onReservaSeleccionada(reserva);
-            }
-            catch (FormatException ex)
-            {
-                MessageBox.Show("Escriba un numero de reserva valido");
+                MessageBox.Show("La reserva no existe");
                 return;
             }
+
+            this.Close();
+            formRetorno.onReservaSeleccionada(reserva);
 
         }
 
@@ -51,7 +47,6 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
         {
             this.Close();
         }
-
 
 
     }
