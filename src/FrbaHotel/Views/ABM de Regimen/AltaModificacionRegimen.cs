@@ -29,7 +29,7 @@ namespace FrbaHotel.ABM_de_Regimen
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            txt_Codigo.DataBindings.Add("Text", regimen, "codigo");
+            txt_Codigo.DataBindings.Add("Text", regimen, "id");
             txt_Descripcion.DataBindings.Add("Text", regimen, "descripcion");
             txt_PrecioBase.DataBindings.Add("Text", regimen, "precio");
             radio_Activo.DataBindings.Add("Checked", regimen, "estado");

@@ -61,7 +61,7 @@ namespace FrbaHotel
             button6.Visible = permisos.Generar_Reserva;
             button7.Visible = permisos.Listado_Estadístico;
             //button8.Visible Volver a pantalla principal
-            button9.Visible = permisos.Registrar_Consumible;
+            //button9.Visible = permisos.Registrar_Consumible;
             button10.Visible = permisos.Registrar_Estadía;
             button11.Visible = permisos.ABM_Usuario;
             button12.Visible = permisos.ABM_Hotel;
