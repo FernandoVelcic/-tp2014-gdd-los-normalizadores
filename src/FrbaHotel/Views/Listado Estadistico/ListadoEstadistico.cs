@@ -278,7 +278,7 @@ namespace FrbaHotel.Listado_Estadistico
         {
 
 
-            var query = "SELECT SUM((consumidos/5) + (habitaciones/10)) as puntos, clientes.id as cliente_nombre";
+            var query = "SELECT SUM((consumidos/5) + (habitaciones/10)) as puntos, clientes.id as cliente_id ";
             query += " FROM [LOS_NORMALIZADORES].[gastos_estadia] ";
             query += " INNER JOIN [" + Config.getInstance().schema + "].[clientes] ON clientes.id = gastos_estadia.cliente_id";
             query += " WHERE fecha > '" + fecha1 + "'";
@@ -293,7 +293,7 @@ namespace FrbaHotel.Listado_Estadistico
                 while (result.Read())
                 {
                     ClienteTrending cliente = new ClienteTrending();
-                    cliente.nombre_cliente = result["cliente_nombre"].ToString();
+                    cliente.cliente_id = result["cliente_id"].ToString();
                     cliente.puntos = Convert.ToInt32(result["puntos"]);
                     clientes.Add(cliente);
                 }

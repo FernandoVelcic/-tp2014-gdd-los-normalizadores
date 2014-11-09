@@ -67,5 +67,11 @@ namespace FrbaHotel.Models
                 throw new ValidationException("Este cliente ya se encontraba registrado con anterioridad");
             }
         }
+
+        public override string ToString()
+        {
+            return nombre + " " + apellido;
+        }
+
     }
 }
