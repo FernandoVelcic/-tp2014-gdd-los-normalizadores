@@ -100,6 +100,7 @@
             this.Name = "HabitacionesDisponibles";
             this.Text = "Habitaciones disponibles";
             this.Load += new System.EventHandler(this.HabitacionesDisponibles_Load);
+            this.Shown += new System.EventHandler(this.HabitacionesDisponibles_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
