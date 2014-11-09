@@ -11,7 +11,7 @@ namespace MyActiveRecord
     {
 
         private static ConnectionManager instance;
-        private SqlConnection coneccion;
+        private SqlConnection conexion;
 
         private ConnectionManager()
         {
@@ -29,23 +29,22 @@ namespace MyActiveRecord
 
         public void connect(String conectionString)
         {
-            coneccion = new SqlConnection(conectionString);
-            coneccion.Open();
-            String query;
-            query = "USE [" + Config.getInstance().database + "] ";
-            SqlCommand command = new SqlCommand(query, coneccion);
-            command.ExecuteNonQuery();
+            conexion = new SqlConnection(conectionString);
+            conexion.Open();
+
+            new SqlCommand("USE [" + Config.getInstance().database + "] ", conexion).ExecuteNonQuery();
+            new SqlCommand("SET DATEFORMAT " + Config.getInstance().getDateFormat(), conexion).ExecuteNonQuery();
 
         }
 
         public SqlConnection getConnection()
         {
-            return coneccion;
+            return conexion;
         }
 
         public void close()
         {
-            coneccion.Close();
+            conexion.Close();
         }
 
 

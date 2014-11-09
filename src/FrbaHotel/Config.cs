@@ -62,5 +62,10 @@ namespace FrbaHotel
         {
             return currentDate;
         }
+
+        public string getDateFormat()
+        {
+            return "dmy";
+        }
     }
 }

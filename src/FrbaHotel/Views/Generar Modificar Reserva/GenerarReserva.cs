@@ -14,23 +14,18 @@ using System.Text;
 using System.Windows.Forms;
 
 using FrbaHotel.Homes;
+using System.Globalization;
 
 namespace FrbaHotel.Generar_Modificar_Reserva
 {
-    public partial class Form1 : Form
+    public partial class FormGenerarReserva : Form
     {
         Reserva reserva;
 
-        public Form1() : this(new Reserva())
+        public FormGenerarReserva()
         {
-
-        }
-
-
-        public Form1(Reserva reserva)
-        {
+            reserva = new Reserva();
             InitializeComponent();
-            this.reserva = reserva;
             reserva.cant_noches = 7;
             reserva.fecha_inicio = Config.getInstance().getCurrentDate().ToShortDateString();
             reserva.reserva_estado = 1;
@@ -58,7 +53,7 @@ namespace FrbaHotel.Generar_Modificar_Reserva
             update_regimenes();
 
             txt_Cant_Noches.DataBindings.Add("Text", this.reserva, "cant_noches");
-            dateTimePicker1.DataBindings.Add("Text", this.reserva, "fecha_inicio");
+            dateTimePicker1.DataBindings.Add("Text", this.reserva, "fecha_inicio", true);
 
             update_precio_habitacion();
         }
@@ -143,6 +138,18 @@ namespace FrbaHotel.Generar_Modificar_Reserva
         private void cmb_TipoHabitacion_SelectedIndexChanged(object sender, EventArgs e)
         {
             update_precio_habitacion();
+        }
+
+
+
+        private void btn_Modificar_Click(object sender, EventArgs e)
+        {
+            Navigator.nextForm(this, new ModificarReserva(this));
+        }
+
+        public void onReservaSeleccionada(Reserva reserva)
+        {
+
         }
 
 
