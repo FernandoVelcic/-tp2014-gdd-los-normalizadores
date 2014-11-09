@@ -126,6 +126,7 @@
             this.txt_Pin.Size = new System.Drawing.Size(100, 22);
             this.txt_Pin.TabIndex = 4;
             this.txt_Pin.Visible = false;
+            this.txt_Pin.TextChanged += new System.EventHandler(this.txt_Pin_TextChanged);
             // 
             // txt_Tarjeta
             // 
@@ -134,6 +135,7 @@
             this.txt_Tarjeta.Size = new System.Drawing.Size(100, 22);
             this.txt_Tarjeta.TabIndex = 3;
             this.txt_Tarjeta.Visible = false;
+            this.txt_Tarjeta.TextChanged += new System.EventHandler(this.txt_Tarjeta_TextChanged);
             // 
             // label8
             // 
@@ -269,6 +271,7 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(10, 22);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(322, 282);
             this.dataGridView1.TabIndex = 0;
             // 
@@ -297,6 +300,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "Facturar";
             this.Text = "Facturar";
+            this.Load += new System.EventHandler(this.Facturar_load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -304,7 +308,6 @@
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
-            this.Load += new System.EventHandler(this.Facturar_load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 

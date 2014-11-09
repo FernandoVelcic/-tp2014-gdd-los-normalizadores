@@ -112,6 +112,20 @@ namespace FrbaHotel.Registrar_Consumible
 
         }
 
+        public bool IsNumeric(object Expression)
+        {
+            bool esnumero;
+            double returnNumero;
+
+            esnumero = Double.TryParse(Convert.ToString(Expression), System.Globalization.NumberStyles.Any, System.Globalization.NumberFormatInfo.InvariantInfo, out returnNumero);
+            return esnumero;
+        }
+
+        private void txt_UnidadesArticulo_TextChanged(object sender, EventArgs e)
+        {
+            if (!IsNumeric(txt_UnidadesArticulo.Text) && txt_UnidadesArticulo.Text != "") { MessageBox.Show("Debe ingresar numeros unicamente"); txt_UnidadesArticulo.Text = ""; }
+        }
+
 
 
        

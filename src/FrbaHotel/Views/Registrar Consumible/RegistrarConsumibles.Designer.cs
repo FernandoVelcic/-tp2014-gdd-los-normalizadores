@@ -140,6 +140,7 @@
             this.txt_UnidadesArticulo.Name = "txt_UnidadesArticulo";
             this.txt_UnidadesArticulo.Size = new System.Drawing.Size(116, 22);
             this.txt_UnidadesArticulo.TabIndex = 14;
+            this.txt_UnidadesArticulo.TextChanged += new System.EventHandler(this.txt_UnidadesArticulo_TextChanged);
             // 
             // label4
             // 
