@@ -223,6 +223,7 @@ namespace FrbaHotel.Listado_Estadistico
         }
 
 
+        /* TODO faltan las fechas */
         private void HabitacionConMayorCantidadDeDiasYVecesOcupada()
         {
 
@@ -276,33 +277,13 @@ namespace FrbaHotel.Listado_Estadistico
         private void ClienteConMasPuntos()
         {
 
-            /*
-             Seria algo asi el tema es que no hay totales de facturacion ni nada
-             
-             
-             SELECT *, (puntos_estadia + puntos_facturacion) puntos_totales 
 
-                FROM (
-	                SELECT nombre, apellido, 
-                	
-		                (SELECT 45/10) as puntos_estadia, 
-		                (SELECT (total_item_facturados/5) FROM [LOS_NORMALIZADORES].[gastos_facturacion]) as puntos_facturacion 
-                		
-	                FROM LOS_NORMALIZADORES.clientes
-                ) as clientes
-             
-             
-             */
-
-            var query = "SELECT clientes.nombre, ";
-
-
-            query += "SUM((SELECT 48) UNION (SELECT 26)) as puntos ";
-
-
-            query += " FROM [LOS_NORMALIZADORES].[clientes] ";
-
-
+            var query = "SELECT SUM((consumidos/5) + (habitaciones/10)) as puntos, clientes.id as cliente_nombre";
+            query += " FROM [LOS_NORMALIZADORES].[gastos_estadia] ";
+            query += " INNER JOIN [" + Config.getInstance().schema + "].[clientes] ON clientes.id = gastos_estadia.cliente_id";
+            query += " WHERE fecha > '" + fecha1 + "'";
+            query += " AND fecha < '" + fecha2 + "'";
+            query += " GROUP BY clientes.id ";
 
             List<ClienteTrending> clientes = new List<ClienteTrending>();
 
@@ -312,7 +293,7 @@ namespace FrbaHotel.Listado_Estadistico
                 while (result.Read())
                 {
                     ClienteTrending cliente = new ClienteTrending();
-                    cliente.nombre_cliente = result["nombre"].ToString();
+                    cliente.nombre_cliente = result["cliente_nombre"].ToString();
                     cliente.puntos = Convert.ToInt32(result["puntos"]);
                     clientes.Add(cliente);
                 }

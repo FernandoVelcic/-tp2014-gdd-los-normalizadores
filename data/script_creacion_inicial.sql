@@ -748,7 +748,7 @@ GO
 */
 
 
-CREATE VIEW [LOS_NORMALIZADORES].[gastos_facturacion] AS
+CREATE VIEW [LOS_NORMALIZADORES].[gastos_consumibles] AS
 	SELECT estadias.id, reservas.cliente_id,  SUM(items_facturas.monto * items_facturas.unidades) as total_item_facturados
 	FROM [LOS_NORMALIZADORES].items_facturas
 	INNER JOIN [LOS_NORMALIZADORES].estadias ON items_facturas.estadia_id = estadias.id
