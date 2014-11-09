@@ -40,7 +40,7 @@ namespace FrbaHotel.Views.Facturar_Estadia
                 setTexts();
                 /* ??? */
 
-                itemsEstadia = EntityManager.getEntityManager().findAllBy<ItemFactura>("estadia_id", estadia.id.ToString());
+                itemsEstadia = EntityManager.getEntityManager().findAllBy<ItemFactura>("items_facturas.estadia_id", estadia.id.ToString());
                 
                 foreach( ItemFactura item in itemsEstadia)
                 {

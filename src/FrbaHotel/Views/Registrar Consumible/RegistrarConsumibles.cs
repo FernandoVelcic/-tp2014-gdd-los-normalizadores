@@ -7,7 +7,11 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using FrbaHotel.Homes;
+using System.Globalization;
 using System.Windows.Forms;
+
+using MyActiveRecord;
 
 namespace FrbaHotel.Registrar_Consumible
 {
@@ -18,7 +22,7 @@ namespace FrbaHotel.Registrar_Consumible
         public Form1(Estadia e)
         {
             estadia = e;
-            InitializeComponent();
+            /*InitializeComponent();*/
             
         }
 
@@ -26,14 +30,20 @@ namespace FrbaHotel.Registrar_Consumible
         {
 
             this.cargarConsumibles();
-            
+
+            comboBox1.Items.Clear();
+
             BindingSource consumibles_binding = new BindingSource();
             consumibles_binding.DataSource = EntityManager.getEntityManager().findAll<Consumible>();
-            cmb_DescripcionArticulo.DataSource = consumibles_binding;
-            cmb_DescripcionArticulo.Text = "";
-
+            comboBox1.DataSource = consumibles_binding;
+             
+            
             txt_reserva_id.Text = estadia.reserva.id.ToString();
-            txt_TipoRegimen.Text = estadia.reserva.regimen.descripcion;
+            Reserva resInter=estadia.reserva;
+            Reserva reserva = EntityManager.getEntityManager().findBy<Reserva>("reservas.id", resInter.id.ToString());
+            Regimen reg = reserva.regimen;
+            Regimen regimen = EntityManager.getEntityManager().findBy<Regimen>("regimenes.id", reg.id.ToString());
+            txt_TipoRegimen.Text = regimen.descripcion;
 
         }
 
@@ -54,9 +64,10 @@ namespace FrbaHotel.Registrar_Consumible
             ItemFactura consumible_estadia = new ItemFactura();
 
             int unidades = int.Parse(txt_UnidadesArticulo.Text);    //chequear si va, para mi deberia, pero en la tabla no está
-            Consumible consumible_seleccionado = cmb_DescripcionArticulo.SelectedItem as Consumible;
+            Consumible consumible_seleccionado = comboBox1.SelectedItem as Consumible;
 
-            consumible_estadia.estadia.id = estadia.id;
+
+            consumible_estadia.estadia = estadia;
             consumible_estadia.consumible.codigo = consumible_seleccionado.codigo;
             consumible_estadia.unidades = unidades;
             consumible_estadia.monto = unidades * consumible_seleccionado.precio;
@@ -67,7 +78,7 @@ namespace FrbaHotel.Registrar_Consumible
 
         private void cargarConsumibles()
         {
-            List<ItemFactura> consumiblesEstadia = EntityManager.getEntityManager().findAllBy<ItemFactura>("estadia_id", estadia.id.ToString());
+            List<ItemFactura> consumiblesEstadia = EntityManager.getEntityManager().findAllBy<ItemFactura>("items_facturas.estadia_id", estadia.id.ToString());
 
             BindingList<ConsumibleItemsUnidades> consumibleUnidadesBinding = new BindingList<ConsumibleItemsUnidades>();
             foreach (ItemFactura consumibleEstadia in consumiblesEstadia)
@@ -79,8 +90,9 @@ namespace FrbaHotel.Registrar_Consumible
                 consumibleUnidades.precio = consumibleEstadia.consumible.precio;
                 consumibleUnidades.unidades = consumibleEstadia.unidades;
                 consumibleUnidades.monto = consumibleEstadia.monto;
-
+                
                 consumibleUnidadesBinding.Add(consumibleUnidades);
+
             }
             dataGridView1.DataSource = new BindingSource(consumibleUnidadesBinding, null);
         }
@@ -96,6 +108,8 @@ namespace FrbaHotel.Registrar_Consumible
             }
 
         }
+
+
 
        
     }

@@ -66,6 +66,7 @@ namespace FrbaHotel.Views.Registrar_Estadia
             }
 
             MessageBox.Show("Reserva confirmada con exito");
+            Close();
         }
       
     

@@ -4,6 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using FrbaHotel.Models;
+using FrbaHotel.Models.Exceptions;
+using FrbaHotel.Tools;
+using FrbaHotel.Database_Helper;
+
 namespace FrbaHotel.Models
 {
     public class Consumible : ActiveRecord 
@@ -14,6 +19,12 @@ namespace FrbaHotel.Models
         public int codigo { get; set; }  //[numeric](18, 0)
         public String descripcion { get; set; } //[nvarchar](255)
         public float precio { get; set; }  // [numeric](18, 2)
+
+
+        public override string ToString()
+        {
+            return descripcion;
+        }
 
 
 
