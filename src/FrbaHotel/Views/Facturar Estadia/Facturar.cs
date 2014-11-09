@@ -244,7 +244,7 @@ namespace FrbaHotel.Views.Facturar_Estadia
 
         private void onBtnFacturar(object sender, EventArgs e)
         {
-            
+            facturarConsumibles();
             string forma_de_pago = cmb_FormaDePago.SelectedItem.ToString();
             
             /* Se agrego harcodeado en el script de migracion que 1: sin especificar, 2: efectivo, 3: credito 4:debito*/
@@ -321,6 +321,35 @@ namespace FrbaHotel.Views.Facturar_Estadia
             }
 
             Navigator.nextForm(this, new FrbaHotel.Operaciones());
+        }
+
+        public void facturarConsumibles()
+        {
+            foreach(ItemAFacturar consumible in itemsParaFacturar)
+                {
+                        ItemFactura itemConsumible = new ItemFactura();
+                        itemConsumible.estadia = estadia;
+                        itemConsumible.consumible = consumible.consumible;
+                        itemConsumible.factura = factura;
+                        itemConsumible.tipo = "C";
+                        itemConsumible.monto = consumible.monto;
+                        itemConsumible.unidades = consumible.unidades;
+
+                        try
+                            {
+                                 itemConsumible.save();
+                            }
+                        catch (ValidationException exception)
+                            {
+                                MessageBox.Show(exception.Message);
+                                return;
+                            }
+                        catch (SqlException exception)
+                            {
+                                MessageBox.Show(exception.Message);
+                                return;
+                            }
+                }
         }
 
         private void onCambioFormaDePago(object sender, EventArgs e)
