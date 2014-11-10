@@ -559,9 +559,7 @@ CREATE TABLE [LOS_NORMALIZADORES].[roles](
 	[ABM_Hotel][bit] NOT NULL,
 	[Generar_Reserva][bit] NOT NULL,
 	[Cancelar_Reserva][bit] NOT NULL,
-	[Registrar_Consumible][bit] NOT NULL,
 	[Registrar_Estadía][bit] NOT NULL,
-	[Facturar_Estadía][bit] NOT NULL,
 	[Listado_Estadístico][bit] NOT NULL,
 ) ON [PRIMARY]
 
@@ -623,12 +621,10 @@ INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[roles]
 		   ,[ABM_Hotel]
 		   ,[Generar_Reserva]
 		   ,[Cancelar_Reserva]
-		   ,[Registrar_Consumible]
-	   	   ,[Registrar_Estadía]
-		   ,[Facturar_Estadía]
+		   ,[Registrar_Estadía]
 		   ,[Listado_Estadístico])
      VALUES
-           ('Administrador',1,1,1,0,1,1,1,0,0,0,0,0,1)
+           ('Administrador',1,1,1,0,1,1,1,0,0,0,1)
 INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[roles]
            ([descripcion]
            ,[estado]
@@ -640,12 +636,10 @@ INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[roles]
 		   ,[ABM_Hotel]
 		   ,[Generar_Reserva]
 		   ,[Cancelar_Reserva]
-		   ,[Registrar_Consumible]
-	   	   ,[Registrar_Estadía]
-		   ,[Facturar_Estadía]
+		   ,[Registrar_Estadía]
 		   ,[Listado_Estadístico])
      VALUES
-           ('Recepcionista',1,0,0,1,0,0,0,1,1,1,1,1,1)
+           ('Recepcionista',1,0,0,1,0,0,0,1,1,1,1)
 
 INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[roles]
            ([descripcion]
@@ -658,12 +652,10 @@ INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[roles]
 		   ,[ABM_Hotel]
 		   ,[Generar_Reserva]
 		   ,[Cancelar_Reserva]
-		   ,[Registrar_Consumible]
-	   	   ,[Registrar_Estadía]
-		   ,[Facturar_Estadía]
+		   ,[Registrar_Estadía]
 		   ,[Listado_Estadístico])
      VALUES
-           ('Guest',1,0,0,0,0,0,0,1,1,0,0,0,1)
+           ('Guest',1,0,0,0,0,0,0,1,1,0,1)
 
 GO
 

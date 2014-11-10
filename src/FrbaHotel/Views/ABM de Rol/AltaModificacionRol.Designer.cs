@@ -110,9 +110,7 @@
             "ABM Hotel",
             "Generar Reserva",
             "Cancelar Reserva",
-            "Registrar Consumible",
             "Registrar Estadía",
-            "Facturar Estadía",
             "Listado Estadístico"});
             this.checkedListBox1.Location = new System.Drawing.Point(175, 107);
             this.checkedListBox1.Name = "checkedListBox1";
