@@ -159,6 +159,7 @@
             // 
             // cmb_FormaDePago
             // 
+            this.cmb_FormaDePago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_FormaDePago.FormattingEnabled = true;
             this.cmb_FormaDePago.Items.AddRange(new object[] {
             "Efectivo",
@@ -168,7 +169,6 @@
             this.cmb_FormaDePago.Name = "cmb_FormaDePago";
             this.cmb_FormaDePago.Size = new System.Drawing.Size(261, 24);
             this.cmb_FormaDePago.TabIndex = 0;
-            this.cmb_FormaDePago.Text = "Seleccione una forma de pago...";
             this.cmb_FormaDePago.SelectedIndexChanged += new System.EventHandler(this.onCambioFormaDePago);
             // 
             // groupBox4
@@ -272,6 +272,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(10, 22);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(451, 282);
             this.dataGridView1.TabIndex = 0;
             // 

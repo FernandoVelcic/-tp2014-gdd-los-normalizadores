@@ -54,6 +54,7 @@ namespace FrbaHotel.Registrar_Estadia
                 if (DateTime.Compare(DateTime.Parse(fecha).Date, DateTime.Parse(reserva.fecha_inicio).Date) == 0)
                 {
                     reserva.reserva_estado = 6;
+                    reserva.fecha_cancelacion = "";
 
                     Estadia estadia = new Estadia();
                     estadia.fecha_inicio = fecha;

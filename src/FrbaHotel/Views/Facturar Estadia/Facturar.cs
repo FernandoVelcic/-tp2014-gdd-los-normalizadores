@@ -18,9 +18,9 @@ namespace FrbaHotel.Views.Facturar_Estadia
         Estadia estadia;
         Factura factura;
         Hotel hotel;
-        List<ItemFactura> itemsEstadia=new List<ItemFactura>();
+        List<ItemFactura> itemsEstadia = new List<ItemFactura>();
         List<ItemAFacturar> itemsParaFacturar;
-        List<ConsumibleItemsUnidades> itemsVisibles=new List<ConsumibleItemsUnidades>();
+        List<ConsumibleItemsUnidades> itemsVisibles = new List<ConsumibleItemsUnidades>();
         Cliente cliente;
 
         public Facturar(Estadia e, List<ItemAFacturar> items)
@@ -28,13 +28,13 @@ namespace FrbaHotel.Views.Facturar_Estadia
             estadia = e;
             itemsParaFacturar = items;
             InitializeComponent();
-            
+
         }
 
         public void Facturar_load(object sender, EventArgs e)
         {
-            
-           
+
+
             BindingList<ConsumibleItemsUnidades> itemsVisibles = new BindingList<ConsumibleItemsUnidades>();
             try
             {
@@ -45,9 +45,9 @@ namespace FrbaHotel.Views.Facturar_Estadia
                 factura.estadia = estadia;
                 factura.save();
                 setTexts();
-           
 
-                foreach( ItemAFacturar item in itemsParaFacturar)
+
+                foreach (ItemAFacturar item in itemsParaFacturar)
                 {
                     ConsumibleItemsUnidades itemVisible = new ConsumibleItemsUnidades();
 
@@ -63,12 +63,12 @@ namespace FrbaHotel.Views.Facturar_Estadia
 
                 Reserva reserva = EntityManager.getEntityManager().findBy<Reserva>("reservas.id", estadia.reserva.id.ToString());
                 cliente = reserva.cliente;
-                txt_Usuario.Text = cliente.nombre.ToString() +" "+ cliente.apellido.ToString();
+                txt_Usuario.Text = cliente.nombre.ToString() + " " + cliente.apellido.ToString();
                 Habitacion habitacionPosta = reserva.obtener_una_habitacion();
                 hotel = habitacionPosta.hotel;
                 setItemHabitacionNoHospedada();
                 setItemHabitacionHospedada();
-                
+
                 //Si el regimen es All inclusive o All inclusive moderado
                 if (reserva.regimen.id == 3 || reserva.regimen.id == 4)
                 {
@@ -98,54 +98,54 @@ namespace FrbaHotel.Views.Facturar_Estadia
             txt_Hasta.Text = (DateTime.Parse(estadia.reserva.fecha_inicio).AddDays(estadia.reserva.cant_noches)).ToString(); //Fecha de supuesta salida
             txt_CheckIn.Text = estadia.fecha_inicio.ToString();//Fecha de inicio real( check in) Las dos de inicio deberian ser iguales porque sino no te dejarian entrar o ya estaria cancelada
             txt_CheckOut.Text = (DateTime.Parse(estadia.fecha_inicio).AddDays(estadia.cant_noches)).ToString();//Fecha de salida real ( check out)
-       
+
         }
 
         private void setItemHabitacionHospedada()
+        {
+            ItemFactura itemHabitacion = new ItemFactura();
+            itemHabitacion.estadia = estadia;
+            itemHabitacion.consumible = null;
+            itemHabitacion.factura = factura;
+            itemHabitacion.tipo = "H";
+
+            Reserva reserva = EntityManager.getEntityManager().findBy<Reserva>("reservas.id", estadia.reserva.id.ToString());
+            Habitacion habitacion = reserva.obtener_una_habitacion();
+            //CALCULO PRECIO DE HABITACION
+            itemHabitacion.monto = (habitacion.tipo.porcentual * reserva.regimen.precio * habitacion.tipo.cantidad_maxima_personas + hotel.cant_estrella * hotel.recarga_estrella) * reserva.cant_noches;
+            itemHabitacion.unidades = estadia.cant_noches;
+
+            try
             {
-                ItemFactura itemHabitacion = new ItemFactura();
-                itemHabitacion.estadia = estadia;
-                itemHabitacion.consumible = null;
-                itemHabitacion.factura = factura;
-                itemHabitacion.tipo = "H";
+                itemHabitacion.save();
+            }
+            catch (ValidationException exception)
+            {
+                MessageBox.Show(exception.Message);
+                return;
+            }
+            catch (SqlException exception)
+            {
+                MessageBox.Show(exception.Message);
+                return;
+            }
 
-                Reserva reserva = EntityManager.getEntityManager().findBy<Reserva>("reservas.id", estadia.reserva.id.ToString());
-                Habitacion habitacion = reserva.obtener_una_habitacion();    
-                //CALCULO PRECIO DE HABITACION
-                itemHabitacion.monto = (habitacion.tipo.porcentual * reserva.regimen.precio * habitacion.tipo.cantidad_maxima_personas + hotel.cant_estrella * hotel.recarga_estrella) * reserva.cant_noches;
-                itemHabitacion.unidades = estadia.cant_noches;
+            ConsumibleItemsUnidades itemVisible = new ConsumibleItemsUnidades();
+            itemVisible.codigo = 0;
+            itemVisible.descripcion = "Regimen " + reserva.regimen.descripcion + ". Habitacion tipo: " + habitacion.descripcion + "-Dias hospedados";
+            itemVisible.precio = (habitacion.tipo.porcentual * reserva.regimen.precio * habitacion.tipo.cantidad_maxima_personas + hotel.cant_estrella * hotel.recarga_estrella);
+            itemVisible.unidades = itemHabitacion.unidades;
+            itemVisible.monto = itemHabitacion.monto;
 
-                try
-                {
-                    itemHabitacion.save();
-                }
-                catch (ValidationException exception)
-                {
-                    MessageBox.Show(exception.Message);
-                    return;
-                }
-                catch (SqlException exception)
-                {
-                    MessageBox.Show(exception.Message);
-                    return;
-                }
-
-                ConsumibleItemsUnidades itemVisible = new ConsumibleItemsUnidades();
-                itemVisible.codigo = 0;
-                itemVisible.descripcion = "Regimen " + reserva.regimen.descripcion + ". Habitacion tipo: " + habitacion.descripcion + "-Dias hospedados";
-                itemVisible.precio = (habitacion.tipo.porcentual * reserva.regimen.precio * habitacion.tipo.cantidad_maxima_personas + hotel.cant_estrella * hotel.recarga_estrella);
-                itemVisible.unidades = itemHabitacion.unidades;
-                itemVisible.monto = itemHabitacion.monto;
-
-                this.itemsVisibles.Add(itemVisible);
-                this.itemsEstadia.Add(itemHabitacion);
+            this.itemsVisibles.Add(itemVisible);
+            this.itemsEstadia.Add(itemHabitacion);
 
         }
-            private void setItemHabitacionNoHospedada()
+        private void setItemHabitacionNoHospedada()
+        {
+            if (estadia.cant_noches < estadia.reserva.cant_noches)
             {
-                if (estadia.cant_noches < estadia.reserva.cant_noches)
-                {
-  
+
                 ItemFactura itemHabitacionNoHospedada = new ItemFactura();
                 itemHabitacionNoHospedada.estadia = estadia;
                 itemHabitacionNoHospedada.consumible = null;
@@ -170,15 +170,15 @@ namespace FrbaHotel.Views.Facturar_Estadia
 
                 Reserva reserva = EntityManager.getEntityManager().findBy<Reserva>("reservas.id", estadia.reserva.id.ToString());
                 Habitacion habitacion = reserva.obtener_una_habitacion();
-               
+
                 ConsumibleItemsUnidades itemVisible = new ConsumibleItemsUnidades();
                 itemVisible.codigo = 0;
                 string descHab;
-                if (habitacion.descripcion == "") 
-                    {
-                        descHab = "Sin descripcion ";
-                    }
-                    else
+                if (habitacion.descripcion == "")
+                {
+                    descHab = "Sin descripcion ";
+                }
+                else
                 {
                     descHab = habitacion.descripcion;
                 }
@@ -198,12 +198,12 @@ namespace FrbaHotel.Views.Facturar_Estadia
 
                 this.itemsVisibles.Add(itemVisible);
                 this.itemsEstadia.Add(itemHabitacionNoHospedada);
-                }
+            }
         }
-        
+
         public void setdescuentoAllInclusive()
         {
-            float suma =  itemsEstadia.Select<ItemFactura, float>(item => item.unidades * item.consumible.precio).Sum();
+            float suma = itemsEstadia.Select<ItemFactura, float>(item => item.unidades * item.consumible.precio).Sum();
 
             ItemFactura itemDescuento = new ItemFactura();
             itemDescuento.estadia = estadia;
@@ -344,31 +344,31 @@ namespace FrbaHotel.Views.Facturar_Estadia
         }
         public void facturarConsumibles()
         {
-            foreach(ItemAFacturar consumible in itemsParaFacturar)
-                {
-                        ItemFactura itemConsumible = new ItemFactura();
-                        itemConsumible.estadia = estadia;
-                        itemConsumible.consumible = consumible.consumible;
-                        itemConsumible.factura = factura;
-                        itemConsumible.tipo = "C";
-                        itemConsumible.monto = consumible.monto;
-                        itemConsumible.unidades = consumible.unidades;
+            foreach (ItemAFacturar consumible in itemsParaFacturar)
+            {
+                ItemFactura itemConsumible = new ItemFactura();
+                itemConsumible.estadia = estadia;
+                itemConsumible.consumible = consumible.consumible;
+                itemConsumible.factura = factura;
+                itemConsumible.tipo = "C";
+                itemConsumible.monto = consumible.monto;
+                itemConsumible.unidades = consumible.unidades;
 
-                        try
-                            {
-                                 itemConsumible.save();
-                            }
-                        catch (ValidationException exception)
-                            {
-                                MessageBox.Show(exception.Message);
-                                return;
-                            }
-                        catch (SqlException exception)
-                            {
-                                MessageBox.Show(exception.Message);
-                                return;
-                            }
+                try
+                {
+                    itemConsumible.save();
                 }
+                catch (ValidationException exception)
+                {
+                    MessageBox.Show(exception.Message);
+                    return;
+                }
+                catch (SqlException exception)
+                {
+                    MessageBox.Show(exception.Message);
+                    return;
+                }
+            }
         }
 
         private void onCambioFormaDePago(object sender, EventArgs e)
