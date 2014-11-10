@@ -61,7 +61,6 @@ namespace FrbaHotel
             button6.Visible = permisos.Generar_Reserva;
             button7.Visible = permisos.Listado_Estadístico;
             //button8.Visible Volver a pantalla principal
-            //button9.Visible = permisos.Registrar_Consumible;
             button10.Visible = permisos.Registrar_Estadía;
             button11.Visible = permisos.ABM_Usuario;
             button12.Visible = permisos.ABM_Hotel;
@@ -105,12 +104,6 @@ namespace FrbaHotel
         private void button8_Click(object sender, EventArgs e)
         {
             Navigator.nextForm(this, new FrbaHotel.Home());
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            //Lo comento porque no sirve sin que le pases el regimen de argumento
-           // Navigator.nextForm(this, new FrbaHotel.Registrar_Consumible.Form1());
         }
 
         private void button10_Click(object sender, EventArgs e)

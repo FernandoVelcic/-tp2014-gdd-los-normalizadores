@@ -22,9 +22,7 @@ namespace FrbaHotel.Models
         public Boolean ABM_Hotel { get; set; } //[bit]
         public Boolean Generar_Reserva { get; set; } //[bit]
         public Boolean Cancelar_Reserva { get; set; } //[bit]
-        public Boolean Registrar_Consumible { get; set; } //[bit]
         public Boolean Registrar_Estadía { get; set; } //[bit]
-        public Boolean Facturar_Estadía { get; set; } //[bit]
         public Boolean Listado_Estadístico { get; set; } //[bit]
 
         public override string ToString()
