@@ -151,7 +151,6 @@ namespace FrbaHotel.Listado_Estadistico
         }
 
 
-        /* TODO aca se vuelve complicado, los consumibles se facturan por estadias,*/
         /* pero las estadias segun el modelo de datos podria tener mas de una habitacion/hotel */
         /* Si bien desde la app no permitimos eso, es muy dificil de calcular */
         /* Hay que joinear consuibles_estadias, estadias, habitacion y hotel ?? */
@@ -231,25 +230,13 @@ namespace FrbaHotel.Listado_Estadistico
         private void HabitacionConMayorCantidadDeDiasYVecesOcupada()
         {
 
-            var query = "SELECT TOP 5 habitaciones.id, hoteles.calle, hoteles.ciudad, ";
-
-            query += " (SELECT COUNT(*) FROM [" + Config.getInstance().schema + "].[estadias] ";
-            query += " INNER JOIN [" + Config.getInstance().schema + "].[reservas] ON estadias.reserva_id = reservas.id";
-            query += " INNER JOIN [" + Config.getInstance().schema + "].[reservas_habitaciones] ON reservas_habitaciones.reserva_id = reservas.id";
-            query += " WHERE reservas_habitaciones.habitacion_id = habitaciones.id";
-            query += " AND estadias.fecha_inicio > '" + fecha1 + "'";     
-            query += " ) veces, ";
-
-            query += " (SELECT ISNULL(SUM(estadias.cant_noches), 0) FROM [" + Config.getInstance().schema + "].[estadias] ";
-            query += " INNER JOIN [" + Config.getInstance().schema + "].[reservas] ON estadias.reserva_id = reservas.id";
-            query += " INNER JOIN [" + Config.getInstance().schema + "].[reservas_habitaciones] ON reservas_habitaciones.reserva_id = reservas.id";
-            query += " WHERE reservas_habitaciones.habitacion_id = habitaciones.id";
-            query += " AND estadias.fecha_inicio > '" + fecha1 + "'";
-            query += " ) cantidad_noches ";
-            
-            query += " FROM [LOS_NORMALIZADORES].[habitaciones] ";
-            query += " INNER JOIN [" + Config.getInstance().schema + "].[hoteles] ON habitaciones.hotel_id = hoteles.id";
-            query += " ORDER BY veces DESC ";
+            var query = "SELECT TOP 5 habitacion_id, SUM(cant_noches) as cantidad_noches, COUNT(*) as veces ";
+            query += " FROM [LOS_NORMALIZADORES].[habitaciones_estadia] ";
+            query += " WHERE ";
+            query += " fecha_inicio > '" + fecha1.ToShortDateString() + "'";
+            query += " AND fecha_fin < '" + fecha2.ToShortDateString() + "'";
+            query += " AND reserva_estado = 6 ";
+            query += " GROUP BY habitacion_id ORDER BY cantidad_noches DESC";
 
 
             List<HabitacionTrending> habitaciones = new List<HabitacionTrending>();
@@ -260,10 +247,9 @@ namespace FrbaHotel.Listado_Estadistico
                 while (result.Read())
                 {
                     HabitacionTrending habitacion = new HabitacionTrending();
-                    habitacion.habitacion_id = Convert.ToInt32(result["id"]);
+                    habitacion.habitacion_id = Convert.ToInt32(result["habitacion_id"]);
                     habitacion.cantidad_veces = Convert.ToInt32(result["veces"]);
                     habitacion.cantidad_noches = Convert.ToInt32(result["cantidad_noches"]);
-                    habitacion.Hotel = result["ciudad"].ToString() + " - " + result["calle"].ToString();
                     habitaciones.Add(habitacion);
                 }
             }
@@ -275,7 +261,6 @@ namespace FrbaHotel.Listado_Estadistico
 
 
 
-        /* TODO ver esto */
         /* Cliente con mayor cantidad de puntos, donde cada $10 en estadías vale 1 puntos */
         /* y cada $5 de consumibles es 1 punto, de la sumatoria de todas las facturaciones que haya tenido */
         /* dentro de un periodo independientemente del Hotel. */

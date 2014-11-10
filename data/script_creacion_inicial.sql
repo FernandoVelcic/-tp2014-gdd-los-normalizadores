@@ -427,6 +427,7 @@ SET IDENTITY_INSERT [LOS_NORMALIZADORES].[reservas] OFF;
 ALTER TABLE [LOS_NORMALIZADORES].[Maestra] ADD reserva_id INTEGER
 GO
 
+
 UPDATE [LOS_NORMALIZADORES].[Maestra]
 SET reserva_id = 
 	(
@@ -446,9 +447,6 @@ INSERT INTO [LOS_NORMALIZADORES].[reservas_habitaciones] ([reserva_id], [habitac
 
 
 /* Estadias */
-
-/*TODO agregar cantidad de personas en base al tipo de habitacion*/
-
 INSERT INTO [LOS_NORMALIZADORES].[estadias] ([fecha_inicio], [cant_noches], [reserva_id])	
 	SELECT DISTINCT [Estadia_Fecha_Inicio], [Estadia_Cant_Noches], [reserva_id] FROM [LOS_NORMALIZADORES].[Maestra]
 	WHERE [Estadia_Fecha_Inicio] IS NOT NULL 
@@ -469,7 +467,11 @@ SET estadia_id =
 	)
 GO
 
-
+UPDATE res SET reserva_estado = 6 
+	FROM [LOS_NORMALIZADORES].reservas res
+	INNER JOIN [LOS_NORMALIZADORES].estadias ON estadias.reserva_id = res.id
+	
+	
 /* Consumibles */ 
 SET IDENTITY_INSERT [LOS_NORMALIZADORES].[consumibles] ON;
 INSERT INTO [LOS_NORMALIZADORES].[consumibles] ([id], [descripcion], [precio])	
@@ -777,6 +779,24 @@ CREATE VIEW [LOS_NORMALIZADORES].[gastos_estadia] AS
 	INNER JOIN [LOS_NORMALIZADORES].reservas ON reservas.id = estadias.reserva_id
 GO
 
+
+CREATE VIEW [LOS_NORMALIZADORES].[habitaciones_estadia] AS
+	SELECT 
+		habitaciones.id as habitacion_id, 
+		reservas.reserva_estado as reserva_estado, 
+		estadias.fecha_inicio as fecha_inicio, 
+		(estadias.fecha_inicio + estadias.cant_noches) as fecha_fin, 
+		estadias.id as estadia_id,
+		estadias.cant_noches as cant_noches,
+		hoteles.id as hotel_id
+		
+		FROM [LOS_NORMALIZADORES].habitaciones
+		INNER JOIN [LOS_NORMALIZADORES].reservas_habitaciones ON reservas_habitaciones.habitacion_id = habitaciones.id
+		INNER JOIN [LOS_NORMALIZADORES].reservas ON reservas_habitaciones.reserva_id = reservas.id
+		INNER JOIN [LOS_NORMALIZADORES].estadias ON estadias.reserva_id = reservas.id
+		INNER JOIN [LOS_NORMALIZADORES].hoteles ON habitaciones.hotel_id = hoteles.id
+		
+GO
 
 
 
