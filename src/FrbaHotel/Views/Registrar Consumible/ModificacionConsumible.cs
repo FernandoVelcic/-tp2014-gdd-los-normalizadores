@@ -13,7 +13,7 @@ namespace FrbaHotel.Registrar_Consumible
 {
     public partial class ModificacionConsumible : Form
     {
-        ConsumibleItemsUnidades consumibleU;
+        public ConsumibleItemsUnidades consumibleU { get; set; }
 
         public ModificacionConsumible(ConsumibleItemsUnidades item)
         {
@@ -23,12 +23,14 @@ namespace FrbaHotel.Registrar_Consumible
 
         private void ModificacionConsumible_Load(object sender, EventArgs e)
         {
-            label1.Text = consumibleU.descripcion;
+            label2.DataBindings.Add("Text", consumibleU, "descripcion");
+            txt_Unidades.DataBindings.Add("Text", consumibleU, "unidades");
         }
             
 
         private void button2_Click(object sender, EventArgs e)
         {
+
            /* 
             ItemFactura consumibleEstadia = EntityManager.getEntityManager().findBy<ItemFactura>("codigo", consumibleU.codigo.ToString());
            
@@ -38,9 +40,9 @@ namespace FrbaHotel.Registrar_Consumible
                 consumibleEstadia.monto = consumibleEstadia.consumible.precio * consumibleEstadia.unidades;
                 
                 Close();
-            }
-            MessageBox.Show("No ha ingresado las unidades a modificar");
-            */
+            }*/
+            MessageBox.Show("Se ha modificado la cantidad de unidades correctamente");
+            Close();
         }
 
         private void button1_Click(object sender, EventArgs e)

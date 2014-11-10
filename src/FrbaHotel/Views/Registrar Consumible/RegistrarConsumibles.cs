@@ -55,12 +55,13 @@ namespace FrbaHotel.Registrar_Consumible
 
         private void btn_Modificar_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            this.editRecord<ConsumibleItemsUnidades, FrbaHotel.Registrar_Consumible.ModificacionConsumible>(dataGridView1);
+            /*foreach (DataGridViewRow row in dataGridView1.SelectedRows)
             {
                ConsumibleItemsUnidades record = (ConsumibleItemsUnidades)row.DataBoundItem;
                 Navigator.nextForm(this, new FrbaHotel.Registrar_Consumible.ModificacionConsumible(record));
                 
-            }
+            }*/
             //modificar el que esta seleccionado en el datagrid
         }
 

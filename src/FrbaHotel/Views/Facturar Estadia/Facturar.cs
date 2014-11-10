@@ -245,6 +245,12 @@ namespace FrbaHotel.Views.Facturar_Estadia
         private void onBtnFacturar(object sender, EventArgs e)
         {
             facturarConsumibles();
+            if(cmb_FormaDePago.SelectedIndex==-1)
+                {
+                MessageBox.Show("Seleccione una forma de pago");
+                return;
+                }
+            else{
             string forma_de_pago = cmb_FormaDePago.SelectedItem.ToString();
             
             /* Se agrego harcodeado en el script de migracion que 1: sin especificar, 2: efectivo, 3: credito 4:debito*/
@@ -322,7 +328,7 @@ namespace FrbaHotel.Views.Facturar_Estadia
 
             Navigator.nextForm(this, new FrbaHotel.Operaciones());
         }
-
+        }
         public void facturarConsumibles()
         {
             foreach(ItemAFacturar consumible in itemsParaFacturar)

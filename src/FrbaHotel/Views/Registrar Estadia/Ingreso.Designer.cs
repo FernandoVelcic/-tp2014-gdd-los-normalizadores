@@ -77,7 +77,7 @@
             this.groupBox3.Size = new System.Drawing.Size(709, 295);
             this.groupBox3.TabIndex = 12;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Agregados:";
+            this.groupBox3.Text = "Huespedes:";
             // 
             // dataGridView1
             // 
@@ -90,7 +90,6 @@
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(697, 260);
             this.dataGridView1.TabIndex = 0;
-            
             // 
             // button3
             // 
