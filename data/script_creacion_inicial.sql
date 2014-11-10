@@ -184,7 +184,8 @@ CREATE TABLE [LOS_NORMALIZADORES].[clientes](
 	[documento_nro] [numeric](18, 0) NOT NULL,
 	[telefono] [nvarchar](255) NULL,
 	[estado] [bit] default 1,
-	[nro_tarjeta] [nvarchar] (255)
+	[nro_tarjeta] [nvarchar] (255),
+	[pin] [nvarchar] (255)
 ) ON [PRIMARY]
 
 
