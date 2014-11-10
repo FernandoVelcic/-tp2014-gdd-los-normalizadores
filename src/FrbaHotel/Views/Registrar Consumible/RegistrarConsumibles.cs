@@ -67,10 +67,23 @@ namespace FrbaHotel.Registrar_Consumible
 
         private void btn_Agregar_Click(object sender, EventArgs e)
         {
+            if (int.Parse(txt_UnidadesArticulo.Text) < 0)
+            {
+                MessageBox.Show("Debe ingresar cantidades positivas");
+                txt_UnidadesArticulo.Text = "";
+                return;
+            }
+
             ItemAFacturar consumible_estadia = new ItemAFacturar();
 
             int unidades = int.Parse(txt_UnidadesArticulo.Text);    //chequear si va, para mi deberia, pero en la tabla no está
             Consumible consumible_seleccionado = comboBox1.SelectedItem as Consumible;
+
+            if (items.Exists(item => item.consumible.id == consumible_seleccionado.id))
+            {
+                MessageBox.Show("Este consumible ya se encuentra en la lista, modifique la cantidad");
+                return;
+            }
 
             consumible_estadia.estadia = estadia;
             consumible_estadia.consumible = consumible_seleccionado;
@@ -78,7 +91,6 @@ namespace FrbaHotel.Registrar_Consumible
             consumible_estadia.monto = unidades * consumible_seleccionado.precio;
             items.Add(consumible_estadia);
             this.cargarConsumibles();
-            
          }
 
         private void cargarConsumibles()
@@ -124,7 +136,25 @@ namespace FrbaHotel.Registrar_Consumible
 
         private void txt_UnidadesArticulo_TextChanged(object sender, EventArgs e)
         {
-            if (!IsNumeric(txt_UnidadesArticulo.Text) && txt_UnidadesArticulo.Text != "") { MessageBox.Show("Debe ingresar numeros unicamente"); txt_UnidadesArticulo.Text = ""; }
+            if (!IsNumeric(txt_UnidadesArticulo.Text) && txt_UnidadesArticulo.Text != "") { 
+                MessageBox.Show("Debe ingresar numeros unicamente"); txt_UnidadesArticulo.Text = 0.ToString(); }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("¿Esta seguro que desea borrar este registro?", "Borrar registro", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+
+            if (dr == DialogResult.Yes)
+            {
+                foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+                {
+                    ConsumibleItemsUnidades record = row.DataBoundItem as ConsumibleItemsUnidades;
+                    items.RemoveAll(item => item.consumible.id == record.codigo);
+                    //items.RemoveAll(item => item.consumible.descripcion == record.descripcion);
+                    MessageBox.Show("Registro borrado correctamente");
+                }
+            }
+            this.cargarConsumibles();
         }
 
 

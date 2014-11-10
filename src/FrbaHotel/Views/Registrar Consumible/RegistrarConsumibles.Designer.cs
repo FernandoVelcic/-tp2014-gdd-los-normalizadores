@@ -43,6 +43,7 @@
             this.btn_Facturar = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.txt_reserva_id = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -56,7 +57,7 @@
             this.btn_Agregar.Location = new System.Drawing.Point(351, 461);
             this.btn_Agregar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btn_Agregar.Name = "btn_Agregar";
-            this.btn_Agregar.Size = new System.Drawing.Size(141, 60);
+            this.btn_Agregar.Size = new System.Drawing.Size(89, 60);
             this.btn_Agregar.TabIndex = 1;
             this.btn_Agregar.Text = "Agregar";
             this.btn_Agregar.UseVisualStyleBackColor = true;
@@ -102,10 +103,10 @@
             // btn_Modificar
             // 
             this.btn_Modificar.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Modificar.Location = new System.Drawing.Point(517, 461);
+            this.btn_Modificar.Location = new System.Drawing.Point(463, 461);
             this.btn_Modificar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btn_Modificar.Name = "btn_Modificar";
-            this.btn_Modificar.Size = new System.Drawing.Size(141, 60);
+            this.btn_Modificar.Size = new System.Drawing.Size(89, 60);
             this.btn_Modificar.TabIndex = 6;
             this.btn_Modificar.Text = "Modificar";
             this.btn_Modificar.UseVisualStyleBackColor = true;
@@ -215,12 +216,25 @@
             this.txt_reserva_id.Size = new System.Drawing.Size(0, 16);
             this.txt_reserva_id.TabIndex = 0;
             // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(570, 461);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(89, 60);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "Borrar";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(850, 534);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.btn_Facturar);
             this.Controls.Add(this.groupBox3);
@@ -263,5 +277,6 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label txt_reserva_id;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button button1;
     }
 }
