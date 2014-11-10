@@ -271,9 +271,10 @@ namespace FrbaHotel.Views.Facturar_Estadia
                         break;
                 }
                 //update del numero de tarjeta del usuario
-                if (cliente.nro_tarjeta == null && txt_Tarjeta.Text != "")
+                if (cliente.nro_tarjeta == null && txt_Tarjeta.Text != "" && txt_Pin.Text != "")
                 {
                     cliente.nro_tarjeta = txt_Tarjeta.Text;
+                    cliente.pin = txt_Pin.Text;
                     try
                     {
                         cliente.save();
@@ -289,12 +290,13 @@ namespace FrbaHotel.Views.Facturar_Estadia
                         return;
                     }
                 }
-                else if (cliente.nro_tarjeta != txt_Tarjeta.Text && txt_Tarjeta.Text != "")
+                else if (cliente.nro_tarjeta != txt_Tarjeta.Text && txt_Tarjeta.Text != "" && txt_Pin.Text != "")
                 {
                     DialogResult result1 = MessageBox.Show("El usuario tiene asignado el siguiente numero de tarjeta, desea cambiarlo?" + cliente.nro_tarjeta, "Importante", MessageBoxButtons.YesNo);
                     if (result1 == DialogResult.Yes)
                     {
                         cliente.nro_tarjeta = txt_Tarjeta.Text;
+                        cliente.pin = txt_Pin.Text;
                         try
                         {
                             cliente.save();
