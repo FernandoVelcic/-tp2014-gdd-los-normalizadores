@@ -197,8 +197,7 @@ CREATE TABLE [LOS_NORMALIZADORES].[estadias](
 
 
 CREATE TABLE [LOS_NORMALIZADORES].[consumibles](
-	[id] INTEGER IDENTITY PRIMARY KEY,
-	[codigo] [numeric](18, 0),
+	[id] INTEGER IDENTITY(2324,1) PRIMARY KEY,
 	[descripcion] [nvarchar](255),
 	[precio] [numeric](18, 2),
 ) ON [PRIMARY]
@@ -471,24 +470,26 @@ GO
 
 
 /* Consumibles */ 
-INSERT INTO [LOS_NORMALIZADORES].[consumibles] ([codigo], [descripcion], [precio])	
+SET IDENTITY_INSERT [LOS_NORMALIZADORES].[consumibles] ON;
+INSERT INTO [LOS_NORMALIZADORES].[consumibles] ([id], [descripcion], [precio])	
 	SELECT DISTINCT [Consumible_Codigo], [Consumible_Descripcion], [Consumible_Precio] FROM [LOS_NORMALIZADORES].[Maestra]
 	WHERE [Consumible_Codigo] IS NOT NULL 
 	AND   [Consumible_Descripcion] IS NOT NULL
 	AND   [Consumible_Precio] IS NOT NULL
+SET IDENTITY_INSERT [LOS_NORMALIZADORES].[consumibles] OFF;
 GO
 
 ALTER TABLE [LOS_NORMALIZADORES].[Maestra] ADD consumible_id INTEGER
 GO
 
-CREATE INDEX Consumibles_codigo ON [LOS_NORMALIZADORES].[consumibles] (codigo)
+CREATE INDEX Consumibles_codigo ON [LOS_NORMALIZADORES].[consumibles] (id)
 CREATE INDEX Maestra_Consumiblse_codigo ON [LOS_NORMALIZADORES].[Maestra] (Consumible_Codigo)
 
 UPDATE [LOS_NORMALIZADORES].[Maestra]
 SET consumible_id = 
 	(
 		SELECT id FROM [LOS_NORMALIZADORES].[consumibles] as c
-		WHERE [LOS_NORMALIZADORES].[Maestra].Consumible_Codigo = c.codigo
+		WHERE [LOS_NORMALIZADORES].[Maestra].Consumible_Codigo = c.id
 		AND   [LOS_NORMALIZADORES].[Maestra].Consumible_Descripcion = c.descripcion
 		AND   [LOS_NORMALIZADORES].[Maestra].Consumible_Precio = c.precio
 	)
