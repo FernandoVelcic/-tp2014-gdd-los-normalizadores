@@ -245,52 +245,33 @@ namespace FrbaHotel.Views.Facturar_Estadia
         private void onBtnFacturar(object sender, EventArgs e)
         {
             facturarConsumibles();
-            if(cmb_FormaDePago.SelectedIndex==-1)
-                {
+            if (cmb_FormaDePago.SelectedIndex == -1)
+            {
                 MessageBox.Show("Seleccione una forma de pago");
                 return;
-                }
-            else{
-            string forma_de_pago = cmb_FormaDePago.SelectedItem.ToString();
-            
-            /* Se agrego harcodeado en el script de migracion que 1: sin especificar, 2: efectivo, 3: credito 4:debito*/
-            switch(forma_de_pago)
-            {
-                case "Efectivo":
-                    factura.forma_pago_id =2;
-                break;
-                case "Tarjeta de Crédito":
-                    factura.forma_pago_id =3;
-                break;
-                case "Tarjeta de Débito":
-                    factura.forma_pago_id =4;
-                break;
-                default:
-                    factura.forma_pago_id =1;
-                break;
             }
-            //update del numero de tarjeta del usuario
-            if(cliente.nro_tarjeta==null)
+            else
             {
-                cliente.nro_tarjeta=txt_Tarjeta.Text;
-                try
+                string forma_de_pago = cmb_FormaDePago.SelectedItem.ToString();
+
+                /* Se agrego harcodeado en el script de migracion que 1: sin especificar, 2: efectivo, 3: credito 4:debito*/
+                switch (forma_de_pago)
                 {
-                    cliente.save();
+                    case "Efectivo":
+                        factura.forma_pago_id = 2;
+                        break;
+                    case "Tarjeta de Crédito":
+                        factura.forma_pago_id = 3;
+                        break;
+                    case "Tarjeta de Débito":
+                        factura.forma_pago_id = 4;
+                        break;
+                    default:
+                        factura.forma_pago_id = 1;
+                        break;
                 }
-                catch (ValidationException exception)
-                {
-                    MessageBox.Show(exception.Message);
-                    return;
-                }
-                catch (SqlException exception)
-                {
-                    MessageBox.Show(exception.Message);
-                    return;
-                }
-            }else if(cliente.nro_tarjeta!=txt_Tarjeta.Text) 
-            {
-                DialogResult result1 = MessageBox.Show("El usuario tiene asignado el siguiente numero de tarjeta, desea cambiarlo?" + cliente.nro_tarjeta, "Importante", MessageBoxButtons.YesNo);
-                if (result1 == DialogResult.Yes)
+                //update del numero de tarjeta del usuario
+                if (cliente.nro_tarjeta == null && txt_Tarjeta.Text != "")
                 {
                     cliente.nro_tarjeta = txt_Tarjeta.Text;
                     try
@@ -308,26 +289,56 @@ namespace FrbaHotel.Views.Facturar_Estadia
                         return;
                     }
                 }
-            }
-            //Update de la factura para guardar la forma de pago
-            try
-            {
-                factura.save();
-                MessageBox.Show("La factura se genero con exito!");
-            }
-            catch (ValidationException exception)
-            {
-                MessageBox.Show(exception.Message);
-                return;
-            }
-            catch (SqlException exception)
-            {
-                MessageBox.Show(exception.Message);
-                return;
-            }
+                else if (cliente.nro_tarjeta != txt_Tarjeta.Text && txt_Tarjeta.Text != "")
+                {
+                    DialogResult result1 = MessageBox.Show("El usuario tiene asignado el siguiente numero de tarjeta, desea cambiarlo?" + cliente.nro_tarjeta, "Importante", MessageBoxButtons.YesNo);
+                    if (result1 == DialogResult.Yes)
+                    {
+                        cliente.nro_tarjeta = txt_Tarjeta.Text;
+                        try
+                        {
+                            cliente.save();
+                        }
+                        catch (ValidationException exception)
+                        {
+                            MessageBox.Show(exception.Message);
+                            return;
+                        }
+                        catch (SqlException exception)
+                        {
+                            MessageBox.Show(exception.Message);
+                            return;
+                        }
+                    }
+                }
 
-            Navigator.nextForm(this, new FrbaHotel.Operaciones());
-        }
+                if (cliente.pin != txt_Pin.ToString())
+                {
+                    MessageBox.Show("El PIN de seguridad de la tarjeta no es el correcto");
+                }
+                else
+                {
+
+                    //Update de la factura para guardar la forma de pago
+                    try
+                    {
+                        factura.save();
+                        MessageBox.Show("La factura se genero con exito!");
+                    }
+                    catch (ValidationException exception)
+                    {
+                        MessageBox.Show(exception.Message);
+                        return;
+                    }
+                    catch (SqlException exception)
+                    {
+                        MessageBox.Show(exception.Message);
+                        return;
+                    }
+
+                    Navigator.nextForm(this, new FrbaHotel.Operaciones());
+                }
+            }
         }
         public void facturarConsumibles()
         {

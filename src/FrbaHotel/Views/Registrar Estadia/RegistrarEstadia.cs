@@ -43,36 +43,44 @@ namespace FrbaHotel.Registrar_Estadia
         {
             if (!obtenerReserva())
                 return;
+            Estadia es = EntityManager.getEntityManager().findBy<Estadia>("reserva_id", reserva.id.ToString());
 
-            if (DateTime.Compare(DateTime.Parse(fecha).Date, DateTime.Parse(reserva.fecha_inicio).Date) == 0)
+            if (es != null)
             {
-                reserva.reserva_estado = 6;
-
-                Estadia estadia = new Estadia();
-                estadia.fecha_inicio = fecha;
-                estadia.reserva = reserva;
-
-                try
-                {
-                    reserva.save();
-                    estadia.save();
-                }
-                catch (ValidationException exception)
-                {
-                    MessageBox.Show(exception.Message);
-                    return;
-                }
-                catch (SqlException exception)
-                {
-                    MessageBox.Show(exception.Message);
-                    return;
-                }
-                MessageBox.Show("La estadía ha sido validada");
-                Navigator.nextForm(this, new FrbaHotel.Views.Registrar_Estadia.Ingreso(reserva));
+                MessageBox.Show("La estadia ya ha sido validada con anteriodad");
             }
-            else if (DateTime.Compare(DateTime.Parse(fecha).Date, DateTime.Parse(reserva.fecha_inicio).Date) != 0)
+            else
             {
-                 MessageBox.Show("La fecha ingresada no es igual a la reservada");
+                if (DateTime.Compare(DateTime.Parse(fecha).Date, DateTime.Parse(reserva.fecha_inicio).Date) == 0)
+                {
+                    reserva.reserva_estado = 6;
+
+                    Estadia estadia = new Estadia();
+                    estadia.fecha_inicio = fecha;
+                    estadia.reserva = reserva;
+
+                    try
+                    {
+                        reserva.save();
+                        estadia.save();
+                    }
+                    catch (ValidationException exception)
+                    {
+                        MessageBox.Show(exception.Message);
+                        return;
+                    }
+                    catch (SqlException exception)
+                    {
+                        MessageBox.Show(exception.Message);
+                        return;
+                    }
+                    MessageBox.Show("La estadía ha sido validada");
+                    Navigator.nextForm(this, new FrbaHotel.Views.Registrar_Estadia.Ingreso(reserva));
+                }
+                else if (DateTime.Compare(DateTime.Parse(fecha).Date, DateTime.Parse(reserva.fecha_inicio).Date) != 0)
+                {
+                    MessageBox.Show("La fecha ingresada no es igual a la reservada");
+                }
             }
         }
 
@@ -82,32 +90,41 @@ namespace FrbaHotel.Registrar_Estadia
                 return;
 
             Estadia estadiaout = EntityManager.getEntityManager().findBy<Estadia>("estadias.reserva_id", reserva_numero.ToString());
-            int dias_desde_ingreso=DateTime.Compare(DateTime.Parse(fecha).Date, DateTime.Parse(reserva.fecha_inicio).Date);
-            int cant_noches=int.Parse(DateTime.Parse(fecha).Subtract(DateTime.Parse(estadiaout.fecha_inicio)).TotalDays.ToString());
-            if (dias_desde_ingreso >= 0 && reserva.cant_noches >=cant_noches)
-            {
-            estadiaout.cant_noches = cant_noches;
 
-            try
+            if (estadiaout.cant_noches != 0)
             {
-                estadiaout.save();
+                MessageBox.Show("La estadia ya ha sido efectivizada con anterioridad");
             }
-            catch (ValidationException exception)
-            {
-                MessageBox.Show(exception.Message);
-                return;
-            }
-            catch (SqlException exception)
-            {
-                MessageBox.Show(exception.Message);
-                return;
-            }
-
-            Navigator.nextForm(this, new FrbaHotel.Registrar_Consumible.Form1(estadiaout));
-        }
             else
             {
-                MessageBox.Show("Debe seleccionar una fecha posterior a la fecha de ingreso para hacer el checkout");
+                int dias_desde_ingreso = DateTime.Compare(DateTime.Parse(fecha).Date, DateTime.Parse(reserva.fecha_inicio).Date);
+                int cant_noches = int.Parse(DateTime.Parse(fecha).Subtract(DateTime.Parse(estadiaout.fecha_inicio)).TotalDays.ToString());
+                if (dias_desde_ingreso >= 0 && reserva.cant_noches >= cant_noches)
+                {
+                    estadiaout.cant_noches = cant_noches;
+
+                    try
+                    {
+                        estadiaout.save();
+                    }
+                    catch (ValidationException exception)
+                    {
+                        MessageBox.Show(exception.Message);
+                        return;
+                    }
+                    catch (SqlException exception)
+                    {
+                        MessageBox.Show(exception.Message);
+                        return;
+                    }
+
+                    Navigator.nextForm(this, new FrbaHotel.Registrar_Consumible.Form1(estadiaout));
+                }
+                else
+                {
+                    MessageBox.Show("Debe seleccionar una fecha posterior a la fecha de ingreso para hacer el checkout");
+                }
+
             }
         }
         public bool obtenerReserva()
