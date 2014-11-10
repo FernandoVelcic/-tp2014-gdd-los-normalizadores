@@ -137,7 +137,7 @@ namespace FrbaHotel.Registrar_Consumible
         private void txt_UnidadesArticulo_TextChanged(object sender, EventArgs e)
         {
             if (!IsNumeric(txt_UnidadesArticulo.Text) && txt_UnidadesArticulo.Text != "") { 
-                MessageBox.Show("Debe ingresar numeros unicamente"); txt_UnidadesArticulo.Text = 0.ToString(); }
+                MessageBox.Show("Debe ingresar numeros unicamente"); txt_UnidadesArticulo.Text = "0"; }
         }
 
         private void button1_Click(object sender, EventArgs e)
