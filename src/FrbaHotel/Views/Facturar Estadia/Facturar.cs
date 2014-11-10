@@ -57,7 +57,7 @@ namespace FrbaHotel.Views.Facturar_Estadia
                     itemVisible.unidades = item.unidades;
                     itemVisible.monto = item.monto;
 
-                    itemsVisibles.Add(itemVisible);
+                    this.itemsVisibles.Add(itemVisible);
 
                 }
 
@@ -86,7 +86,7 @@ namespace FrbaHotel.Views.Facturar_Estadia
                 return;
             }
 
-            dataGridView1.DataSource = new BindingSource(itemsVisibles, null);
+            dataGridView1.DataSource = new BindingSource(this.itemsVisibles, null);
         }
 
 
@@ -132,13 +132,13 @@ namespace FrbaHotel.Views.Facturar_Estadia
 
                 ConsumibleItemsUnidades itemVisible = new ConsumibleItemsUnidades();
                 itemVisible.codigo = 0;
-                itemVisible.descripcion = "Regimen" + reserva.regimen.descripcion + ". Habitacion tipo" + habitacion.descripcion + "-Dias que realmente se hospedo";
+                itemVisible.descripcion = "Regimen " + reserva.regimen.descripcion + ". Habitacion tipo: " + habitacion.descripcion + "-Dias hospedados";
                 itemVisible.precio = (habitacion.tipo.porcentual * reserva.regimen.precio * habitacion.tipo.cantidad_maxima_personas + hotel.cant_estrella * hotel.recarga_estrella);
                 itemVisible.unidades = itemHabitacion.unidades;
                 itemVisible.monto = itemHabitacion.monto;
 
-                itemsVisibles.Add(itemVisible);
-                itemsEstadia.Add(itemHabitacion);
+                this.itemsVisibles.Add(itemVisible);
+                this.itemsEstadia.Add(itemHabitacion);
 
         }
             private void setItemHabitacionNoHospedada()
@@ -176,7 +176,7 @@ namespace FrbaHotel.Views.Facturar_Estadia
                 string descHab;
                 if (habitacion.descripcion == "") 
                     {
-                        descHab = "Sin desc";
+                        descHab = "Sin descripcion ";
                     }
                     else
                 {
@@ -191,13 +191,13 @@ namespace FrbaHotel.Views.Facturar_Estadia
                 {
                     descReg = reserva.regimen.descripcion;
                 }
-                itemVisible.descripcion = "Regimen" + descReg + ". Habitacion tipo" + descHab + "-Dias que no se hospedo";
+                itemVisible.descripcion = "Regimen " + descReg + ". Habitacion tipo: " + descHab + "-Dias no usados";
                 itemVisible.precio = 0;
                 itemVisible.unidades = itemHabitacionNoHospedada.unidades;
                 itemVisible.monto = 0;
 
-                itemsVisibles.Add(itemVisible);
-                itemsEstadia.Add(itemHabitacionNoHospedada);
+                this.itemsVisibles.Add(itemVisible);
+                this.itemsEstadia.Add(itemHabitacionNoHospedada);
                 }
         }
         

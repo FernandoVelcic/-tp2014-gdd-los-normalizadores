@@ -71,7 +71,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(43, 17);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(753, 408);
+            this.groupBox1.Size = new System.Drawing.Size(865, 408);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Tag = "";
@@ -261,7 +261,7 @@
             this.groupBox3.Controls.Add(this.dataGridView1);
             this.groupBox3.Location = new System.Drawing.Point(392, 18);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(343, 323);
+            this.groupBox3.Size = new System.Drawing.Size(467, 323);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Items a cobrar:";
@@ -272,7 +272,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(10, 22);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(322, 282);
+            this.dataGridView1.Size = new System.Drawing.Size(451, 282);
             this.dataGridView1.TabIndex = 0;
             // 
             // txt_FacturaNro
@@ -296,7 +296,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(831, 453);
+            this.ClientSize = new System.Drawing.Size(928, 442);
             this.Controls.Add(this.groupBox1);
             this.Name = "Facturar";
             this.Text = "Facturar";
