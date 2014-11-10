@@ -51,7 +51,7 @@ namespace FrbaHotel.Views.Facturar_Estadia
                 {
                     ConsumibleItemsUnidades itemVisible = new ConsumibleItemsUnidades();
 
-                    itemVisible.codigo = item.consumible.codigo;
+                    itemVisible.codigo = item.consumible.id;
                     itemVisible.descripcion = item.consumible.descripcion;
                     itemVisible.precio = item.consumible.precio;
                     itemVisible.unidades = item.unidades;

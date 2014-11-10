@@ -11,7 +11,7 @@ namespace FrbaHotel.Models
     public class ConsumibleItemsUnidades
     {
         
-        public int codigo { get; set; }  //[numeric](18, 0)
+        public long codigo { get; set; }  //[numeric](18, 0)
         public String descripcion { get; set; } //[nvarchar](255)
         public float precio { get; set; }  // [numeric](18, 2)
         public int unidades { get; set; }

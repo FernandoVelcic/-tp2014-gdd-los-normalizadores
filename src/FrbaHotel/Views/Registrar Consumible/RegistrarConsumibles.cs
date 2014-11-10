@@ -88,7 +88,7 @@ namespace FrbaHotel.Registrar_Consumible
             {
                 ConsumibleItemsUnidades consumibleUnidades = new ConsumibleItemsUnidades();
 
-                consumibleUnidades.codigo = consumibleEstadia.consumible.codigo;
+                consumibleUnidades.codigo = consumibleEstadia.consumible.id;
                 consumibleUnidades.descripcion = consumibleEstadia.consumible.descripcion;
                 consumibleUnidades.precio = consumibleEstadia.consumible.precio;
                 consumibleUnidades.unidades = consumibleEstadia.unidades;
