@@ -547,6 +547,25 @@ INSERT INTO [LOS_NORMALIZADORES].[items_facturas] (factura_id, estadia_id, monto
 	AND   Item_Factura_Cantidad IS NOT NULL
 GO
 
+
+UPDATE LOS_NORMALIZADORES.LOS_NORMALIZADORES.items_facturas 
+	SET monto = (((monto - (ho.cant_estrella * ho.recarga_estrella))* t.cantidad_maxima_personas) + ho.cant_estrella*ho.recarga_estrella) * e.cant_noches 
+	FROM 
+		LOS_NORMALIZADORES.LOS_NORMALIZADORES.estadias e,
+		LOS_NORMALIZADORES.LOS_NORMALIZADORES.reservas_habitaciones r, 
+		LOS_NORMALIZADORES.LOS_NORMALIZADORES.hoteles ho,
+		LOS_NORMALIZADORES.LOS_NORMALIZADORES.habitaciones h, 
+		LOS_NORMALIZADORES.LOS_NORMALIZADORES.habitaciones_tipos t
+		
+	WHERE estadia_id = e.id 
+	AND h.hotel_id = ho.id
+	AND e.reserva_id = r.reserva_id
+	AND r.habitacion_id = h.id
+	AND h.tipo_id = t.id
+	AND tipo = 'H'
+
+GO
+
 /* LOGIN y ROLES */
 CREATE TABLE [LOS_NORMALIZADORES].[roles](
 	[id] INTEGER IDENTITY PRIMARY KEY,
