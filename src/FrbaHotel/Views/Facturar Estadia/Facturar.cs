@@ -369,6 +369,10 @@ namespace FrbaHotel.Views.Facturar_Estadia
                     return;
                 }
             }
+
+            List<ItemFactura> itemsFactura = EntityManager.getEntityManager().findAllBy<ItemFactura>("factura_id", factura.id.ToString());
+            float suma = itemsEstadia.Select<ItemFactura, float>(item => item.monto).Sum();
+            factura.monto_total = suma;
         }
 
         private void onCambioFormaDePago(object sender, EventArgs e)
