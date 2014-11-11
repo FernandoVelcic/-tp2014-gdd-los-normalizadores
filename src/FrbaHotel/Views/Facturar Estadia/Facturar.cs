@@ -26,6 +26,7 @@ namespace FrbaHotel.Views.Facturar_Estadia
         public Facturar(Estadia e, List<ItemAFacturar> items)
         {
             estadia = e;
+            //Lista de items cargados en Registrar Consumibles
             itemsParaFacturar = items;
             InitializeComponent();
 
@@ -46,7 +47,8 @@ namespace FrbaHotel.Views.Facturar_Estadia
                 factura.save();
                 setTexts();
 
-
+                //Por cada item de factura que se registro como consumible, creamos un objeto
+                //ConsumibleItemsUnidades que es la manera de representarlo visiblemente en el datagrid
                 foreach (ItemAFacturar item in itemsParaFacturar)
                 {
                     ConsumibleItemsUnidades itemVisible = new ConsumibleItemsUnidades();
@@ -66,10 +68,12 @@ namespace FrbaHotel.Views.Facturar_Estadia
                 txt_Usuario.Text = cliente.nombre.ToString() + " " + cliente.apellido.ToString();
                 Habitacion habitacionPosta = reserva.obtener_una_habitacion();
                 hotel = habitacionPosta.hotel;
+                //Registro de los dias no hospedados
                 setItemHabitacionNoHospedada();
+                //Registro de los dias hospedados
                 setItemHabitacionHospedada();
 
-                //Si el regimen es All inclusive o All inclusive moderado
+                //Si el regimen es All inclusive o All inclusive moderado, registro del descuento de los consumibles
                 if (reserva.regimen.id == 3 || reserva.regimen.id == 4)
                 {
                     setdescuentoAllInclusive();
@@ -290,6 +294,7 @@ namespace FrbaHotel.Views.Facturar_Estadia
                         return;
                     }
                 }
+                //Ingreso de una nro de tarjeta distinto del que ya tiene el cliente
                 else if (cliente.nro_tarjeta != txt_Tarjeta.Text && txt_Tarjeta.Text != "" && txt_Pin.Text != "")
                 {
                     DialogResult result1 = MessageBox.Show("El usuario tiene asignado el siguiente numero de tarjeta, desea cambiarlo?" + cliente.nro_tarjeta, "Importante", MessageBoxButtons.YesNo);
@@ -313,7 +318,7 @@ namespace FrbaHotel.Views.Facturar_Estadia
                         }
                     }
                 }
-
+                //Si no se ingreso el nro de tarjeta
                 if ((cmb_FormaDePago.SelectedItem.ToString() != "Efectivo") && (cliente.pin == "") && (cliente.pin != txt_Pin.ToString()))
                 {
                     MessageBox.Show("El PIN de seguridad de la tarjeta no es el correcto");
@@ -344,6 +349,7 @@ namespace FrbaHotel.Views.Facturar_Estadia
         }
         public void facturarConsumibles()
         {
+            //Persistencia de los items de factura una vez elegido el medio de pago
             foreach (ItemAFacturar consumible in itemsParaFacturar)
             {
                 ItemFactura itemConsumible = new ItemFactura();

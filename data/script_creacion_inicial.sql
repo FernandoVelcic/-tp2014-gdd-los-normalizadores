@@ -688,7 +688,7 @@ INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[roles]
 		   ,[Registrar_Estadía]
 		   ,[Listado_Estadístico])
      VALUES
-           ('Recepcionista',1,0,0,1,0,0,0,1,1,1,1)
+           ('Recepcionista',1,0,0,1,0,0,0,1,1,1,0)
 
 INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[roles]
            ([descripcion]
@@ -704,7 +704,7 @@ INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[roles]
 		   ,[Registrar_Estadía]
 		   ,[Listado_Estadístico])
      VALUES
-           ('Guest',1,0,0,0,0,0,0,1,1,0,1)
+           ('Guest',1,0,0,0,0,0,0,1,1,0,0)
 
 GO
 

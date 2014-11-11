@@ -43,6 +43,7 @@ namespace FrbaHotel.Views.Registrar_Estadia
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //Creacion de clientes-reserva con los seleccionados
             try
             {
                 foreach (Cliente cliente in clientes)

@@ -33,24 +33,25 @@ namespace FrbaHotel.Registrar_Estadia
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //Bindeo del nro de reserva, fecha, y usuario
             txt_NroReserva.DataBindings.Add("Text", this, "reserva_numero");
             dateTimePicker1.DataBindings.Add("Text", this, "fecha", true);
             txt_Usuario.DataBindings.Add("Text", this, "usuario");
         }
 
-
+        //CHECK-IN
         private void onCheckIn(object sender, EventArgs e)
-        {
+        {   //Validacion de que exista la reserva
             if (!obtenerReserva())
                 return;
             Estadia es = EntityManager.getEntityManager().findBy<Estadia>("reserva_id", reserva.id.ToString());
-
+            //Validacion de que no se haya hecho el ingreso antes
             if (es != null)
             {
                 MessageBox.Show("La estadia ya ha sido validada con anteriodad");
             }
             else
-            {
+            {   //Comparacion de fechas, unicamente se puede ingresar el dia en que se reservo
                 if (DateTime.Compare(DateTime.Parse(fecha).Date, DateTime.Parse(reserva.fecha_inicio).Date) == 0)
                 {
                     reserva.reserva_estado = 6;
@@ -85,19 +86,21 @@ namespace FrbaHotel.Registrar_Estadia
             }
         }
 
+        //CHECK-OUT
         private void onCheckout(object sender, EventArgs e)
         {
             if (!obtenerReserva())
                 return;
 
             Estadia estadiaout = EntityManager.getEntityManager().findBy<Estadia>("estadias.reserva_id", reserva_numero.ToString());
-
+            //Validacion de que la salida no se haya hecho antes
             if (estadiaout.cant_noches != 0)
             {
                 MessageBox.Show("La estadia ya ha sido efectivizada con anterioridad");
             }
             else
             {
+                //Calculo de la cantidad de noches que se hospedo
                 int dias_desde_ingreso = DateTime.Compare(DateTime.Parse(fecha).Date, DateTime.Parse(reserva.fecha_inicio).Date);
                 int cant_noches = int.Parse(DateTime.Parse(fecha).Subtract(DateTime.Parse(estadiaout.fecha_inicio)).TotalDays.ToString());
                 if (dias_desde_ingreso >= 0 && reserva.cant_noches >= cant_noches)
@@ -139,7 +142,7 @@ namespace FrbaHotel.Registrar_Estadia
             }
             List<ReservaHabitacion> habitaciones_reservadas = EntityManager.getEntityManager().findAllBy<ReservaHabitacion>("reservas_habitaciones.reserva_id", reserva.id.ToString());
             Habitacion habitacion = EntityManager.getEntityManager().findBy<Habitacion>("habitaciones.id", habitaciones_reservadas[0].habitacion.id.ToString());
-            
+            //Validacion de que el usuario que realiza el check-in o check.out se encuentre en el mismo hotel
             if(habitacion.hotel.id!=SesionActual.rol_usuario.hotel.id)
             {
                 MessageBox.Show("La reserva no corresponde al hotel en el cual se esta trabajando");
