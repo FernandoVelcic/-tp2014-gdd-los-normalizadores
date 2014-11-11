@@ -112,7 +112,7 @@ namespace FrbaHotel.Views.ABM_de_Cliente
             }
 
             if(esAlta){
-                formAnterior.Recargar();
+                if(formAnterior != null) formAnterior.Recargar();
                 MessageBox.Show("Cliente creado correctamente!");
             }else{
                 MessageBox.Show("Cliente modificado correctamente!");
