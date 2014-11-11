@@ -68,7 +68,7 @@ namespace FrbaHotel.Registrar_Consumible
 
             ItemAFacturar consumible_estadia = new ItemAFacturar();
 
-            int unidades = int.Parse(txt_UnidadesArticulo.Text);    //chequear si va, para mi deberia, pero en la tabla no está
+            int unidades = int.Parse(txt_UnidadesArticulo.Text);   
             Consumible consumible_seleccionado = comboBox1.SelectedItem as Consumible;
 
             if (items.Exists(item => item.consumible.id == consumible_seleccionado.id))

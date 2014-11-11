@@ -774,6 +774,8 @@ ALTER TABLE [LOS_NORMALIZADORES].[reserva_cliente] ADD CONSTRAINT fk_cliente_res
 
 ALTER TABLE [LOS_NORMALIZADORES].[reservas] ADD CONSTRAINT fk_reserva_estado_id FOREIGN KEY (reserva_estado) REFERENCES [LOS_NORMALIZADORES].[reserva_estado](id)
 
+ALTER TABLE [LOS_NORMALIZADORES].[hoteles_bajas] ADD CONSTRAINT fk_hotel_baja_id FOREIGN KEY (hotel_id) REFERENCES [LOS_NORMALIZADORES].[hoteles](id)
+
 GO
 
 

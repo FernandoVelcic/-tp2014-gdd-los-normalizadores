@@ -46,7 +46,8 @@ namespace FrbaHotel.Views.ABM_de_Regimen
             radioButton1.Checked = false;
             radioButton2.Checked = false;
             dataGridView1.Rows.Clear();
-            //Data binding (cargar en el data todos los registros)
+            var regimennesBinding = new BindingList<Regimen>(EntityManager.getEntityManager().findAll<Regimen>());
+            dataGridView1.DataSource = new BindingSource(regimennesBinding, null);
         }
 
     }

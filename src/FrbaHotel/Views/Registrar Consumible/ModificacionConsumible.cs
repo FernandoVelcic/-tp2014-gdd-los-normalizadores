@@ -31,16 +31,6 @@ namespace FrbaHotel.Registrar_Consumible
         private void button2_Click(object sender, EventArgs e)
         {
 
-           /* 
-            ItemFactura consumibleEstadia = EntityManager.getEntityManager().findBy<ItemFactura>("codigo", consumibleU.codigo.ToString());
-           
-            if(textBox1.Text != null)
-            {
-                consumibleEstadia.unidades = int.Parse(textBox1.Text);
-                consumibleEstadia.monto = consumibleEstadia.consumible.precio * consumibleEstadia.unidades;
-                
-                Close();
-            }*/
             MessageBox.Show("Se ha modificado la cantidad de unidades correctamente");
             Close();
         }

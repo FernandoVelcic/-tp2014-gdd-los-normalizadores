@@ -151,9 +151,6 @@ namespace FrbaHotel.Listado_Estadistico
         }
 
 
-        /* pero las estadias segun el modelo de datos podria tener mas de una habitacion/hotel */
-        /* Si bien desde la app no permitimos eso, es muy dificil de calcular */
-        /* Hay que joinear consuibles_estadias, estadias, habitacion y hotel ?? */
         private void HotelConMasConsumibles()
         {
 

@@ -44,9 +44,7 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
             }
         }
 
-        /* TODO 
-         * pasar a una vista con las habitaciones disponibles o algo parecido 
-         */
+       
         private void HabitacionesDisponibles_Load(object sender, EventArgs e)
         {
             //Cancelar reservas por no show
