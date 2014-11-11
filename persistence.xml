@@ -3,7 +3,7 @@
 		<provider>org.orm.norma</provider>
 		<class>FrbaHotel.Models.*</class>
 		<properties>
-			<server>GDD-PC\SQLSERVER2008</server>
+			<server>localhost\SQLSERVER2008</server>
 			<username>gd</username>
 			<password>gd2014</password>
 			<database>LOS_NORMALIZADORES</database>
