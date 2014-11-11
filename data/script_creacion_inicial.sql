@@ -803,11 +803,11 @@ GO
 
 CREATE VIEW [LOS_NORMALIZADORES].[gastos_estadia] AS
 	SELECT estadia_id, fecha, reservas.cliente_id, 
-		(SELECT ISNULL(SUM(monto * unidades), 0) FROM [LOS_NORMALIZADORES].items_facturas WHERE items_facturas.factura_id = facturas.id) as total,
-		(SELECT ISNULL(SUM(monto * unidades), 0) FROM [LOS_NORMALIZADORES].items_facturas WHERE items_facturas.factura_id = facturas.id AND items_facturas.tipo = 'C') as consumidos,
-		(SELECT ISNULL(SUM(monto * unidades), 0) FROM [LOS_NORMALIZADORES].items_facturas WHERE items_facturas.factura_id = facturas.id AND items_facturas.tipo = 'H') as habitaciones, 
-		(SELECT ISNULL(SUM(monto * unidades), 0) FROM [LOS_NORMALIZADORES].items_facturas WHERE items_facturas.factura_id = facturas.id AND items_facturas.tipo = 'D') as descuentos, 
-		(SELECT ISNULL(SUM(monto * unidades), 0) FROM [LOS_NORMALIZADORES].items_facturas WHERE items_facturas.factura_id = facturas.id AND items_facturas.tipo = 'N') as habitaciones_no_hospedadas
+		(SELECT ISNULL(SUM(monto), 0) FROM [LOS_NORMALIZADORES].items_facturas WHERE items_facturas.factura_id = facturas.id) as total,
+		(SELECT ISNULL(SUM(monto), 0) FROM [LOS_NORMALIZADORES].items_facturas WHERE items_facturas.factura_id = facturas.id AND items_facturas.tipo = 'C') as consumidos,
+		(SELECT ISNULL(SUM(monto), 0) FROM [LOS_NORMALIZADORES].items_facturas WHERE items_facturas.factura_id = facturas.id AND items_facturas.tipo = 'H') as habitaciones, 
+		(SELECT ISNULL(SUM(monto), 0) FROM [LOS_NORMALIZADORES].items_facturas WHERE items_facturas.factura_id = facturas.id AND items_facturas.tipo = 'D') as descuentos, 
+		(SELECT ISNULL(SUM(monto), 0) FROM [LOS_NORMALIZADORES].items_facturas WHERE items_facturas.factura_id = facturas.id AND items_facturas.tipo = 'N') as habitaciones_no_hospedadas
 	FROM [LOS_NORMALIZADORES].facturas
 	INNER JOIN [LOS_NORMALIZADORES].estadias ON estadias.id = estadia_id
 	INNER JOIN [LOS_NORMALIZADORES].reservas ON reservas.id = estadias.reserva_id

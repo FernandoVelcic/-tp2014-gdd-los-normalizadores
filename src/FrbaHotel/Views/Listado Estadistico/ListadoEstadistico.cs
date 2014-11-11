@@ -226,7 +226,6 @@ namespace FrbaHotel.Listado_Estadistico
         }
 
 
-        /* TODO faltan las fechas */
         private void HabitacionConMayorCantidadDeDiasYVecesOcupada()
         {
 
