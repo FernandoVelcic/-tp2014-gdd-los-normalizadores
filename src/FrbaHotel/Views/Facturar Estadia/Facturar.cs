@@ -369,10 +369,6 @@ namespace FrbaHotel.Views.Facturar_Estadia
                     return;
                 }
             }
-
-            List<ItemFactura> itemsFactura = EntityManager.getEntityManager().findAllBy<ItemFactura>("factura_id", factura.id.ToString());
-            float suma = itemsEstadia.Select<ItemFactura, float>(item => item.monto).Sum();
-            factura.monto_total = suma;
         }
 
         private void onCambioFormaDePago(object sender, EventArgs e)
@@ -415,6 +411,5 @@ namespace FrbaHotel.Views.Facturar_Estadia
         {
             if (!IsNumeric(txt_Pin.Text) && txt_Pin.Text != "") { MessageBox.Show("Debe ingresar numeros unicamente"); txt_Pin.Text = ""; }
         }
-
     }
 }

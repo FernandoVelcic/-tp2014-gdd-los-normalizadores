@@ -221,8 +221,7 @@ CREATE TABLE [LOS_NORMALIZADORES].[facturas](
 	[estadia_id] INTEGER NOT NULL,					
 	[nro] [numeric](18, 0) NOT NULL,
 	[fecha] [datetime] NOT NULL,					
-	[forma_pago_id] INTEGER NOT NULL,				/* Este dato no esta en la Maestra */
-	[monto_total] [numeric] (18,0) 
+	[forma_pago_id] INTEGER NOT NULL			/* Este dato no esta en la Maestra */
 ) ON [PRIMARY]
 
 CREATE TABLE [LOS_NORMALIZADORES].[formas_de_pago](
@@ -512,8 +511,8 @@ INSERT INTO [LOS_NORMALIZADORES].[formas_de_pago] (descripcion) VALUES ('Tarjeta
 INSERT INTO [LOS_NORMALIZADORES].[formas_de_pago] (descripcion) VALUES ('Tarjeta de débito')
 GO
 
-INSERT INTO [LOS_NORMALIZADORES].[facturas] ([nro], [estadia_id], [fecha], [forma_pago_id], [monto_total])	
-	SELECT DISTINCT [Factura_Nro], [estadia_id], [Factura_Fecha], 1, [Factura_Total]  FROM [LOS_NORMALIZADORES].[Maestra]
+INSERT INTO [LOS_NORMALIZADORES].[facturas] ([nro], [estadia_id], [fecha], [forma_pago_id])	
+	SELECT DISTINCT [Factura_Nro], [estadia_id], [Factura_Fecha], 1  FROM [LOS_NORMALIZADORES].[Maestra]
 	WHERE [Factura_Nro] IS NOT NULL 
 	AND   [estadia_id] IS NOT NULL
 	AND   [Factura_Fecha] IS NOT NULL
@@ -594,12 +593,6 @@ AND (reg.id = 3 OR reg.id = 4)
 GROUP BY i.factura_id, i.estadia_id
 GO
 
-/*UPD DEL MONTO TOTAL DE LAS FACTURAS*/
-
-UPDATE [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[facturas] 
-SET monto_total = (SELECT SUM(i.monto) FROM [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[items_facturas] i
-WHERE i2.factura_id = id AND i2.factura_id = i.factura_id)
-FROM [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[items_facturas] i2
 
 
 /* LOGIN y ROLES */
