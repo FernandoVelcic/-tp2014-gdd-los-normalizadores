@@ -27,7 +27,7 @@ namespace FrbaHotel.Registrar_Consumible
             txt_Unidades.DataBindings.Add("Text", consumibleU, "unidades");
         }
             
-
+        //Modificacion de la cantidad de unidades del item seleccionado
         private void button2_Click(object sender, EventArgs e)
         {
 

@@ -32,12 +32,12 @@ namespace FrbaHotel.Registrar_Consumible
             this.cargarConsumibles();
 
             comboBox1.Items.Clear();
-
+            //Bindeo de todos los consumibles con el combo box
             BindingSource consumibles_binding = new BindingSource();
             consumibles_binding.DataSource = EntityManager.getEntityManager().findAll<Consumible>();
             comboBox1.DataSource = consumibles_binding;
              
-            
+            //Bindeo del nro de reserva y el tipo de regimen con los text box
             txt_reserva_id.Text = estadia.reserva.id.ToString();
             Reserva resInter=estadia.reserva;
             Reserva reserva = EntityManager.getEntityManager().findBy<Reserva>("reservas.id", resInter.id.ToString());
@@ -59,13 +59,14 @@ namespace FrbaHotel.Registrar_Consumible
 
         private void btn_Agregar_Click(object sender, EventArgs e)
         {
+            //Valida que se ingrese un numero positivo de unidades para un consumible
             if (int.Parse(txt_UnidadesArticulo.Text) < 0)
             {
                 MessageBox.Show("Debe ingresar cantidades positivas");
                 txt_UnidadesArticulo.Text = "";
                 return;
             }
-
+            //Crea el consumible a persistir
             ItemAFacturar consumible_estadia = new ItemAFacturar();
 
             int unidades = int.Parse(txt_UnidadesArticulo.Text);   
@@ -87,7 +88,7 @@ namespace FrbaHotel.Registrar_Consumible
 
         private void cargarConsumibles()
         {
-           
+           //Bindea los items ya ingresado con el datagrid donde se va actualizando
             BindingList<ConsumibleItemsUnidades> consumibleUnidadesBinding = new BindingList<ConsumibleItemsUnidades>();
             foreach (ItemAFacturar consumibleEstadia in items)
             {
@@ -108,7 +109,7 @@ namespace FrbaHotel.Registrar_Consumible
 
         private void btn_Facturar_Click(object sender, EventArgs e)
         {
-
+            //Confirmacion de consumibles, para seguir con la facturacion
             DialogResult result1 = MessageBox.Show("¿Está seguro que ya ingreso todo lo consumido y desea facturar?","Importante",MessageBoxButtons.YesNo);
             if(result1==DialogResult.Yes)
             {
@@ -134,6 +135,7 @@ namespace FrbaHotel.Registrar_Consumible
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //Borrado de un item consumible ingresado
             DialogResult dr = MessageBox.Show("¿Esta seguro que desea borrar este registro?", "Borrar registro", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
 
             if (dr == DialogResult.Yes)
