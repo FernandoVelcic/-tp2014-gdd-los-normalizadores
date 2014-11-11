@@ -17,28 +17,21 @@ namespace FrbaHotel
     {
         private Rol permisos;
 
-        public Operaciones(RolUsuario rolUsuario)
-        {
-            SesionActual.rol_usuario = rolUsuario;
-            permisos = rolUsuario.rol;
-
-            InitializeComponent();
-            determinarPermisos();
-            button8.Text = "Cerrar Sesion";
-            label1.Text = "Usted se encuentra logeado como " + rolUsuario.ToString();
-        }
-
         public Operaciones()
         {
-            Rol GuestRol = EntityManager.getEntityManager().findById<Rol>(3); //Buscar rol guest
-            RolUsuario GuestRolUsuario = new RolUsuario();
-            GuestRolUsuario.rol = GuestRol;
-            SesionActual.rol_usuario = GuestRolUsuario;
-            permisos = GuestRol;
-
+            permisos = SesionActual.rol_usuario.rol;
             InitializeComponent();
-            label1.Text = "Damos la bienvenida a los futuros clientes de la cadena FRBAHotel, Por favor, tenga a bien escoger una operación";
             determinarPermisos();
+
+            if (SesionActual.rol_usuario.esGuest())
+            {
+                label1.Text = "Damos la bienvenida a los futuros clientes de la cadena FRBAHotel, Por favor, tenga a bien escoger una operación";
+            }
+            else
+            {
+                button8.Text = "Cerrar Sesion";
+                label1.Text = "Usted se encuentra logeado como " + SesionActual.rol_usuario.ToString();
+            }
         }
 
 
@@ -46,7 +39,7 @@ namespace FrbaHotel
         {
             if (permisos.id == 3 && permisos.estado == false) //Guests deshabilitados
             {
-                Navigator.nextForm(this,new Home());
+                Navigator.nextForm(this, new Home());
                 MessageBox.Show("En este momento los guests no pueden acceder al sistema. Por favor intente mas tarde.");
             }
         }
@@ -121,6 +114,6 @@ namespace FrbaHotel
             Navigator.nextForm(this, new FrbaHotel.Views.ABM_de_Hotel.ABMHotel());
         }
 
-       
+
     }
 }

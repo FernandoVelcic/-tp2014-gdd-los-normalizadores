@@ -20,5 +20,10 @@ namespace FrbaHotel.Models
         {
             return rol.ToString() + " en el hotel " + hotel.ToString();
         }
+
+        public bool esGuest()
+        {
+            return rol.id == 3; //Guest
+        }
     }
 }

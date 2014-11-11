@@ -6,7 +6,11 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using FrbaHotel;
+using FrbaHotel.Models;
+using FrbaHotel.Homes;
+using FrbaHotel.Database_Helper;
 
 namespace FrbaHotel
 {
@@ -29,6 +33,11 @@ namespace FrbaHotel
 
         private void button3_Click(object sender, EventArgs e)
         {
+            Rol GuestRol = EntityManager.getEntityManager().findById<Rol>(3); //Buscar rol guest
+            RolUsuario GuestRolUsuario = new RolUsuario();
+            GuestRolUsuario.rol = GuestRol;
+            SesionActual.rol_usuario = GuestRolUsuario;
+
             Navigator.nextForm(this,new FrbaHotel.Operaciones());
         }
     }

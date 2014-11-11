@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using FrbaHotel;
+using FrbaHotel.Homes;
 using FrbaHotel.Models;
 using FrbaHotel.Database_Helper;
 
@@ -43,10 +44,14 @@ namespace FrbaHotel.Views.Login
 
             if (roles.Count == 1)
             {
-                if (roles[0].rol.estado == true)
-                    Navigator.nextForm(this,new Operaciones(roles[0]));
-                else
+                if (roles[0].rol.estado != true)
+                {
                     MessageBox.Show("El rol asociado a este usuario se encuentra inhabilitado");
+                    return;
+                }
+
+                SesionActual.rol_usuario = roles[0];
+                Navigator.nextForm(this,new Operaciones());
             }
         }
 
@@ -63,10 +68,14 @@ namespace FrbaHotel.Views.Login
                 return;
             }
 
-            if((comboBox1.SelectedValue as RolUsuario).rol.estado == true)
-                Navigator.nextForm(this,new Operaciones(comboBox1.SelectedValue as RolUsuario));
-            else
+            if ((comboBox1.SelectedValue as RolUsuario).rol.estado != true)
+            {
                 MessageBox.Show("El rol seleccionado se encuentra inhabilitado");
+                return;
+            }
+
+            SesionActual.rol_usuario = comboBox1.SelectedValue as RolUsuario;
+            Navigator.nextForm(this,new Operaciones());
         }
     }
 }
