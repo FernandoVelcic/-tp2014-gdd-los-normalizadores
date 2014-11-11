@@ -17,13 +17,21 @@ namespace FrbaHotel.Views.ABM_de_Cliente
     public partial class AltaModificacionCliente : Form
     {
         private bool esAlta = false;
+        private ABMCliente formAnterior;
+
         private Cliente cliente;
 
         public AltaModificacionCliente() : this(new Cliente())
         {
             esAlta = true;
+
             cliente.fecha_nac = DateTime.Today.ToString();
             cliente.estado = true;
+        }
+
+        public AltaModificacionCliente(ABMCliente formAnterior) : this()
+        {
+            this.formAnterior = formAnterior;
         }
 
         public AltaModificacionCliente(Cliente cliente)
@@ -104,6 +112,7 @@ namespace FrbaHotel.Views.ABM_de_Cliente
             }
 
             if(esAlta){
+                formAnterior.Recargar();
                 MessageBox.Show("Cliente creado correctamente!");
             }else{
                 MessageBox.Show("Cliente modificado correctamente!");

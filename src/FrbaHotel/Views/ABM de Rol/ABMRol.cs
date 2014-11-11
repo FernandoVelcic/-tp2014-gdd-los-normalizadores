@@ -30,12 +30,12 @@ namespace FrbaHotel.Views.ABM_de_Rol
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Navigator.nextForm(this,new FrbaHotel.ABM_de_Rol.AltaModificacionRol());
+            Navigator.nextForm(this,new AltaModificacionRol(this));
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.editRecord<Rol, FrbaHotel.ABM_de_Rol.AltaModificacionRol>(dataGridView1);
+            this.editRecord<Rol, AltaModificacionRol>(dataGridView1);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -46,8 +46,7 @@ namespace FrbaHotel.Views.ABM_de_Rol
 
         private void button5_Click(object sender, EventArgs e)
         {
-            textBox1.Text = "";
-            Listar(new List<FetchCondition>());
+            Recargar();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -73,6 +72,12 @@ namespace FrbaHotel.Views.ABM_de_Rol
                 MessageBox.Show("Error en la query: " + Query.log.Last());
             }
 
+        }
+
+        public void Recargar()
+        {
+            textBox1.Text = "";
+            Listar(new List<FetchCondition>());
         }
                
     }

@@ -1,4 +1,4 @@
-﻿namespace FrbaHotel.ABM_de_Habitacion
+﻿namespace FrbaHotel.Views.ABM_de_Habitacion
 {
     partial class AltaModificacionHabitacion
     {

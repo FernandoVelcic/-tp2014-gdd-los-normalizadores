@@ -46,9 +46,22 @@ namespace FrbaHotel.ABM_de_Usuario
             }
 
         }
+
+        public void Recargar()
+        {
+            textBox1.Text = "";
+            textBox2.Text = "";
+            textBox3.Text = "";
+            textBox4.Text = "";
+            textBox8.Text = "";
+            comboBox1.SelectedIndex = -1;
+
+            Listar(new List<FetchCondition>());
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
-            Navigator.nextForm(this,new FrbaHotel.ABM_de_Usuario.AltaModificaiconUsuario());
+            Navigator.nextForm(this,new FrbaHotel.ABM_de_Usuario.AltaModificaiconUsuario(this));
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -75,14 +88,7 @@ namespace FrbaHotel.ABM_de_Usuario
 
         private void button5_Click(object sender, EventArgs e)
         {
-            textBox1.Text = "";
-            textBox2.Text = "";
-            textBox3.Text = "";
-            textBox4.Text = "";
-            textBox8.Text = "";
-            comboBox1.SelectedIndex = -1;
-
-            Listar(new List<FetchCondition>());
+            Recargar();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -118,7 +124,6 @@ namespace FrbaHotel.ABM_de_Usuario
 
             Listar(condiciones);
         }
-
                
     }
 }

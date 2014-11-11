@@ -36,6 +36,16 @@ namespace FrbaHotel.Views.ABM_de_Habitacion
             Listar(new List<FetchCondition>());
         }
 
+        public void Recargar()
+        {
+            textBox1.Text = "";
+            textBox3.Text = "";
+            cmb_Hoteles.SelectedIndex = -1;
+            comboBox1.SelectedIndex = -1;
+            cmb_TipoHabitacion.SelectedIndex = -1;
+            Listar(new List<FetchCondition>());
+        }
+
 
         private void Listar(List<FetchCondition> conditions)
         {
@@ -45,12 +55,12 @@ namespace FrbaHotel.Views.ABM_de_Habitacion
 
         private void onBtnModificar(object sender, EventArgs e)
         {
-            this.editRecord<Habitacion, FrbaHotel.ABM_de_Habitacion.AltaModificacionHabitacion>(dataGridView1);
+            this.editRecord<Habitacion, FrbaHotel.Views.ABM_de_Habitacion.AltaModificacionHabitacion>(dataGridView1);
         }
 
         private void onBtnAlta(object sender, EventArgs e)
         {
-            Navigator.nextForm(this,new FrbaHotel.ABM_de_Habitacion.AltaModificacionHabitacion());
+            Navigator.nextForm(this,new FrbaHotel.Views.ABM_de_Habitacion.AltaModificacionHabitacion(this));
         }
 
         private void onBtnEliminar(object sender, EventArgs e)
@@ -100,12 +110,7 @@ namespace FrbaHotel.Views.ABM_de_Habitacion
 
         private void button4_Click(object sender, EventArgs e)
         {
-            textBox1.Text = "";
-            textBox3.Text = "";
-            cmb_Hoteles.SelectedIndex = -1;
-            comboBox1.SelectedIndex = -1;
-            cmb_TipoHabitacion.SelectedIndex = -1;
-            Listar(new List<FetchCondition>());
+            Recargar();
         }
 
 

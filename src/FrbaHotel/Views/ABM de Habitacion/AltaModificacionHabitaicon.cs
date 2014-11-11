@@ -6,24 +6,29 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 using MyActiveRecord;
+
 using FrbaHotel.Models;
 using FrbaHotel.Database_Helper;
 using FrbaHotel.Models.Exceptions;
-using System.Data.SqlClient;
 
 
-namespace FrbaHotel.ABM_de_Habitacion
+namespace FrbaHotel.Views.ABM_de_Habitacion
 {
     public partial class AltaModificacionHabitacion : Form
     {
         private bool esAlta = false;
+        private ABMHabitacion formAnterior;
+
         private Habitacion habitacion;
 
-        public AltaModificacionHabitacion() : this(new Habitacion())
+        public AltaModificacionHabitacion(ABMHabitacion formAnterior) : this(new Habitacion())
         {
             esAlta = true;
+            this.formAnterior = formAnterior;
+
             habitacion.estado = true;
         }
 
@@ -79,8 +84,11 @@ namespace FrbaHotel.ABM_de_Habitacion
                 return;
             }
 
-            if(esAlta)
+            if (esAlta)
+            {
+                formAnterior.Recargar();
                 MessageBox.Show("Habitacion creada correctamente!");
+            }
             else
                 MessageBox.Show("Habitacion modificada correctamente!");
 

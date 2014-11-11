@@ -44,9 +44,19 @@ namespace FrbaHotel.Views.ABM_de_Cliente
             
         }
 
+        public void Recargar()
+        {
+            txt_Filtro_Nombre.Text = "";
+            txt_Filter_Mail.Text = "";
+            txt_Filter_Documento.Text = "";
+            txt_Filter_Apellido.Text = "";
+            comboBox2.SelectedIndex = 0;
+            Listar(new List<FetchCondition>());
+        }
+
         private void onBtnAlta(object sender, EventArgs e)
         {
-            Navigator.nextForm(this,new FrbaHotel.Views.ABM_de_Cliente.AltaModificacionCliente());
+            Navigator.nextForm(this,new FrbaHotel.Views.ABM_de_Cliente.AltaModificacionCliente(this));
         }
 
 
@@ -96,12 +106,7 @@ namespace FrbaHotel.Views.ABM_de_Cliente
 
         private void button4_Click(object sender, EventArgs e)
         {
-            txt_Filtro_Nombre.Text = "";
-            txt_Filter_Mail.Text = "";
-            txt_Filter_Documento.Text = "";
-            txt_Filter_Apellido.Text = "";
-            comboBox2.SelectedIndex = 0;
-            Listar(new List<FetchCondition>());
+            Recargar();
         }
 
 

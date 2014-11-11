@@ -20,11 +20,15 @@ namespace FrbaHotel.Views.ABM_de_Hotel
     public partial class AltaModificacionHotel : Form
     {
         private Boolean esAlta = false;
+        private ABMHotel formAnterior;
+
         private Hotel hotel;
 
-        public AltaModificacionHotel() : this(new Hotel())
+        public AltaModificacionHotel(ABMHotel formAnterior) : this(new Hotel())
         {
             esAlta = true;
+            this.formAnterior = formAnterior;
+
             hotel.fecha_creacion = DateTime.Today.ToString();
         }
 
@@ -108,7 +112,10 @@ namespace FrbaHotel.Views.ABM_de_Hotel
             }
 
             if (esAlta)
+            {
+                formAnterior.Recargar();
                 MessageBox.Show("Hotel creado correctamente!");
+            }
             else
                 MessageBox.Show("Hotel modificado correctamente!");
 

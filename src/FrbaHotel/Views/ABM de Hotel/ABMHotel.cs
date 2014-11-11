@@ -29,17 +29,12 @@ namespace FrbaHotel.Views.ABM_de_Hotel
 
         private void button5_Click(object sender, EventArgs e)
         {
-            textBox1.Text = "";
-            textBox2.Text = ""; 
-            textBox3.Text = "";
-            textBox4.Text = "";
-
-            Listar(new List<FetchCondition>());
+            Recargar();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Navigator.nextForm(this,new AltaModificacionHotel());
+            Navigator.nextForm(this, new AltaModificacionHotel(this));
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -101,6 +96,15 @@ namespace FrbaHotel.Views.ABM_de_Hotel
 
         }
 
+        public void Recargar()
+        {
+            textBox1.Text = "";
+            textBox2.Text = "";
+            textBox3.Text = "";
+            textBox4.Text = "";
+
+            Listar(new List<FetchCondition>());
+        }
        
     }
 }

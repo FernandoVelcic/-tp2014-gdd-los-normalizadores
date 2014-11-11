@@ -1,4 +1,4 @@
-﻿namespace FrbaHotel.ABM_de_Rol
+﻿namespace FrbaHotel.Views.ABM_de_Rol
 {
     partial class AltaModificacionRol
     {

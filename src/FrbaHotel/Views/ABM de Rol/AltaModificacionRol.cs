@@ -14,16 +14,20 @@ using FrbaHotel.Database_Helper;
 using FrbaHotel.Views.ABM_de_Rol;
 using FrbaHotel.Models.Exceptions;
 
-namespace FrbaHotel.ABM_de_Rol
+namespace FrbaHotel.Views.ABM_de_Rol
 {
     public partial class AltaModificacionRol : Form
     {
         private Boolean esAlta = false;
+        private ABMRol formAnterior;
+
         private Rol rol;
 
-        public AltaModificacionRol() : this(new Rol())
+        public AltaModificacionRol(ABMRol formAnterior) : this(new Rol())
         {
             esAlta = true;
+            this.formAnterior = formAnterior;
+
             rol.estado = true;
         }
 
@@ -81,8 +85,11 @@ namespace FrbaHotel.ABM_de_Rol
                 return;
             }
 
-            if(esAlta)
+            if (esAlta)
+            {
+                formAnterior.Recargar();
                 MessageBox.Show("Rol creado correctamente!");
+            }
             else
                 MessageBox.Show("Rol modificado correctamente!");
             Close();
