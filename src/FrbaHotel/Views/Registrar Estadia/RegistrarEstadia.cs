@@ -138,7 +138,7 @@ namespace FrbaHotel.Registrar_Estadia
                 return false;
             }
             List<ReservaHabitacion> habitaciones_reservadas = EntityManager.getEntityManager().findAllBy<ReservaHabitacion>("reservas_habitaciones.reserva_id", reserva.id.ToString());
-            Habitacion habitacion = EntityManager.getEntityManager().findBy<Habitacion>("habitaciones.id", habitaciones_reservadas[0].id.ToString());
+            Habitacion habitacion = EntityManager.getEntityManager().findBy<Habitacion>("habitaciones.id", habitaciones_reservadas[0].habitacion.id.ToString());
             
             if(habitacion.hotel!=SesionActual.rol_usuario.hotel)
             {
