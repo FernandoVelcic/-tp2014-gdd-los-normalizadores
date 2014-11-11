@@ -314,7 +314,7 @@ namespace FrbaHotel.Views.Facturar_Estadia
                     }
                 }
 
-                if (cliente.pin != txt_Pin.ToString())
+                if ((cmb_FormaDePago.SelectedItem.ToString() != "Efectivo") && (cliente.pin == "") && (cliente.pin != txt_Pin.ToString()))
                 {
                     MessageBox.Show("El PIN de seguridad de la tarjeta no es el correcto");
                 }
