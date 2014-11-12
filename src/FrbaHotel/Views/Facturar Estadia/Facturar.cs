@@ -297,7 +297,7 @@ namespace FrbaHotel.Views.Facturar_Estadia
                 //Ingreso de una nro de tarjeta distinto del que ya tiene el cliente
                 else if (cliente.nro_tarjeta != txt_Tarjeta.Text && txt_Tarjeta.Text != "" && txt_Pin.Text != "")
                 {
-                    DialogResult result1 = MessageBox.Show("El usuario tiene asignado el siguiente numero de tarjeta, desea cambiarlo?" + cliente.nro_tarjeta, "Importante", MessageBoxButtons.YesNo);
+                    DialogResult result1 = MessageBox.Show("El usuario tiene asignado el siguiente numero de tarjeta, desea cambiarlo?" + cliente.nro_tarjeta + "Importante" + MessageBoxButtons.YesNo);
                     if (result1 == DialogResult.Yes)
                     {
                         cliente.nro_tarjeta = txt_Tarjeta.Text;
