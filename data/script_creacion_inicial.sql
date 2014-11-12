@@ -1,7 +1,7 @@
 USE [GD2C2014]
 GO
 
-/* START TESTING ONLY */
+/* START TESTING ONLY 
 DROP DATABASE [LOS_NORMALIZADORES]
 GO
 
@@ -10,7 +10,7 @@ GO
 
 USE [LOS_NORMALIZADORES]
 GO
-/* END TESTING_ONLY */
+ END TESTING_ONLY */
 
 CREATE SCHEMA [LOS_NORMALIZADORES]
 GO
@@ -570,20 +570,20 @@ UPDATE LOS_NORMALIZADORES.LOS_NORMALIZADORES.items_facturas
 GO
 
 /*HABITACIONES NO HOSPEDADAS*/
-INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[items_facturas] (factura_id, estadia_id, monto, unidades, tipo)
+INSERT INTO [LOS_NORMALIZADORES].[items_facturas] (factura_id, estadia_id, monto, unidades, tipo)
 SELECT DISTINCT  i.factura_id, i.estadia_id, 0, r.cant_noches - e.cant_noches , 'N' 
-FROM  [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[items_facturas] i, [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].estadias e,[LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[reservas] r
+FROM  [LOS_NORMALIZADORES].[items_facturas] i, [LOS_NORMALIZADORES].estadias e,[LOS_NORMALIZADORES].[reservas] r
 where i.estadia_id = e.id
 AND (r.cant_noches - e.cant_noches) > 0
 GO
 
 /*DESCUENTOS POR ALL INCLUSIVE*/
-INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[items_facturas] (factura_id, estadia_id, monto, unidades, tipo)
+INSERT INTO [LOS_NORMALIZADORES].[items_facturas] (factura_id, estadia_id, monto, unidades, tipo)
 SELECT DISTINCT  i.factura_id, i.estadia_id, SUM(i.monto)*(-1), 0, 'D'
-FROM[LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[items_facturas] i,
-[LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[estadias] e,
-[LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[reservas] res,
-[LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[regimenes] reg
+FROM[LOS_NORMALIZADORES].[items_facturas] i,
+[LOS_NORMALIZADORES].[estadias] e,
+[LOS_NORMALIZADORES].[reservas] res,
+[LOS_NORMALIZADORES].[regimenes] reg
 WHERE 
 i.tipo = 'C'
 AND i.estadia_id = e.id
@@ -659,7 +659,7 @@ INSERT INTO [LOS_NORMALIZADORES].[documento_tipos] (descripcion) VALUES ('LE - L
 INSERT INTO [LOS_NORMALIZADORES].[documento_tipos] (descripcion) VALUES ('Pasaporte')
 
 /* Agregando roles */
-INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[roles]
+INSERT INTO [LOS_NORMALIZADORES].[roles]
            ([descripcion]
            ,[estado]
            ,[ABM_Rol]
@@ -674,7 +674,7 @@ INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[roles]
 		   ,[Listado_Estadístico])
      VALUES
            ('Administrador',1,1,1,0,1,1,1,0,0,0,1)
-INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[roles]
+INSERT INTO [LOS_NORMALIZADORES].[roles]
            ([descripcion]
            ,[estado]
            ,[ABM_Rol]
@@ -690,7 +690,7 @@ INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[roles]
      VALUES
            ('Recepcionista',1,0,0,1,0,0,0,1,1,1,0)
 
-INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[roles]
+INSERT INTO [LOS_NORMALIZADORES].[roles]
            ([descripcion]
            ,[estado]
            ,[ABM_Rol]
@@ -710,17 +710,17 @@ GO
 
 /* Estados de reserva*/
 
-INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[reserva_estado]
+INSERT INTO [LOS_NORMALIZADORES].[reserva_estado]
 	([descripcion]) VALUES ('Reserva correcta')
-INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[reserva_estado]
+INSERT INTO [LOS_NORMALIZADORES].[reserva_estado]
 	([descripcion]) VALUES ('Reserva modificada')
-INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[reserva_estado]
+INSERT INTO [LOS_NORMALIZADORES].[reserva_estado]
 	([descripcion]) VALUES ('Reserva cancelada por Recepción')
-INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[reserva_estado]
+INSERT INTO [LOS_NORMALIZADORES].[reserva_estado]
 	([descripcion]) VALUES ('Reserva cancelada por Cliente')
-INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[reserva_estado]
+INSERT INTO [LOS_NORMALIZADORES].[reserva_estado]
 	([descripcion]) VALUES ('Reserva cancelada por No-Show')
-INSERT INTO [LOS_NORMALIZADORES].[LOS_NORMALIZADORES].[reserva_estado]
+INSERT INTO [LOS_NORMALIZADORES].[reserva_estado]
 	([descripcion]) VALUES ('Reserva con ingreso')
 
 
@@ -778,6 +778,8 @@ ALTER TABLE [LOS_NORMALIZADORES].[hoteles_bajas] ADD CONSTRAINT fk_hotel_baja_id
 
 GO
 
+DROP TABLE [LOS_NORMALIZADORES].Maestra
+GO
 
 /* Creo vistas SQL */
 
