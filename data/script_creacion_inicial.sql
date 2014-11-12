@@ -551,7 +551,7 @@ INSERT INTO [LOS_NORMALIZADORES].[items_facturas] (factura_id, estadia_id, monto
 GO
 
 
-UPDATE LOS_NORMALIZADORES.LOS_NORMALIZADORES.items_facturas 
+UPDATE [LOS_NORMALIZADORES].items_facturas 
 	SET monto = (((monto - (ho.cant_estrella * ho.recarga_estrella))* t.cantidad_maxima_personas) + ho.cant_estrella*ho.recarga_estrella) * e.cant_noches 
 	FROM 
 		LOS_NORMALIZADORES.LOS_NORMALIZADORES.estadias e,
