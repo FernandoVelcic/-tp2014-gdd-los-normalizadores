@@ -150,7 +150,7 @@ namespace FrbaHotel.Views.Facturar_Estadia
             itemVisible.descripcion = "Regimen " + reserva.regimen.descripcion + ". Habitacion tipo: " + habitacion.descripcion + "-Dias hospedados";
             itemVisible.precio = (habitacion.tipo.porcentual * reserva.regimen.precio * habitacion.tipo.cantidad_maxima_personas + hotel.cant_estrella * hotel.recarga_estrella);
             itemVisible.unidades = itemHabitacion.unidades;
-            itemVisible.monto = itemHabitacion.monto * itemHabitacion.unidades/reserva.cant_noches;
+            itemVisible.monto = itemHabitacion.monto;
 
             this.itemsVisibles.Add(itemVisible);
             this.itemsEstadia.Add(itemHabitacion);
@@ -161,18 +161,11 @@ namespace FrbaHotel.Views.Facturar_Estadia
             if (estadia.cant_noches < estadia.reserva.cant_noches)
             {
 
-                Reserva reserva = EntityManager.getEntityManager().findBy<Reserva>("reservas.id", estadia.reserva.id.ToString());
-                Habitacion habitacion = reserva.obtener_una_habitacion();
-
-                int cantidad_habitaciones = EntityManager.getEntityManager().findAllBy<ReservaHabitacion>("reservas_habitaciones.reserva_id", reserva.id.ToString()).Count;
-                //FORMULA
-                float precio_habitacion = ((habitacion.tipo.porcentual * reserva.regimen.precio * habitacion.tipo.cantidad_maxima_personas + hotel.cant_estrella * hotel.recarga_estrella) * reserva.cant_noches) * cantidad_habitaciones;
-
                 ItemFactura itemHabitacionNoHospedada = new ItemFactura();
                 itemHabitacionNoHospedada.estadia = estadia;
                 itemHabitacionNoHospedada.consumible = null;
                 itemHabitacionNoHospedada.factura = factura;
-                itemHabitacionNoHospedada.monto = precio_habitacion * (estadia.reserva.cant_noches - estadia.cant_noches)/reserva.cant_noches; 
+                itemHabitacionNoHospedada.monto = 0;
                 itemHabitacionNoHospedada.tipo = "N";
                 itemHabitacionNoHospedada.unidades = estadia.reserva.cant_noches - estadia.cant_noches;
                 try
@@ -189,6 +182,9 @@ namespace FrbaHotel.Views.Facturar_Estadia
                     MessageBox.Show(exception.Message);
                     return;
                 }
+
+                Reserva reserva = EntityManager.getEntityManager().findBy<Reserva>("reservas.id", estadia.reserva.id.ToString());
+                Habitacion habitacion = reserva.obtener_una_habitacion();
 
                 ConsumibleItemsUnidades itemVisible = new ConsumibleItemsUnidades();
                 itemVisible.codigo = 0;
@@ -211,9 +207,9 @@ namespace FrbaHotel.Views.Facturar_Estadia
                     descReg = reserva.regimen.descripcion;
                 }
                 itemVisible.descripcion = "Regimen " + descReg + ". Habitacion tipo: " + descHab + "-Dias no usados";
-                itemVisible.precio = precio_habitacion;
+                itemVisible.precio = 0;
                 itemVisible.unidades = itemHabitacionNoHospedada.unidades;
-                itemVisible.monto = itemHabitacionNoHospedada.monto;
+                itemVisible.monto = 0;
 
                 this.itemsVisibles.Add(itemVisible);
                 this.itemsEstadia.Add(itemHabitacionNoHospedada);
