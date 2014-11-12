@@ -93,6 +93,13 @@ namespace FrbaHotel.Registrar_Estadia
                 return;
 
             Estadia estadiaout = EntityManager.getEntityManager().findBy<Estadia>("estadias.reserva_id", reserva_numero.ToString());
+
+            if (estadiaout == null)
+            {
+                MessageBox.Show("Primero debe hacer el check-in");
+                return;
+            }
+            
             //Validacion de que la salida no se haya hecho antes
             if (estadiaout.cant_noches != 0)
             {

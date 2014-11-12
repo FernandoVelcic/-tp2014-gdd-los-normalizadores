@@ -51,6 +51,7 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.txt_FacturaNro = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -60,6 +61,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.btn_Facturar);
             this.groupBox1.Controls.Add(this.txt_Usuario);
             this.groupBox1.Controls.Add(this.label6);
@@ -79,7 +81,7 @@
             // 
             // btn_Facturar
             // 
-            this.btn_Facturar.Location = new System.Drawing.Point(593, 351);
+            this.btn_Facturar.Location = new System.Drawing.Point(722, 364);
             this.btn_Facturar.Name = "btn_Facturar";
             this.btn_Facturar.Size = new System.Drawing.Size(131, 38);
             this.btn_Facturar.TabIndex = 6;
@@ -261,7 +263,7 @@
             this.groupBox3.Controls.Add(this.dataGridView1);
             this.groupBox3.Location = new System.Drawing.Point(392, 18);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(467, 323);
+            this.groupBox3.Size = new System.Drawing.Size(467, 340);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Items a cobrar:";
@@ -273,7 +275,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(451, 282);
+            this.dataGridView1.Size = new System.Drawing.Size(451, 302);
             this.dataGridView1.TabIndex = 0;
             // 
             // txt_FacturaNro
@@ -292,6 +294,15 @@
             this.label1.Size = new System.Drawing.Size(69, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "Factura Nro:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(465, 373);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(36, 16);
+            this.label9.TabIndex = 1;
+            this.label9.Text = "Total:";
             // 
             // Facturar
             // 
@@ -339,5 +350,6 @@
         private System.Windows.Forms.TextBox txt_Tarjeta;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label9;
     }
 }

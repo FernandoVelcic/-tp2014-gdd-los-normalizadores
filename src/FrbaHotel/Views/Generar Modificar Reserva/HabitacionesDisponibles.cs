@@ -180,7 +180,7 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
         private void list_Habitaciones_SelectedIndexChanged(object sender, EventArgs e)
         {
             //FORMULA
-            label1.Text = "Costo total de la reserva: $" + list_Habitaciones.SelectedItems.Count * (tipoHabitacion.porcentual * reserva.regimen.precio * tipoHabitacion.cantidad_maxima_personas + hotel.cant_estrella * hotel.recarga_estrella);
+            label1.Text = "Costo total de la reserva: $" + (list_Habitaciones.SelectedItems.Count * (tipoHabitacion.porcentual * reserva.regimen.precio * tipoHabitacion.cantidad_maxima_personas + hotel.cant_estrella * hotel.recarga_estrella) * reserva.cant_noches);
         }
 
         private void HabitacionesDisponibles_Shown(object sender, EventArgs e)

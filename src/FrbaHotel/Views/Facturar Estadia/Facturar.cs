@@ -91,6 +91,14 @@ namespace FrbaHotel.Views.Facturar_Estadia
             }
 
             dataGridView1.DataSource = new BindingSource(this.itemsVisibles, null);
+
+            float total = 0;
+            foreach (ConsumibleItemsUnidades item in this.itemsVisibles)
+            {
+                total += item.monto;
+            }
+
+            label9.Text = "Total: " + total;
         }
 
 
@@ -115,8 +123,11 @@ namespace FrbaHotel.Views.Facturar_Estadia
 
             Reserva reserva = EntityManager.getEntityManager().findBy<Reserva>("reservas.id", estadia.reserva.id.ToString());
             Habitacion habitacion = reserva.obtener_una_habitacion();
+
+            int cantidad_habitaciones = EntityManager.getEntityManager().findAllBy<ReservaHabitacion>("reservas_habitaciones.reserva_id", reserva.id.ToString()).Count;
+
             //CALCULO PRECIO DE HABITACION
-            itemHabitacion.monto = (habitacion.tipo.porcentual * reserva.regimen.precio * habitacion.tipo.cantidad_maxima_personas + hotel.cant_estrella * hotel.recarga_estrella) * reserva.cant_noches;
+            itemHabitacion.monto = ((habitacion.tipo.porcentual * reserva.regimen.precio * habitacion.tipo.cantidad_maxima_personas + hotel.cant_estrella * hotel.recarga_estrella) * reserva.cant_noches) * cantidad_habitaciones;
             itemHabitacion.unidades = estadia.cant_noches;
 
             try
