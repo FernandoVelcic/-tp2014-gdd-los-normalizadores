@@ -336,7 +336,7 @@ namespace FrbaHotel.Views.Facturar_Estadia
                 }
                 else
                 {
-
+                    //factura.cliente_id = cliente;
                     //Update de la factura para guardar la forma de pago
                     try
                     {

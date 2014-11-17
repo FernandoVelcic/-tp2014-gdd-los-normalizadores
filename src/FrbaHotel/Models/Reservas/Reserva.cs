@@ -23,9 +23,9 @@ namespace FrbaHotel.Models
         public int cant_noches { get; set; } //[numeric](18, 0)
         public int reserva_estado { get; set; } //INTEGER NOT NULL
 
-        public String motivo_cancelacion { get; set; } //[nvarchar](255)
-        public String fecha_cancelacion { get; set; } //[datetime]
-        public String usuario_cancelacion { get; set; } //[nvarchar](30)
+        //public String motivo_cancelacion { get; set; } //[nvarchar](255)
+        //public String fecha_cancelacion { get; set; } //[datetime]
+        //public String usuario_cancelacion { get; set; } //[nvarchar](30)
 
         public override void preInsert()
         {

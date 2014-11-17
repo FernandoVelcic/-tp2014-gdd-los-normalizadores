@@ -746,6 +746,8 @@ ALTER TABLE [LOS_NORMALIZADORES].[hoteles_regimenes] ADD CONSTRAINT regimenes_un
 
 ALTER TABLE [LOS_NORMALIZADORES].[reservas] ADD CONSTRAINT reservas_regimen_id FOREIGN KEY (regimen_id) REFERENCES [LOS_NORMALIZADORES].[regimenes](id)
 
+ALTER TABLE [LOS_NORMALIZADORES].[reservas_canceladas] ADD CONSTRAINT canceladas_reservas_id FOREIGN KEY (reserva_id) REFERENCES [LOS_NORMALIZADORES].[reservas](id)
+
 ALTER TABLE [LOS_NORMALIZADORES].[estadias] ADD CONSTRAINT estadias_reserva_id FOREIGN KEY (reserva_id) REFERENCES [LOS_NORMALIZADORES].[reservas](id)
 
 ALTER TABLE [LOS_NORMALIZADORES].[items_facturas] ADD CONSTRAINT items_factura_id FOREIGN KEY (estadia_id) REFERENCES [LOS_NORMALIZADORES].[estadias](id)

@@ -12,7 +12,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using FrbaHotel.Homes;
 using FrbaHotel.Models.Exceptions;
-
+using FrbaHotel.Models.Reservas;
 
 namespace FrbaHotel.Cancelar_Reserva
 {
@@ -45,9 +45,13 @@ namespace FrbaHotel.Cancelar_Reserva
                 MessageBox.Show("No se puede cancelar una reserva una vez comenzada");   
                 return;
             }
-            reserva.fecha_cancelacion = fecha.ToString();
-            reserva.motivo_cancelacion = txt_Motivo.Text;
-            reserva.usuario_cancelacion = txt_Usuario.Text;
+            //reserva.fecha_cancelacion = fecha.ToString();
+            //reserva.motivo_cancelacion = txt_Motivo.Text;
+            //reserva.usuario_cancelacion = txt_Usuario.Text;
+            ReservaCancelada reservaCancelada = new ReservaCancelada();
+            reservaCancelada.fecha = fecha.ToString();
+            reservaCancelada.motivo = txt_Motivo.Text;
+            reservaCancelada.usuario = txt_Usuario.Text;
             if (SesionActual.rol_usuario.rol.id == 2) //Recepcionista
                 reserva.reserva_estado = 3;
             if (SesionActual.rol_usuario.rol.id == 3) //Guest
@@ -56,6 +60,7 @@ namespace FrbaHotel.Cancelar_Reserva
             try
             {
                 reserva.save();
+                reservaCancelada.save();
             }
             catch (ValidationException exception)
             {

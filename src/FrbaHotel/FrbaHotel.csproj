@@ -62,6 +62,7 @@
     <Compile Include="Models\Listado Estadistico\HotelCaro.cs" />
     <Compile Include="Models\Listado Estadistico\HotelesReservasCanceladas.cs" />
     <Compile Include="Models\Pais.cs" />
+    <Compile Include="Models\Reservas\ReservaCancelada.cs" />
     <Compile Include="Models\Reservas\ReservaCliente.cs" />
     <Compile Include="Models\Reservas\ReservaHabitacion.cs" />
     <Compile Include="Tools\Navigator.cs" />
