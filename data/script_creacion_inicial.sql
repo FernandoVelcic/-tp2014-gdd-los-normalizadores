@@ -141,9 +141,6 @@ CREATE TABLE [LOS_NORMALIZADORES].[reservas](
 	[cant_noches] [numeric](18, 0),
 	[regimen_id] INTEGER,
 	[cliente_id]	INTEGER,				
-	[motivo_cancelacion] [nvarchar](255),
-	[fecha_cancelacion] [datetime],				/* Fecha en que se cancela la reserva */
-	[usuario_cancelacion] [nvarchar](30),		/* Usuario que cancela */
 	[reserva_estado] INTEGER NOT NULL,
 												/* Como calculo el precio?? */
 ) ON [PRIMARY]
@@ -222,6 +219,7 @@ CREATE TABLE [LOS_NORMALIZADORES].[facturas](
 	[nro] [numeric](18, 0) NOT NULL,
 	[fecha] [datetime] NOT NULL,					
 	[forma_pago_id] INTEGER NOT NULL			/* Este dato no esta en la Maestra */
+	/*[cliente_id] INTEGER NOT NULL*/
 ) ON [PRIMARY]
 
 CREATE TABLE [LOS_NORMALIZADORES].[formas_de_pago](
@@ -234,6 +232,14 @@ CREATE TABLE [LOS_NORMALIZADORES].[paises](
 	[id] INTEGER IDENTITY PRIMARY KEY,
 	[nombre] [nvarchar](255) NOT NULL,					
 	[gentilicio] [nvarchar](255) NOT NULL,
+) ON [PRIMARY]
+
+CREATE TABLE [LOS_NORMALIZADORES].[reservas_canceladas](
+	[id] INTEGER IDENTITY PRIMARY KEY,
+	[reserva_id] INTEGER NOT NULL,
+	[motivo] [nvarchar](255),
+	[fecha] [datetime],				/* Fecha en que se cancela la reserva */
+	[usuario] [nvarchar](30),		/* Usuario que cancela */
 ) ON [PRIMARY]
 
 INSERT INTO [LOS_NORMALIZADORES].[paises] (nombre, gentilicio) VALUES ('', '')
