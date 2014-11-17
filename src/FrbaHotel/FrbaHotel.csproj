@@ -49,23 +49,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Homes\SesionActual.cs" />
-    <Compile Include="Models\Factura.cs" />
-    <Compile Include="Models\ItemAFacturar.cs" />
-    <Compile Include="Models\ItemFactura.cs" />
+    <Compile Include="Models\Facturacion\Factura.cs" />
+    <Compile Include="Models\Facturacion\ItemAFacturar.cs" />
+    <Compile Include="Models\Facturacion\ItemFactura.cs" />
     <Compile Include="Models\ConsumibleItemsUnidades.cs" />
-    <Compile Include="Models\Estadia.cs" />
-    <Compile Include="Models\FormaDePago.cs" />
-    <Compile Include="Models\HotelBaja.cs" />
-    <Compile Include="Models\HotelRegimen.cs" />
+    <Compile Include="Models\Reservas\Estadia.cs" />
+    <Compile Include="Models\Facturacion\FormaDePago.cs" />
+    <Compile Include="Models\Hotel\HotelBaja.cs" />
+    <Compile Include="Models\Hotel\HotelRegimen.cs" />
     <Compile Include="Models\Listado Estadistico\ClienteTrending.cs" />
     <Compile Include="Models\Listado Estadistico\HabitacionTrending.cs" />
     <Compile Include="Models\Listado Estadistico\HotelCaro.cs" />
     <Compile Include="Models\Listado Estadistico\HotelesReservasCanceladas.cs" />
     <Compile Include="Models\Pais.cs" />
-    <Compile Include="Models\ReservaCliente.cs" />
-    <Compile Include="Models\ReservaHabitacion.cs" />
+    <Compile Include="Models\Reservas\ReservaCliente.cs" />
+    <Compile Include="Models\Reservas\ReservaHabitacion.cs" />
     <Compile Include="Tools\Navigator.cs" />
-    <Compile Include="Models\Cliente.cs" />
+    <Compile Include="Models\Clientes\Cliente.cs" />
     <Compile Include="Models\Consumible.cs" />
     <Compile Include="Models\RolUsuario.cs" />
     <Compile Include="Models\TipoDocumento.cs" />
@@ -166,10 +166,10 @@
     <Compile Include="Database Helper\FetchCondition.cs" />
     <Compile Include="Database Helper\FetchConfig.cs" />
     <Compile Include="Database Helper\FillerHelper.cs" />
-    <Compile Include="Models\Hotel.cs" />
+    <Compile Include="Models\Hotel\Hotel.cs" />
     <Compile Include="Database Helper\InsertQuery.cs" />
-    <Compile Include="Models\Regimen.cs" />
-    <Compile Include="Models\Reserva.cs" />
+    <Compile Include="Models\Hotel\Regimen.cs" />
+    <Compile Include="Models\Reservas\Reserva.cs" />
     <Compile Include="Models\Rol.cs" />
     <Compile Include="Database Helper\Query.cs" />
     <Compile Include="Database Helper\SelectQuery.cs" />
@@ -223,7 +223,7 @@
     <Compile Include="Views\Generar Modificar Reserva\GenerarReserva.Designer.cs">
       <DependentUpon>GenerarReserva.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\Habitacion.cs" />
+    <Compile Include="Models\Hotel\Habitacion.cs" />
     <Compile Include="Views\Listado Estadistico\ListadoEstadistico.cs">
       <SubType>Form</SubType>
     </Compile>
