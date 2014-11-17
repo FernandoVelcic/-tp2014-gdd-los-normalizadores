@@ -1,7 +1,7 @@
 USE [GD2C2014]
 GO
 
-/* START TESTING ONLY 
+/* START TESTING ONLY */
 DROP DATABASE [LOS_NORMALIZADORES]
 GO
 
@@ -10,7 +10,7 @@ GO
 
 USE [LOS_NORMALIZADORES]
 GO
- END TESTING_ONLY */
+/* END TESTING_ONLY */
 
 CREATE SCHEMA [LOS_NORMALIZADORES]
 GO
@@ -554,11 +554,11 @@ GO
 UPDATE [LOS_NORMALIZADORES].items_facturas 
 	SET monto = (((monto - (ho.cant_estrella * ho.recarga_estrella))* t.cantidad_maxima_personas) + ho.cant_estrella*ho.recarga_estrella) * e.cant_noches 
 	FROM 
-		LOS_NORMALIZADORES.LOS_NORMALIZADORES.estadias e,
-		LOS_NORMALIZADORES.LOS_NORMALIZADORES.reservas_habitaciones r, 
-		LOS_NORMALIZADORES.LOS_NORMALIZADORES.hoteles ho,
-		LOS_NORMALIZADORES.LOS_NORMALIZADORES.habitaciones h, 
-		LOS_NORMALIZADORES.LOS_NORMALIZADORES.habitaciones_tipos t
+		LOS_NORMALIZADORES.estadias e,
+		LOS_NORMALIZADORES.reservas_habitaciones r, 
+		LOS_NORMALIZADORES.hoteles ho,
+		LOS_NORMALIZADORES.habitaciones h, 
+		LOS_NORMALIZADORES.habitaciones_tipos t
 		
 	WHERE estadia_id = e.id 
 	AND h.hotel_id = ho.id
