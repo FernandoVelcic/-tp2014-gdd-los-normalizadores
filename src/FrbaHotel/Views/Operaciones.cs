@@ -21,7 +21,7 @@ namespace FrbaHotel
         {
             permisos = SesionActual.rol_usuario.rol;
             InitializeComponent();
-            determinarPermisos();
+            //determinarPermisos();
 
             if (SesionActual.rol_usuario.esGuest())
             {
@@ -71,7 +71,8 @@ namespace FrbaHotel
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Navigator.nextForm(this, new FrbaHotel.Views.ABM_de_Regimen.ABMRegimen());
+            MessageBox.Show("El ABM de regimen no se encuentra implementado por el momento");
+            //Navigator.nextForm(this, new FrbaHotel.Views.ABM_de_Regimen.ABMRegimen());
         }
 
         private void button4_Click(object sender, EventArgs e)
