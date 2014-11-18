@@ -42,37 +42,41 @@ namespace FrbaHotel.Views.ABM_de_Rol
             textBox1.DataBindings.Add("Text", rol, "descripcion");
             comboBox1.DataBindings.Add("SelectedIndex", rol, "estado");
 
+            BindingSource funcionalidades_binding = new BindingSource();
+            funcionalidades_binding.DataSource = EntityManager.getEntityManager().findAll<Funcionalidad>();
+            list_Funcionalidades.DataSource = funcionalidades_binding;
+
             if (!esAlta)
             {
-                /*checkedListBox1.SetItemChecked(0, rol.ABM_Rol);
-                checkedListBox1.SetItemChecked(1, rol.ABM_Habitación);
-                checkedListBox1.SetItemChecked(2, rol.ABM_Cliente);
-                checkedListBox1.SetItemChecked(3, rol.ABM_Usuario);
-                checkedListBox1.SetItemChecked(4, rol.ABM_Regimen);
-                checkedListBox1.SetItemChecked(5, rol.ABM_Hotel);
-                checkedListBox1.SetItemChecked(6, rol.Generar_Reserva);
-                checkedListBox1.SetItemChecked(7, rol.Cancelar_Reserva);
-                checkedListBox1.SetItemChecked(8, rol.Registrar_Estadía);
-                checkedListBox1.SetItemChecked(9, rol.Listado_Estadístico);*/
+                List<RolFuncionalidad> funcionalidades = rol.getFuncionalidades();
+
+                for (int i = 0; i < list_Funcionalidades.Items.Count; i++)
+                {
+                    Funcionalidad funcionalidad = list_Funcionalidades.Items[i] as Funcionalidad;
+                    list_Funcionalidades.SetSelected(i, funcionalidades.Exists(f => f.funcionalidad.id == funcionalidad.id));
+                }
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            /*rol.ABM_Rol = checkedListBox1.GetItemChecked(0);
-            rol.ABM_Habitación = checkedListBox1.GetItemChecked(1);
-            rol.ABM_Cliente = checkedListBox1.GetItemChecked(2);
-            rol.ABM_Usuario = checkedListBox1.GetItemChecked(3);
-            rol.ABM_Regimen = checkedListBox1.GetItemChecked(4);
-            rol.ABM_Hotel = checkedListBox1.GetItemChecked(5);
-            rol.Generar_Reserva = checkedListBox1.GetItemChecked(6);
-            rol.Cancelar_Reserva = checkedListBox1.GetItemChecked(7);
-            rol.Registrar_Estadía = checkedListBox1.GetItemChecked(8);
-            rol.Listado_Estadístico = checkedListBox1.GetItemChecked(9);*/
-
             try
             {
                 rol.save();
+
+                if (!esAlta)
+                {
+                    List<RolFuncionalidad> funcionalidades = rol.getFuncionalidades();
+                    funcionalidades.ForEach(f => f.delete());
+                }
+
+                foreach (Funcionalidad funcionalidad in list_Funcionalidades.SelectedItems)
+                {
+                    RolFuncionalidad rol_funcionalidad = new RolFuncionalidad();
+                    rol_funcionalidad.funcionalidad = funcionalidad;
+                    rol_funcionalidad.rol = rol;
+                    rol_funcionalidad.insert();
+                }
             }
             catch (ValidationException exception)
             {

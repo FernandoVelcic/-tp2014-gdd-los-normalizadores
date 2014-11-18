@@ -33,10 +33,10 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.list_Funcionalidades = new System.Windows.Forms.ListBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,9 +62,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.list_Funcionalidades);
             this.groupBox1.Controls.Add(this.comboBox1);
             this.groupBox1.Controls.Add(this.label15);
-            this.groupBox1.Controls.Add(this.checkedListBox1);
             this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label2);
@@ -98,25 +98,6 @@
             this.label15.TabIndex = 38;
             this.label15.Text = "Estado:";
             // 
-            // checkedListBox1
-            // 
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Items.AddRange(new object[] {
-            "ABM Rol",
-            "ABM Habitación",
-            "ABM Cliente",
-            "ABM Usuario",
-            "ABM Regimen",
-            "ABM Hotel",
-            "Generar Reserva",
-            "Cancelar Reserva",
-            "Registrar Estadía",
-            "Listado Estadístico"});
-            this.checkedListBox1.Location = new System.Drawing.Point(175, 107);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(159, 208);
-            this.checkedListBox1.TabIndex = 5;
-            // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(161, 24);
@@ -145,6 +126,16 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // list_Funcionalidades
+            // 
+            this.list_Funcionalidades.FormattingEnabled = true;
+            this.list_Funcionalidades.ItemHeight = 16;
+            this.list_Funcionalidades.Location = new System.Drawing.Point(161, 95);
+            this.list_Funcionalidades.Name = "list_Funcionalidades";
+            this.list_Funcionalidades.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.list_Funcionalidades.Size = new System.Drawing.Size(284, 228);
+            this.list_Funcionalidades.TabIndex = 40;
+            // 
             // AltaModificacionRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -171,9 +162,9 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.ListBox list_Funcionalidades;
 
     }
 }

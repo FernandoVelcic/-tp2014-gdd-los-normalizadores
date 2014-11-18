@@ -13,6 +13,10 @@ namespace FrbaHotel.Models
 
         //public int id { get; set; } //INTEGER IDENTITY PRIMARY KEY
         public String descripcion { get; set; } //[nvarchar](30)
-        public Funcionalidad funcionalidad { get; set; }
+
+        public override string ToString()
+        {
+            return descripcion;
+        }
     }
 }

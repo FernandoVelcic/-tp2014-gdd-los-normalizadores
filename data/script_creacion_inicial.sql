@@ -247,7 +247,7 @@ INSERT INTO [LOS_NORMALIZADORES].[paises] (nombre, gentilicio) VALUES ('ARGENTIN
 	
 
 
-INSERT INTO [LOS_NORMALIZADORES].[Maestra] SELECT TOP 20000 * FROM [GD2C2014].[gd_esquema].[Maestra]
+INSERT INTO [LOS_NORMALIZADORES].[Maestra] SELECT * FROM [GD2C2014].[gd_esquema].[Maestra]
 GO
   	
 
