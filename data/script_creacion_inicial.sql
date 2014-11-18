@@ -247,7 +247,7 @@ INSERT INTO [LOS_NORMALIZADORES].[paises] (nombre, gentilicio) VALUES ('ARGENTIN
 	
 
 
-INSERT INTO [LOS_NORMALIZADORES].[Maestra] SELECT * FROM [GD2C2014].[gd_esquema].[Maestra]
+INSERT INTO [LOS_NORMALIZADORES].[Maestra] SELECT TOP 20000 * FROM [GD2C2014].[gd_esquema].[Maestra]
 GO
   	
 
@@ -605,19 +605,19 @@ GO
 CREATE TABLE [LOS_NORMALIZADORES].[roles](
 	[id] INTEGER IDENTITY PRIMARY KEY,
 	[descripcion] [nvarchar](30) NOT NULL,
-	[estado] [bit] NOT NULL,
-	[ABM_Rol][bit] NOT NULL,
-	[ABM_Habitación][bit] NOT NULL,
-	[ABM_Cliente][bit] NOT NULL,
-	[ABM_Usuario][bit] NOT NULL,
-	[ABM_Regimen][bit] NOT NULL,
-	[ABM_Hotel][bit] NOT NULL,
-	[Generar_Reserva][bit] NOT NULL,
-	[Cancelar_Reserva][bit] NOT NULL,
-	[Registrar_Estadía][bit] NOT NULL,
-	[Listado_Estadístico][bit] NOT NULL,
+	[estado] [bit] NOT NULL
 ) ON [PRIMARY]
 
+CREATE TABLE [LOS_NORMALIZADORES].[roles_funcionalidades](
+	[id] INTEGER IDENTITY PRIMARY KEY,
+	[rol_id] INTEGER NOT NULL,
+	[funcionalidad_id] INTEGER NOT NULL
+) ON [PRIMARY]
+
+CREATE TABLE [LOS_NORMALIZADORES].[funcionalidades](
+	[id] INTEGER IDENTITY PRIMARY KEY,
+	[descripcion] [nvarchar](30) NOT NULL
+) ON [PRIMARY]
 
 CREATE TABLE [LOS_NORMALIZADORES].[rol_usuario](
 	[id] INTEGER IDENTITY PRIMARY KEY,
@@ -664,55 +664,54 @@ INSERT INTO [LOS_NORMALIZADORES].[documento_tipos] (descripcion) VALUES ('LC - L
 INSERT INTO [LOS_NORMALIZADORES].[documento_tipos] (descripcion) VALUES ('LE - Libreta de Enrolamiento')
 INSERT INTO [LOS_NORMALIZADORES].[documento_tipos] (descripcion) VALUES ('Pasaporte')
 
+/* Agregando funcionalidades */
+SET IDENTITY_INSERT [LOS_NORMALIZADORES].[funcionalidades] ON;
+INSERT INTO [LOS_NORMALIZADORES].[funcionalidades]([id],[descripcion]) VALUES (1,'ABM de Rol')
+INSERT INTO [LOS_NORMALIZADORES].[funcionalidades]([id],[descripcion]) VALUES (2,'ABM de Habitacion')
+INSERT INTO [LOS_NORMALIZADORES].[funcionalidades]([id],[descripcion]) VALUES (3,'ABM de Cliente')
+INSERT INTO [LOS_NORMALIZADORES].[funcionalidades]([id],[descripcion]) VALUES (4,'ABM de Usuario')
+INSERT INTO [LOS_NORMALIZADORES].[funcionalidades]([id],[descripcion]) VALUES (5,'ABM de Regimen')
+INSERT INTO [LOS_NORMALIZADORES].[funcionalidades]([id],[descripcion]) VALUES (6,'ABM de Hotel')
+INSERT INTO [LOS_NORMALIZADORES].[funcionalidades]([id],[descripcion]) VALUES (7,'Generar Reserva')
+INSERT INTO [LOS_NORMALIZADORES].[funcionalidades]([id],[descripcion]) VALUES (8,'Cancelar Reserva')
+INSERT INTO [LOS_NORMALIZADORES].[funcionalidades]([id],[descripcion]) VALUES (9,'Registrar Estadia')
+INSERT INTO [LOS_NORMALIZADORES].[funcionalidades]([id],[descripcion]) VALUES (10,'Listado Estadistico')
+SET IDENTITY_INSERT [LOS_NORMALIZADORES].[funcionalidades] OFF;
+
 /* Agregando roles */
+SET IDENTITY_INSERT [LOS_NORMALIZADORES].[roles] ON;
 INSERT INTO [LOS_NORMALIZADORES].[roles]
-           ([descripcion]
-           ,[estado]
-           ,[ABM_Rol]
-           ,[ABM_Habitación]
-           ,[ABM_Cliente]
-           ,[ABM_Usuario]
-		   ,[ABM_Regimen]
-		   ,[ABM_Hotel]
-		   ,[Generar_Reserva]
-		   ,[Cancelar_Reserva]
-		   ,[Registrar_Estadía]
-		   ,[Listado_Estadístico])
+           ([id],[descripcion],[estado])
      VALUES
-           ('Administrador',1,1,1,0,1,1,1,0,0,0,1)
+           (1, 'Administrador',1)
 INSERT INTO [LOS_NORMALIZADORES].[roles]
-           ([descripcion]
-           ,[estado]
-           ,[ABM_Rol]
-           ,[ABM_Habitación]
-           ,[ABM_Cliente]
-           ,[ABM_Usuario]
-		   ,[ABM_Regimen]
-		   ,[ABM_Hotel]
-		   ,[Generar_Reserva]
-		   ,[Cancelar_Reserva]
-		   ,[Registrar_Estadía]
-		   ,[Listado_Estadístico])
+           ([id],[descripcion],[estado])
      VALUES
-           ('Recepcionista',1,0,0,1,0,0,0,1,1,1,0)
+           (2, 'Recepcionista',1)
 
 INSERT INTO [LOS_NORMALIZADORES].[roles]
-           ([descripcion]
-           ,[estado]
-           ,[ABM_Rol]
-           ,[ABM_Habitación]
-           ,[ABM_Cliente]
-           ,[ABM_Usuario]
-		   ,[ABM_Regimen]
-		   ,[ABM_Hotel]
-		   ,[Generar_Reserva]
-		   ,[Cancelar_Reserva]
-		   ,[Registrar_Estadía]
-		   ,[Listado_Estadístico])
+           ([id],[descripcion],[estado])
      VALUES
-           ('Guest',1,0,0,0,0,0,0,1,1,0,0)
-
+           (3, 'Guest',1)
+SET IDENTITY_INSERT [LOS_NORMALIZADORES].[roles] OFF;
 GO
+
+/* Agregando permisos a los Administradores */
+INSERT INTO [LOS_NORMALIZADORES].[roles_funcionalidades] (rol_id,funcionalidad_id) VALUES (1,1)
+INSERT INTO [LOS_NORMALIZADORES].[roles_funcionalidades] (rol_id,funcionalidad_id) VALUES (1,2)
+INSERT INTO [LOS_NORMALIZADORES].[roles_funcionalidades] (rol_id,funcionalidad_id) VALUES (1,4)
+INSERT INTO [LOS_NORMALIZADORES].[roles_funcionalidades] (rol_id,funcionalidad_id) VALUES (1,5)
+INSERT INTO [LOS_NORMALIZADORES].[roles_funcionalidades] (rol_id,funcionalidad_id) VALUES (1,6)
+INSERT INTO [LOS_NORMALIZADORES].[roles_funcionalidades] (rol_id,funcionalidad_id) VALUES (1,10)
+/* Agregando permisos a los Recepcionistas */
+INSERT INTO [LOS_NORMALIZADORES].[roles_funcionalidades] (rol_id,funcionalidad_id) VALUES (2,3)
+INSERT INTO [LOS_NORMALIZADORES].[roles_funcionalidades] (rol_id,funcionalidad_id) VALUES (2,7)
+INSERT INTO [LOS_NORMALIZADORES].[roles_funcionalidades] (rol_id,funcionalidad_id) VALUES (2,8)
+INSERT INTO [LOS_NORMALIZADORES].[roles_funcionalidades] (rol_id,funcionalidad_id) VALUES (2,9)
+/* Agregando permisos a los Guest */
+INSERT INTO [LOS_NORMALIZADORES].[roles_funcionalidades] (rol_id,funcionalidad_id) VALUES (3,7)
+INSERT INTO [LOS_NORMALIZADORES].[roles_funcionalidades] (rol_id,funcionalidad_id) VALUES (3,8)
+
 
 /* Estados de reserva*/
 

@@ -21,7 +21,7 @@ namespace FrbaHotel
         {
             permisos = SesionActual.rol_usuario.rol;
             InitializeComponent();
-            //determinarPermisos();
+            determinarPermisos();
 
             if (SesionActual.rol_usuario.esGuest())
             {
@@ -46,17 +46,18 @@ namespace FrbaHotel
 
         public void determinarPermisos()
         {
-            button1.Visible = permisos.ABM_Cliente;
-            button2.Visible = permisos.ABM_Habitación;
-            button3.Visible = permisos.ABM_Regimen;
-            button4.Visible = permisos.ABM_Rol;
-            button5.Visible = permisos.Cancelar_Reserva;
-            button6.Visible = permisos.Generar_Reserva;
-            button7.Visible = permisos.Listado_Estadístico;
+            List<RolFuncionalidad> roles_funcionalidades = permisos.getFuncionalidades();
+            button1.Visible = roles_funcionalidades.Exists(p => p.funcionalidad.descripcion == "ABM de Cliente");
+            button2.Visible = roles_funcionalidades.Exists(p => p.funcionalidad.descripcion == "ABM de Habitacion");
+            button3.Visible = roles_funcionalidades.Exists(p => p.funcionalidad.descripcion == "ABM de Regimen");
+            button4.Visible = roles_funcionalidades.Exists(p => p.funcionalidad.descripcion == "ABM de Rol");
+            button5.Visible = roles_funcionalidades.Exists(p => p.funcionalidad.descripcion == "Cancelar Reserva");
+            button6.Visible = roles_funcionalidades.Exists(p => p.funcionalidad.descripcion == "Generar Reserva");
+            button7.Visible = roles_funcionalidades.Exists(p => p.funcionalidad.descripcion == "Listado Estadistico");
             //button8.Visible Volver a pantalla principal
-            button10.Visible = permisos.Registrar_Estadía;
-            button11.Visible = permisos.ABM_Usuario;
-            button12.Visible = permisos.ABM_Hotel;
+            button10.Visible = roles_funcionalidades.Exists(p => p.funcionalidad.descripcion == "Registrar Estadia");
+            button11.Visible = roles_funcionalidades.Exists(p => p.funcionalidad.descripcion == "ABM de Usuario");
+            button12.Visible = roles_funcionalidades.Exists(p => p.funcionalidad.descripcion == "ABM de Hotel");
         }
 
         private void button1_Click(object sender, EventArgs e)

@@ -44,7 +44,7 @@ namespace FrbaHotel.Views.ABM_de_Rol
 
             if (!esAlta)
             {
-                checkedListBox1.SetItemChecked(0, rol.ABM_Rol);
+                /*checkedListBox1.SetItemChecked(0, rol.ABM_Rol);
                 checkedListBox1.SetItemChecked(1, rol.ABM_Habitación);
                 checkedListBox1.SetItemChecked(2, rol.ABM_Cliente);
                 checkedListBox1.SetItemChecked(3, rol.ABM_Usuario);
@@ -53,13 +53,13 @@ namespace FrbaHotel.Views.ABM_de_Rol
                 checkedListBox1.SetItemChecked(6, rol.Generar_Reserva);
                 checkedListBox1.SetItemChecked(7, rol.Cancelar_Reserva);
                 checkedListBox1.SetItemChecked(8, rol.Registrar_Estadía);
-                checkedListBox1.SetItemChecked(9, rol.Listado_Estadístico);
+                checkedListBox1.SetItemChecked(9, rol.Listado_Estadístico);*/
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            rol.ABM_Rol = checkedListBox1.GetItemChecked(0);
+            /*rol.ABM_Rol = checkedListBox1.GetItemChecked(0);
             rol.ABM_Habitación = checkedListBox1.GetItemChecked(1);
             rol.ABM_Cliente = checkedListBox1.GetItemChecked(2);
             rol.ABM_Usuario = checkedListBox1.GetItemChecked(3);
@@ -68,7 +68,7 @@ namespace FrbaHotel.Views.ABM_de_Rol
             rol.Generar_Reserva = checkedListBox1.GetItemChecked(6);
             rol.Cancelar_Reserva = checkedListBox1.GetItemChecked(7);
             rol.Registrar_Estadía = checkedListBox1.GetItemChecked(8);
-            rol.Listado_Estadístico = checkedListBox1.GetItemChecked(9);
+            rol.Listado_Estadístico = checkedListBox1.GetItemChecked(9);*/
 
             try
             {
