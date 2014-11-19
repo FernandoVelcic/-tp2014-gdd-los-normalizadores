@@ -140,6 +140,7 @@ namespace FrbaHotel.Registrar_Estadia
         }
         public bool obtenerReserva()
         {
+
             reserva = EntityManager.getEntityManager().findBy<Reserva>("reservas.id", reserva_numero.ToString());
             
             if (reserva == null)
@@ -147,15 +148,17 @@ namespace FrbaHotel.Registrar_Estadia
                 MessageBox.Show("Por favor, ingrese un número de reserva correcto.");
                 return false;
             }
+
             List<ReservaHabitacion> habitaciones_reservadas = EntityManager.getEntityManager().findAllBy<ReservaHabitacion>("reservas_habitaciones.reserva_id", reserva.id.ToString());
             Habitacion habitacion = EntityManager.getEntityManager().findBy<Habitacion>("habitaciones.id", habitaciones_reservadas[0].habitacion.id.ToString());
             //Validacion de que el usuario que realiza el check-in o check.out se encuentre en el mismo hotel
-            if(habitacion.hotel.id!=SesionActual.rol_usuario.hotel.id)
+            if (SesionActual.rol_usuario == null || SesionActual.rol_usuario.hotel == null || habitacion.hotel.id != SesionActual.rol_usuario.hotel.id)
             {
                 MessageBox.Show("La reserva no corresponde al hotel en el cual se esta trabajando");
                 return false;
             }
             return true;
+
         }
     }
 }
