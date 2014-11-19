@@ -36,6 +36,11 @@ namespace FrbaHotel.Views.ABM_de_Habitacion
         {
             InitializeComponent();
             this.habitacion = habitacion;
+            if (habitacion.frente != "S" && habitacion.frente != "N")
+            {
+                habitacion.frente = "S";
+            }
+
         }
 
 

@@ -106,7 +106,7 @@ CREATE TABLE [LOS_NORMALIZADORES].[habitaciones](
 	[frente] [nvarchar](50),
 	[tipo_id] INTEGER,
 	[estado] [bit] NOT NULL,
-	[descripcion] [nvarchar](255) NOT NULL
+	[descripcion] [nvarchar](255)
 ) ON [PRIMARY]
 
 
