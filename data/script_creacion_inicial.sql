@@ -789,6 +789,14 @@ DROP TABLE [LOS_NORMALIZADORES].Maestra
 GO
 
 /* Creo vistas SQL */
+CREATE VIEW [LOS_NORMALIZADORES].[v_reservas_hoteles]
+AS
+SELECT     rh.reserva_id AS id, r.id AS reserva_id, h.hotel_id AS hotel_id
+FROM         [LOS_NORMALIZADORES].[reservas] AS r LEFT JOIN
+                      [LOS_NORMALIZADORES].[reservas_habitaciones] AS rh ON r.id = rh.reserva_id LEFT JOIN
+                      [LOS_NORMALIZADORES].[habitaciones] AS h ON rh.habitacion_id = h.id
+
+GO
 
 CREATE VIEW [LOS_NORMALIZADORES].[v_habitaciones] AS
 SELECT habitaciones.* FROM [LOS_NORMALIZADORES].[habitaciones] habitaciones

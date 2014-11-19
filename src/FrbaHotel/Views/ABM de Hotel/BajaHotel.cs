@@ -27,8 +27,8 @@ namespace FrbaHotel.Views.ABM_de_Hotel
             hotel_baja = new HotelBaja();
             hotel_baja.hotel = hotel;
 
-            hotel_baja.fecha_desde = DateTime.Today.ToShortDateString();
-            hotel_baja.fecha_hasta = DateTime.Today.ToShortDateString();
+            hotel_baja.fecha_desde = Config.getInstance().getCurrentDate().ToShortDateString();
+            hotel_baja.fecha_hasta = Config.getInstance().getCurrentDate().ToShortDateString();
         }
 
         private void BajaHotel_Load(object sender, EventArgs e)

@@ -67,6 +67,7 @@
     <Compile Include="Models\Reservas\ReservaCancelada.cs" />
     <Compile Include="Models\Reservas\ReservaCliente.cs" />
     <Compile Include="Models\Reservas\ReservaHabitacion.cs" />
+    <Compile Include="Models\Reservas\ReservaHotel.cs" />
     <Compile Include="Tools\Navigator.cs" />
     <Compile Include="Models\Clientes\Cliente.cs" />
     <Compile Include="Models\Facturacion\Consumible.cs" />

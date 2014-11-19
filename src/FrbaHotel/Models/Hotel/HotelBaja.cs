@@ -22,7 +22,7 @@ namespace FrbaHotel.Models
 
         public override void preSave()
         {
-            if (Config.getInstance().getCurrentDate() > DateTime.Parse(fecha_desde))
+            if (Config.getInstance().getCurrentDate().Date > DateTime.Parse(fecha_desde))
                 throw new ValidationException("No se pueden hacer bajas al pasado, la fecha_desde debe ser mayor que la fecha de sistema.");
 
             if (DateTime.Parse(fecha_desde) > DateTime.Parse(fecha_hasta))
@@ -31,25 +31,22 @@ namespace FrbaHotel.Models
             if (!hotel.estaLibre(fecha_desde, fecha_hasta))
                 throw new ValidationException("Ya existe una baja en ese periodo");
 
-            List<Reserva> reservas = EntityManager.getEntityManager().findAllBy<Reserva>("habitaciones.hotel_id", hotel.id.ToString());
+
+            List<ReservaHotel> reservas = EntityManager.getEntityManager().findAllBy<ReservaHotel>("hotel_id", hotel.id.ToString());
+
             //Reservas no canceladas, no tener en cuenta las que ya pasaron
-            reservas = reservas.FindAll(r => !r.estaCancelada() && DateTime.Parse(r.fecha_inicio).AddDays(r.cant_noches) >= Config.getInstance().getCurrentDate() &&
-                /*(
-                (DateTime.Parse(fecha_desde) <= DateTime.Parse(r.fecha_inicio) &&
-                DateTime.Parse(r.fecha_inicio) <= DateTime.Parse(fecha_hasta)) ||
-                (DateTime.Parse(fecha_desde) <= DateTime.Parse(r.fecha_inicio).AddDays(r.cant_noches) &&
-                DateTime.Parse(r.fecha_inicio).AddDays(r.cant_noches) <= DateTime.Parse(fecha_hasta))
-                ));*/
+            reservas = reservas.FindAll(r => !r.reserva.estaCancelada() && DateTime.Parse(r.reserva.fecha_inicio).AddDays(r.reserva.cant_noches) >= Config.getInstance().getCurrentDate() &&
                 (
-                (DateTime.Parse(fecha_desde) <= DateTime.Parse(r.fecha_inicio) &&
-                DateTime.Parse(r.fecha_inicio) <= DateTime.Parse(fecha_hasta)) ||
-                (DateTime.Parse(fecha_desde) <= DateTime.Parse(r.fecha_inicio).AddDays(r.cant_noches) &&
-                DateTime.Parse(r.fecha_inicio).AddDays(r.cant_noches) <= DateTime.Parse(fecha_hasta)) ||
+                (DateTime.Parse(fecha_desde) <= DateTime.Parse(r.reserva.fecha_inicio) &&
+                DateTime.Parse(r.reserva.fecha_inicio) <= DateTime.Parse(fecha_hasta)) ||
+                (DateTime.Parse(fecha_desde) <= DateTime.Parse(r.reserva.fecha_inicio).AddDays(r.reserva.cant_noches) &&
+                DateTime.Parse(r.reserva.fecha_inicio).AddDays(r.reserva.cant_noches) <= DateTime.Parse(fecha_hasta)) ||
                 (
-                DateTime.Parse(r.fecha_inicio) < DateTime.Parse(fecha_desde) &&
-                DateTime.Parse(fecha_desde) < DateTime.Parse(r.fecha_inicio).AddDays(r.cant_noches)
+                DateTime.Parse(r.reserva.fecha_inicio) < DateTime.Parse(fecha_desde) &&
+                DateTime.Parse(fecha_desde) < DateTime.Parse(r.reserva.fecha_inicio).AddDays(r.reserva.cant_noches)
                 )
                 ));
+
             if (reservas.Count != 0)
                 throw new ValidationException("Existen reservas tomadas para ese periodo");
         }
