@@ -38,20 +38,35 @@ namespace FrbaHotel.Cancelar_Reserva
                 return;
             }
            
-            DateTime fecha= DateTime.Parse(dateTimePicker1.Text);   
+            DateTime fecha = DateTime.Parse(dateTimePicker1.Text);   
 
             if (DateTime.Compare(DateTime.Parse(reserva.fecha_inicio), fecha) < 0)
             {
                 MessageBox.Show("No se puede cancelar una reserva una vez comenzada");   
                 return;
             }
+
+            List<FetchCondition> condiciones = new List<FetchCondition>();
+            FetchCondition fetchCondition = new FetchCondition();
+            fetchCondition.setEquals("reserva_id", reserva.id);
+            condiciones.Add(fetchCondition);
+            List<ReservaCancelada> viajasCancelaciones = EntityManager.getEntityManager().findList<ReservaCancelada>(condiciones);
+            if (viajasCancelaciones.Count != 0)
+            {
+                MessageBox.Show("La reserva ya había sido cancelada anteriormente");
+                return;
+            }
+
+
             //reserva.fecha_cancelacion = fecha.ToString();
             //reserva.motivo_cancelacion = txt_Motivo.Text;
             //reserva.usuario_cancelacion = txt_Usuario.Text;
             ReservaCancelada reservaCancelada = new ReservaCancelada();
             reservaCancelada.fecha = fecha.ToString();
+            reservaCancelada.reserva = reserva;
             reservaCancelada.motivo = txt_Motivo.Text;
             reservaCancelada.usuario = txt_Usuario.Text;
+
             if (SesionActual.rol_usuario.rol.id == 2) //Recepcionista
                 reserva.reserva_estado = 3;
             if (SesionActual.rol_usuario.rol.id == 3) //Guest
