@@ -48,5 +48,6 @@ namespace FrbaHotel.Models
         {
             return obtener_habitaciones().Count() * obtener_una_habitacion().tipo.cantidad_maxima_personas;
         }
+
     }
 }

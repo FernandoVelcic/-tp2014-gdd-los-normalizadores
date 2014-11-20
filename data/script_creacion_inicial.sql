@@ -158,9 +158,9 @@ CREATE TABLE [LOS_NORMALIZADORES].[reserva_estado](
 	[descripcion] [nvarchar] (255),
 ) ON [PRIMARY]	
 
-CREATE TABLE [LOS_NORMALIZADORES].[reserva_cliente](
+CREATE TABLE [LOS_NORMALIZADORES].[estadia_cliente](
 	[id] iNTEGER IDENTITY PRIMARY KEY,
-	[reserva_id] INTEGER,
+	[estadia_id] INTEGER,
 	[cliente_id] INTEGER,
 ) ON [PRIMARY]
 
@@ -247,7 +247,7 @@ INSERT INTO [LOS_NORMALIZADORES].[paises] (nombre, gentilicio) VALUES ('ARGENTIN
 	
 
 
-INSERT INTO [LOS_NORMALIZADORES].[Maestra] SELECT * FROM [GD2C2014].[gd_esquema].[Maestra]
+INSERT INTO [LOS_NORMALIZADORES].[Maestra] SELECT TOP 1000 * FROM [GD2C2014].[gd_esquema].[Maestra]
 GO
   	
 
@@ -775,9 +775,9 @@ ALTER TABLE [LOS_NORMALIZADORES].[reservas_habitaciones] ADD CONSTRAINT fk_reser
 
 ALTER TABLE [LOS_NORMALIZADORES].[reservas_habitaciones] ADD CONSTRAINT fk_habitacion_id FOREIGN KEY (habitacion_id) REFERENCES [LOS_NORMALIZADORES].[habitaciones](id)
 
-ALTER TABLE [LOS_NORMALIZADORES].[reserva_cliente] ADD CONSTRAINT fk_reserva_cliente_id FOREIGN KEY (reserva_id) REFERENCES [LOS_NORMALIZADORES].[reservas](id)
+ALTER TABLE [LOS_NORMALIZADORES].[estadia_cliente] ADD CONSTRAINT fk_estadia_cliente_id FOREIGN KEY (estadia_id) REFERENCES [LOS_NORMALIZADORES].[estadias](id)
 
-ALTER TABLE [LOS_NORMALIZADORES].[reserva_cliente] ADD CONSTRAINT fk_cliente_reserva_id FOREIGN KEY (cliente_id) REFERENCES [LOS_NORMALIZADORES].[clientes](id)
+ALTER TABLE [LOS_NORMALIZADORES].[estadia_cliente] ADD CONSTRAINT fk_cliente_reserva_id FOREIGN KEY (cliente_id) REFERENCES [LOS_NORMALIZADORES].[clientes](id)
 
 ALTER TABLE [LOS_NORMALIZADORES].[reservas] ADD CONSTRAINT fk_reserva_estado_id FOREIGN KEY (reserva_estado) REFERENCES [LOS_NORMALIZADORES].[reserva_estado](id)
 

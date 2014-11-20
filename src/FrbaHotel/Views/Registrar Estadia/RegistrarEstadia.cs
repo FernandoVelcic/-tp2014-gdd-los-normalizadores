@@ -77,7 +77,7 @@ namespace FrbaHotel.Registrar_Estadia
                         return;
                     }
                     MessageBox.Show("La estadía ha sido validada");
-                    Navigator.nextForm(this, new FrbaHotel.Views.Registrar_Estadia.Ingreso(reserva));
+                    Navigator.nextForm(this, new FrbaHotel.Views.Registrar_Estadia.Ingreso(estadia));
                 }
                 else if (DateTime.Compare(DateTime.Parse(fecha).Date, DateTime.Parse(reserva.fecha_inicio).Date) != 0)
                 {

@@ -19,11 +19,11 @@ namespace FrbaHotel.Views.Registrar_Estadia
     public partial class Ingreso : Form, SeleccionCliente
     {
         public List<Cliente> clientes = new List<Cliente>();
-        public Reserva reserva;
-        
-        public Ingreso(Reserva res)
+        public Estadia estadia;
+
+        public Ingreso(Estadia est)
         {
-            reserva = res;
+            estadia = est;
             InitializeComponent();
         }
 
@@ -48,11 +48,11 @@ namespace FrbaHotel.Views.Registrar_Estadia
             {
                 foreach (Cliente cliente in clientes)
                 {
-                    ReservaCliente reservaCliente = new ReservaCliente();
-                    reservaCliente.cliente = cliente;
-                    reservaCliente.reserva = reserva;
+                    EstadiaCliente estadiaCliente = new EstadiaCliente();
+                    estadiaCliente.cliente = cliente;
+                    estadiaCliente.estadia = estadia;
 
-                    reservaCliente.save();
+                    estadiaCliente.save();
                 }
             }
             catch (ValidationException exception)
@@ -86,7 +86,7 @@ namespace FrbaHotel.Views.Registrar_Estadia
                 return;
             }
 
-            if (clientes.Count >= reserva.cantidad_maxima_personas())
+            if (clientes.Count >= estadia.cantidad_maxima_personas())
             {
                 MessageBox.Show("La estadía alcanzo el maximo de ocupantes");
                 return;

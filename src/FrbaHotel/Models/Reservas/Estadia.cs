@@ -14,5 +14,11 @@ namespace FrbaHotel.Models
         public String fecha_inicio { get; set; }
         public int cant_noches { get; set; }
 
+        public int cantidad_maxima_personas()
+        {
+            return reserva.cantidad_maxima_personas();
+        } 
+
+
     }
 }

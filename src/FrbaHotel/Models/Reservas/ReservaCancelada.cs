@@ -15,5 +15,7 @@ namespace FrbaHotel.Models.Reservas
         public String motivo { get; set; } //[nvarchar](255)
         public String fecha { get; set; } //[datetime]
         public String usuario { get; set; } //[nvarchar](30)
+        public Reserva reserva { get; set; }
+
     }
 }

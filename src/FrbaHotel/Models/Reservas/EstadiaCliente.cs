@@ -6,14 +6,14 @@ using System.Text;
 
 namespace FrbaHotel.Models
 {
-    public class ReservaCliente : ActiveRecord
+    public class EstadiaCliente : ActiveRecord
     {
 
-        public override String table { get { return "reserva_cliente"; } }
+        public override String table { get { return "estadia_cliente"; } }
 
         //public int id { get; set; } //INTEGER IDENTITY PRIMARY KEY
 
-        public Reserva reserva { get; set; }
+        public Estadia estadia { get; set; }
         public Cliente cliente { get; set; }
     }
 }
