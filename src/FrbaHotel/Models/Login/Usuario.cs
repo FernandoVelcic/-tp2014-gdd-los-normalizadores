@@ -38,6 +38,33 @@ namespace FrbaHotel.Models
 
         public override void preSave()
         {
+
+            if (String.IsNullOrEmpty(username))
+            {
+                throw new ValidationException("El username es obligatorio");
+            }
+
+            if (String.IsNullOrEmpty(password))
+            {
+                throw new ValidationException("La password es obligatoria");
+            }
+
+            if (String.IsNullOrEmpty(nombre))
+            {
+                throw new ValidationException("El nombre es obligatorio");
+            }
+
+            if (String.IsNullOrEmpty(apellido))
+            {
+                throw new ValidationException("La password es obligatoria");
+            }
+
+            if (String.IsNullOrEmpty(fecha_nac))
+            {
+                throw new ValidationException("La fecha de nacimiento es obligatoria");
+            }
+
+
             List<FetchCondition> condiciones = new List<FetchCondition>();
             FetchCondition condicionId = new FetchCondition();
             condicionId.setNotEquals("usuarios.id", id);
@@ -60,5 +87,6 @@ namespace FrbaHotel.Models
         {
             return EntityManager.getEntityManager().findAllBy<RolUsuario>("usuario_id", id.ToString());
         }
+
     }
 }
