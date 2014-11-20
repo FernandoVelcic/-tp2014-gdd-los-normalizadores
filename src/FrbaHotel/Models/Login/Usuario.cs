@@ -44,10 +44,6 @@ namespace FrbaHotel.Models
                 throw new ValidationException("El username es obligatorio");
             }
 
-            if (String.IsNullOrEmpty(password))
-            {
-                throw new ValidationException("La password es obligatoria");
-            }
 
             if (String.IsNullOrEmpty(nombre))
             {
@@ -56,7 +52,7 @@ namespace FrbaHotel.Models
 
             if (String.IsNullOrEmpty(apellido))
             {
-                throw new ValidationException("La password es obligatoria");
+                throw new ValidationException("El apellido es obligatorio");
             }
 
             if (String.IsNullOrEmpty(fecha_nac))
@@ -64,6 +60,15 @@ namespace FrbaHotel.Models
                 throw new ValidationException("La fecha de nacimiento es obligatoria");
             }
 
+            if (String.IsNullOrEmpty(calle))
+            {
+                throw new ValidationException("La calle es obligatoria");
+            }
+
+            if (String.IsNullOrEmpty(telefono))
+            {
+                throw new ValidationException("el telefono es obligatorio");
+            }
 
             List<FetchCondition> condiciones = new List<FetchCondition>();
             FetchCondition condicionId = new FetchCondition();

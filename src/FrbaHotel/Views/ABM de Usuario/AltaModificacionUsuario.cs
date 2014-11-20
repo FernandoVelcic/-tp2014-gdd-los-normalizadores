@@ -90,7 +90,13 @@ namespace FrbaHotel.ABM_de_Usuario
                 MessageBox.Show("Debe agregar al menos un rol para algun hotel");
                 return;
             }
-            
+
+         /*  if (esAlta && textBox2.Text == "")
+            {
+                MessageBox.Show("La password es obligatoria");
+                return;
+            }*/
+
             //Bindings especiales
             if(textBox2.Text != "" || esAlta)
                 usuario.password = new SHA256(textBox2.Text).ToString();

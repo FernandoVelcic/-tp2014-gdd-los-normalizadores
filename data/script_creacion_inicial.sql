@@ -637,11 +637,11 @@ CREATE TABLE [LOS_NORMALIZADORES].[usuarios](
 	[apellido] [nvarchar](255) NOT NULL,
 	[mail] [nvarchar](255) NOT NULL,
 	[fecha_nac] [datetime] NOT NULL,
-	[calle] [nvarchar](255),
-	[nro_Calle] [numeric](18, 0),
-	[telefono] [nvarchar](255),
+	[calle] [nvarchar](255) NOT NULL,
+	[nro_Calle] [numeric](18, 0) NOT NULL,
+	[telefono] [nvarchar](255) NOT NULL,
 	[documento_tipo_id] INTEGER NOT NULL,
-	[documento_nro] [numeric](18, 0)
+	[documento_nro] [numeric](18, 0) NOT NULL
  CONSTRAINT [PK_usuarios] PRIMARY KEY CLUSTERED 
 
 ([id] ASC)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]) ON [PRIMARY]
