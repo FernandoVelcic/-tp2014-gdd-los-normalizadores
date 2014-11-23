@@ -52,6 +52,12 @@ namespace FrbaHotel.Views.Facturar_Estadia
             factura.fecha = (DateTime.Parse(estadia.fecha_inicio).AddDays(estadia.cant_noches)).ToString();
             factura.forma_pago_id = 1;
             factura.estadia = estadia;
+
+            Reserva reserva = EntityManager.getEntityManager().findBy<Reserva>("reservas.id", estadia.reserva.id.ToString());
+            cliente = reserva.cliente;
+
+            factura.cliente = cliente;
+
             factura.save();
             setTexts();
 
@@ -71,8 +77,6 @@ namespace FrbaHotel.Views.Facturar_Estadia
 
             }
 
-            Reserva reserva = EntityManager.getEntityManager().findBy<Reserva>("reservas.id", estadia.reserva.id.ToString());
-            cliente = reserva.cliente;
             txt_Usuario.Text = cliente.nombre.ToString() + " " + cliente.apellido.ToString();
             Habitacion habitacionPosta = reserva.obtener_una_habitacion();
             hotel = habitacionPosta.hotel;

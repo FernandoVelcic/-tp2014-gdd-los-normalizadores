@@ -218,8 +218,8 @@ CREATE TABLE [LOS_NORMALIZADORES].[facturas](
 	[estadia_id] INTEGER NOT NULL,					
 	[nro] [numeric](18, 0) NOT NULL,
 	[fecha] [datetime] NOT NULL,					
-	[forma_pago_id] INTEGER NOT NULL			/* Este dato no esta en la Maestra */
-	/*[cliente_id] INTEGER NOT NULL*/
+	[forma_pago_id] INTEGER NOT NULL,			/* Este dato no esta en la Maestra */
+	[cliente_id] INTEGER NOT NULL
 ) ON [PRIMARY]
 
 CREATE TABLE [LOS_NORMALIZADORES].[formas_de_pago](
@@ -517,11 +517,12 @@ INSERT INTO [LOS_NORMALIZADORES].[formas_de_pago] (descripcion) VALUES ('Tarjeta
 INSERT INTO [LOS_NORMALIZADORES].[formas_de_pago] (descripcion) VALUES ('Tarjeta de débito')
 GO
 
-INSERT INTO [LOS_NORMALIZADORES].[facturas] ([nro], [estadia_id], [fecha], [forma_pago_id])	
-	SELECT DISTINCT [Factura_Nro], [estadia_id], [Factura_Fecha], 1  FROM [LOS_NORMALIZADORES].[Maestra]
+INSERT INTO [LOS_NORMALIZADORES].[facturas] ([nro], [estadia_id], [fecha], [forma_pago_id], [cliente_id])	
+	SELECT DISTINCT [Factura_Nro], [estadia_id], [Factura_Fecha], 1, [cliente_id]  FROM [LOS_NORMALIZADORES].[Maestra]
 	WHERE [Factura_Nro] IS NOT NULL 
 	AND   [estadia_id] IS NOT NULL
 	AND   [Factura_Fecha] IS NOT NULL
+	AND [cliente_id] IS NOT NULL
 GO
 
 ALTER TABLE [LOS_NORMALIZADORES].[Maestra] ADD factura_id INTEGER
