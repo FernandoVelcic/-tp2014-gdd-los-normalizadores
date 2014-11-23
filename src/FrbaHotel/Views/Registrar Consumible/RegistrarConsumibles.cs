@@ -18,33 +18,31 @@ namespace FrbaHotel.Registrar_Consumible
     public partial class Form1 : Form
     {
         Estadia estadia;
-        List<ItemAFacturar> items= new List<ItemAFacturar>();
+        List<ItemAFacturar> items = new List<ItemAFacturar>();
 
-        public Form1(Estadia e)
+        public int unidades { get; set; }
+
+        public Form1(Estadia estadia)
         {
-            estadia = e;
+            this.estadia = estadia;
             InitializeComponent();
-            
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             this.cargarConsumibles();
 
-            comboBox1.Items.Clear();
             //Bindeo de todos los consumibles con el combo box
             BindingSource consumibles_binding = new BindingSource();
             consumibles_binding.DataSource = EntityManager.getEntityManager().findAll<Consumible>();
             comboBox1.DataSource = consumibles_binding;
-             
-            //Bindeo del nro de reserva y el tipo de regimen con los text box
-            txt_reserva_id.Text = estadia.reserva.id.ToString();
-            Reserva resInter=estadia.reserva;
-            Reserva reserva = EntityManager.getEntityManager().findBy<Reserva>("reservas.id", resInter.id.ToString());
-            Regimen reg = reserva.regimen;
-            Regimen regimen = EntityManager.getEntityManager().findBy<Regimen>("regimenes.id", reg.id.ToString());
-            txt_TipoRegimen.Text = regimen.descripcion;
 
+            //Bindeo del nro de reserva y el tipo de regimen con los text box
+            Reserva reserva = EntityManager.getEntityManager().findBy<Reserva>("reservas.id", estadia.reserva.id.ToString());
+            txt_reserva_id.Text = estadia.reserva.id.ToString();
+            txt_TipoRegimen.Text = reserva.regimen.descripcion;
+
+            txt_UnidadesArticulo.DataBindings.Add("Text", this, "unidades");
         }
 
         private void btn_Volver_Click(object sender, EventArgs e)
@@ -59,18 +57,14 @@ namespace FrbaHotel.Registrar_Consumible
 
         private void btn_Agregar_Click(object sender, EventArgs e)
         {
-            //Valida que se ingrese un numero positivo de unidades para un consumible
-            if (int.Parse(txt_UnidadesArticulo.Text) < 0)
+            Consumible consumible_seleccionado = comboBox1.SelectedItem as Consumible;
+
+            if (unidades <= 0)
             {
                 MessageBox.Show("Debe ingresar cantidades positivas");
                 txt_UnidadesArticulo.Text = "";
                 return;
             }
-            //Crea el consumible a persistir
-            ItemAFacturar consumible_estadia = new ItemAFacturar();
-
-            int unidades = int.Parse(txt_UnidadesArticulo.Text);   
-            Consumible consumible_seleccionado = comboBox1.SelectedItem as Consumible;
 
             if (items.Exists(item => item.consumible.id == consumible_seleccionado.id))
             {
@@ -78,31 +72,22 @@ namespace FrbaHotel.Registrar_Consumible
                 return;
             }
 
+            //Crea el consumible a persistir
+            ItemAFacturar consumible_estadia = new ItemAFacturar();
             consumible_estadia.estadia = estadia;
             consumible_estadia.consumible = consumible_seleccionado;
             consumible_estadia.unidades = unidades;
             consumible_estadia.monto = unidades * consumible_seleccionado.precio;
             items.Add(consumible_estadia);
-            this.cargarConsumibles();
-         }
+            
+            cargarConsumibles();
+        }
 
         private void cargarConsumibles()
         {
-           //Bindea los items ya ingresado con el datagrid donde se va actualizando
+            //Bindea los items ya ingresado con el datagrid donde se va actualizando
             BindingList<ConsumibleItemsUnidades> consumibleUnidadesBinding = new BindingList<ConsumibleItemsUnidades>();
-            foreach (ItemAFacturar consumibleEstadia in items)
-            {
-                ConsumibleItemsUnidades consumibleUnidades = new ConsumibleItemsUnidades();
-
-                consumibleUnidades.codigo = consumibleEstadia.consumible.id;
-                consumibleUnidades.descripcion = consumibleEstadia.consumible.descripcion;
-                consumibleUnidades.precio = consumibleEstadia.consumible.precio;
-                consumibleUnidades.unidades = consumibleEstadia.unidades;
-                consumibleUnidades.monto = consumibleEstadia.monto;
-                                
-                consumibleUnidadesBinding.Add(consumibleUnidades);
-
-            }
+            items.ForEach(i => consumibleUnidadesBinding.Add(new ConsumibleItemsUnidades(i)));
             dataGridView1.DataSource = new BindingSource(consumibleUnidadesBinding, null);
         }
 
@@ -110,27 +95,12 @@ namespace FrbaHotel.Registrar_Consumible
         private void btn_Facturar_Click(object sender, EventArgs e)
         {
             //Confirmacion de consumibles, para seguir con la facturacion
-            DialogResult result1 = MessageBox.Show("¿Está seguro que ya ingreso todo lo consumido y desea facturar?","Importante",MessageBoxButtons.YesNo);
-            if(result1==DialogResult.Yes)
+            DialogResult result1 = MessageBox.Show("¿Está seguro que ya ingreso todo lo consumido y desea facturar?", "Importante", MessageBoxButtons.YesNo);
+            if (result1 == DialogResult.Yes)
             {
-                     Navigator.nextForm(this, new FrbaHotel.Views.Facturar_Estadia.Facturar(estadia, items));
+                Navigator.nextForm(this, new FrbaHotel.Views.Facturar_Estadia.Facturar(estadia, items));
             }
 
-        }
-
-        public bool IsNumeric(object Expression)
-        {
-            bool esnumero;
-            double returnNumero;
-
-            esnumero = Double.TryParse(Convert.ToString(Expression), System.Globalization.NumberStyles.Any, System.Globalization.NumberFormatInfo.InvariantInfo, out returnNumero);
-            return esnumero;
-        }
-
-        private void txt_UnidadesArticulo_TextChanged(object sender, EventArgs e)
-        {
-            if (!IsNumeric(txt_UnidadesArticulo.Text) && txt_UnidadesArticulo.Text != "") { 
-                MessageBox.Show("Debe ingresar numeros unicamente"); txt_UnidadesArticulo.Text = "0"; }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -147,11 +117,8 @@ namespace FrbaHotel.Registrar_Consumible
                     MessageBox.Show("Registro borrado correctamente");
                 }
             }
-            this.cargarConsumibles();
+            cargarConsumibles();
         }
 
-
-
-       
     }
 }

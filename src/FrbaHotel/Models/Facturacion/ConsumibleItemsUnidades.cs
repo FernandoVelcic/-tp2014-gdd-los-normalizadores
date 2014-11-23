@@ -17,6 +17,18 @@ namespace FrbaHotel.Models
         public int unidades { get; set; }
         public float monto { get; set; }
 
+        public ConsumibleItemsUnidades()
+        {
 
+        }
+
+        public ConsumibleItemsUnidades(ItemAFacturar consumibleEstadia)
+        {
+            codigo = consumibleEstadia.consumible.id;
+            descripcion = consumibleEstadia.consumible.descripcion;
+            precio = consumibleEstadia.consumible.precio;
+            unidades = consumibleEstadia.unidades;
+            monto = consumibleEstadia.monto;
+        }
     }
 }

@@ -44,8 +44,8 @@ namespace FrbaHotel.Views.Facturar_Estadia
             cmb_FormaDePago.DataSource = formas_pago_binding;
             //
 
-            BindingList<ConsumibleItemsUnidades> itemsVisibles = new BindingList<ConsumibleItemsUnidades>();
-
+            //ConsumibleItemsUnidades que es la manera de representarlo visiblemente en el datagrid
+            itemsParaFacturar.ForEach(i => this.itemsVisibles.Add(new ConsumibleItemsUnidades(i)));
 
             //Insert de factura porque sino de otro modo no podria insertar los items sin el id de la misma
             factura = new Factura();
@@ -61,21 +61,6 @@ namespace FrbaHotel.Views.Facturar_Estadia
             factura.save();
             setTexts();
 
-            //Por cada item de factura que se registro como consumible, creamos un objeto
-            //ConsumibleItemsUnidades que es la manera de representarlo visiblemente en el datagrid
-            foreach (ItemAFacturar item in itemsParaFacturar)
-            {
-                ConsumibleItemsUnidades itemVisible = new ConsumibleItemsUnidades();
-
-                itemVisible.codigo = item.consumible.id;
-                itemVisible.descripcion = item.consumible.descripcion;
-                itemVisible.precio = item.consumible.precio;
-                itemVisible.unidades = item.unidades;
-                itemVisible.monto = item.monto;
-
-                this.itemsVisibles.Add(itemVisible);
-
-            }
 
             txt_Usuario.Text = cliente.nombre.ToString() + " " + cliente.apellido.ToString();
             Habitacion habitacionPosta = reserva.obtener_una_habitacion();
