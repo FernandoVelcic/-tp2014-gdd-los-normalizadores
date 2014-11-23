@@ -36,7 +36,38 @@ namespace FrbaHotel.Models
         public override void preSave()
         {
             if (mail.isValidEmail() != true && mail != "")
+            {
                 throw new ValidationException("Formato de email invalido");
+            }
+            
+            if (String.IsNullOrEmpty(nombre))
+            {
+                throw new ValidationException("El nombre es obligatorio");
+            }
+
+            if (String.IsNullOrEmpty(mail))
+            {
+                throw new ValidationException("El mail es obligatorio");
+            }
+
+            if (String.IsNullOrEmpty(telefono))
+            {
+                throw new ValidationException("El telefono es obligatorio");
+            }
+
+            if (String.IsNullOrEmpty(fecha_creacion))
+            {
+                throw new ValidationException("La fecha de creación es obligatoria");
+            }
+
+            if (String.IsNullOrEmpty(ciudad))
+            {
+                throw new ValidationException("La ciudad es obligatoria");
+            }
+            if (String.IsNullOrEmpty(calle))
+            {
+                throw new ValidationException("La calle es obligatoria");
+            }
         }
 
         public bool estaLibre(String fecha1, String fecha2)
