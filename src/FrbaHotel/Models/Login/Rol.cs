@@ -5,6 +5,7 @@ using System.Text;
 
 using MyActiveRecord;
 using FrbaHotel.Database_Helper;
+using FrbaHotel.Models.Exceptions;
 
 namespace FrbaHotel.Models
 {
@@ -24,6 +25,15 @@ namespace FrbaHotel.Models
         public List<RolFuncionalidad> getFuncionalidades()
         {
             return EntityManager.getEntityManager().findAllBy<RolFuncionalidad>("rol_id", id.ToString());
+        }
+        public override void preSave()
+        {
+           if (String.IsNullOrEmpty(descripcion))
+            {
+                throw new ValidationException("La descripcion es obligatoria");
+            }
+
+      
         }
     }
 }
