@@ -106,6 +106,12 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
 
         private void btn_Confirmar_Click(object sender, EventArgs e)
         {
+            if (list_Habitaciones.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Debe seleccionar al menos una o mas habitaciones");
+                return;
+            }
+
             ABMCliente form = new ABM_de_Cliente.ABMCliente();
             form.Show();
             form.setModoSeleccionCliente(this);
@@ -119,6 +125,12 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
 
         private void btn_CrearCliente_Click(object sender, EventArgs e)
         {
+            if (list_Habitaciones.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Debe seleccionar al menos una o mas habitaciones");
+                return;
+            }
+
             if (esModificacion)
             {
                 guardarReserva();

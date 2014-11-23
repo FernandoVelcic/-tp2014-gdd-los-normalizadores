@@ -67,7 +67,8 @@ namespace FrbaHotel.ABM_de_Usuario
         private void button2_Click(object sender, EventArgs e)
         {
             List<RolUsuario> roles = (dataGridView1.SelectedRows[0].DataBoundItem as Usuario).getRoles();
-            if( !roles.Any(r => r.hotel.id == SesionActual.rol_usuario.hotel.id) ) {
+            if (SesionActual.rol_usuario.hotel == null || !roles.Any(r => r.hotel.id == SesionActual.rol_usuario.hotel.id))
+            {
                 MessageBox.Show("No se puede eliminar un usuario si no trabaja en el mismo hotel que el Administrador");
                 return;
             }
@@ -78,7 +79,7 @@ namespace FrbaHotel.ABM_de_Usuario
         private void button3_Click(object sender, EventArgs e)
         {
             List<RolUsuario> roles = (dataGridView1.SelectedRows[0].DataBoundItem as Usuario).getRoles();
-            if (!roles.Any(r => r.hotel.id == SesionActual.rol_usuario.hotel.id))
+            if (SesionActual.rol_usuario.hotel == null || !roles.Any(r => r.hotel.id == SesionActual.rol_usuario.hotel.id))
             {
                 MessageBox.Show("No se puede modificar un usuario si no trabaja en el mismo hotel que el Administrador");
                 return;

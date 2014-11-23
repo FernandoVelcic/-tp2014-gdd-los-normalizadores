@@ -18,24 +18,25 @@ namespace FrbaHotel.Models
 
         //public int id { get; set; } //INTEGER IDENTITY PRIMARY KEY
         public String nombre { get; set; } //[nvarchar](255)
-        public String mail { get; set; } //[nvarchar](255)
-        public String telefono { get; set; } //[nvarchar](255)
-        public String fecha_creacion { get; set; } //[datetime]
-        public Pais pais { get; set; }
         public String ciudad { get; set; } //[nvarchar](255)
         public String calle { get; set; } //[nvarchar](255)
         public int nro_Calle { get; set; } //[numeric](18, 0)
 	    public int cant_estrella { get; set; } //[numeric](18, 0)
 	    public int recarga_estrella { get; set; } //[numeric](18, 0)
 
+        public String mail { get; set; } //[nvarchar](255)
+        public String telefono { get; set; } //[nvarchar](255)
+        public String fecha_creacion { get; set; } //[datetime]
+        public Pais pais { get; set; }
+
         public override string ToString()
         {
-            return (nombre == "") ? calle + " " + nro_Calle : nombre;
+            return nombre;
         }
 
         public override void preSave()
         {
-            if (mail.isValidEmail() != true && mail != "")
+            if (mail.isValidEmail() != true && !String.IsNullOrEmpty(mail))
             {
                 throw new ValidationException("Formato de email invalido");
             }
@@ -43,21 +44,6 @@ namespace FrbaHotel.Models
             if (String.IsNullOrEmpty(nombre))
             {
                 throw new ValidationException("El nombre es obligatorio");
-            }
-
-            if (String.IsNullOrEmpty(mail))
-            {
-                throw new ValidationException("El mail es obligatorio");
-            }
-
-            if (String.IsNullOrEmpty(telefono))
-            {
-                throw new ValidationException("El telefono es obligatorio");
-            }
-
-            if (String.IsNullOrEmpty(fecha_creacion))
-            {
-                throw new ValidationException("La fecha de creación es obligatoria");
             }
 
             if (String.IsNullOrEmpty(ciudad))

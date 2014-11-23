@@ -25,11 +25,6 @@ namespace FrbaHotel.Models
 
         public override void preSave()
         {
-            if (String.IsNullOrEmpty(fecha_carga))
-            {
-                throw new ValidationException("La fecha de carga es obligatoria");
-            }
-
             if (String.IsNullOrEmpty(fecha_inicio))
             {
                 throw new ValidationException("La fecha de inicio es obligatoria");

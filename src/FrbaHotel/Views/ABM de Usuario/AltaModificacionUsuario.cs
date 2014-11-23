@@ -91,11 +91,11 @@ namespace FrbaHotel.ABM_de_Usuario
                 return;
             }
 
-         /*  if (esAlta && textBox2.Text == "")
+            if (esAlta && String.IsNullOrEmpty(textBox2.Text))
             {
                 MessageBox.Show("La password es obligatoria");
                 return;
-            }*/
+            }
 
             //Bindings especiales
             if(textBox2.Text != "" || esAlta)

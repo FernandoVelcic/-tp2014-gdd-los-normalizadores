@@ -65,11 +65,6 @@ namespace FrbaHotel.Models
             {
                 throw new ValidationException("El mail es obligatorio");
             }
-
-            if (String.IsNullOrEmpty(telefono))
-            {
-                throw new ValidationException("el telefono es obligatorio");
-            }
         }
 
         public override void preInsert()
