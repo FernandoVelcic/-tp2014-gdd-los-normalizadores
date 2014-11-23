@@ -18,6 +18,12 @@ namespace FrbaHotel
         [STAThread]
         static void Main()
         {
+            //Setear formato por default para las fechas
+            CultureInfo culture = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+            culture.DateTimeFormat.ShortDatePattern = "dd/MM/yyyy";
+            culture.DateTimeFormat.LongTimePattern = "";
+            Thread.CurrentThread.CurrentCulture = culture;
+
             //Crear conexion con el motor MSSQL
             try
             {
@@ -28,12 +34,6 @@ namespace FrbaHotel
                 MessageBox.Show("No se puede conectar al servidor, verifique los datos en el persistent.xml\r\n" + ex.Message);
                 return;
             }
-
-            //Setear formato por default para las fechas
-            CultureInfo culture = (CultureInfo)CultureInfo.CurrentCulture.Clone();
-            culture.DateTimeFormat.ShortDatePattern = "dd/MM/yyyy";
-            culture.DateTimeFormat.LongTimePattern = "";
-            Thread.CurrentThread.CurrentCulture = culture;
 
             //Aplicacion UI
             Application.EnableVisualStyles();
