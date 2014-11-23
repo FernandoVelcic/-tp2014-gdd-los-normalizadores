@@ -23,82 +23,73 @@ namespace FrbaHotel.Views.Facturar_Estadia
         List<ConsumibleItemsUnidades> itemsVisibles = new List<ConsumibleItemsUnidades>();
         Cliente cliente;
 
-        public Facturar(Estadia e, List<ItemAFacturar> items)
+        public Facturar(Estadia estadia, List<ItemAFacturar> items)
         {
-            estadia = e;
-            //Lista de items cargados en Registrar Consumibles
+            this.estadia = estadia;
             itemsParaFacturar = items;
-            InitializeComponent();
 
+            InitializeComponent();
         }
 
         public void Facturar_load(object sender, EventArgs e)
         {
+            //
+            List<FetchCondition> condiciones = new List<FetchCondition>();
+            FetchCondition condicionNoSinEspecificar = new FetchCondition();
+            condicionNoSinEspecificar.setNotEquals("id", 1); //Sin especificar id = 1
+            condiciones.Add(condicionNoSinEspecificar);
 
+            BindingSource formas_pago_binding = new BindingSource();
+            formas_pago_binding.DataSource = EntityManager.getEntityManager().findList<FormaDePago>(condiciones);
+            cmb_FormaDePago.DataSource = formas_pago_binding;
+            //
 
             BindingList<ConsumibleItemsUnidades> itemsVisibles = new BindingList<ConsumibleItemsUnidades>();
-            try
+
+
+            //Insert de factura porque sino de otro modo no podria insertar los items sin el id de la misma
+            factura = new Factura();
+            factura.fecha = (DateTime.Parse(estadia.fecha_inicio).AddDays(estadia.cant_noches)).ToString();
+            factura.forma_pago_id = 1;
+            factura.estadia = estadia;
+            factura.save();
+            setTexts();
+
+            //Por cada item de factura que se registro como consumible, creamos un objeto
+            //ConsumibleItemsUnidades que es la manera de representarlo visiblemente en el datagrid
+            foreach (ItemAFacturar item in itemsParaFacturar)
             {
-                //Insert de factura porque sino de otro modo no podria insertar los items sin el id de la misma
-                factura = new Factura();
-                factura.fecha = (DateTime.Parse(estadia.fecha_inicio).AddDays(estadia.cant_noches)).ToString();
-                factura.forma_pago_id = 1;
-                factura.estadia = estadia;
-                factura.save();
-                setTexts();
+                ConsumibleItemsUnidades itemVisible = new ConsumibleItemsUnidades();
 
-                //Por cada item de factura que se registro como consumible, creamos un objeto
-                //ConsumibleItemsUnidades que es la manera de representarlo visiblemente en el datagrid
-                foreach (ItemAFacturar item in itemsParaFacturar)
-                {
-                    ConsumibleItemsUnidades itemVisible = new ConsumibleItemsUnidades();
+                itemVisible.codigo = item.consumible.id;
+                itemVisible.descripcion = item.consumible.descripcion;
+                itemVisible.precio = item.consumible.precio;
+                itemVisible.unidades = item.unidades;
+                itemVisible.monto = item.monto;
 
-                    itemVisible.codigo = item.consumible.id;
-                    itemVisible.descripcion = item.consumible.descripcion;
-                    itemVisible.precio = item.consumible.precio;
-                    itemVisible.unidades = item.unidades;
-                    itemVisible.monto = item.monto;
+                this.itemsVisibles.Add(itemVisible);
 
-                    this.itemsVisibles.Add(itemVisible);
-
-                }
-
-                Reserva reserva = EntityManager.getEntityManager().findBy<Reserva>("reservas.id", estadia.reserva.id.ToString());
-                cliente = reserva.cliente;
-                txt_Usuario.Text = cliente.nombre.ToString() + " " + cliente.apellido.ToString();
-                Habitacion habitacionPosta = reserva.obtener_una_habitacion();
-                hotel = habitacionPosta.hotel;
-                //Registro de los dias no hospedados
-                setItemHabitacionNoHospedada();
-                //Registro de los dias hospedados
-                setItemHabitacionHospedada();
-
-                //Si el regimen es All inclusive o All inclusive moderado, registro del descuento de los consumibles
-                if (reserva.regimen.id == 3 || reserva.regimen.id == 4)
-                {
-                    setdescuentoAllInclusive();
-                }
             }
-            catch (ValidationException exception)
+
+            Reserva reserva = EntityManager.getEntityManager().findBy<Reserva>("reservas.id", estadia.reserva.id.ToString());
+            cliente = reserva.cliente;
+            txt_Usuario.Text = cliente.nombre.ToString() + " " + cliente.apellido.ToString();
+            Habitacion habitacionPosta = reserva.obtener_una_habitacion();
+            hotel = habitacionPosta.hotel;
+            //Registro de los dias no hospedados
+            setItemHabitacionNoHospedada();
+            //Registro de los dias hospedados
+            setItemHabitacionHospedada();
+
+            //Si el regimen es All inclusive o All inclusive moderado, registro del descuento de los consumibles
+            if (reserva.regimen.id == 3 || reserva.regimen.id == 4)
             {
-                MessageBox.Show(exception.Message);
-                return;
-            }
-            catch (SqlException exception)
-            {
-                MessageBox.Show(exception.Message);
-                return;
+                setdescuentoAllInclusive();
             }
 
             dataGridView1.DataSource = new BindingSource(this.itemsVisibles, null);
 
-            float total = 0;
-            foreach (ConsumibleItemsUnidades item in this.itemsVisibles)
-            {
-                total += item.monto;
-            }
-
-            label9.Text = "Total: " + total;
+            label9.Text = "Total: " + this.itemsVisibles.Sum(item => item.monto);
         }
 
 
@@ -130,20 +121,7 @@ namespace FrbaHotel.Views.Facturar_Estadia
             itemHabitacion.monto = ((habitacion.tipo.porcentual * reserva.regimen.precio * habitacion.tipo.cantidad_maxima_personas + hotel.cant_estrella * hotel.recarga_estrella) * reserva.cant_noches) * cantidad_habitaciones;
             itemHabitacion.unidades = estadia.cant_noches;
 
-            try
-            {
-                itemHabitacion.save();
-            }
-            catch (ValidationException exception)
-            {
-                MessageBox.Show(exception.Message);
-                return;
-            }
-            catch (SqlException exception)
-            {
-                MessageBox.Show(exception.Message);
-                return;
-            }
+            itemHabitacion.save();
 
             ConsumibleItemsUnidades itemVisible = new ConsumibleItemsUnidades();
             itemVisible.codigo = 0;
@@ -168,20 +146,8 @@ namespace FrbaHotel.Views.Facturar_Estadia
                 itemHabitacionNoHospedada.monto = 0;
                 itemHabitacionNoHospedada.tipo = "N";
                 itemHabitacionNoHospedada.unidades = estadia.reserva.cant_noches - estadia.cant_noches;
-                try
-                {
-                    itemHabitacionNoHospedada.save();
-                }
-                catch (ValidationException exception)
-                {
-                    MessageBox.Show(exception.Message);
-                    return;
-                }
-                catch (SqlException exception)
-                {
-                    MessageBox.Show(exception.Message);
-                    return;
-                }
+
+                itemHabitacionNoHospedada.save();
 
                 Reserva reserva = EntityManager.getEntityManager().findBy<Reserva>("reservas.id", estadia.reserva.id.ToString());
                 Habitacion habitacion = reserva.obtener_una_habitacion();
@@ -227,22 +193,10 @@ namespace FrbaHotel.Views.Facturar_Estadia
 
             itemDescuento.tipo = "D";
             itemDescuento.unidades = 0;
-            itemDescuento.monto = suma * (-1);
+            itemDescuento.monto = -suma;
 
-            try
-            {
-                itemDescuento.save();
-            }
-            catch (ValidationException exception)
-            {
-                MessageBox.Show(exception.Message);
-                return;
-            }
-            catch (SqlException exception)
-            {
-                MessageBox.Show(exception.Message);
-                return;
-            }
+            itemDescuento.save();
+
             Reserva reserva = estadia.reserva;
             ConsumibleItemsUnidades itemVisible = new ConsumibleItemsUnidades();
             itemVisible.codigo = 0;
@@ -265,98 +219,44 @@ namespace FrbaHotel.Views.Facturar_Estadia
                 MessageBox.Show("Seleccione una forma de pago");
                 return;
             }
-            else
-            {
-                string forma_de_pago = cmb_FormaDePago.SelectedItem.ToString();
 
-                /* Se agrego harcodeado en el script de migracion que 1: sin especificar, 2: efectivo, 3: credito 4:debito*/
-                switch (forma_de_pago)
-                {
-                    case "Efectivo":
-                        factura.forma_pago_id = 2;
-                        break;
-                    case "Tarjeta de Crédito":
-                        factura.forma_pago_id = 3;
-                        break;
-                    case "Tarjeta de Débito":
-                        factura.forma_pago_id = 4;
-                        break;
-                    default:
-                        factura.forma_pago_id = 1;
-                        break;
-                }
-                //update del numero de tarjeta del usuario
-                if (cliente.nro_tarjeta == null && txt_Tarjeta.Text != "" && txt_Pin.Text != "")
+
+            FormaDePago forma = cmb_FormaDePago.SelectedItem as FormaDePago;
+            factura.forma_pago_id = forma.id;
+
+            //update del numero de tarjeta del usuario
+            if (cliente.nro_tarjeta == null && txt_Tarjeta.Text != "" && txt_Pin.Text != "")
+            {
+                cliente.nro_tarjeta = txt_Tarjeta.Text;
+                cliente.pin = txt_Pin.Text;
+
+                cliente.save();
+            }
+            //Ingreso de una nro de tarjeta distinto del que ya tiene el cliente
+            else if (cliente.nro_tarjeta != txt_Tarjeta.Text && txt_Tarjeta.Text != "" && txt_Pin.Text != "")
+            {
+                DialogResult result1 = MessageBox.Show("El usuario tiene asignado el siguiente numero de tarjeta, desea cambiarlo?" + cliente.nro_tarjeta, "Importante", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                if (result1 == DialogResult.Yes)
                 {
                     cliente.nro_tarjeta = txt_Tarjeta.Text;
                     cliente.pin = txt_Pin.Text;
-                    try
-                    {
-                        cliente.save();
-                    }
-                    catch (ValidationException exception)
-                    {
-                        MessageBox.Show(exception.Message);
-                        return;
-                    }
-                    catch (SqlException exception)
-                    {
-                        MessageBox.Show(exception.Message);
-                        return;
-                    }
-                }
-                //Ingreso de una nro de tarjeta distinto del que ya tiene el cliente
-                else if (cliente.nro_tarjeta != txt_Tarjeta.Text && txt_Tarjeta.Text != "" && txt_Pin.Text != "")
-                {
-                    DialogResult result1 = MessageBox.Show("El usuario tiene asignado el siguiente numero de tarjeta, desea cambiarlo?" + cliente.nro_tarjeta + "Importante" + MessageBoxButtons.YesNo);
-                    if (result1 == DialogResult.Yes)
-                    {
-                        cliente.nro_tarjeta = txt_Tarjeta.Text;
-                        cliente.pin = txt_Pin.Text;
-                        try
-                        {
-                            cliente.save();
-                        }
-                        catch (ValidationException exception)
-                        {
-                            MessageBox.Show(exception.Message);
-                            return;
-                        }
-                        catch (SqlException exception)
-                        {
-                            MessageBox.Show(exception.Message);
-                            return;
-                        }
-                    }
-                }
-                //Si no se ingreso el nro de tarjeta
-                if ((cmb_FormaDePago.SelectedItem.ToString() != "Efectivo") && (cliente.pin == "") && (cliente.pin != txt_Pin.ToString()))
-                {
-                    MessageBox.Show("El PIN de seguridad de la tarjeta no es el correcto");
-                }
-                else
-                {
-                    //factura.cliente_id = cliente;
-                    //Update de la factura para guardar la forma de pago
-                    try
-                    {
-                        factura.save();
-                        MessageBox.Show("La factura se genero con exito!");
-                    }
-                    catch (ValidationException exception)
-                    {
-                        MessageBox.Show(exception.Message);
-                        return;
-                    }
-                    catch (SqlException exception)
-                    {
-                        MessageBox.Show(exception.Message);
-                        return;
-                    }
 
-                    Navigator.nextForm(this, new FrbaHotel.Operaciones());
+                    cliente.save();
                 }
             }
+            //Si no se ingreso el nro de tarjeta
+            if ((forma.descripcion != "Efectivo") && (cliente.pin == "") && (cliente.pin != txt_Pin.ToString()))
+            {
+                MessageBox.Show("El PIN de seguridad de la tarjeta no es el correcto");
+                return;
+            }
+
+            //factura.cliente_id = cliente;
+            //Update de la factura para guardar la forma de pago
+            factura.save();
+            MessageBox.Show("La factura se genero con exito!");
+
+            Navigator.nextForm(this, new FrbaHotel.Operaciones());
         }
         public void facturarConsumibles()
         {
@@ -371,28 +271,17 @@ namespace FrbaHotel.Views.Facturar_Estadia
                 itemConsumible.monto = consumible.monto;
                 itemConsumible.unidades = consumible.unidades;
 
-                try
-                {
-                    itemConsumible.save();
-                }
-                catch (ValidationException exception)
-                {
-                    MessageBox.Show(exception.Message);
-                    return;
-                }
-                catch (SqlException exception)
-                {
-                    MessageBox.Show(exception.Message);
-                    return;
-                }
+                itemConsumible.save();
             }
         }
 
+        //TARJETA DE CREDITO
         private void onCambioFormaDePago(object sender, EventArgs e)
         {
-            string forma_de_pago = cmb_FormaDePago.SelectedItem.ToString();
-            if (forma_de_pago == "Tarjeta de Crédito" || forma_de_pago == "Tarjeta de Débito") activarDatosTarjeta();
-            if (forma_de_pago == "Efectivo") desactivarDatosTarjeta();
+            FormaDePago forma = cmb_FormaDePago.SelectedItem as FormaDePago;
+
+            if (forma.descripcion == "Tarjeta de crédito" || forma.descripcion == "Tarjeta de débito") activarDatosTarjeta();
+            if (forma.descripcion == "Efectivo") desactivarDatosTarjeta();
         }
 
         public void activarDatosTarjeta()
@@ -409,24 +298,6 @@ namespace FrbaHotel.Views.Facturar_Estadia
             label8.Visible = false;
             txt_Tarjeta.Visible = false;
             txt_Pin.Visible = false;
-        }
-        public bool IsNumeric(object Expression)
-        {
-            bool esnumero;
-            double returnNumero;
-
-            esnumero = Double.TryParse(Convert.ToString(Expression), System.Globalization.NumberStyles.Any, System.Globalization.NumberFormatInfo.InvariantInfo, out returnNumero);
-            return esnumero;
-        }
-
-        private void txt_Tarjeta_TextChanged(object sender, EventArgs e)
-        {
-            if (!IsNumeric(txt_Tarjeta.Text) && txt_Tarjeta.Text != "") { MessageBox.Show("Debe ingresar numeros unicamente"); txt_Tarjeta.Text = ""; }
-        }
-
-        private void txt_Pin_TextChanged(object sender, EventArgs e)
-        {
-            if (!IsNumeric(txt_Pin.Text) && txt_Pin.Text != "") { MessageBox.Show("Debe ingresar numeros unicamente"); txt_Pin.Text = ""; }
         }
     }
 }

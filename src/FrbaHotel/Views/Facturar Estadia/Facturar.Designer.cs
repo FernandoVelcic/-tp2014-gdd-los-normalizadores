@@ -128,7 +128,6 @@
             this.txt_Pin.Size = new System.Drawing.Size(100, 22);
             this.txt_Pin.TabIndex = 4;
             this.txt_Pin.Visible = false;
-            this.txt_Pin.TextChanged += new System.EventHandler(this.txt_Pin_TextChanged);
             // 
             // txt_Tarjeta
             // 
@@ -137,7 +136,6 @@
             this.txt_Tarjeta.Size = new System.Drawing.Size(100, 22);
             this.txt_Tarjeta.TabIndex = 3;
             this.txt_Tarjeta.Visible = false;
-            this.txt_Tarjeta.TextChanged += new System.EventHandler(this.txt_Tarjeta_TextChanged);
             // 
             // label8
             // 
@@ -163,10 +161,6 @@
             // 
             this.cmb_FormaDePago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_FormaDePago.FormattingEnabled = true;
-            this.cmb_FormaDePago.Items.AddRange(new object[] {
-            "Efectivo",
-            "Tarjeta de Crédito",
-            "Tarjeta de Débito"});
             this.cmb_FormaDePago.Location = new System.Drawing.Point(47, 30);
             this.cmb_FormaDePago.Name = "cmb_FormaDePago";
             this.cmb_FormaDePago.Size = new System.Drawing.Size(261, 24);
