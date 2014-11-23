@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 using MyActiveRecord;
-
+using FrbaHotel.Models.Exceptions;
 using FrbaHotel.Database_Helper;
 using FrbaHotel.Models;
 
@@ -22,6 +22,20 @@ namespace FrbaHotel.Models
         public Cliente cliente { get; set; }
         public int cant_noches { get; set; } //[numeric](18, 0)
         public int reserva_estado { get; set; } //INTEGER NOT NULL
+
+        public override void preSave()
+        {
+            if (String.IsNullOrEmpty(fecha_carga))
+            {
+                throw new ValidationException("La fecha de carga es obligatoria");
+            }
+
+            if (String.IsNullOrEmpty(fecha_inicio))
+            {
+                throw new ValidationException("La fecha de inicio es obligatoria");
+            }
+
+        }
 
         public override void preInsert()
         {
