@@ -42,7 +42,34 @@ namespace FrbaHotel.Models
         public override void preSave()
         {
             if (mail.isValidEmail() != true)
+            {
                 throw new ValidationException("Formato de email invalido");
+            }
+
+            if (String.IsNullOrEmpty(nombre))
+            {
+                throw new ValidationException("El nombre es obligatorio");
+            }
+
+            if (String.IsNullOrEmpty(apellido))
+            {
+                throw new ValidationException("El apellido es obligatorio");
+            }
+
+            if (String.IsNullOrEmpty(fecha_nac))
+            {
+                throw new ValidationException("La fecha de nacimiento es obligatoria");
+            }
+
+            if (String.IsNullOrEmpty(mail))
+            {
+                throw new ValidationException("El mail es obligatorio");
+            }
+
+            if (String.IsNullOrEmpty(telefono))
+            {
+                throw new ValidationException("el telefono es obligatorio");
+            }
         }
 
         public override void preInsert()
