@@ -216,7 +216,6 @@ CREATE TABLE [LOS_NORMALIZADORES].[items_facturas](
 CREATE TABLE [LOS_NORMALIZADORES].[facturas](
 	[id] INTEGER IDENTITY PRIMARY KEY,
 	[estadia_id] INTEGER NOT NULL,					
-	[nro] [numeric](18, 0) NOT NULL,
 	[fecha] [datetime] NOT NULL,					
 	[forma_pago_id] INTEGER NOT NULL,			/* Este dato no esta en la Maestra */
 	[cliente_id] INTEGER NOT NULL
@@ -246,8 +245,8 @@ INSERT INTO [LOS_NORMALIZADORES].[paises] (nombre, gentilicio) VALUES ('', '')
 INSERT INTO [LOS_NORMALIZADORES].[paises] (nombre, gentilicio) VALUES ('ARGENTINA', 'ARGENTINO')
 	
 
-
-INSERT INTO [LOS_NORMALIZADORES].[Maestra] SELECT TOP 1000 * FROM [GD2C2014].[gd_esquema].[Maestra]
+//TESTING
+INSERT INTO [LOS_NORMALIZADORES].[Maestra] SELECT TOP 10000 * FROM [GD2C2014].[gd_esquema].[Maestra] ORDER BY Factura_Nro DESC
 GO
   	
 
@@ -517,12 +516,14 @@ INSERT INTO [LOS_NORMALIZADORES].[formas_de_pago] (descripcion) VALUES ('Tarjeta
 INSERT INTO [LOS_NORMALIZADORES].[formas_de_pago] (descripcion) VALUES ('Tarjeta de débito')
 GO
 
-INSERT INTO [LOS_NORMALIZADORES].[facturas] ([nro], [estadia_id], [fecha], [forma_pago_id], [cliente_id])	
+SET IDENTITY_INSERT [LOS_NORMALIZADORES].[facturas] ON;
+INSERT INTO [LOS_NORMALIZADORES].[facturas] ([id], [estadia_id], [fecha], [forma_pago_id], [cliente_id])	
 	SELECT DISTINCT [Factura_Nro], [estadia_id], [Factura_Fecha], 1, [cliente_id]  FROM [LOS_NORMALIZADORES].[Maestra]
 	WHERE [Factura_Nro] IS NOT NULL 
-	AND   [estadia_id] IS NOT NULL
-	AND   [Factura_Fecha] IS NOT NULL
+	AND [estadia_id] IS NOT NULL
+	AND [Factura_Fecha] IS NOT NULL
 	AND [cliente_id] IS NOT NULL
+SET IDENTITY_INSERT [LOS_NORMALIZADORES].[facturas] OFF;
 GO
 
 ALTER TABLE [LOS_NORMALIZADORES].[Maestra] ADD factura_id INTEGER
@@ -532,7 +533,7 @@ UPDATE [LOS_NORMALIZADORES].[Maestra]
 SET factura_id = 
 	(
 		SELECT id FROM [LOS_NORMALIZADORES].[facturas] as f
-		WHERE [LOS_NORMALIZADORES].[Maestra].Factura_Nro = f.nro
+		WHERE [LOS_NORMALIZADORES].[Maestra].Factura_Nro = f.id
 		AND   [LOS_NORMALIZADORES].[Maestra].estadia_id = f.estadia_id
 		AND   [LOS_NORMALIZADORES].[Maestra].Factura_Fecha = f.fecha
 	)

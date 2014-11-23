@@ -85,7 +85,7 @@ namespace FrbaHotel.Views.Facturar_Estadia
 
         private void setTexts()
         {
-            txt_FacturaNro.Text = factura.nro.ToString(); //nro de factura
+            txt_FacturaNro.Text = factura.id.ToString(); //nro de factura
             txt_Desde.Text = estadia.reserva.fecha_inicio.ToString(); //Fecha de inicio que se reservo
             txt_Hasta.Text = (DateTime.Parse(estadia.reserva.fecha_inicio).AddDays(estadia.reserva.cant_noches)).ToString(); //Fecha de supuesta salida
             txt_CheckIn.Text = estadia.fecha_inicio.ToString();//Fecha de inicio real( check in) Las dos de inicio deberian ser iguales porque sino no te dejarian entrar o ya estaria cancelada
