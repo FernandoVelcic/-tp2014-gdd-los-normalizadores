@@ -50,7 +50,7 @@ namespace FrbaHotel.Listado_Estadistico
         
         private void btnFiltrar(object sender, EventArgs e)
         {
-            if (anio < 1900 || anio > 2020)
+            if (anio < 1900)
             {
                 MessageBox.Show("Por favor, seleccione un año valido");
                 return;
