@@ -22,13 +22,14 @@ namespace FrbaHotel.Models
 
         }
 
-        public ConsumibleItemsUnidades(ItemAFacturar consumibleEstadia)
+        public ConsumibleItemsUnidades(ConsumibleEstadia consumibleEstadia)
         {
             codigo = consumibleEstadia.consumible.id;
             descripcion = consumibleEstadia.consumible.descripcion;
             precio = consumibleEstadia.consumible.precio;
             unidades = consumibleEstadia.unidades;
-            monto = consumibleEstadia.monto;
+            monto = precio * unidades;
+            
         }
     }
 }

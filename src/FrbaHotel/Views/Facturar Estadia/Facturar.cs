@@ -19,15 +19,14 @@ namespace FrbaHotel.Views.Facturar_Estadia
         Factura factura;
         Hotel hotel;
         List<ItemFactura> itemsEstadia = new List<ItemFactura>();
-        List<ItemAFacturar> itemsParaFacturar;
+        List<ConsumibleEstadia> consumiblesEstadia;
         List<ConsumibleItemsUnidades> itemsVisibles = new List<ConsumibleItemsUnidades>();
         Cliente cliente;
 
-        public Facturar(Estadia estadia, List<ItemAFacturar> items)
+        public Facturar(Estadia estadia)
         {
             this.estadia = estadia;
-            itemsParaFacturar = items;
-
+            consumiblesEstadia = EntityManager.getEntityManager().findAllBy<ConsumibleEstadia>("estadia_id", estadia.id.ToString());
             InitializeComponent();
         }
 
@@ -44,8 +43,9 @@ namespace FrbaHotel.Views.Facturar_Estadia
             cmb_FormaDePago.DataSource = formas_pago_binding;
             //
 
+           
             //ConsumibleItemsUnidades que es la manera de representarlo visiblemente en el datagrid
-            itemsParaFacturar.ForEach(i => this.itemsVisibles.Add(new ConsumibleItemsUnidades(i)));
+            consumiblesEstadia.ForEach(i => this.itemsVisibles.Add(new ConsumibleItemsUnidades(i)));
 
             //Insert de factura porque sino de otro modo no podria insertar los items sin el id de la misma
             factura = new Factura();
@@ -78,7 +78,7 @@ namespace FrbaHotel.Views.Facturar_Estadia
 
             dataGridView1.DataSource = new BindingSource(this.itemsVisibles, null);
 
-            label9.Text = "Total: " + this.itemsVisibles.Sum(item => item.monto);
+          
         }
 
 
@@ -96,8 +96,7 @@ namespace FrbaHotel.Views.Facturar_Estadia
         private void setItemHabitacionHospedada()
         {
             ItemFactura itemHabitacion = new ItemFactura();
-            itemHabitacion.estadia = estadia;
-            itemHabitacion.consumible = null;
+            itemHabitacion.consumible_estadia = null;
             itemHabitacion.factura = factura;
             itemHabitacion.tipo = "H";
 
@@ -129,8 +128,7 @@ namespace FrbaHotel.Views.Facturar_Estadia
             {
 
                 ItemFactura itemHabitacionNoHospedada = new ItemFactura();
-                itemHabitacionNoHospedada.estadia = estadia;
-                itemHabitacionNoHospedada.consumible = null;
+                itemHabitacionNoHospedada.consumible_estadia = null;
                 itemHabitacionNoHospedada.factura = factura;
                 itemHabitacionNoHospedada.monto = 0;
                 itemHabitacionNoHospedada.tipo = "N";
@@ -173,11 +171,10 @@ namespace FrbaHotel.Views.Facturar_Estadia
 
         public void setdescuentoAllInclusive()
         {
-            float suma = itemsEstadia.Select<ItemFactura, float>(item => item.unidades * item.consumible.precio).Sum();
+            float suma = EntityManager.getEntityManager().findAllBy<ConsumibleEstadia>("estadia_id", estadia.id.ToString()).Select(item => item.unidades * item.consumible.precio).Sum();
 
             ItemFactura itemDescuento = new ItemFactura();
-            itemDescuento.estadia = estadia;
-            itemDescuento.consumible = null;
+            itemDescuento.consumible_estadia = null;
             itemDescuento.factura = factura;
 
             itemDescuento.tipo = "D";
@@ -250,15 +247,15 @@ namespace FrbaHotel.Views.Facturar_Estadia
         public void facturarConsumibles()
         {
             //Persistencia de los items de factura una vez elegido el medio de pago
-            foreach (ItemAFacturar consumible in itemsParaFacturar)
+            
+            foreach (ConsumibleEstadia consumibleEstadia in consumiblesEstadia)
             {
                 ItemFactura itemConsumible = new ItemFactura();
-                itemConsumible.estadia = estadia;
-                itemConsumible.consumible = consumible.consumible;
+                itemConsumible.consumible_estadia = consumibleEstadia;
                 itemConsumible.factura = factura;
                 itemConsumible.tipo = "C";
-                itemConsumible.monto = consumible.monto;
-                itemConsumible.unidades = consumible.unidades;
+                itemConsumible.monto = consumibleEstadia.unidades * consumibleEstadia.consumible.precio;
+                itemConsumible.unidades = consumibleEstadia.unidades;
 
                 itemConsumible.save();
             }

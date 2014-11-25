@@ -200,17 +200,22 @@ CREATE TABLE [LOS_NORMALIZADORES].[consumibles](
 	[precio] [numeric](18, 2),
 ) ON [PRIMARY]
 
+CREATE TABLE [LOS_NORMALIZADORES].[consumibles_estadias](
+	[id] INTEGER IDENTITY PRIMARY KEY,
+	[consumible_id] INTEGER,
+	[estadia_id] INTEGER,
+	[unidades] INTEGER,
+) ON PRIMARY
 
 CREATE TABLE [LOS_NORMALIZADORES].[items_facturas](
 	[id] INTEGER IDENTITY PRIMARY KEY,
 	[factura_id] INTEGER,
-	[consumible_id] INTEGER,
-	[estadia_id] INTEGER,
+	[consumible_estadia_id] INTEGER,
 	[monto] [numeric] (18,2),
 	[unidades] INTEGER,
 	[tipo] [char] (1),
 
-) ON [PRIMARY]
+) ON PRIMARY
 
 
 CREATE TABLE [LOS_NORMALIZADORES].[facturas](
@@ -539,18 +544,25 @@ SET factura_id =
 	)
 GO
 
+/*Consumibles Estadias*/
+INSERT INTO [LOS_NORMALIZADORES].[consumibles_estadias] (consumible_id, estadia_id, unidades)
+SELECT SELECT consumible_id, estadia_id, Item_Factura_Cantidad FROM [LOS_NORMALIZADORES].[Maestra]
+WHERE consumible_id IS NOT NULL
+AND estadia_id IS NOT NULL
+AND Item_Factura_Cantidad IS NOT NULL
+GO
+
 
 /* Items */
-INSERT INTO [LOS_NORMALIZADORES].[items_facturas] (factura_id, consumible_id, estadia_id, monto, unidades, tipo)
-	SELECT DISTINCT  factura_id, consumible_id, estadia_id, Item_Factura_Monto, Item_Factura_Cantidad, 'C' FROM  [LOS_NORMALIZADORES].[Maestra]
-	WHERE consumible_id is NOT NULL
-	AND   estadia_id IS NOT NULL
+INSERT INTO [LOS_NORMALIZADORES].[items_facturas] (factura_id, consumible_estadia_id, monto, unidades, tipo)
+	SELECT DISTINCT  m.factura_id, c.consumible_estadia_id, m.Item_Factura_Monto, m.Item_Factura_Cantidad, 'C' FROM  [LOS_NORMALIZADORES].[Maestra] m, [LOS_NORMALIZADORES].[consumibles_estadias] c
+	WHERE c.estadia_id = m.estadia_id
 	AND   Item_Factura_Monto IS NOT NULL
 	AND   Item_Factura_Cantidad IS NOT NULL
 GO
 
-INSERT INTO [LOS_NORMALIZADORES].[items_facturas] (factura_id, estadia_id, monto, unidades, tipo)
-	SELECT DISTINCT  factura_id, estadia_id, Item_Factura_Monto, Item_Factura_Cantidad, 'H' FROM  [LOS_NORMALIZADORES].[Maestra]
+INSERT INTO [LOS_NORMALIZADORES].[items_facturas] (factura_id, monto, unidades, tipo)
+	SELECT DISTINCT  factura_id, Item_Factura_Monto, Item_Factura_Cantidad, 'H' FROM  [LOS_NORMALIZADORES].[Maestra]
 	WHERE Factura_Total is NOT NULL
 	AND   estadia_id IS NOT NULL
 	AND   habitacion_id IS NOT NULL
@@ -578,8 +590,8 @@ UPDATE [LOS_NORMALIZADORES].items_facturas
 GO
 
 /*HABITACIONES NO HOSPEDADAS*/
-INSERT INTO [LOS_NORMALIZADORES].[items_facturas] (factura_id, estadia_id, monto, unidades, tipo)
-SELECT DISTINCT  i.factura_id, i.estadia_id, 0, r.cant_noches - e.cant_noches , 'N' 
+INSERT INTO [LOS_NORMALIZADORES].[items_facturas] (factura_id, monto, unidades, tipo)
+SELECT DISTINCT  i.factura_id, 0, r.cant_noches - e.cant_noches , 'N' 
 FROM  [LOS_NORMALIZADORES].[items_facturas] i, [LOS_NORMALIZADORES].estadias e,[LOS_NORMALIZADORES].[reservas] r
 where i.estadia_id = e.id
 AND (r.cant_noches - e.cant_noches) > 0

@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Homes\SesionActual.cs" />
+    <Compile Include="Models\Facturacion\ConsumibleEstadia.cs" />
     <Compile Include="Models\Facturacion\Factura.cs" />
     <Compile Include="Models\Facturacion\ItemAFacturar.cs" />
     <Compile Include="Models\Facturacion\ItemFactura.cs" />

@@ -18,7 +18,7 @@ namespace FrbaHotel.Registrar_Consumible
     public partial class Form1 : Form
     {
         Estadia estadia;
-        List<ItemAFacturar> items = new List<ItemAFacturar>();
+        List<ConsumibleEstadia> items = new List<ConsumibleEstadia>();
 
         public int unidades { get; set; }
 
@@ -73,11 +73,10 @@ namespace FrbaHotel.Registrar_Consumible
             }
 
             //Crea el consumible a persistir
-            ItemAFacturar consumible_estadia = new ItemAFacturar();
+            ConsumibleEstadia consumible_estadia = new ConsumibleEstadia();
             consumible_estadia.estadia = estadia;
             consumible_estadia.consumible = consumible_seleccionado;
             consumible_estadia.unidades = unidades;
-            consumible_estadia.monto = unidades * consumible_seleccionado.precio;
             items.Add(consumible_estadia);
             
             cargarConsumibles();
@@ -98,7 +97,7 @@ namespace FrbaHotel.Registrar_Consumible
             DialogResult result1 = MessageBox.Show("¿Está seguro que ya ingreso todo lo consumido y desea facturar?", "Importante", MessageBoxButtons.YesNo);
             if (result1 == DialogResult.Yes)
             {
-                Navigator.nextForm(this, new FrbaHotel.Views.Facturar_Estadia.Facturar(estadia, items));
+                Navigator.nextForm(this, new FrbaHotel.Views.Facturar_Estadia.Facturar(estadia));
             }
 
         }
