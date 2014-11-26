@@ -204,8 +204,8 @@ CREATE TABLE [LOS_NORMALIZADORES].[consumibles_estadias](
 	[id] INTEGER IDENTITY PRIMARY KEY,
 	[consumible_id] INTEGER,
 	[estadia_id] INTEGER,
-	[unidades] INTEGER,
-) ON PRIMARY
+	[unidades] INTEGER
+) ON [PRIMARY]
 
 CREATE TABLE [LOS_NORMALIZADORES].[items_facturas](
 	[id] INTEGER IDENTITY PRIMARY KEY,
@@ -213,9 +213,8 @@ CREATE TABLE [LOS_NORMALIZADORES].[items_facturas](
 	[consumible_estadia_id] INTEGER,
 	[monto] [numeric] (18,2),
 	[unidades] INTEGER,
-	[tipo] [char] (1),
-
-) ON PRIMARY
+	[tipo] [char] (1)
+) ON [PRIMARY]
 
 
 CREATE TABLE [LOS_NORMALIZADORES].[facturas](
