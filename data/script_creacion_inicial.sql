@@ -917,54 +917,6 @@ END
 
 GO
 
-/* PROCEDIMIENTOS PARA MANEJAR RESERVAS */
-CREATE PROCEDURE [LOS_NORMALIZADORES].[uspCambiarReservaEstado]
-AS
-BEGIN
-	DECLARE @restado INTEGER
-	DECLARE @fecha_actual DATE
-	SET @fecha_actual = CONVERT(date, GETDATE())
-	
-	DECLARE @rid INTEGER
-	DECLARE @rfecha_inicio DATE
-	DECLARE @rcant_noches INTEGER
-	DECLARE @eid INTEGER
-
-	DECLARE reservas_cursor CURSOR FORWARD_ONLY	FOR (SELECT r.id, r.fecha_inicio, r.cant_noches, e.id FROM [LOS_NORMALIZADORES].[reservas] r LEFT JOIN [LOS_NORMALIZADORES].[estadias] e ON r.id = e.reserva_id)
-
-	OPEN reservas_cursor
-	FETCH NEXT FROM reservas_cursor INTO @rid, @rfecha_inicio, @rcant_noches, @eid
-	
-	WHILE @@FETCH_STATUS = 0
-	BEGIN
-		IF @eid IS NULL
-		BEGIN
-			IF @rfecha_inicio >= @fecha_actual
-				SET @restado = 1 --Reserva correcta
-			ELSE
-				SET @restado = 5 --Reserva cancelada por No-Show
-		END
-		ELSE
-		BEGIN
-			--Las reservas con estadias asociadas ya vienen con facturas
-			--y siempre el tiempo que se hospedan es la cantidad que reservaron (reserva.cant_noches = estadia.cant_noches)
-			--y la factura se genera al momento que se registra el check out
-			--por lo tanto hay que descartar a los que no hayan concluido su estadia porque tienen facturas antes de tiempo
-			IF DATEADD(day,@rcant_noches,@rfecha_inicio) <= @fecha_actual
-				SET @restado = 6 --Reserva con ingreso
-			ELSE
-				SET @restado = 7 --Reserva invalida
-		END
-		UPDATE [LOS_NORMALIZADORES].[reservas] SET reserva_estado = @restado WHERE id = @rid
-		
-		FETCH NEXT FROM reservas_cursor INTO @rid, @rfecha_inicio, @rcant_noches, @eid
-	END
-	CLOSE reservas_cursor
-	DEALLOCATE reservas_cursor
-END
-GO
-EXEC [LOS_NORMALIZADORES].[uspCambiarReservaEstado]
-GO
 
 CREATE PROCEDURE [LOS_NORMALIZADORES].[uspCancelarReservasPorNoShow] 
 	@fecha_sistema DATE
@@ -974,4 +926,15 @@ BEGIN
 END
 GO
 
-
+--Migracion de estados de reservas
+			--Las reservas con estadias asociadas ya vienen con facturas
+			--y siempre el tiempo que se hospedan es la cantidad que reservaron (reserva.cant_noches = estadia.cant_noches)
+			--y la factura se genera al momento que se registra el check out
+			--por lo tanto hay que descartar a los que no hayan concluido su estadia porque tienen facturas antes de tiempo
+UPDATE [LOS_NORMALIZADORES].[reservas] SET reserva_estado = (
+SELECT 
+	CASE
+		WHEN e.id IS NULL THEN (CASE WHEN r.fecha_inicio >= CONVERT(date, GETDATE()) THEN 1 ELSE 5 END)
+		WHEN e.id IS NOT NULL THEN (CASE WHEN DATEADD(day,r.cant_noches,r.fecha_inicio) <= CONVERT(date, GETDATE()) THEN 6 ELSE 7 END)
+	END
+FROM [LOS_NORMALIZADORES].[reservas] r LEFT JOIN [LOS_NORMALIZADORES].[estadias] e ON r.id = e.reserva_id WHERE r.id = reservas.id)
