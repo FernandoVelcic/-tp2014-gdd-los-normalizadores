@@ -250,7 +250,7 @@ INSERT INTO [LOS_NORMALIZADORES].[paises] (nombre, gentilicio) VALUES ('ARGENTIN
 	
 
 /* TESTING */
-INSERT INTO [LOS_NORMALIZADORES].[Maestra] SELECT TOP 1000 * FROM [GD2C2014].[gd_esquema].[Maestra] ORDER BY Factura_Nro DESC
+INSERT INTO [LOS_NORMALIZADORES].[Maestra] SELECT * FROM [GD2C2014].[gd_esquema].[Maestra] 
 GO
   	
 
@@ -545,7 +545,7 @@ GO
 
 /*Consumibles Estadias*/
 INSERT INTO [LOS_NORMALIZADORES].[consumibles_estadias] (consumible_id, estadia_id, unidades)
-SELECT SELECT consumible_id, estadia_id, Item_Factura_Cantidad FROM [LOS_NORMALIZADORES].[Maestra]
+SELECT consumible_id, estadia_id, Item_Factura_Cantidad FROM [LOS_NORMALIZADORES].[Maestra]
 WHERE consumible_id IS NOT NULL
 AND estadia_id IS NOT NULL
 AND Item_Factura_Cantidad IS NOT NULL
@@ -554,14 +554,14 @@ GO
 
 /* Items */
 INSERT INTO [LOS_NORMALIZADORES].[items_facturas] (factura_id, consumible_estadia_id, monto, unidades, tipo)
-	SELECT DISTINCT  m.factura_id, c.consumible_estadia_id, m.Item_Factura_Monto, m.Item_Factura_Cantidad, 'C' FROM  [LOS_NORMALIZADORES].[Maestra] m, [LOS_NORMALIZADORES].[consumibles_estadias] c
+	SELECT DISTINCT  m.factura_id, c.id, m.Item_Factura_Monto, m.Item_Factura_Cantidad, 'C' FROM  [LOS_NORMALIZADORES].[Maestra] m, [LOS_NORMALIZADORES].[consumibles_estadias] c
 	WHERE c.estadia_id = m.estadia_id
 	AND   Item_Factura_Monto IS NOT NULL
 	AND   Item_Factura_Cantidad IS NOT NULL
 GO
 
 INSERT INTO [LOS_NORMALIZADORES].[items_facturas] (factura_id, monto, unidades, tipo)
-	SELECT DISTINCT  factura_id, Item_Factura_Monto, Item_Factura_Cantidad, 'H' FROM  [LOS_NORMALIZADORES].[Maestra]
+	SELECT DISTINCT  factura_id, Item_Factura_Monto, Estadia_Cant_Noches, 'H' FROM  [LOS_NORMALIZADORES].[Maestra]
 	WHERE Factura_Total is NOT NULL
 	AND   estadia_id IS NOT NULL
 	AND   habitacion_id IS NOT NULL
@@ -577,9 +577,11 @@ UPDATE [LOS_NORMALIZADORES].items_facturas
 		LOS_NORMALIZADORES.reservas_habitaciones r, 
 		LOS_NORMALIZADORES.hoteles ho,
 		LOS_NORMALIZADORES.habitaciones h, 
-		LOS_NORMALIZADORES.habitaciones_tipos t
+		LOS_NORMALIZADORES.habitaciones_tipos t,
+		LOS_NORMALIZADORES.facturas f
 		
-	WHERE estadia_id = e.id 
+	WHERE f.id= factura_id
+	AND f.estadia_id = e.id 
 	AND h.hotel_id = ho.id
 	AND e.reserva_id = r.reserva_id
 	AND r.habitacion_id = h.id
@@ -591,25 +593,28 @@ GO
 /*HABITACIONES NO HOSPEDADAS*/
 INSERT INTO [LOS_NORMALIZADORES].[items_facturas] (factura_id, monto, unidades, tipo)
 SELECT DISTINCT  i.factura_id, 0, r.cant_noches - e.cant_noches , 'N' 
-FROM  [LOS_NORMALIZADORES].[items_facturas] i, [LOS_NORMALIZADORES].estadias e,[LOS_NORMALIZADORES].[reservas] r
-where i.estadia_id = e.id
+FROM  [LOS_NORMALIZADORES].[items_facturas] i,[LOS_NORMALIZADORES].[facturas] f, [LOS_NORMALIZADORES].estadias e,[LOS_NORMALIZADORES].[reservas] r
+where f.estadia_id = e.id
+AND i.factura_id=f.id
 AND (r.cant_noches - e.cant_noches) > 0
 GO
 
 /*DESCUENTOS POR ALL INCLUSIVE*/
-INSERT INTO [LOS_NORMALIZADORES].[items_facturas] (factura_id, estadia_id, monto, unidades, tipo)
-SELECT DISTINCT  i.factura_id, i.estadia_id, SUM(i.monto)*(-1), 0, 'D'
+INSERT INTO [LOS_NORMALIZADORES].[items_facturas] (factura_id, monto, unidades, tipo)
+SELECT DISTINCT  i.factura_id, SUM(i.monto)*(-1), 0, 'D'
 FROM[LOS_NORMALIZADORES].[items_facturas] i,
 [LOS_NORMALIZADORES].[estadias] e,
 [LOS_NORMALIZADORES].[reservas] res,
-[LOS_NORMALIZADORES].[regimenes] reg
+[LOS_NORMALIZADORES].[regimenes] reg,
+[LOS_NORMALIZADORES].[facturas] f
 WHERE 
 i.tipo = 'C'
-AND i.estadia_id = e.id
+AND factura_id = f.id
+AND f.estadia_id = e.id
 AND e.reserva_id = res.id
 AND res.regimen_id = reg.id
 AND (reg.id = 3 OR reg.id = 4)
-GROUP BY i.factura_id, i.estadia_id
+GROUP BY i.factura_id
 GO
 
 
@@ -764,9 +769,9 @@ ALTER TABLE [LOS_NORMALIZADORES].[reservas_canceladas] ADD CONSTRAINT canceladas
 
 ALTER TABLE [LOS_NORMALIZADORES].[estadias] ADD CONSTRAINT estadias_reserva_id FOREIGN KEY (reserva_id) REFERENCES [LOS_NORMALIZADORES].[reservas](id)
 
-ALTER TABLE [LOS_NORMALIZADORES].[items_facturas] ADD CONSTRAINT items_factura_id FOREIGN KEY (estadia_id) REFERENCES [LOS_NORMALIZADORES].[estadias](id)
+ALTER TABLE [LOS_NORMALIZADORES].[items_facturas] ADD CONSTRAINT items_factura_id FOREIGN KEY (consumible_estadia_id) REFERENCES [LOS_NORMALIZADORES].[consumibles_estadias](id)
 
-ALTER TABLE [LOS_NORMALIZADORES].[items_facturas] ADD CONSTRAINT consumibles_consumible_id FOREIGN KEY (consumible_id) REFERENCES [LOS_NORMALIZADORES].[consumibles](id)
+--ALTER TABLE [LOS_NORMALIZADORES].[items_facturas] ADD CONSTRAINT consumibles_consumible_id FOREIGN KEY (consumible_id) REFERENCES [LOS_NORMALIZADORES].[consumibles](id)
 
 ALTER TABLE [LOS_NORMALIZADORES].[items_facturas] ADD CHECK (tipo in ('C', 'H','N', 'D'))
 

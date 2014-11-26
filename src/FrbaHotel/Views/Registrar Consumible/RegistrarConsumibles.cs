@@ -97,6 +97,7 @@ namespace FrbaHotel.Registrar_Consumible
             DialogResult result1 = MessageBox.Show("¿Está seguro que ya ingreso todo lo consumido y desea facturar?", "Importante", MessageBoxButtons.YesNo);
             if (result1 == DialogResult.Yes)
             {
+                items.ForEach(item => item.save());
                 Navigator.nextForm(this, new FrbaHotel.Views.Facturar_Estadia.Facturar(estadia));
             }
 
