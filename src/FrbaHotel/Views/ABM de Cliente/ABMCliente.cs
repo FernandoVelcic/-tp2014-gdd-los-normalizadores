@@ -15,6 +15,9 @@ namespace FrbaHotel.Views.ABM_de_Cliente
 {
     public partial class ABMCliente : Form
     {
+        int offset = 1000;
+        int inicio=0;
+        int final=0;
         public ABMCliente()
         {
             InitializeComponent();
@@ -22,12 +25,22 @@ namespace FrbaHotel.Views.ABM_de_Cliente
 
         private void ABMCliente_Load(object sender, EventArgs e)
         {
+            final = offset;
             BindingSource documentos_binding = new BindingSource();
             documentos_binding.DataSource = EntityManager.getEntityManager().findAll<TipoDocumento>();
             comboBox2.DataSource = documentos_binding;
             comboBox2.Text = "";
-            Listar(new List<FetchCondition>());
+            Paginar();
             btn_Seleccionar.Hide();
+        }
+
+        private void Paginar()
+        {
+            List<FetchCondition> condiciones = new List<FetchCondition>();
+            FetchCondition condicionPaginacion = new FetchCondition();
+            condicionPaginacion.setBetween("clientes.id", inicio.ToString(), final.ToString());
+            condiciones.Add(condicionPaginacion);
+            Listar(new List<FetchCondition>(condiciones));
         }
 
         private void Listar(List<FetchCondition> conditions)
@@ -50,8 +63,12 @@ namespace FrbaHotel.Views.ABM_de_Cliente
             txt_Filter_Mail.Text = "";
             txt_Filter_Documento.Text = "";
             txt_Filter_Apellido.Text = "";
+            button1.Show();
+            button2.Show();
             comboBox2.SelectedIndex = 0;
-            Listar(new List<FetchCondition>());
+            inicio = 0;
+            final = offset;
+            Paginar();
         }
 
         private void onBtnAlta(object sender, EventArgs e)
@@ -101,7 +118,8 @@ namespace FrbaHotel.Views.ABM_de_Cliente
             }
 
             Listar(condiciones);
-
+            button1.Hide();
+            button2.Hide();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -133,6 +151,27 @@ namespace FrbaHotel.Views.ABM_de_Cliente
         private void ABMCliente_FormClosed(object sender, FormClosedEventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if(inicio!=0)
+            {
+                inicio = inicio - offset;
+                final = final - offset;
+                Paginar();
+            }
+            else
+            {
+                MessageBox.Show("Se encuentra al inicio de la lista de clientes");
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            inicio = inicio + offset;
+            final = final + offset;
+            Paginar();
         }
 
 
