@@ -48,14 +48,14 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btn_Volver = new System.Windows.Forms.Button();
+            this.btn_Guardar = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btn_BorrarRegimen = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btn_AgregarRegimen = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
@@ -256,27 +256,27 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Nombre:";
             // 
-            // button1
+            // btn_Volver
             // 
-            this.button1.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(12, 415);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(107, 35);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Volver";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btn_Volver.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Volver.Location = new System.Drawing.Point(12, 415);
+            this.btn_Volver.Name = "btn_Volver";
+            this.btn_Volver.Size = new System.Drawing.Size(107, 35);
+            this.btn_Volver.TabIndex = 1;
+            this.btn_Volver.Text = "Volver";
+            this.btn_Volver.UseVisualStyleBackColor = true;
+            this.btn_Volver.Click += new System.EventHandler(this.onBtnVolver);
             // 
-            // button2
+            // btn_Guardar
             // 
-            this.button2.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(501, 415);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(107, 35);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Guardar";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btn_Guardar.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Guardar.Location = new System.Drawing.Point(501, 415);
+            this.btn_Guardar.Name = "btn_Guardar";
+            this.btn_Guardar.Size = new System.Drawing.Size(107, 35);
+            this.btn_Guardar.TabIndex = 2;
+            this.btn_Guardar.Text = "Guardar";
+            this.btn_Guardar.UseVisualStyleBackColor = true;
+            this.btn_Guardar.Click += new System.EventHandler(this.onBtnGuardar);
             // 
             // groupBox4
             // 
@@ -291,7 +291,7 @@
             // 
             // groupBox6
             // 
-            this.groupBox6.Controls.Add(this.button4);
+            this.groupBox6.Controls.Add(this.btn_BorrarRegimen);
             this.groupBox6.Controls.Add(this.listBox1);
             this.groupBox6.Location = new System.Drawing.Point(9, 116);
             this.groupBox6.Name = "groupBox6";
@@ -300,15 +300,15 @@
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Régimenes que ofrece";
             // 
-            // button4
+            // btn_BorrarRegimen
             // 
-            this.button4.Location = new System.Drawing.Point(102, 224);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(121, 22);
-            this.button4.TabIndex = 45;
-            this.button4.Text = "Borrar";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.btn_BorrarRegimen.Location = new System.Drawing.Point(102, 224);
+            this.btn_BorrarRegimen.Name = "btn_BorrarRegimen";
+            this.btn_BorrarRegimen.Size = new System.Drawing.Size(121, 22);
+            this.btn_BorrarRegimen.TabIndex = 45;
+            this.btn_BorrarRegimen.Text = "Borrar";
+            this.btn_BorrarRegimen.UseVisualStyleBackColor = true;
+            this.btn_BorrarRegimen.Click += new System.EventHandler(this.onBtnBorrarRegimen);
             // 
             // listBox1
             // 
@@ -320,7 +320,7 @@
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.button3);
+            this.groupBox5.Controls.Add(this.btn_AgregarRegimen);
             this.groupBox5.Controls.Add(this.label8);
             this.groupBox5.Controls.Add(this.comboBox3);
             this.groupBox5.Location = new System.Drawing.Point(6, 20);
@@ -330,15 +330,15 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Agregar un tipo régimen";
             // 
-            // button3
+            // btn_AgregarRegimen
             // 
-            this.button3.Location = new System.Drawing.Point(105, 52);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(121, 22);
-            this.button3.TabIndex = 44;
-            this.button3.Text = "Agregar";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.btn_AgregarRegimen.Location = new System.Drawing.Point(105, 52);
+            this.btn_AgregarRegimen.Name = "btn_AgregarRegimen";
+            this.btn_AgregarRegimen.Size = new System.Drawing.Size(121, 22);
+            this.btn_AgregarRegimen.TabIndex = 44;
+            this.btn_AgregarRegimen.Text = "Agregar";
+            this.btn_AgregarRegimen.UseVisualStyleBackColor = true;
+            this.btn_AgregarRegimen.Click += new System.EventHandler(this.onBtnAgregarRegimen);
             // 
             // label8
             // 
@@ -368,8 +368,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(614, 460);
             this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btn_Guardar);
+            this.Controls.Add(this.btn_Volver);
             this.Controls.Add(this.groupBox1);
             this.Name = "AltaModificacionHotel";
             this.Text = "AltaHotel";
@@ -389,8 +389,8 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btn_Volver;
+        private System.Windows.Forms.Button btn_Guardar;
         private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.TextBox textBox4;
@@ -412,10 +412,10 @@
         private System.Windows.Forms.ComboBox comboBox4;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btn_BorrarRegimen;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btn_AgregarRegimen;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox comboBox3;
     }

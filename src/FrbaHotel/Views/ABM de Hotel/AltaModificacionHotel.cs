@@ -72,13 +72,19 @@ namespace FrbaHotel.Views.ABM_de_Hotel
             dateTimePicker1.DataBindings.Add("Text", hotel, "fecha_creacion", true);
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void onBtnGuardar(object sender, EventArgs e)
         {
             hotel.pais = comboBox4.SelectedItem as Pais;
 
             if (listBox1.Items.Count == 0)
             {
                 MessageBox.Show("Debe agregar al menos un regimen para el hotel");
+                return;
+            }
+
+            if (esAlta && SesionActual.rol_usuario.usuario == null)
+            {
+                MessageBox.Show("Los usuarios guest no pueden crear nuevos hoteles");
                 return;
             }
 
@@ -122,12 +128,12 @@ namespace FrbaHotel.Views.ABM_de_Hotel
             Close();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void onBtnVolver(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void onBtnAgregarRegimen(object sender, EventArgs e)
         {
             HotelRegimen hotel_regimen = new HotelRegimen();
             hotel_regimen.regimen = comboBox3.SelectedItem as Regimen;
@@ -145,7 +151,7 @@ namespace FrbaHotel.Views.ABM_de_Hotel
             listBox1.Items.Add(hotel_regimen);
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void onBtnBorrarRegimen(object sender, EventArgs e)
         {
             HotelRegimen regimen = listBox1.SelectedItem as HotelRegimen;
             if (!esAlta)
