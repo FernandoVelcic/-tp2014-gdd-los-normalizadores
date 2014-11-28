@@ -378,6 +378,8 @@ GO
 
 /* Clientes */
 
+CREATE INDEX Maestra_Cliente_Pasaporte_Nro_id ON [LOS_NORMALIZADORES].[Maestra] (Cliente_Pasaporte_Nro)
+
 INSERT INTO [LOS_NORMALIZADORES].[clientes] ([documento_nro], [apellido], [nombre], [fecha_nac], [mail], [dom_calle], [nro_calle], [piso], [depto], [nacionalidad_id], [documento_tipo_id], [pais_id])	
 	SELECT DISTINCT [Cliente_Pasaporte_Nro], [Cliente_Apellido], [Cliente_Nombre], [Cliente_Fecha_Nac], [Cliente_Mail], [Cliente_Dom_Calle], [Cliente_Nro_Calle], [Cliente_Piso], [Cliente_Depto], 2, 4, 1 FROM [LOS_NORMALIZADORES].[Maestra]
 	WHERE [Cliente_Pasaporte_Nro] IS NOT NULL 
@@ -396,7 +398,6 @@ ALTER TABLE [LOS_NORMALIZADORES].[Maestra] ADD cliente_id INTEGER
 GO
 
 CREATE INDEX Clientes_Pasaporte_Nro_id ON [LOS_NORMALIZADORES].[clientes] (documento_nro)
-CREATE INDEX Maestra_Cliente_Pasaporte_Nro_id ON [LOS_NORMALIZADORES].[Maestra] (Cliente_Pasaporte_Nro)
 
 UPDATE [LOS_NORMALIZADORES].[Maestra]
 SET cliente_id = 
@@ -481,8 +482,12 @@ UPDATE res SET reserva_estado = 6
 	FROM [LOS_NORMALIZADORES].reservas res
 	INNER JOIN [LOS_NORMALIZADORES].estadias ON estadias.reserva_id = res.id
 	
+CREATE INDEX Maestra_estadia_id ON [LOS_NORMALIZADORES].[Maestra] (estadia_id)
 	
 /* Consumibles */ 
+
+CREATE INDEX Maestra_Consumiblse_codigo ON [LOS_NORMALIZADORES].[Maestra] (Consumible_Codigo)
+
 SET IDENTITY_INSERT [LOS_NORMALIZADORES].[consumibles] ON;
 INSERT INTO [LOS_NORMALIZADORES].[consumibles] ([id], [descripcion], [precio])	
 	SELECT DISTINCT [Consumible_Codigo], [Consumible_Descripcion], [Consumible_Precio] FROM [LOS_NORMALIZADORES].[Maestra]
@@ -495,8 +500,7 @@ GO
 ALTER TABLE [LOS_NORMALIZADORES].[Maestra] ADD consumible_id INTEGER
 GO
 
-CREATE INDEX Consumibles_codigo ON [LOS_NORMALIZADORES].[consumibles] (id)
-CREATE INDEX Maestra_Consumiblse_codigo ON [LOS_NORMALIZADORES].[Maestra] (Consumible_Codigo)
+
 
 UPDATE [LOS_NORMALIZADORES].[Maestra]
 SET consumible_id = 
@@ -508,8 +512,7 @@ SET consumible_id =
 	)
 GO
 
-DROP INDEX  Consumibles_codigo ON [LOS_NORMALIZADORES].[consumibles]
-
+CREATE INDEX Maestra_consumible_id ON [LOS_NORMALIZADORES].[Maestra] (consumible_id)
 
 
 
@@ -543,12 +546,15 @@ SET factura_id =
 	)
 GO
 
+CREATE INDEX Maestra_factura_id ON [LOS_NORMALIZADORES].[Maestra] (factura_id)
+
+
 /*Consumibles Estadias*/
 INSERT INTO [LOS_NORMALIZADORES].[consumibles_estadias] (consumible_id, estadia_id, unidades)
-SELECT consumible_id, estadia_id, Item_Factura_Cantidad FROM [LOS_NORMALIZADORES].[Maestra]
-WHERE consumible_id IS NOT NULL
-AND estadia_id IS NOT NULL
-AND Item_Factura_Cantidad IS NOT NULL
+	SELECT consumible_id, estadia_id, Item_Factura_Cantidad FROM [LOS_NORMALIZADORES].[Maestra]
+	WHERE consumible_id IS NOT NULL
+	AND   estadia_id IS NOT NULL
+	AND   Item_Factura_Cantidad IS NOT NULL
 GO
 
 
@@ -592,29 +598,29 @@ GO
 
 /*HABITACIONES NO HOSPEDADAS*/
 INSERT INTO [LOS_NORMALIZADORES].[items_facturas] (factura_id, monto, unidades, tipo)
-SELECT DISTINCT  i.factura_id, 0, r.cant_noches - e.cant_noches , 'N' 
-FROM  [LOS_NORMALIZADORES].[items_facturas] i,[LOS_NORMALIZADORES].[facturas] f, [LOS_NORMALIZADORES].estadias e,[LOS_NORMALIZADORES].[reservas] r
-where f.estadia_id = e.id
-AND i.factura_id=f.id
-AND (r.cant_noches - e.cant_noches) > 0
+	SELECT DISTINCT  i.factura_id, 0, r.cant_noches - e.cant_noches , 'N' 
+	FROM  [LOS_NORMALIZADORES].[items_facturas] i,[LOS_NORMALIZADORES].[facturas] f, [LOS_NORMALIZADORES].estadias e,[LOS_NORMALIZADORES].[reservas] r
+	WHERE f.estadia_id = e.id
+	AND i.factura_id=f.id
+	AND (r.cant_noches - e.cant_noches) > 0
 GO
 
 /*DESCUENTOS POR ALL INCLUSIVE*/
 INSERT INTO [LOS_NORMALIZADORES].[items_facturas] (factura_id, monto, unidades, tipo)
-SELECT DISTINCT  i.factura_id, SUM(i.monto)*(-1), 0, 'D'
-FROM[LOS_NORMALIZADORES].[items_facturas] i,
-[LOS_NORMALIZADORES].[estadias] e,
-[LOS_NORMALIZADORES].[reservas] res,
-[LOS_NORMALIZADORES].[regimenes] reg,
-[LOS_NORMALIZADORES].[facturas] f
-WHERE 
-i.tipo = 'C'
-AND factura_id = f.id
-AND f.estadia_id = e.id
-AND e.reserva_id = res.id
-AND res.regimen_id = reg.id
-AND (reg.id = 3 OR reg.id = 4)
-GROUP BY i.factura_id
+	SELECT DISTINCT  i.factura_id, SUM(i.monto)*(-1), 0, 'D'
+	FROM[LOS_NORMALIZADORES].[items_facturas] i,
+		[LOS_NORMALIZADORES].[estadias] e,
+		[LOS_NORMALIZADORES].[reservas] res,
+		[LOS_NORMALIZADORES].[regimenes] reg,
+		[LOS_NORMALIZADORES].[facturas] f
+	WHERE 
+		i.tipo = 'C'
+		AND factura_id = f.id
+		AND f.estadia_id = e.id
+		AND e.reserva_id = res.id
+		AND res.regimen_id = reg.id
+		AND (reg.id = 3 OR reg.id = 4)
+	GROUP BY i.factura_id
 GO
 
 
