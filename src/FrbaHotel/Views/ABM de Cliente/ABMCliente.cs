@@ -169,9 +169,18 @@ namespace FrbaHotel.Views.ABM_de_Cliente
 
         private void button2_Click(object sender, EventArgs e)
         {
-            inicio = inicio + offset;
-            final = final + offset;
-            Paginar();
+
+            if (!dataGridView2.RowCount.Equals(0)) 
+            {
+                inicio = inicio + offset;
+                final = final + offset;
+                Paginar();
+            }
+            else
+            {
+                MessageBox.Show("No existen mas clientes que los ya mostrados");
+            }
+
         }
 
 
