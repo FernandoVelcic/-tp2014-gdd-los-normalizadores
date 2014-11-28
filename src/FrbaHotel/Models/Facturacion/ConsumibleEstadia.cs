@@ -13,7 +13,7 @@ namespace FrbaHotel.Models
 {
     public class ConsumibleEstadia : ActiveRecord
     {
-        public override String table { get { return "cosumibles_estadias"; } }
+        public override String table { get { return "consumibles_estadias"; } }
 
         public Consumible consumible { get; set; } //INTEGER
         public Estadia estadia { get; set; }  // INTEGER
