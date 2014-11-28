@@ -86,7 +86,7 @@ namespace FrbaHotel.Models
             List<Cliente> clientes_repetidos = EntityManager.getEntityManager().findList<Cliente>(condiciones_repetidos);
             if (clientes_repetidos.Count != 0)
             {
-                throw new ValidationException("Este cliente ya se encontraba registrado con anterioridad");
+                throw new ValidationException("Este cliente ya se encontraba registrado con anterioridad, verifique el Tipo y Numero de documento");
             }
         }
 
