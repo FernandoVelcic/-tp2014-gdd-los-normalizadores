@@ -37,6 +37,11 @@ namespace FrbaHotel.Cancelar_Reserva
                 MessageBox.Show("La reserva no existe");
                 return;
             }
+            if (reserva.reserva_estado==6)
+            {
+                MessageBox.Show("No se puede cancelar una reserva ingresada");
+                return;
+            }
            
             DateTime fecha = DateTime.Parse(dateTimePicker1.Text);   
 
