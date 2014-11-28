@@ -77,8 +77,13 @@ namespace FrbaHotel.Views.Facturar_Estadia
             }
 
             dataGridView1.DataSource = new BindingSource(this.itemsVisibles, null);
-
-          
+            float total = 0;
+            foreach (ConsumibleItemsUnidades item in this.itemsVisibles)
+            {
+                 total += item.monto;
+            }
+            label9.Text = "Total: " + total;
+                 
         }
 
 
