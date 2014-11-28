@@ -751,8 +751,8 @@ INSERT INTO [LOS_NORMALIZADORES].[reserva_estado]
 	([descripcion]) VALUES ('Reserva cancelada por No-Show')
 INSERT INTO [LOS_NORMALIZADORES].[reserva_estado]
 	([descripcion]) VALUES ('Reserva con ingreso')
-INSERT INTO [LOS_NORMALIZADORES].[reserva_estado]
-	([descripcion]) VALUES ('Reserva invalida')
+/*INSERT INTO [LOS_NORMALIZADORES].[reserva_estado]
+	([descripcion]) VALUES ('Reserva invalida')*/
 
 
 
@@ -941,6 +941,7 @@ GO
 			--y siempre el tiempo que se hospedan es la cantidad que reservaron (reserva.cant_noches = estadia.cant_noches)
 			--y la factura se genera al momento que se registra el check out
 			--por lo tanto hay que descartar a los que no hayan concluido su estadia porque tienen facturas antes de tiempo
+/*
 UPDATE [LOS_NORMALIZADORES].[reservas] SET reserva_estado = (
 SELECT 
 	CASE
@@ -948,3 +949,4 @@ SELECT
 		WHEN e.id IS NOT NULL THEN (CASE WHEN DATEADD(day,r.cant_noches,r.fecha_inicio) <= CONVERT(date, GETDATE()) THEN 6 ELSE 7 END)
 	END
 FROM [LOS_NORMALIZADORES].[reservas] r LEFT JOIN [LOS_NORMALIZADORES].[estadias] e ON r.id = e.reserva_id WHERE r.id = reservas.id)
+*/
