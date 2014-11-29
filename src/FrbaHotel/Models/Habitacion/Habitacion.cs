@@ -30,19 +30,20 @@ namespace FrbaHotel.Models
             return hotel.ToString() + " - " + numero.ToString() ;
         }
 
+        public override void preInsert()
+        {
+            if (String.IsNullOrEmpty(descripcion))
+            {
+                throw new ValidationException("La descripción es obligatoria");
+            }
+        }
+
         public override void preSave()
         {
             if (String.IsNullOrEmpty(frente))
             {
                 throw new ValidationException("El frente es obligatorio");
             }
-
-
-            if (String.IsNullOrEmpty(descripcion))
-            {
-                throw new ValidationException("La descripción es obligatoria");
-            }
-
                        
             List<FetchCondition> condiciones = new List<FetchCondition>();
             FetchCondition condicionId = new FetchCondition();

@@ -57,6 +57,36 @@ namespace FrbaHotel.Views.ABM_de_Cliente
             
         }
 
+        public void Filtrar()
+        {
+            List<FetchCondition> condiciones = new List<FetchCondition>();
+
+            FetchCondition condicionNombre = new FetchCondition();
+            condicionNombre.setLike("clientes.nombre", txt_Filtro_Nombre.Text);
+            condiciones.Add(condicionNombre);
+
+            FetchCondition condicionApellido = new FetchCondition();
+            condicionApellido.setLike("clientes.apellido", txt_Filter_Apellido.Text);
+            condiciones.Add(condicionApellido);
+
+            FetchCondition condicionMail = new FetchCondition();
+            condicionMail.setLike("clientes.mail", txt_Filter_Mail.Text);
+            condiciones.Add(condicionMail);
+
+            FetchCondition condicionIdentificacion = new FetchCondition();
+            condicionIdentificacion.setLike("clientes.documento_nro", txt_Filter_Documento.Text);
+            condiciones.Add(condicionIdentificacion);
+
+            if (comboBox2.Text != "")
+            {
+                FetchCondition condicionTipoIdentificacion = new FetchCondition();
+                condicionTipoIdentificacion.setEquals("clientes.documento_tipo_id", (comboBox2.SelectedValue as TipoDocumento).id.ToString());
+                condiciones.Add(condicionTipoIdentificacion);
+            }
+
+            Listar(condiciones);
+        }
+
         public void Recargar()
         {
             txt_Filtro_Nombre.Text = "";
@@ -87,38 +117,13 @@ namespace FrbaHotel.Views.ABM_de_Cliente
         private void onBtnEliminar(object sender, EventArgs e)
         {
             this.deleteRecord(dataGridView2);
-            onBtnFiltrar(null, null);
+            Filtrar();
         }
 
         private void onBtnFiltrar(object sender, EventArgs e)
         {
+            Filtrar();
 
-            List<FetchCondition> condiciones = new List<FetchCondition>();
-
-            FetchCondition condicionNombre = new FetchCondition();
-            condicionNombre.setLike("clientes.nombre", txt_Filtro_Nombre.Text);
-            condiciones.Add(condicionNombre);
-
-            FetchCondition condicionApellido = new FetchCondition();
-            condicionApellido.setLike("clientes.apellido", txt_Filter_Apellido.Text);
-            condiciones.Add(condicionApellido);
-
-            FetchCondition condicionMail = new FetchCondition();
-            condicionMail.setLike("clientes.mail", txt_Filter_Mail.Text);
-            condiciones.Add(condicionMail);
-
-            FetchCondition condicionIdentificacion = new FetchCondition();
-            condicionIdentificacion.setLike("clientes.documento_nro", txt_Filter_Documento.Text);
-            condiciones.Add(condicionIdentificacion);
-
-            if (comboBox2.Text != "")
-            {
-                FetchCondition condicionTipoIdentificacion = new FetchCondition();
-                condicionTipoIdentificacion.setEquals("clientes.documento_tipo_id", (comboBox2.SelectedValue as TipoDocumento).id.ToString());
-                condiciones.Add(condicionTipoIdentificacion);
-            }
-
-            Listar(condiciones);
             button1.Hide();
             button2.Hide();
             button3.Hide();

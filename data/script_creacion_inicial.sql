@@ -937,20 +937,6 @@ CREATE PROCEDURE [LOS_NORMALIZADORES].[uspCancelarReservasPorNoShow]
 AS
 BEGIN
 	UPDATE [LOS_NORMALIZADORES].[reservas] SET reserva_estado = 5 WHERE (reserva_estado = 1 OR reserva_estado = 2) AND fecha_inicio < @fecha_sistema
+	INSERT INTO [LOS_NORMALIZADORES].[reservas_canceladas] (reserva_id, fecha, motivo, usuario) (SELECT reservas.id, @fecha_sistema, 'Cancelada por No-Show', 'Sistema' FROM [LOS_NORMALIZADORES].[reservas] WHERE NOT EXISTS(SELECT 1 FROM [LOS_NORMALIZADORES].[reservas_canceladas] WHERE reserva_id = reservas.id))
 END
 GO
-
---Migracion de estados de reservas
-			--Las reservas con estadias asociadas ya vienen con facturas
-			--y siempre el tiempo que se hospedan es la cantidad que reservaron (reserva.cant_noches = estadia.cant_noches)
-			--y la factura se genera al momento que se registra el check out
-			--por lo tanto hay que descartar a los que no hayan concluido su estadia porque tienen facturas antes de tiempo
-/*
-UPDATE [LOS_NORMALIZADORES].[reservas] SET reserva_estado = (
-SELECT 
-	CASE
-		WHEN e.id IS NULL THEN (CASE WHEN r.fecha_inicio >= CONVERT(date, GETDATE()) THEN 1 ELSE 5 END)
-		WHEN e.id IS NOT NULL THEN (CASE WHEN DATEADD(day,r.cant_noches,r.fecha_inicio) <= CONVERT(date, GETDATE()) THEN 6 ELSE 7 END)
-	END
-FROM [LOS_NORMALIZADORES].[reservas] r LEFT JOIN [LOS_NORMALIZADORES].[estadias] e ON r.id = e.reserva_id WHERE r.id = reservas.id)
-*/
