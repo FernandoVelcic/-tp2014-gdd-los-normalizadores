@@ -937,6 +937,6 @@ CREATE PROCEDURE [LOS_NORMALIZADORES].[uspCancelarReservasPorNoShow]
 AS
 BEGIN
 	UPDATE [LOS_NORMALIZADORES].[reservas] SET reserva_estado = 5 WHERE (reserva_estado = 1 OR reserva_estado = 2) AND fecha_inicio < @fecha_sistema
-	INSERT INTO [LOS_NORMALIZADORES].[reservas_canceladas] (reserva_id, fecha, motivo, usuario) (SELECT reservas.id, @fecha_sistema, 'Cancelada por No-Show', 'Sistema' FROM [LOS_NORMALIZADORES].[reservas] WHERE NOT EXISTS(SELECT 1 FROM [LOS_NORMALIZADORES].[reservas_canceladas] WHERE reserva_id = reservas.id))
+	INSERT INTO [LOS_NORMALIZADORES].[reservas_canceladas] (reserva_id, fecha, motivo, usuario) (SELECT reservas.id, @fecha_sistema, 'Cancelada por No-Show', 'Sistema' FROM [LOS_NORMALIZADORES].[reservas] WHERE reserva_estado = 5 AND NOT EXISTS(SELECT 1 FROM [LOS_NORMALIZADORES].[reservas_canceladas] WHERE reserva_id = reservas.id))
 END
 GO
