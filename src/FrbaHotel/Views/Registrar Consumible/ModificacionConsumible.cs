@@ -31,9 +31,8 @@ namespace FrbaHotel.Registrar_Consumible
         //Modificacion de la cantidad de unidades del item seleccionado
         private void button2_Click(object sender, EventArgs e)
         {
-            ConsumibleEstadia consu_est = EntityManager.getEntityManager().findBy<ConsumibleEstadia>("consumibles_estadias.id", consumibleU.consumible_estadia_id.ToString());
-            consu_est.unidades = consumibleU.unidades;
-            consu_est.save();
+            consumibleU.monto = consumibleU.precio * consumibleU.unidades;
+            consumibleU.consumible_estadia.unidades = consumibleU.unidades;
 
             MessageBox.Show("Se ha modificado la cantidad de unidades correctamente");
             Close();
