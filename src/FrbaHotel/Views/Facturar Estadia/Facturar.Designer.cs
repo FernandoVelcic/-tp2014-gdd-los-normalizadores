@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.btn_Facturar = new System.Windows.Forms.Button();
             this.txt_Usuario = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -51,7 +52,6 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.txt_FacturaNro = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -78,6 +78,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Tag = "";
             this.groupBox1.Text = "Detalle:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Palatino Linotype", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(465, 367);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(60, 26);
+            this.label9.TabIndex = 1;
+            this.label9.Text = "Total:";
             // 
             // btn_Facturar
             // 
@@ -288,15 +298,6 @@
             this.label1.Size = new System.Drawing.Size(69, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "Factura Nro:";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(465, 373);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(36, 16);
-            this.label9.TabIndex = 1;
-            this.label9.Text = "Total:";
             // 
             // Facturar
             // 

@@ -41,10 +41,13 @@ namespace FrbaHotel.Listado_Estadistico
 
         private void btnLimpiar(object sender, EventArgs e)
         {
-            txt_Anio.Text = "";
-            cmb_Trimestre.SelectedIndex = -1;
-            cmb_Tipo.SelectedIndex = -1;
-            dataGridView1.Rows.Clear();
+            this.anio = 2013;
+            cmb_Tipo.SelectedIndex = 3;
+            cmb_Trimestre.SelectedIndex = 0;
+
+            fecha1 = new DateTime(anio, 1, 1);
+            fecha2 = new DateTime(anio, 3, 31);
+            HabitacionConMayorCantidadDeDiasYVecesOcupada();
 
         }
         
@@ -122,7 +125,7 @@ namespace FrbaHotel.Listado_Estadistico
             query += "INNER JOIN [LOS_NORMALIZADORES].[reservas_habitaciones] ON [reservas].id = reservas_habitaciones.reserva_id ";
             query += "INNER JOIN [LOS_NORMALIZADORES].[habitaciones] ON [reservas_habitaciones].habitacion_id = habitaciones.id ";
 	        query += "INNER JOIN [LOS_NORMALIZADORES].[hoteles] ON [hoteles].id = [habitaciones].hotel_id ";
-            query += "INNER JOIN [LOS_NORMALIZADORES].[reservas_canceladas] ON [reservas].id = reservas_canceladas.reserva_id";
+            query += "INNER JOIN [LOS_NORMALIZADORES].[reservas_canceladas] ON [reservas].id = reservas_canceladas.reserva_id ";
             query += "WHERE (reserva_estado = 3 OR reserva_estado = 4 OR reserva_estado = 5) ";
             query += "AND [reservas_canceladas].[fecha] BETWEEN '" + fecha1.ToShortDateString() + "' AND '" + fecha2.ToShortDateString() + "' "; 
            
