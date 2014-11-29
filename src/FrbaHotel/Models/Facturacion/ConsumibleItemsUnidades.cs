@@ -11,12 +11,13 @@ namespace FrbaHotel.Models
     public class ConsumibleItemsUnidades
     {
         [System.ComponentModel.Browsable(false)]
+        public long consumible_estadia_id { get; set; }
         public long codigo { get; set; }  //[numeric](18, 0)
         public String descripcion { get; set; } //[nvarchar](255)
         public float precio { get; set; }  // [numeric](18, 2)
         public int unidades { get; set; }
         public float monto { get; set; }
-
+        
         public ConsumibleItemsUnidades()
         {
 
@@ -24,6 +25,7 @@ namespace FrbaHotel.Models
 
         public ConsumibleItemsUnidades(ConsumibleEstadia consumibleEstadia)
         {
+            consumible_estadia_id = consumibleEstadia.id;
             codigo = consumibleEstadia.consumible.id;
             descripcion = consumibleEstadia.consumible.descripcion;
             precio = consumibleEstadia.consumible.precio;

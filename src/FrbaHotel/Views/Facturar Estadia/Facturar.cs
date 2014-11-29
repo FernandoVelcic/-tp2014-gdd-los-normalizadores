@@ -216,7 +216,7 @@ namespace FrbaHotel.Views.Facturar_Estadia
             factura.forma_pago_id = forma.id;
 
             //update del numero de tarjeta del usuario
-            if (cliente.nro_tarjeta == null && txt_Tarjeta.Text != "" && txt_Pin.Text != "")
+            if (cliente.nro_tarjeta == "" && txt_Tarjeta.Text != "" && txt_Pin.Text != "")
             {
                 cliente.nro_tarjeta = txt_Tarjeta.Text;
                 cliente.pin = txt_Pin.Text;

@@ -25,11 +25,15 @@ namespace FrbaHotel.Registrar_Consumible
         {
             label2.DataBindings.Add("Text", consumibleU, "descripcion");
             txt_Unidades.DataBindings.Add("Text", consumibleU, "unidades");
+
         }
             
         //Modificacion de la cantidad de unidades del item seleccionado
         private void button2_Click(object sender, EventArgs e)
         {
+            ConsumibleEstadia consu_est = EntityManager.getEntityManager().findBy<ConsumibleEstadia>("consumibles_estadias.id", consumibleU.consumible_estadia_id.ToString());
+            consu_est.unidades = consumibleU.unidades;
+            consu_est.save();
 
             MessageBox.Show("Se ha modificado la cantidad de unidades correctamente");
             Close();
