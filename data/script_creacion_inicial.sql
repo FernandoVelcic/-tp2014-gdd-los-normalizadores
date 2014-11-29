@@ -809,6 +809,10 @@ ALTER TABLE [LOS_NORMALIZADORES].[reservas] ADD CONSTRAINT fk_reserva_estado_id 
 
 ALTER TABLE [LOS_NORMALIZADORES].[hoteles_bajas] ADD CONSTRAINT fk_hotel_baja_id FOREIGN KEY (hotel_id) REFERENCES [LOS_NORMALIZADORES].[hoteles](id)
 
+ALTER TABLE [LOS_NORMALIZADORES].[roles_funcionalidades] ADD CONSTRAINT fk_rol_funcionalidad_id FOREIGN KEY (rol_id) REFERENCES [LOS_NORMALIZADORES].[roles](id)
+
+ALTER TABLE [LOS_NORMALIZADORES].[roles_funcionalidades] ADD CONSTRAINT fk_funcionalidad_rol_id FOREIGN KEY (funcionalidad_id) REFERENCES [LOS_NORMALIZADORES].[funcionalidades](id)
+
 GO
 
 DROP TABLE [LOS_NORMALIZADORES].Maestra
