@@ -31,6 +31,11 @@ namespace FrbaHotel.Registrar_Consumible
         //Modificacion de la cantidad de unidades del item seleccionado
         private void button2_Click(object sender, EventArgs e)
         {
+            if (consumibleU.unidades <= 0)
+            {
+                MessageBox.Show("Debe ingresar cantidades positivas (Si desea borrarlo solo necesita clickear en el boton de borrado)");
+                return;
+            }
             consumibleU.monto = consumibleU.precio * consumibleU.unidades;
             consumibleU.consumible_estadia.unidades = consumibleU.unidades;
 

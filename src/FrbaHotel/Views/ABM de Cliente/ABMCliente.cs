@@ -65,6 +65,7 @@ namespace FrbaHotel.Views.ABM_de_Cliente
             txt_Filter_Apellido.Text = "";
             button1.Show();
             button2.Show();
+            button3.Show();
             comboBox2.SelectedIndex = 0;
             inicio = 0;
             final = offset;
@@ -120,6 +121,7 @@ namespace FrbaHotel.Views.ABM_de_Cliente
             Listar(condiciones);
             button1.Hide();
             button2.Hide();
+            button3.Hide();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -181,6 +183,13 @@ namespace FrbaHotel.Views.ABM_de_Cliente
                 MessageBox.Show("No existen mas clientes que los ya mostrados");
             }
 
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            inicio = 0;
+            final = offset;
+            Paginar();
         }
 
 

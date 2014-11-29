@@ -39,12 +39,12 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txt_TipoRegimen = new System.Windows.Forms.Label();
+            this.txt_reserva_id = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.btn_Facturar = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txt_reserva_id = new System.Windows.Forms.Label();
-            this.txt_TipoRegimen = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -180,6 +180,46 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Datos de la estadia:";
             // 
+            // txt_TipoRegimen
+            // 
+            this.txt_TipoRegimen.AutoSize = true;
+            this.txt_TipoRegimen.Font = new System.Drawing.Font("Palatino Linotype", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_TipoRegimen.Location = new System.Drawing.Point(179, 81);
+            this.txt_TipoRegimen.Name = "txt_TipoRegimen";
+            this.txt_TipoRegimen.Size = new System.Drawing.Size(87, 18);
+            this.txt_TipoRegimen.TabIndex = 3;
+            this.txt_TipoRegimen.Text = "TipoRegimen";
+            // 
+            // txt_reserva_id
+            // 
+            this.txt_reserva_id.AutoSize = true;
+            this.txt_reserva_id.Font = new System.Drawing.Font("Palatino Linotype", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_reserva_id.Location = new System.Drawing.Point(179, 41);
+            this.txt_reserva_id.Name = "txt_reserva_id";
+            this.txt_reserva_id.Size = new System.Drawing.Size(68, 18);
+            this.txt_reserva_id.TabIndex = 2;
+            this.txt_reserva_id.Text = "ReservaId";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Palatino Linotype", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(28, 79);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(110, 18);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Tipo de regimen: ";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Palatino Linotype", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(28, 39);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(129, 18);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Número de reserva: ";
+            // 
             // btn_Facturar
             // 
             this.btn_Facturar.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -203,42 +243,6 @@
             this.button1.Text = "Borrar";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(28, 23);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(110, 16);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Número de reserva: ";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(28, 39);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(96, 16);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Tipo de regimen: ";
-            // 
-            // txt_reserva_id
-            // 
-            this.txt_reserva_id.AutoSize = true;
-            this.txt_reserva_id.Location = new System.Drawing.Point(144, 23);
-            this.txt_reserva_id.Name = "txt_reserva_id";
-            this.txt_reserva_id.Size = new System.Drawing.Size(57, 16);
-            this.txt_reserva_id.TabIndex = 2;
-            this.txt_reserva_id.Text = "ReservaId";
-            // 
-            // txt_TipoRegimen
-            // 
-            this.txt_TipoRegimen.AutoSize = true;
-            this.txt_TipoRegimen.Location = new System.Drawing.Point(144, 39);
-            this.txt_TipoRegimen.Name = "txt_TipoRegimen";
-            this.txt_TipoRegimen.Size = new System.Drawing.Size(75, 16);
-            this.txt_TipoRegimen.TabIndex = 3;
-            this.txt_TipoRegimen.Text = "TipoRegimen";
             // 
             // Form1
             // 

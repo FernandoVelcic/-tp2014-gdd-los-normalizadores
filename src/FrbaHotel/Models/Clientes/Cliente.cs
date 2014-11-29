@@ -41,10 +41,7 @@ namespace FrbaHotel.Models
 
         public override void preSave()
         {
-            if (mail.isValidEmail() != true)
-            {
-                throw new ValidationException("Formato de email invalido");
-            }
+            
 
             if (String.IsNullOrEmpty(nombre))
             {
@@ -74,7 +71,10 @@ namespace FrbaHotel.Models
             {
                 throw new ValidationException("Email duplicado");
             }
-
+            if (mail.isValidEmail() != true)
+            {
+                throw new ValidationException("Formato de email invalido");
+            }
             List<FetchCondition> condiciones_repetidos = new List<FetchCondition>();
             FetchCondition condicion_documento_tipo = new FetchCondition();
             condicion_documento_tipo.setEquals("documento_tipo_id", documento_tipo.id.ToString());
