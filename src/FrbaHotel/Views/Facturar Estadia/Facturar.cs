@@ -242,7 +242,7 @@ namespace FrbaHotel.Views.Facturar_Estadia
                 return;
             }
 
-            //factura.cliente_id = cliente;
+            factura.cliente = cliente;
             //Update de la factura para guardar la forma de pago
             factura.save();
             MessageBox.Show("La factura se genero con exito!");
