@@ -813,6 +813,8 @@ ALTER TABLE [LOS_NORMALIZADORES].[roles_funcionalidades] ADD CONSTRAINT fk_rol_f
 
 ALTER TABLE [LOS_NORMALIZADORES].[roles_funcionalidades] ADD CONSTRAINT fk_funcionalidad_rol_id FOREIGN KEY (funcionalidad_id) REFERENCES [LOS_NORMALIZADORES].[funcionalidades](id)
 
+ALTER TABLE [LOS_NORMALIZADORES].[consumibles_estadias] ADD CONSTRAINT fk_consumibles_estadias_consumible_id FOREIGN KEY (consumible_id) REFERENCES [LOS_NORMALIZADORES].[consumibles](id)
+
 GO
 
 DROP TABLE [LOS_NORMALIZADORES].Maestra
