@@ -21,7 +21,7 @@ namespace FrbaHotel
         {
             permisos = SesionActual.rol_usuario.rol;
             InitializeComponent();
-            //determinarPermisos();
+            determinarPermisos();
 
             if (SesionActual.rol_usuario.esGuest())
             {

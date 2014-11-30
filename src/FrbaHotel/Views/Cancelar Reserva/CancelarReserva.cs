@@ -25,7 +25,7 @@ namespace FrbaHotel.Cancelar_Reserva
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            dateTimePicker1.Text = Config.getInstance().getCurrentDate().ToShortDateString();
         }
 
         private void btn_Cancelar_Click(object sender, EventArgs e)
@@ -37,7 +37,8 @@ namespace FrbaHotel.Cancelar_Reserva
                 MessageBox.Show("La reserva no existe");
                 return;
             }
-            if (reserva.reserva_estado==6)
+
+            if (reserva.reserva_estado == 6)
             {
                 MessageBox.Show("No se puede cancelar una reserva ingresada");
                 return;
@@ -62,10 +63,6 @@ namespace FrbaHotel.Cancelar_Reserva
                 return;
             }
 
-
-            //reserva.fecha_cancelacion = fecha.ToString();
-            //reserva.motivo_cancelacion = txt_Motivo.Text;
-            //reserva.usuario_cancelacion = txt_Usuario.Text;
             ReservaCancelada reservaCancelada = new ReservaCancelada();
             reservaCancelada.fecha = fecha.ToString();
             reservaCancelada.reserva = reserva;

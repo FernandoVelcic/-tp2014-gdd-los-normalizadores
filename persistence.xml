@@ -6,7 +6,7 @@
 			<server>localhost\SQLSERVER2008</server>
 			<username>gd</username>
 			<password>gd2014</password>
-			<database>LOS_NORMALIZADORES</database>
+			<database>GD2C2014</database>
 			<schema>LOS_NORMALIZADORES</schema>
 		</properties>
 	</persistence-unit>

@@ -117,7 +117,7 @@ namespace FrbaHotel.Views.ABM_de_Cliente
         private void onBtnEliminar(object sender, EventArgs e)
         {
             this.deleteRecord(dataGridView2);
-            Filtrar();
+            Recargar();
         }
 
         private void onBtnFiltrar(object sender, EventArgs e)
