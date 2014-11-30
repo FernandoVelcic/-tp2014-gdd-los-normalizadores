@@ -71,7 +71,7 @@ namespace FrbaHotel.Views.Facturar_Estadia
             setItemHabitacionHospedada();
 
             //Si el regimen es All inclusive o All inclusive moderado, registro del descuento de los consumibles
-            if (reserva.regimen.id == 3 || reserva.regimen.id == 4)
+            if (reserva.regimen.id == 1 || reserva.regimen.id == 2)
             {
                 setdescuentoAllInclusive();
             }
@@ -118,7 +118,7 @@ namespace FrbaHotel.Views.Facturar_Estadia
 
             ConsumibleItemsUnidades itemVisible = new ConsumibleItemsUnidades();
             itemVisible.codigo = 0;
-            itemVisible.descripcion = "Regimen " + reserva.regimen.descripcion + ". Habitacion tipo: " + habitacion.descripcion + "-Dias hospedados";
+            itemVisible.descripcion = "Reserva-Dias hospedados";
             itemVisible.precio = (habitacion.tipo.porcentual * reserva.regimen.precio * habitacion.tipo.cantidad_maxima_personas + hotel.cant_estrella * hotel.recarga_estrella);
             itemVisible.unidades = itemHabitacion.unidades;
             itemVisible.monto = itemHabitacion.monto;
@@ -164,7 +164,7 @@ namespace FrbaHotel.Views.Facturar_Estadia
                 {
                     descReg = reserva.regimen.descripcion;
                 }
-                itemVisible.descripcion = "Regimen " + descReg + ". Habitacion tipo: " + descHab + "-Dias no usados";
+                itemVisible.descripcion = "Reserva -Dias no usados";
                 itemVisible.precio = 0;
                 itemVisible.unidades = itemHabitacionNoHospedada.unidades;
                 itemVisible.monto = 0;
@@ -188,12 +188,13 @@ namespace FrbaHotel.Views.Facturar_Estadia
 
             itemDescuento.save();
 
-            Reserva reserva = estadia.reserva;
+            Reserva reserva = EntityManager.getEntityManager().findById<Reserva>(estadia.reserva.id);
+            Regimen regimen = reserva.regimen;
             ConsumibleItemsUnidades itemVisible = new ConsumibleItemsUnidades();
             itemVisible.codigo = 0;
-            itemVisible.descripcion = "Descuento por regimen" + reserva.regimen.descripcion;
+            itemVisible.descripcion = "Descuento " + regimen.descripcion;
             itemVisible.precio = 0;
-            itemVisible.unidades = 0;
+            itemVisible.unidades = 0;   
             itemVisible.monto = itemDescuento.monto;
 
             itemsVisibles.Add(itemVisible);

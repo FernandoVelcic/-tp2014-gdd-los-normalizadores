@@ -161,5 +161,10 @@ namespace FrbaHotel.Views.Generar_Modificar_Reserva
         {
             update_precio_habitacion();
         }
+
+        private void cmb_Regimen_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            update_precio_habitacion();
+        }
     }
 }

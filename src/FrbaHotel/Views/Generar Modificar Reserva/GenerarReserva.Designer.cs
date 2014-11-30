@@ -129,6 +129,7 @@
             this.cmb_Regimen.Name = "cmb_Regimen";
             this.cmb_Regimen.Size = new System.Drawing.Size(225, 24);
             this.cmb_Regimen.TabIndex = 5;
+            this.cmb_Regimen.SelectedIndexChanged += new System.EventHandler(this.cmb_Regimen_SelectedIndexChanged);
             // 
             // label5
             // 

@@ -52,6 +52,7 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.txt_FacturaNro = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -299,11 +300,24 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Factura Nro:";
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label10.Location = new System.Drawing.Point(426, 447);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(482, 16);
+            this.label10.TabIndex = 1;
+            this.label10.Text = "*Los precios son unitarios, debe contemplarse que puede haber varias habitaciones" +
+                " involucradas";
+            // 
             // Facturar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(928, 442);
+            this.ClientSize = new System.Drawing.Size(928, 472);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.groupBox1);
             this.Name = "Facturar";
             this.Text = "Facturar";
@@ -317,6 +331,7 @@
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -346,5 +361,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
     }
 }
